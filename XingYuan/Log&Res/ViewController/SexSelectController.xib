@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SexSelectController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="男女选择界面" translatesAutoresizingMaskIntoConstraints="NO" id="eRq-eh-bWr">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="男" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLK-Fq-Beh">
+                    <rect key="frame" x="95.5" y="211.5" width="17.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.050980392156862744" green="0.46666666666666667" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYj-QE-XrC">
+                    <rect key="frame" x="46" y="164" width="115.5" height="115.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="IYj-QE-XrC" secondAttribute="height" id="lg8-Xg-h4j"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="-119" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" image="椭圆-1"/>
+                    <connections>
+                        <action selector="dealSelectMan:" destination="-1" eventType="touchUpInside" id="RNY-Er-T8z"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="女" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7N-S6-bXA">
+                    <rect key="frame" x="262.5" y="211.5" width="17.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.94117647058823528" green="0.20784313725490194" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPa-Xv-IMf">
+                    <rect key="frame" x="213" y="164" width="115.5" height="115.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="BPa-Xv-IMf" secondAttribute="height" id="H3d-Jb-3ps"/>
+                    </constraints>
+                    <state key="normal" image="椭圆-1-拷贝"/>
+                    <connections>
+                        <action selector="dealSelectWomen:" destination="-1" eventType="touchUpInside" id="lGz-p8-aCH"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择你的性别" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKm-Cz-OaD">
+                    <rect key="frame" x="126.5" y="317.5" width="121.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.85882352941176465" green="0.85882352941176465" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提示：性别选择后无法修改" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYA-Gx-mbi">
+                    <rect key="frame" x="95.5" y="354.5" width="184" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="eRq-eh-bWr" secondAttribute="bottom" id="0M7-Dr-eic"/>
+                <constraint firstItem="IYj-QE-XrC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="46" id="3Rf-wg-LkW"/>
+                <constraint firstItem="cLK-Fq-Beh" firstAttribute="centerY" secondItem="IYj-QE-XrC" secondAttribute="centerY" id="4da-Bi-YRr"/>
+                <constraint firstItem="BPa-Xv-IMf" firstAttribute="centerY" secondItem="IYj-QE-XrC" secondAttribute="centerY" id="F1x-6N-ZmZ"/>
+                <constraint firstItem="BPa-Xv-IMf" firstAttribute="width" secondItem="IYj-QE-XrC" secondAttribute="width" id="H9X-fV-vlZ"/>
+                <constraint firstItem="eRq-eh-bWr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IP4-6k-N7b"/>
+                <constraint firstItem="qKm-Cz-OaD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="K3m-gc-dJJ"/>
+                <constraint firstItem="IYA-Gx-mbi" firstAttribute="top" secondItem="qKm-Cz-OaD" secondAttribute="bottom" constant="16" id="KeC-6V-DSx"/>
+                <constraint firstItem="Y7N-S6-bXA" firstAttribute="centerY" secondItem="BPa-Xv-IMf" secondAttribute="centerY" id="QmE-8e-nqN"/>
+                <constraint firstItem="eRq-eh-bWr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Tkr-Gj-fj0"/>
+                <constraint firstItem="qKm-Cz-OaD" firstAttribute="top" secondItem="IYj-QE-XrC" secondAttribute="bottom" constant="38" id="ZnL-eA-JLJ"/>
+                <constraint firstItem="IYj-QE-XrC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="164" id="h1y-pE-IEt"/>
+                <constraint firstAttribute="trailing" secondItem="eRq-eh-bWr" secondAttribute="trailing" id="hBC-qY-azR"/>
+                <constraint firstItem="Y7N-S6-bXA" firstAttribute="centerX" secondItem="BPa-Xv-IMf" secondAttribute="centerX" id="jNq-xe-FU7"/>
+                <constraint firstAttribute="trailing" secondItem="BPa-Xv-IMf" secondAttribute="trailing" constant="46" id="mLc-YF-I5U"/>
+                <constraint firstItem="cLK-Fq-Beh" firstAttribute="centerX" secondItem="IYj-QE-XrC" secondAttribute="centerX" id="nTx-04-PXR"/>
+                <constraint firstItem="BPa-Xv-IMf" firstAttribute="leading" secondItem="IYj-QE-XrC" secondAttribute="trailing" constant="52" id="pcA-3f-zIl"/>
+                <constraint firstItem="IYA-Gx-mbi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="r1E-Tq-6X1"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="椭圆-1" width="116" height="116"/>
+        <image name="椭圆-1-拷贝" width="116" height="116"/>
+        <image name="男女选择界面" width="750" height="1334"/>
+    </resources>
+</document>
