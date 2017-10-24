@@ -42,7 +42,7 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     [layout setMinimumInteritemSpacing:10];
     [layout setMinimumLineSpacing:10];
-    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.collectionView.collectionViewLayout = layout;
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     DDLogInfo(@"MyDataIStageInfoCell->awakeFromNib");
@@ -79,6 +79,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    NSLog(@"titles.count:%@",self.titles);
     return self.titles.count;
 }
 

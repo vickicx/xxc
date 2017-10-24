@@ -120,6 +120,9 @@
 // MARK: - 我的资料
 #define MyInfo @"/mobileapi/myinfo"
 
+// MARK: - 首页
+#define KnowTAFirstPage @"/mobileapi/KnowTAFirstPage"
+
 
 
 

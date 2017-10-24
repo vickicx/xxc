@@ -629,6 +629,7 @@
 		99ADB5901F9D7E55005928B3 /* PictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADB58F1F9D7E55005928B3 /* PictureModel.m */; };
 		99ADB5921F9D8EF2005928B3 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99ADB5911F9D8EF2005928B3 /* SDWebImage.framework */; };
 		99ADB5951F9EDF54005928B3 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADB5941F9EDF54005928B3 /* FileUtils.m */; };
+		99ADB5981F9F15FC005928B3 /* FindHimMainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADB5971F9F15FC005928B3 /* FindHimMainModel.m */; };
 		99B487701F7B408F00D8DE54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B4876F1F7B408F00D8DE54 /* main.m */; };
 		99B487791F7B408F00D8DE54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99B487771F7B408F00D8DE54 /* Main.storyboard */; };
 		99B4877B1F7B408F00D8DE54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99B4877A1F7B408F00D8DE54 /* Assets.xcassets */; };
@@ -1808,6 +1809,8 @@
 		99ADB5911F9D8EF2005928B3 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "../Library/Developer/Xcode/DerivedData/XingYuan-cbufxxknfimkupciptcodvgpbptl/Build/Products/Debug-iphonesimulator/SDWebImage/SDWebImage.framework"; sourceTree = "<group>"; };
 		99ADB5931F9EDF54005928B3 /* FileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
 		99ADB5941F9EDF54005928B3 /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
+		99ADB5961F9F15FC005928B3 /* FindHimMainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindHimMainModel.h; sourceTree = "<group>"; };
+		99ADB5971F9F15FC005928B3 /* FindHimMainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindHimMainModel.m; sourceTree = "<group>"; };
 		99B4876B1F7B408F00D8DE54 /* XingYuan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XingYuan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99B4876F1F7B408F00D8DE54 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		99B487781F7B408F00D8DE54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -3902,6 +3905,8 @@
 				59DA85F01F99A6C300089DBB /* SuperHobbyModel.m */,
 				59DA85F21F99A6D000089DBB /* ChildHobbyModel.h */,
 				59DA85F31F99A6D000089DBB /* ChildHobbyModel.m */,
+				99ADB5961F9F15FC005928B3 /* FindHimMainModel.h */,
+				99ADB5971F9F15FC005928B3 /* FindHimMainModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5241,6 +5246,7 @@
 				5924EF6D1F8B7BEB00D2108A /* NIMInputEmoticonManager.m in Sources */,
 				5924F2881F8B7C3600D2108A /* NTESNoDisturbTimeCell.m in Sources */,
 				9986AFB31F8F58B600A6EEC7 /* HXAlbumModel.m in Sources */,
+				99ADB5981F9F15FC005928B3 /* FindHimMainModel.m in Sources */,
 				5924F2721F8B7C3600D2108A /* ijksdl_timer.c in Sources */,
 				5924F20E1F8B7C3600D2108A /* NTESChatroomMemberCell.m in Sources */,
 				5924EF751F8B7BEB00D2108A /* NIMKitInfoFetchOption.m in Sources */,

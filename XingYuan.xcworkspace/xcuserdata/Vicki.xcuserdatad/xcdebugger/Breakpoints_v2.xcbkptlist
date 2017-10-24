@@ -339,5 +339,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
+            timestampString = "530524800.345832"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "-requestData"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[FindHimMainViewController requestData]_block_invoke"
+                  moduleName = "XingYuan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/FindHim/ViewController/FindHimMainViewController.m"
+                  timestampString = "530524802.461614"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "203"
+                  endingLineNumber = "203"
+                  offsetFromSymbolStart = "624">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[FindHimMainViewController requestData]_block_invoke"
+                  moduleName = "XingYuan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/FindHim/ViewController/FindHimMainViewController.m"
+                  timestampString = "530524802.466229"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "203"
+                  endingLineNumber = "203"
+                  offsetFromSymbolStart = "632">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

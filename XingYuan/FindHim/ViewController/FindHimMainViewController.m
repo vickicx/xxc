@@ -8,10 +8,12 @@
 
 #import "FindHimMainViewController.h"
 #import "OneStageScreeningController.h"
+#import "FindHimMainModel.h"
 
 @interface FindHimMainViewController ()
 @property (nonatomic,copy) NSString *PipeiNum;
 @property (nonatomic,copy) NSString *signature;
+@property (nonatomic,copy) NSMutableArray *peopleArr;
 @end
 
 @implementation FindHimMainViewController
@@ -20,6 +22,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getMyArtistIntroductionData];
+    [self requestData];
 }
 
 - (void)viewDidLoad {
@@ -116,6 +119,7 @@
     cell.signature.text = self.signature;
     cell.label.text = [NSString stringWithFormat:@"index->%ld",index];
     cell.jumpDelegate = self;
+//    cell.address.text = [NSString stringWithFormat:@"%@(%@)",self.peopleArr[index]]
     return cell;
 }
 
@@ -180,6 +184,25 @@
             self.signature = summary;
         }
         
+    } fail:^(NSError *error) {
+        
+    }];
+}
+
+- (void)requestData {
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+    [VVNetWorkTool postWithUrl:Url(KnowTAFirstPage) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+        NSMutableArray *arr = [result objectForKey:@"data"];
+        self.peopleArr = [NSMutableArray new];
+        for (NSDictionary *dic in arr) {
+            FindHimMainModel *findHimMainModel = [[FindHimMainModel alloc] initWithDictionary:dic];
+            [self.peopleArr addObject:findHimMainModel];
+            
+        }
     } fail:^(NSError *error) {
         
     }];

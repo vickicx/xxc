@@ -30,6 +30,7 @@
 
 @interface MyDataController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,weak) UITableView *tableView;
+@property (nonatomic,weak) UIButton *finishBtn;
 //我的头像
 @property (nonatomic,strong) MyDataHeadImageCell *myDataHeadImageCell;
 //我的相册
@@ -64,11 +65,11 @@
 
 @implementation MyDataController
 
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self getMyArtistIntroductionData];
-    
-}
+//-(void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [self getMyArtistIntroductionData];
+//    
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -78,6 +79,14 @@
     tableView.dataSource = self;
     self.tableView = tableView;
     [self.view addSubview:tableView];
+    
+    UIButton *finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.finishBtn = finishBtn;
+    [finishBtn setTitleColor:RGBColor(246, 80, 116, 1) forState:UIControlStateNormal];
+    [finishBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [finishBtn sizeToFit];
+    [finishBtn addTarget:self action:@selector(saveMyMateRequirement) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:finishBtn]];
     
     self.myDataCellTitles = @[@"基本资料",@"个人情况",@"家庭情况",@"未来规划"];
     self.suposeStandardCellTitles = @[@"年龄",@"身高",@"月收入",@"学历",@"婚姻状况",@"体型",@"工作地区",@"是否想要孩子",@"是否抽烟",@"是否喝酒",@"购房情况",@"购车情况"];
@@ -162,6 +171,21 @@
         self.myMateRequireModel = myMateRequireModel;
         [self refreshWithMyMateRequireModel:myMateRequireModel];
         [JGProgressHUD showErrorWithModel:myMateRequireModel In:self.view];
+    } fail:^(NSError *error) {
+        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
+    }];
+}
+
+//保存我的择偶要求到服务器
+- (void)saveMyMateRequirement{
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[self.myMateRequireModel mj_keyValues]];
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    
+    [VVNetWorkTool postWithUrl:Url(SetMateSelectionRequire) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+        BaseModel *model = [BaseModel new];
+        [model setValuesForKeysWithDictionary:result];
+
+        [JGProgressHUD showErrorWithModel:model In:self.view];
     } fail:^(NSError *error) {
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
@@ -332,7 +356,10 @@
     }
     if(indexPath.section == 2){
         if(self.myDataSelectType == MyDataSelectTypeMyData){
-            MyDataIStageInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyDataIStageInfoCell"];
+            MyDataIStageInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyDataIStageInfoCell" forIndexPath:indexPath];
+            if(cell == nil){
+                NSLog(@"CELL 为空 啦");
+            }
             if(indexPath.row == 0){
                 cell.leftLabelTitle = @"基本资料";
                 cell.editBlock = ^(){
@@ -348,6 +375,7 @@
                     TwoStageScreeningController *twoStageScreeningController = [[TwoStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"个人情况"];
                     [self.navigationController pushViewController:twoStageScreeningController animated:true];
                 };
+//                NSArray *titles = @[@"hello my nameis liufeng ",@"hello my nameis liufeng ",@"hello my nameis liufeng ",@"hello my nameis liufeng "];
                 NSArray *titles = [[self.mydataModel.matchingleveltwo mj_keyValues] allValues];
                 [cell configWithTitles:titles color:[UIColor grayColor]];
             }
