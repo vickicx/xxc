@@ -51,6 +51,11 @@
     [self removeFromSuperview];
 }
 
+- (void)toShow{
+    self.frame = SCREEN_RECT;
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self];
+}
+
 // MARK: - UIPickerViewDelegate、UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 2;

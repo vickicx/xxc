@@ -30,22 +30,22 @@
 }
 
 - (void)setSexWith:(NSNumber *)sex{
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setValue:self.memberId forKey:@"memberid"];
-    [parameters setValue:sex forKey:@"sex"];
-    [JGProgressHUD showStatusWith:nil In:self.view];
-    [VVNetWorkTool postWithUrl:Url(SetMemberSex) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        BaseModel *model = [BaseModel new];
-        [model setValuesForKeysWithDictionary:result];
-        if ([model.code isEqual:@1]){
+//    NSMutableDictionary *parameters = [NSMutableDictionary new];
+//    [parameters setValue:self.memberId forKey:@"memberid"];
+//    [parameters setValue:sex forKey:@"sex"];
+//    [JGProgressHUD showStatusWith:nil In:self.view];
+//    [VVNetWorkTool postWithUrl:Url(SetMemberSex) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+//        BaseModel *model = [BaseModel new];
+//        [model setValuesForKeysWithDictionary:result];
+//        if ([model.code isEqual:@1]){
             UserBaseInfoFillInController *baseInfoFillInController = [[UserBaseInfoFillInController alloc] init];
             baseInfoFillInController.memberId = self.memberId;
             [self.navigationController pushViewController:baseInfoFillInController animated:true];
-        }
-        [JGProgressHUD showErrorWithModel:model In:self.view];
-    } fail:^(NSError *error) {
-        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
-    }];
+//        }
+//        [JGProgressHUD showErrorWithModel:model In:self.view];
+//    } fail:^(NSError *error) {
+//        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -10,4 +10,11 @@
 
 @interface ModifyPasswordController : BaseViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *oldPassword;
+
+@property (weak, nonatomic) IBOutlet UITextField *newsPassword;
+
+@property (weak, nonatomic) IBOutlet UITextField *retypePassword;
+
+@property (weak, nonatomic) IBOutlet UIButton *finishButton;
 @end

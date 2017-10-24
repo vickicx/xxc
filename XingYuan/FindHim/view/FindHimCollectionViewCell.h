@@ -18,6 +18,7 @@
 
 @interface FindHimCollectionViewCell : UICollectionViewCell
 @property (nonatomic, weak, readonly) UILabel *label;
+@property (nonatomic, strong) UILabel *signature;
 
 @property (nonatomic, assign) id<jumpToDelegate>jumpDelegate;
 @end

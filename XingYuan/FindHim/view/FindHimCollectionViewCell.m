@@ -69,7 +69,7 @@
     UILabel *address = [[UILabel alloc] initWithFrame:CGRectMake(self.width - 80, 10, 60, 20)];
     UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(15, self.shadeView.height - 100, 100, 20)];
     UILabel *info = [[UILabel alloc] initWithFrame:CGRectMake(15, userName.bottom + 10, self.shadeView.width - 24, 20)];
-    UILabel *signature = [[UILabel alloc] initWithFrame:CGRectMake(15, info.bottom + 10, self.shadeView.width - 24, 40)];
+    self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15, info.bottom + 10, self.shadeView.width - 24, 40)];
     
     address.text = @"成都(3km)";
     address.textAlignment = NSTextAlignmentRight;
@@ -90,20 +90,20 @@
     info.width = infoSize.width;
     info.height = infoSize.height;
     
-    signature.text = @"这里是交友的一个签名什么的~";
-    signature.font = [UIFont systemFontOfSize:12];
-    signature.numberOfLines = 0;
-     CGSize signatureSize = [signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
-    signature.width = signatureSize.width;
-    signature.height = signatureSize.height;
+    _signature.text = @"这里是交友的一个签名什么的~";
+    _signature.font = [UIFont systemFontOfSize:12];
+    _signature.numberOfLines = 0;
+     CGSize signatureSize = [_signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+    _signature.width = signatureSize.width;
+    _signature.height = signatureSize.height;
     
-    address.textColor = userName.textColor = info.textColor = signature.textColor = [UIColor whiteColor];
+    address.textColor = userName.textColor = info.textColor = _signature.textColor = [UIColor whiteColor];
     
     [self.shadeView addSubview:address];
     [self.shadeView addSubview:sixImageView];
     [self.shadeView addSubview:userName];
     [self.shadeView addSubview:info];
-    [self.shadeView addSubview:signature];
+    [self.shadeView addSubview:_signature];
     
 }
 

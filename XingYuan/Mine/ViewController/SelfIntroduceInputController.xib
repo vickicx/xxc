@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelfIntroduceInputController">
+            <connections>
+                <outlet property="placeHolderLabel" destination="mpf-an-pBY" id="SAX-hc-WOp"/>
+                <outlet property="textView" destination="iGh-t5-UtA" id="1ac-1B-mZM"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wordsNumLabel" destination="MiK-cb-m6S" id="oPU-OE-mVF"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4i-z5-GUo">
+                    <rect key="frame" x="12" y="74" width="351" height="210"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请对自己进行简要介绍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpf-an-pBY">
+                            <rect key="frame" x="10" y="10" width="173.5" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.74509803921568629" green="0.76470588235294112" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiK-cb-m6S">
+                            <rect key="frame" x="341" y="200" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.55294117647058827" green="0.5725490196078431" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGh-t5-UtA">
+                            <rect key="frame" x="10" y="10" width="331" height="190"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="iGh-t5-UtA" firstAttribute="top" secondItem="K4i-z5-GUo" secondAttribute="top" constant="10" id="4dJ-Ca-XSx"/>
+                        <constraint firstItem="MiK-cb-m6S" firstAttribute="bottom" secondItem="iGh-t5-UtA" secondAttribute="bottom" id="8Vp-Va-mmf"/>
+                        <constraint firstAttribute="bottom" secondItem="iGh-t5-UtA" secondAttribute="bottom" constant="10" id="8pw-j3-4sY"/>
+                        <constraint firstAttribute="trailing" secondItem="iGh-t5-UtA" secondAttribute="trailing" constant="10" id="MHo-5C-Xen"/>
+                        <constraint firstItem="mpf-an-pBY" firstAttribute="leading" secondItem="iGh-t5-UtA" secondAttribute="leading" id="ceg-I1-QTu"/>
+                        <constraint firstItem="mpf-an-pBY" firstAttribute="top" secondItem="iGh-t5-UtA" secondAttribute="top" id="eJm-h2-pqy"/>
+                        <constraint firstItem="MiK-cb-m6S" firstAttribute="trailing" secondItem="iGh-t5-UtA" secondAttribute="trailing" id="lKc-Au-LT2"/>
+                        <constraint firstItem="iGh-t5-UtA" firstAttribute="leading" secondItem="K4i-z5-GUo" secondAttribute="leading" constant="10" id="mlY-HW-oHp"/>
+                        <constraint firstAttribute="height" constant="210" id="owW-HW-I8V"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.94901960784313721" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="K4i-z5-GUo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="Abf-jl-s1c"/>
+                <constraint firstItem="K4i-z5-GUo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="BOf-cx-OJE"/>
+                <constraint firstAttribute="trailing" secondItem="K4i-z5-GUo" secondAttribute="trailing" constant="12" id="Kuc-gg-4rx"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

@@ -14,6 +14,8 @@
 //结果描述信息
 @property (nonatomic,copy) NSString *msg;
 
+@property (nonatomic, copy) NSString *nId;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 /**
  *  赋值

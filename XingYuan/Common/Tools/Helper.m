@@ -73,6 +73,7 @@
     return @"";
 }
 
+//获取验证码按钮倒计时
 - (void)makeBtnCannotBeHandleWith:(UIButton *)button{
     [button setUserInteractionEnabled:false];
     self.time = 10;
@@ -86,5 +87,42 @@
             self.timer = nil;
         }
     }];
+}
+
+/**
+ 显示一个警告框
+ 
+ @param message 警告信息
+ @param completion 点击确定后的操作
+ */
++ (void)showAlertControllerWithMessage:(NSString *)message completion:(void(^)(void))completion{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"警告" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertVC addAction:actionOK];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alertVC animated:YES completion:completion];
+}
+
+
+/**
+ 从storyboard中获取一个Controller
+
+ @param storyBoardName storyboard名字
+ @param identifier Controller的Id
+ @return Controller
+ */
++ (UIViewController *)getViewControllerFromStoryBoard:(NSString *)storyBoardName identifier:(NSString *)identifier{
+    return [[UIStoryboard storyboardWithName:storyBoardName bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:identifier];
+}
+
++ (UIFont *)adaptiveFontWithPlusFont:(int)plusFont{
+    if(SCREEN_WIDTH == 375){
+        return [UIFont systemFontOfSize:(375.0/414)*plusFont];
+    }
+    if (SCREEN_WIDTH == 320){
+        return [UIFont systemFontOfSize:(320.0/414)*plusFont];
+    }
+    return [UIFont systemFontOfSize:plusFont];
 }
 @end

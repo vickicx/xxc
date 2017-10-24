@@ -34,6 +34,9 @@
 #import <UserNotifications/UserNotifications.h>
 #import "UILabel+SizeToFit.h"
 #import "Masonry.h"
+#import "Macros.h"
+#import "UIImageView+WebCache.h"
+
 
 #ifdef DEBUG
 static DDLogLevel ddLogLevel = DDLogLevelVerbose;

@@ -10,6 +10,8 @@
 #import "HXPhotoViewController.h"
 #import "HXPhotoView.h"
 #import "PhotoPreviewViewController.h"
+#import "PictureModel.h"
+#import "FileUtils.h"
 
 static const CGFloat kPhotoViewMargin = 12.0;
 
@@ -18,24 +20,51 @@ static const CGFloat kPhotoViewMargin = 12.0;
 @property (strong, nonatomic) HXPhotoManager *manager;
 @property (weak, nonatomic) HXPhotoView *photoView;
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (nonatomic,strong) NSMutableArray *pictureModelArr;
+@property (nonatomic,strong) NSMutableArray *picUrlArr;
 
 @end
 
 @implementation MyPhotoViewController
+- (HXPhotoManager *)manager {
+    if (!_manager) {
+        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
+        _manager.openCamera = YES;
+        _manager.cacheAlbum = YES;
+        _manager.lookLivePhoto = YES;
+        //        _manager.outerCamera = YES;
+        _manager.open3DTouchPreview = YES;
+        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
+        _manager.photoMaxNum = 21;
+        _manager.videoMaxNum = 9;
+        _manager.maxNum = 21;
+        _manager.saveSystemAblum = NO;
+    }
+    return _manager;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的相册";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     //    self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-  
+    // 加载本地图片
+//    NSMutableArray *images = [NSMutableArray array];
+    
+//    for (int i = 0 ; i < 4; i++) {
+//        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i]];
+//        
+//        [images addObject:image];
+//    }
+    //    [self.manager addLocalImageToAlbumWithImages:images];
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     scrollView.alwaysBounceVertical = YES;
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
+    
+    CGFloat width = scrollView.frame.size.width;
     
     UILabel *advise = [[UILabel alloc] initWithFrame:CGRectMake(kPhotoViewMargin, 5, kWIDTH - 80, 30)];
     advise.text = @"当你照片上传完成后，方可进行效果展示预览";
@@ -43,90 +72,145 @@ static const CGFloat kPhotoViewMargin = 12.0;
     advise.font = [UIFont systemFontOfSize:14];
     [self.scrollView addSubview:advise];
     
-    CGFloat width = scrollView.frame.size.width;
-    HXPhotoView *photoView = [HXPhotoView photoManager:self.manager];
-    photoView.frame = CGRectMake(kPhotoViewMargin, 45, width - kPhotoViewMargin * 2, 0);
+    HXPhotoView *photoView = [[HXPhotoView alloc] initWithFrame:CGRectMake(kPhotoViewMargin, kPhotoViewMargin + 20, width - kPhotoViewMargin * 2, 0) manager:self.manager];
     photoView.delegate = self;
     photoView.backgroundColor = [UIColor whiteColor];
+    //    self.manager.localImageList = images;
+//    [self.manager addLocalImage:images selected:YES];
+//    [photoView refreshView];
     [scrollView addSubview:photoView];
     self.photoView = photoView;
     
-    // 可以在懒加载中赋值 ,  也可以这样赋值
-    self.manager.networkPhotoUrls = [NSMutableArray arrayWithObjects:@"http://oss-cn-hangzhou.aliyuncs.com/tsnrhapp/shop/photos/857980fd0acd3caf9e258e42788e38f5_0.gif",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0034821a-6815-4d64-b0f2-09103d62630d.jpg",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0be5118d-f550-403e-8e5c-6d0badb53648.jpg",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/1466408576222.jpg", nil];
-    
-    photoView.manager = self.manager;
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"预览" style:UIBarButtonItemStylePlain target:self action:@selector(lookClick)];
+    
     self.navigationItem.rightBarButtonItem.tintColor = RGBColor(240, 53, 99, 1);
+    [self requestData];
+    
 }
-
-- (HXPhotoManager *)manager
-{
-    if (!_manager) {
-        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhoto];
-        //        _manager.openCamera = NO;
-        _manager.outerCamera = YES;
-        _manager.showDeleteNetworkPhotoAlert = NO;
-        _manager.saveSystemAblum = YES;
-        _manager.photoMaxNum = 2; // 这里需要注意 !!!  第一次传入的最大照片数 是可选最大数 减去 网络照片数量   即   photoMaxNum = maxNum - networkPhotoUrls.count  当点击删除网络照片时, photoMaxNum 内部会自动加1
-        _manager.videoMaxNum = 0;  // 如果有网络图片且选择类型为HXPhotoManagerSelectedTypePhotoAndVideo 又设置了视频最大数且不为0时,
-        //        那么在选择照片列表最大只能选择 photoMaxNum + videoMaxNum
-        //        在外面collectionView上最大数是 photoMaxNum + networkPhotoUrls.count + videoMaxNum
-        _manager.maxNum = 6;
-        
-    }
-    return _manager;
-}
-
 
 - (void)lookClick {
     PhotoPreviewViewController *photoView = [[PhotoPreviewViewController alloc] init];
     [self.navigationController pushViewController:photoView animated:YES];
-   }
+}
 
 - (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
-    NSSLog(@"所有:%ld - 照片:%ld - 视频:%ld",allList.count,photos.count,videos.count);
-    
-    [HXPhotoTools getImageForSelectedPhoto:photos type:HXPhotoToolsFetchHDImageType completion:^(NSArray<UIImage *> *images) {
-        NSSLog(@"%@",images);
-    }];
-    
+    NSSLog(@"%@",allList);
 }
 
-- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
-    NSSLog(@"%@",networkPhotoUrl);
-}
-
-- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame
-{
+- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
     NSSLog(@"%@",NSStringFromCGRect(frame));
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
+    
 }
 
-- (void)photoViewAllNetworkingPhotoDownloadComplete:(HXPhotoView *)photoView {
-    NSSLog(@"所有网络图片下载完成");
-    /*
-     网络图片全部下载完成之后会的调一下这个方法
-     // 代理返回 选择、移动顺序、删除之后的图片以及视频
-     - (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal;
-     */
+- (void)requestData {
+    
+    self.pictureModelArr = [NSMutableArray new];
+    
+    self.picUrlArr = [NSMutableArray new];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    
+    [parameters setValue:@"1" forKey:@"pageindex"]; //分页下标
+    
+    [parameters setValue:@"21" forKey:@"pagesize"]; //每页数据条数
+    
+    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+    
+    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+    
+    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+    
+    __weak __typeof__(self) weakSelf = self;
+    
+    
+    
+    
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    
+    
+    
+    
+    [VVNetWorkTool postWithUrl:Url(Myphotoalbum) body:[Helper parametersWith:parameters]
+     
+                      progress:nil success:^(id result) {
+                          
+                          NSMutableArray *arr = [result objectForKey:@"data"];
+                          
+                          for (NSDictionary *dic in arr) {
+                              
+                              PictureModel *pic = [[PictureModel alloc] initWithDictionary:dic];
+                              
+                              [self.pictureModelArr addObject:pic];
+                              
+                              
+                              
+                              
+                              
+                              NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:Url(pic.pic)]];
+                              
+                              UIImage *image = [UIImage imageWithData:data]; // 取得图片
+                              
+                              
+            
+//                              [FileUtils creatFile:[NSString stringWithFormat:@"nnn%@",pic.sort] withData:data];
+                              NSString *path_sandox = NSHomeDirectory();
+                              //设置一个图片的存储路径
+                              NSString *imagePath = [path_sandox stringByAppendingString:[NSString stringWithFormat:@"/nnn%@.png",pic.sort]];
+                              //把图片直接保存到指定的路径（同时应该把图片的路径imagePath存起来，下次就可以直接用来取）
+                              [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+                              
+                              
+                              
+                    
+                           
+                              if ( [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES]) {
+                                  NSLog(@"成功");
+                              }else {
+                                  NSLog(@"失败");
+                              }
+                              
+                              
+                          }
+                          
+                          NSMutableArray *images = [NSMutableArray array];
+                          
+                          
+                          
+                          for (PictureModel *pic in self.pictureModelArr) {
+                              
+                              //借助以上获取的沙盒路径读取图片
+                              // 读取沙盒路径图片
+                              NSString *aPath3=[NSString stringWithFormat:@"%@/nnn%@.png",NSHomeDirectory(),pic.sort];
+                              // 拿到沙盒路径图片
+                              UIImage *imgFromUrl3=[[UIImage alloc]initWithContentsOfFile:aPath3];
+                             
+                              
+                              [images addObject:imgFromUrl3];
+                              
+                          }
+                          
+                          
+                          
+                          
+                          
+                          [self.manager addLocalImage:images selected:YES];
+                          
+                          weakSelf.photoView.manager = self.manager;
+                          [weakSelf.photoView refreshView];
+                          
+                          
+                          
+                      } fail:^(NSError *error) {
+                          
+                          
+                          
+                      }];
+    
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

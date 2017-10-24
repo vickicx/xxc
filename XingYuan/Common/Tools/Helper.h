@@ -32,4 +32,31 @@
 
 //使获取验证码button在一段时间内不可操作
 - (void)makeBtnCannotBeHandleWith:(UIButton *)button;
+
+
+/**
+ 显示一个警告框
+
+ @param message 警告信息
+ @param completion 点击确定后的操作
+ */
++ (void)showAlertControllerWithMessage:(NSString *)message completion:(void(^)(void))completion;
+
+/**
+ 从storyboard中获取一个Controller
+ 
+ @param storyBoardName storyboard名字
+ @param identifier Controller的Id
+ @return Controller
+ */
++ (UIViewController *)getViewControllerFromStoryBoard:(NSString *)storyBoardName identifier:(NSString *)identifier;
+
+
+/**
+ 根据plus机型的字体大小自动返回适配其他机型的字体
+
+ @param plusFont plus机型的字体
+ @return 相对应机型的大小
+ */
++ (UIFont *)adaptiveFontWithPlusFont:(int)plusFont;
 @end

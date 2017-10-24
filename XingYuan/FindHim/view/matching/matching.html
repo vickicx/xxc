@@ -1,0 +1,121 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>匹配界面</title>  
+ <link rel="stylesheet" href="matching.css" /> 
+</head>  
+  
+<body>  
+<div class="container">
+	<!--择偶标准box-->
+	<div class="zeou_box">
+		<!--TA的择偶标准-->
+		<div class="TA_user_photo">
+	    	<img src="touxiang.png"/>
+	    </div>
+	    <div class="TA_inner_circle1"></div>
+	    <div class="TA_inner_circle2"></div>
+	    <div class="TA_pulse"></div>
+	       
+	    <div class="TA_age TA_zeou zeou_moveleft"> 24-32岁</div>
+	    <div class="TA_income TA_zeou zeou_movetop">收入6k-11.2k</div>
+	    <div class="TA_user_height TA_zeou zeou_movetop">170-185cm</div>
+	    <div class="TA_buy_room TA_zeou zeou_movetop">已购房 </div>
+	    <div class="TA_marriage TA_zeou zeou_moveleft">未婚</div>
+	    <div class="TA_education TA_zeou zeou_moveleft">本科 </div>
+	    <div class="TA_zobz TA_zeou">TA的择偶标准</div>
+	          <!--百分比-->
+	    <canvas id="canvas" width="100" height="100"></canvas>
+	    <div class="overall_pj">综合评价</div>
+	    <div class="matching_gd">高度匹配</div>
+	    <!--我的择偶标准-->
+	    <div class="ME_user_photo">
+	    	<img src="touxiang.png"/>
+	    </div>
+	    <div class="ME_inner_circle1"></div>
+	    <div class="ME_inner_circle2"></div>
+	    <div class="ME_pulse"></div>
+	       
+	    <div class="ME_age TA_zeou zeou_moveleft"> 24-32岁</div>
+	    <div class="ME_income TA_zeou zeou_movetop">收入6k-11.2k</div>
+	    <div class="ME_user_height TA_zeou zeou_movetop">170-185cm</div>
+	    <div class="ME_buy_room TA_zeou zeou_movetop">已购房 </div>
+	    <div class="ME_marriage TA_zeou zeou_moveleft">未婚</div>
+	    <div class="ME_education TA_zeou zeou_moveleft">本科 </div>
+	    <div class="ME_zobz TA_zeou">我的择偶标准</div>
+	    <!--打招呼-->
+	    <div class="say_hello">打招呼</div>
+	</div>
+	<!--共同兴趣爱好-->
+	<div class="hobbies_box">
+		<p style="font-size: 30px;text-align: center;">你们的兴趣爱好分布情况</p>
+		<p style="font-size: 26px;text-align: center;color: #8d9295;margin-top: 12px;";>共有4个相同兴趣爱好</p>
+		<!--共同兴趣爱好-->
+		<div class="common_hobbies">
+			<canvas id="canvas2" width="210" height="210" ></canvas>
+			<div class="common_hobbies_title">共同<br>兴趣</div>
+			<div class="common_hobbies_nq Clockwise_xz">
+				<div class="common_hobbies1_q common_hobbies_nq_xq">
+					
+				</div>
+				<div class="common_hobbies2_q common_hobbies_nq_xq">
+					
+				</div>
+				<div class="common_hobbies3_q common_hobbies_nq_xq">
+					
+				</div>
+				<div class="common_hobbies4_q common_hobbies_nq_xq">
+					
+				</div>
+				<div class="common_hobbies_nr ">
+					<div class="common_hobbies_style common_hobbies1 ssz_zt ">
+						吃饭  
+					</div>
+					<div class="common_hobbies_style common_hobbies2 ssz_zt">
+						睡觉
+					</div>
+					<div class="common_hobbies_style common_hobbies3 ssz_zt">
+						敲代码
+					</div>
+					<div class="common_hobbies_style common_hobbies4 ssz_zt">
+						玩游戏
+					</div>
+				</div>
+			</div>
+			<div class="common_hobbies_wq Anticlockwise_xz">
+				<div class="common_hobbies_wq_xq1 common_hobbies_wq_xq_style">
+					
+				</div>
+				<div class="common_hobbies_wq_xq2 common_hobbies_wq_xq_style">
+					
+				</div>
+				<div class="common_hobbies_wq_xq3 common_hobbies_wq_xq_style">
+					
+				</div>
+				<div class="common_hobbies_wq_xq4 common_hobbies_wq_xq_style">
+					
+				</div>
+			</div>
+			<!--聊聊兴趣爱好-->
+	    	<div class="chat_hobbies">聊聊兴趣爱好</div>
+		</div> 
+		
+		
+	</div>
+   <div class="zh_matching_box">
+   		<p style="font-size: 30px;text-align: center;">综合匹配情况</p>
+		<p style="font-size: 26px;text-align: center;color: #8d9295;margin-top: 12px;";>你们属于中度匹配，只要你主动就能更进一步哟</p>
+   	    <div id="chart" class="zeou_movetop">
+   	    	
+   	    </div>
+   	    <div class="chat_zh">把握缘分 留住爱情</div>
+        <div style="text-align:center;clear:both"></div>
+   </div>
+
+
+</div>  
+<script type="text/javascript" src="jquery-1.11.3.js" ></script>
+<script type="text/javascript" src="matching.js" ></script>
+</body>  
+</html>  

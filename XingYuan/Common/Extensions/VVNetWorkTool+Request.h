@@ -35,4 +35,17 @@
  *  @param fail         失败响应
  */
 + (void)postWithUrl:(NSString *)url body:(id)body progress:(ProgressBlock)progress success:(SuccessBlock)success fail:(FailedBlock)fail;
+
+
+/**
+ 表单提交
+
+ @param url 网址
+ @param body 参数
+ @param progress 响应进度
+ @param block 表单block
+ @param success 成功响应
+ @param fail 失败响应
+ */
++ (void)formSubmissionWithUrl:(NSString *)url body:(id)body progress:(ProgressBlock)progress formBlock:(void (^)(id <AFMultipartFormData> formData))block success:(SuccessBlock)success fail:(FailedBlock)fail;
 @end

@@ -7,12 +7,20 @@
 //  
 
 #import "FindHimMainViewController.h"
+#import "OneStageScreeningController.h"
 
 @interface FindHimMainViewController ()
 @property (nonatomic,copy) NSString *PipeiNum;
+@property (nonatomic,copy) NSString *signature;
 @end
 
 @implementation FindHimMainViewController
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getMyArtistIntroductionData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -105,6 +113,7 @@
     cell.backgroundColor = _datas[index];
     cell.layer.cornerRadius = 10;
     [cell.layer setMasksToBounds:YES];
+    cell.signature.text = self.signature;
     cell.label.text = [NSString stringWithFormat:@"index->%ld",index];
     cell.jumpDelegate = self;
     return cell;
@@ -144,7 +153,7 @@
 
 
 - (void) rightButton:(UIButton *)button {
-    
+    [self.navigationController pushViewController:[OneStageScreeningController new] animated:true];
 }
 
 
@@ -155,6 +164,25 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)getMyArtistIntroductionData {
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+    [VVNetWorkTool postWithUrl:Url(MyArtistIntroduction) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+        NSDictionary *dic = result;
+        NSString *summary = [[dic objectForKey:@"data"] valueForKey:@"summary"];
+        if (summary != nil) {
+            self.signature = summary;
+        }
+        
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 /*

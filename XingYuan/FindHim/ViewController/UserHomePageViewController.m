@@ -17,6 +17,7 @@
 #import "futurePlanningTableViewCell.h"
 #import "UserSpouseStandardTableViewCell.h"
 #import "Masonry.h"
+#import "MatchingTableViewCell.h"
 
 @interface UserHomePageViewController ()<NavHeadTitleViewDelegate,headLineDelegate,UITableViewDataSource,UITableViewDelegate>
 #define JXColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
@@ -42,6 +43,7 @@
 @property(nonatomic,assign)int rowHeightFa;
 @property(nonatomic,assign)int rowHeightFu;
 @property(nonatomic,strong)UITableView *tableView;
+@property (nonatomic,strong) UIVisualEffectView *visualview;
 @end
 
 @implementation UserHomePageViewController
@@ -60,6 +62,9 @@
     [self createTabBar];
     
     [self.tableView reloadData];
+    
+    [self requestData];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight:) name:@"CellHeightP" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight1:) name:@"CellHeightB" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight3:) name:@"CellHeightFu" object:nil];
@@ -118,6 +123,8 @@
         [_tableView registerClass:[familyInformationTableViewCell class] forCellReuseIdentifier:@"familyCell"];
         [_tableView registerClass:[futurePlanningTableViewCell class] forCellReuseIdentifier:@"futureCell"];
         [_tableView registerClass:[UserSpouseStandardTableViewCell class] forCellReuseIdentifier:@"SpouseStandardCell"];
+         [_tableView registerClass:[MatchingTableViewCell class] forCellReuseIdentifier:@"MatchingTableViewCell"];
+        
                [self.view addSubview:_tableView];
     }
     [_tableView setTableHeaderView:self.headImageView];
@@ -154,7 +161,9 @@
         _headImageView=[[UserHomePagePopView alloc]init];
         _headImageView.frame=CGRectMake(0, 0, kWIDTH, 223);
         _headImageView.backgroundColor=[UIColor clearColor];
+    
         
+       
         UIImage *image=[UIImage imageNamed:@"头像"];
         //图片的宽度设为屏幕的宽度，高度自适应
         NSLog(@"%f",image.size.height);
@@ -166,6 +175,11 @@
         _backImgOrgy=_backgroundImgV.frame.origin.y;
          [self.view addSubview:_backgroundImgV];
         
+        UIBlurEffect *effct = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        self.visualview = [[UIVisualEffectView alloc] initWithEffect:effct];
+        _visualview.frame = _headImageView.bounds;
+        [_backgroundImgV addSubview:_visualview];
+
         //_headImageView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"个人页背景图.png"]];
         
         _headerImg=[[UIImageView alloc]init];
@@ -182,21 +196,21 @@
             make.size.mas_equalTo(CGSizeMake(70, 70));
         }];
         //昵称
-        _nickLabel=[[UILabel alloc]init];
-        _nickLabel.text=@"执念12o3";
-        _nickLabel.textColor=[UIColor whiteColor];
-        _nickLabel.textAlignment=NSTextAlignmentCenter;
-        UIButton *fixBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        fixBtn.frame=CGRectMake(CGRectGetMaxX(_nickLabel.frame)+5, 114, 22, 22);
-        [fixBtn setImage:[UIImage imageNamed:@"pencil-light-shadow"] forState:UIControlStateNormal];
-        [fixBtn addTarget:self action:@selector(fixClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_headImageView addSubview:fixBtn];
-        [self.view addSubview:_nickLabel];
-        [_nickLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).with.offset(64);
-            make.centerX.equalTo(self.view);
-            
-        }];
+//        _nickLabel=[[UILabel alloc]init];
+//        _nickLabel.text=@"执念12o3";
+//        _nickLabel.textColor=[UIColor whiteColor];
+//        _nickLabel.textAlignment=NSTextAlignmentCenter;
+//        UIButton *fixBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//        fixBtn.frame=CGRectMake(CGRectGetMaxX(_nickLabel.frame)+5, 114, 22, 22);
+//        [fixBtn setImage:[UIImage imageNamed:@"pencil-light-shadow"] forState:UIControlStateNormal];
+//        [fixBtn addTarget:self action:@selector(fixClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [_headImageView addSubview:fixBtn];
+//        [self.view addSubview:_nickLabel];
+//        [_nickLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view).with.offset(64);
+//            make.centerX.equalTo(self.view);
+//            
+//        }];
     }
     return _headImageView;
 }
@@ -282,8 +296,10 @@
 
     }else if (_currentIndex == 1){
         return 400;
+    }else if (_currentIndex == 2) {
+        return 1200;
     }
-    return 255;
+    return 225;
 }
 - (void)cellHeight:(NSNotification *)notification{
     NSLog(@"接到通知P");
@@ -311,7 +327,7 @@
     }else if(_currentIndex==1){
         return 1;
     }else{
-        return _dataArray2.count;
+        return 1;
     }
     return 0;
 }
@@ -387,11 +403,7 @@
         
         return cell;
             }else if(_currentIndex==2){
-                cell.textLabel.text=[_dataArray2 objectAtIndex:indexPath.row];
-        
-                cell.detailTextLabel.text=[_dataArray2 objectAtIndex:indexPath.row];
-        
-                [cell.imageView setImage:[UIImage imageNamed:@"29.jpg"]];
+                MatchingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MatchingTableViewCell"];
                 
                 return cell;
             }
@@ -437,6 +449,7 @@
         rect.origin.x =  -(rect.size.width-_backImgWidth)/2;
         rect.origin.y = 0;
         _backgroundImgV.frame = rect;
+        _visualview.frame = rect;
     }else{
         CGRect rect = _backgroundImgV.frame;
         rect.size.height = _backImgHeight;
@@ -444,6 +457,7 @@
         rect.origin.x = 0;
         rect.origin.y = -contentOffsety;
         _backgroundImgV.frame = rect;
+        _visualview.frame = rect;
         
     }
     
@@ -489,6 +503,27 @@
     [self.view addSubview:chatbutton];
     
 }
+
+- (void)requestData {
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    [parameters setValue:[Helper memberId] forKey:@"memberid"]; //seememberid  被查看人id
+    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+    __weak __typeof__(self) weakSelf = self;
+    [VVNetWorkTool postWithUrl:Url(MemberFirstPage) body:[Helper parametersWith:parameters]
+                      progress:nil success:^(id result) {
+                          NSDictionary *dic = result;
+                          NSLog(@"%@", dic);
+                          
+                          
+                      } fail:^(NSError *error) {
+                          
+                      }];
+}
+
+
 
 
 

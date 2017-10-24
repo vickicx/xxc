@@ -18,6 +18,7 @@ static UINavigationController *currentNavigationController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationBar setTranslucent:true];
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{

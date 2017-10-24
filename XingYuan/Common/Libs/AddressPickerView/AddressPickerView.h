@@ -12,4 +12,5 @@
 @property (nonatomic,strong) void(^block)(NSString *province,NSString *city);
 
 + (instancetype)addressPickerView;
+- (void)toShow;
 @end

@@ -18,6 +18,7 @@
             <subviews>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mu9-yf-pt4">
                     <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Mu9-yf-pt4" secondAttribute="height" multiplier="125:72" id="tr8-86-o3q"/>
                     </constraints>

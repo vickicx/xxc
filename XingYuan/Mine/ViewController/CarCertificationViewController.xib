@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarCertificationViewController">
+            <connections>
+                <outlet property="button" destination="bvk-Et-Uot" id="bzX-TC-Rdd"/>
+                <outlet property="label" destination="ciJ-4Z-73Z" id="00f-xi-aRv"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   请清晰的拍摄出您购车证明信息以便审核" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciJ-4Z-73Z">
+                    <rect key="frame" x="0.0" y="64" width="375" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="RKs-0t-w7p"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.72156862749999995" green="0.72941176470000002" blue="0.74117647060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvk-Et-Uot">
+                    <rect key="frame" x="12" y="124" width="351" height="177"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="177" id="iwu-pn-pfS"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="购车"/>
+                    <connections>
+                        <action selector="dealToSelectHeadImg:" destination="-1" eventType="touchUpInside" id="gKj-o9-Pls"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.点亮专属醒目的购车标识" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGC-VS-Byc">
+                    <rect key="frame" x="12" y="331" width="167.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.获得更多的推荐机会" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ton-r2-5q2">
+                    <rect key="frame" x="12" y="358" width="141" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.72156862749999995" green="0.72941176470000002" blue="0.74117647060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.收信率大幅提升" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMc-NW-tB4">
+                    <rect key="frame" x="12" y="385" width="112.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.72156862749999995" green="0.72941176470000002" blue="0.74117647060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.异性将更放心的与你交往" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8D-F3-fDe">
+                    <rect key="frame" x="12" y="412" width="169.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.72156862749999995" green="0.72941176470000002" blue="0.74117647060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSW-wU-iIu">
+                    <rect key="frame" x="0.0" y="586" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="jOh-Sh-aZZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的信息仅用来核实情况，不会泄露您的信息，我们将严格保护您的隐私" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idM-M0-7qK">
+                    <rect key="frame" x="32" y="607" width="312" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="312" id="ATR-QN-rS7"/>
+                        <constraint firstAttribute="height" constant="40" id="xg7-KU-Nq8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ton-r2-5q2" firstAttribute="top" secondItem="OGC-VS-Byc" secondAttribute="bottom" constant="10" id="27y-zC-hht"/>
+                <constraint firstItem="ciJ-4Z-73Z" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="3Lw-OO-DAh"/>
+                <constraint firstItem="idM-M0-7qK" firstAttribute="top" secondItem="cSW-wU-iIu" secondAttribute="bottom" constant="20" id="3VB-l7-eWl"/>
+                <constraint firstItem="Ton-r2-5q2" firstAttribute="leading" secondItem="GMc-NW-tB4" secondAttribute="leading" id="68o-nz-Cry"/>
+                <constraint firstItem="bvk-Et-Uot" firstAttribute="top" secondItem="ciJ-4Z-73Z" secondAttribute="bottom" constant="20" id="AoV-CA-a2J"/>
+                <constraint firstItem="GMc-NW-tB4" firstAttribute="top" secondItem="Ton-r2-5q2" secondAttribute="bottom" constant="10" id="Gt9-6q-5KC"/>
+                <constraint firstAttribute="trailing" secondItem="cSW-wU-iIu" secondAttribute="trailing" id="Mcz-aA-fSX"/>
+                <constraint firstItem="bvk-Et-Uot" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="NTh-Tq-eZ0"/>
+                <constraint firstItem="OGC-VS-Byc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="OdQ-CT-Mge"/>
+                <constraint firstItem="N8D-F3-fDe" firstAttribute="top" secondItem="GMc-NW-tB4" secondAttribute="bottom" constant="10" id="PGm-ZB-it8"/>
+                <constraint firstItem="idM-M0-7qK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UIO-WT-Dxd"/>
+                <constraint firstItem="Ton-r2-5q2" firstAttribute="leading" secondItem="N8D-F3-fDe" secondAttribute="leading" id="ZJD-qF-Y8u"/>
+                <constraint firstItem="Ton-r2-5q2" firstAttribute="leading" secondItem="OGC-VS-Byc" secondAttribute="leading" id="a4g-jC-9Bw"/>
+                <constraint firstItem="OGC-VS-Byc" firstAttribute="top" secondItem="bvk-Et-Uot" secondAttribute="bottom" constant="30" id="cvU-xp-D5j"/>
+                <constraint firstItem="bvk-Et-Uot" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fDM-e4-nLG"/>
+                <constraint firstItem="cSW-wU-iIu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lbJ-Ts-1gq"/>
+                <constraint firstAttribute="bottom" secondItem="cSW-wU-iIu" secondAttribute="bottom" constant="80" id="mEg-QT-rJA"/>
+                <constraint firstAttribute="trailing" secondItem="ciJ-4Z-73Z" secondAttribute="trailing" id="sp0-Ya-4qN"/>
+                <constraint firstItem="ciJ-4Z-73Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yF5-z4-aji"/>
+                <constraint firstAttribute="trailing" secondItem="bvk-Et-Uot" secondAttribute="trailing" constant="12" id="zNe-tw-BIz"/>
+            </constraints>
+            <point key="canvasLocation" x="34.5" y="72.5"/>
+        </view>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.点亮芝麻认证标识" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LJv-Dl-yjO">
+            <rect key="frame" x="0.0" y="0.0" width="124.5" height="17"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+            <color key="textColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <nil key="highlightedColor"/>
+        </label>
+    </objects>
+    <resources>
+        <image name="购车" width="351" height="177"/>
+    </resources>
+</document>

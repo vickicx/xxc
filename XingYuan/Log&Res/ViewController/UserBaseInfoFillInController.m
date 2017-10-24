@@ -15,7 +15,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "LoginRegisterController.h"
 
-@interface UserBaseInfoFillInController ()<TZImagePickerControllerDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface UserBaseInfoFillInController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
 
 @property (weak, nonatomic) IBOutlet UILabel *nickNameInfo;
@@ -25,8 +25,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *finishBtn;
 
-@property (strong,nonnull) TZImagePickerController *imagePickerController;
-
+@property (nonatomic,copy) NSString *nickName;
+@property (nonatomic,copy) NSString *birthDay;
+@property (nonatomic,copy) NSString *height;
+@property (nonatomic,copy) NSString *area;
+@property (nonatomic,weak) UIImage *img;
 @end
 
 @implementation UserBaseInfoFillInController
@@ -46,6 +49,55 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark --部分属性的Set方法
+- (void)setNickName:(NSString *)nickName{
+    _nickName = nickName;
+    if (_nickName != nil){
+        self.nickNameInfo.text = nickName;
+    }else{
+        self.nickNameInfo.text = @"请输入";
+    }
+}
+
+- (void)setBirthDay:(NSString *)birthDay{
+    _birthDay = birthDay;
+    if (_birthDay != nil){
+        self.birthdayInfo.text = birthDay;
+    }else{
+        self.birthdayInfo.text = @"请输入";
+    }
+}
+
+- (void)setHeight:(NSString *)height{
+    _height = height;
+    if (_height != nil){
+        self.heightInfo.text = height;
+    }
+    else{
+        self.heightInfo.text = @"请输入";
+    }
+}
+
+- (void)setArea:(NSString *)area{
+    _area = area;
+    if (_area != nil){
+        self.areaInfo.text = area;
+    }else{
+        self.areaInfo.text = @"请输入";
+    }
+}
+
+- (void)setImg:(UIImage *)img{
+    _img = img;
+    if (_img != nil){
+        self.headImg.image = img;
+        [self.headImg setHidden:false];
+    }else{
+        [self.headImg setHidden:true];
+    }
+}
+
+#pragma mark --各个选项点击事件
 //去相册选择头像
 - (IBAction)dealToSelectHeadImg:(id)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -59,10 +111,7 @@
             picker.allowsEditing = YES;
             [self presentModalViewController:picker animated:YES];
         }else{
-            UIAlertController *alerVC = [UIAlertController alertControllerWithTitle:@"警告" message:@"该设备不支持相机" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
-            [alerVC addAction:okAction];
-            [self presentViewController:alerVC animated:true completion:nil];
+            [Helper showAlertControllerWithMessage:@"该设备不支持相机" completion:nil];
         }
     }];
     UIAlertAction *toAlbum = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -72,10 +121,7 @@
         {
             // 无权限
             // do something...
-            UIAlertController *alerVC = [UIAlertController alertControllerWithTitle:@"警告" message:@"未获得相册授权，请先设置" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
-            [alerVC addAction:okAction];
-            [self presentViewController:alerVC animated:true completion:nil];
+            [Helper showAlertControllerWithMessage:@"未获得相册授权，请先设置" completion:nil];
         }else{
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
             //资源类型为图片库
@@ -99,7 +145,9 @@
 - (IBAction)dealTapNickName:(id)sender {
     NickNameFillInController *nickNameFillInController = [[NickNameFillInController alloc] init];
     nickNameFillInController.nickNameBlock = ^(NSString *nickName){
-        self.nickNameInfo.text = nickName;
+        if (nickName.length){
+            self.nickName = nickName;
+        }
     };
     [self presentViewController:nickNameFillInController animated:true completion:nil];
 }
@@ -111,7 +159,7 @@
         NSDateFormatter *formater = [[NSDateFormatter alloc] init];
         [formater setDateFormat:@"yyyy-MM-dd"];//设置时间显示的格式，此处使用的formater格式要与字符串格式完全一致，否则转换失败
         NSString *dateStr = [formater stringFromDate:date];//将日期转换成字符串
-        self.birthdayInfo.text = dateStr;
+        self.birthDay = dateStr;
     };
     datePickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
     [[[UIApplication sharedApplication] keyWindow] addSubview:datePickerView];
@@ -121,7 +169,7 @@
 - (IBAction)dealTapHeight:(id)sender {
     HeightPickerView *heightPickerView = [HeightPickerView heightPickerView];
     heightPickerView.heightPickerBlock = ^(NSString *height){
-        self.heightInfo.text = height;
+        self.height = height;
     };
     heightPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
     [[[UIApplication sharedApplication] keyWindow] addSubview:heightPickerView];
@@ -131,7 +179,7 @@
 - (IBAction)dealTapArea:(id)sender {
     AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
     addressPickerView.block = ^(NSString *province, NSString *city){
-        self.areaInfo.text = [province stringByAppendingString:city];
+        self.area = [[province stringByAppendingString:@" "] stringByAppendingString:city];
     };
     addressPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
     [[[UIApplication sharedApplication] keyWindow] addSubview:addressPickerView];
@@ -139,16 +187,67 @@
 
 //完成设置
 - (IBAction)dealTapFinish:(id)sender {
-    [[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissViewControllerAnimated:YES completion:nil];
-    LoginRegisterController *loginRegisterController = [[LoginRegisterController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginRegisterController];
-    [[UIApplication sharedApplication] keyWindow].rootViewController = nav;
+    //
+    if(![self isParameterIntegrity]){return;}
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setValue:self.memberId forKey:@"memberid"];
+    [parameters setValue:self.nickName forKey:@"nickname"];
+    [parameters setValue:self.height forKey:@"stature"];
+    [parameters setValue:self.area forKey:@"address"];
+    [parameters setValue:self.birthDay forKey:@"birthday"];
+    
+    [JGProgressHUD showStatusWith:nil In:self.view];
+    [VVNetWorkTool formSubmissionWithUrl:Url(SetMemberInfo) body:[Helper parametersWith:parameters] progress:^(NSProgress *progress) {
+        NSLog(@"%f",1.0*progress.completedUnitCount/progress.totalUnitCount);
+    } formBlock:^(id<AFMultipartFormData> formData) {
+        NSData *data = UIImagePNGRepresentation(self.img);
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        // 设置时间格式
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+
+        [formData appendPartWithFileData:data name:@"file" fileName:fileName mimeType:@"image/png"];
+    } success:^(id result) {
+        //成功后直接进入主界面？
+        [[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissViewControllerAnimated:YES completion:nil];
+        LoginRegisterController *loginRegisterController = [[LoginRegisterController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginRegisterController];
+        [[UIApplication sharedApplication] keyWindow].rootViewController = nav;
+    } fail:^(NSError *error) {
+        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
+    }];
 }
 
-// MARK: - UIImagePickerControllerDelegate
+//检测参数完整性
+- (BOOL)isParameterIntegrity{
+    if (self.img == nil){
+        [Helper showAlertControllerWithMessage:@"头像不能为空" completion:nil];
+        return false;
+    }
+    if (self.nickName == nil){
+        [Helper showAlertControllerWithMessage:@"昵称不能为空" completion:nil];
+        return false;
+    }
+    if (self.birthDay == nil){
+        [Helper showAlertControllerWithMessage:@"生日不能为空" completion:nil];
+        return false;
+    }
+    if (self.height == nil){
+        [Helper showAlertControllerWithMessage:@"身高不能为空" completion:nil];
+        return false;
+    }
+    if (self.area == nil){
+        [Helper showAlertControllerWithMessage:@"地区不能为空" completion:nil];
+        return false;
+    }
+    return true;
+}
+
+#pragma mark --UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo{
     if (image != nil){
-        self.headImg.image = image;
+        self.img = image;
     }
     [picker dismissViewControllerAnimated:true completion:nil];
 }

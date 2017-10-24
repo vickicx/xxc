@@ -42,7 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIView *gradientContentView;
 
 @property (retain,nonatomic) TencentOAuth *tencentOAuth;
-@property (nonatomic,weak) LoginResultModel *loginResultModel;
+@property (nonatomic,strong) LoginResultModel *loginResultModel;
 @end
 
 @implementation LoginRegisterController
@@ -84,6 +84,7 @@
         NSDictionary *data = [dic valueForKey:@"data"];
         [loginResultModel setValuesForKeysWithDictionary:data];
         self.loginResultModel = loginResultModel;
+        [Helper saveMemberId:loginResultModel.memberId];
         if ([loginResultModel.code  isEqual: @1]){
             [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
 //            //若未选择性别则跳转性别选选择界面
@@ -94,7 +95,7 @@
 //                return;
 //            }
 //            //若未选择用户基础信息则跳转基础信息填写界面
-//            if (!loginResultModel.baseInfo){
+//            if (!loginResultModel.baseInfo){          
 //                UserBaseInfoFillInController *baseInfoFillInController = [[UserBaseInfoFillInController alloc] init];
 //                baseInfoFillInController.memberId = loginResultModel.memberId;
 //                [self.navigationController pushViewController:baseInfoFillInController animated:true];
