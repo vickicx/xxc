@@ -630,6 +630,9 @@
 		99ADB5921F9D8EF2005928B3 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99ADB5911F9D8EF2005928B3 /* SDWebImage.framework */; };
 		99ADB5951F9EDF54005928B3 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADB5941F9EDF54005928B3 /* FileUtils.m */; };
 		99ADB5981F9F15FC005928B3 /* FindHimMainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADB5971F9F15FC005928B3 /* FindHimMainModel.m */; };
+		99ADB59B1FA063D9005928B3 /* UserHomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADB59A1FA063D9005928B3 /* UserHomePageModel.m */; };
+		99ADB59F1FA06A98005928B3 /* SmallPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADB59D1FA06A98005928B3 /* SmallPhotoCollectionViewCell.m */; };
+		99ADB5A01FA06A98005928B3 /* SmallPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ADB59E1FA06A98005928B3 /* SmallPhotoCollectionViewCell.xib */; };
 		99B487701F7B408F00D8DE54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B4876F1F7B408F00D8DE54 /* main.m */; };
 		99B487791F7B408F00D8DE54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99B487771F7B408F00D8DE54 /* Main.storyboard */; };
 		99B4877B1F7B408F00D8DE54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99B4877A1F7B408F00D8DE54 /* Assets.xcassets */; };
@@ -1811,6 +1814,11 @@
 		99ADB5941F9EDF54005928B3 /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
 		99ADB5961F9F15FC005928B3 /* FindHimMainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindHimMainModel.h; sourceTree = "<group>"; };
 		99ADB5971F9F15FC005928B3 /* FindHimMainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindHimMainModel.m; sourceTree = "<group>"; };
+		99ADB5991FA063D9005928B3 /* UserHomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHomePageModel.h; sourceTree = "<group>"; };
+		99ADB59A1FA063D9005928B3 /* UserHomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHomePageModel.m; sourceTree = "<group>"; };
+		99ADB59C1FA06A98005928B3 /* SmallPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmallPhotoCollectionViewCell.h; path = XingYuan/FindHim/view/SmallPhotoCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
+		99ADB59D1FA06A98005928B3 /* SmallPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmallPhotoCollectionViewCell.m; path = XingYuan/FindHim/view/SmallPhotoCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
+		99ADB59E1FA06A98005928B3 /* SmallPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SmallPhotoCollectionViewCell.xib; path = XingYuan/FindHim/view/SmallPhotoCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
 		99B4876B1F7B408F00D8DE54 /* XingYuan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XingYuan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99B4876F1F7B408F00D8DE54 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		99B487781F7B408F00D8DE54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -3907,6 +3915,8 @@
 				59DA85F31F99A6D000089DBB /* ChildHobbyModel.m */,
 				99ADB5961F9F15FC005928B3 /* FindHimMainModel.h */,
 				99ADB5971F9F15FC005928B3 /* FindHimMainModel.m */,
+				99ADB5991FA063D9005928B3 /* UserHomePageModel.h */,
+				99ADB59A1FA063D9005928B3 /* UserHomePageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4414,6 +4424,9 @@
 				59DA85E91F9995ED00089DBB /* MyHobbyCollectionCell.xib */,
 				59DA85F51F99D50200089DBB /* HobbyListHeaderView.h */,
 				59DA85F61F99D50200089DBB /* HobbyListHeaderView.m */,
+				99ADB59C1FA06A98005928B3 /* SmallPhotoCollectionViewCell.h */,
+				99ADB59D1FA06A98005928B3 /* SmallPhotoCollectionViewCell.m */,
+				99ADB59E1FA06A98005928B3 /* SmallPhotoCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4672,6 +4685,7 @@
 				594E867A1F9D911E00EE0390 /* AttestationNextCollectionViewCell.xib in Resources */,
 				99ADB52A1F948EBB005928B3 /* SesameCertificationFirstViewController.xib in Resources */,
 				5924F2621F8B7C3600D2108A /* NTESTeamMeetingViewController.xib in Resources */,
+				99ADB5A01FA06A98005928B3 /* SmallPhotoCollectionViewCell.xib in Resources */,
 				59E0ABDA1F95E068001FFC7A /* MyDataStageItemInfoCell.xib in Resources */,
 				5924F2AE1F8B7C3600D2108A /* AlipaySDK.bundle in Resources */,
 				5924E4F01F8B6CAA00D2108A /* TZImagePickerController.bundle in Resources */,
@@ -4876,6 +4890,7 @@
 				5924EFA31F8B7BEC00D2108A /* NIMTeamCardRowItem.m in Sources */,
 				5924F2041F8B7C3600D2108A /* NTESChatroomConfig.m in Sources */,
 				5924EF4E1F8B7BEB00D2108A /* UIView+NIM.m in Sources */,
+				99ADB59B1FA063D9005928B3 /* UserHomePageModel.m in Sources */,
 				5924F1F01F8B7C3600D2108A /* NTESBadgeView.m in Sources */,
 				5924F25D1F8B7C3600D2108A /* NTESTeamMeetingCallingViewController.m in Sources */,
 				5924F2731F8B7C3600D2108A /* IJKSDLGLView.m in Sources */,
@@ -5026,6 +5041,7 @@
 				5924F1EE1F8B7C3600D2108A /* NTESNavigationHandler.m in Sources */,
 				5924F1F51F8B7C3600D2108A /* NTESChatroomRobotContentConfig.m in Sources */,
 				5924EF991F8B7BEB00D2108A /* NIMSessionRobotContentView.m in Sources */,
+				99ADB59F1FA06A98005928B3 /* SmallPhotoCollectionViewCell.m in Sources */,
 				5924F29C1F8B7C3600D2108A /* NTESDemoFetchChatroomTask.m in Sources */,
 				5924F2971F8B7C3600D2108A /* NTESBirthPickerView.m in Sources */,
 				5924F2091F8B7C3600D2108A /* NTESChatroomMessageDataProvider.m in Sources */,

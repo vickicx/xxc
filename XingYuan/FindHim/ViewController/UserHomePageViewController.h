@@ -12,5 +12,5 @@
 #import "HeadLineView.h"
 
 @interface UserHomePageViewController : UIViewController
-
+@property (nonatomic,copy) NSString *seememberid;
 @end

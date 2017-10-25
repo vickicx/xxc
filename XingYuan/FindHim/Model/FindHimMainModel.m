@@ -16,12 +16,12 @@
         self.nid = value;
     }
     if([key isEqualToString:@"picture"]){
-        self.picture = [NSMutableArray new];
-        NSMutableArray *arr = [NSMutableArray arrayWithArray:value];
-        for (NSDictionary *dic in arr) {
+        NSMutableArray *arr = [NSMutableArray new];
+        for (NSDictionary *dic in value) {
             PictureModel *pic = [[PictureModel alloc] initWithDictionary:dic];
-            [self.picture addObject:pic];
+            [arr addObject:pic];
         }
+        self.pictureArr = [NSMutableArray arrayWithArray:arr];
     }
 }
 @end

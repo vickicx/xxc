@@ -16,7 +16,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.leftLabel.font = FONT(16)
+    self.leftLabel.font = FONT_WITH_S(16)
     self.leftLabel.textColor = RGBColor(43, 48, 52, 1);
     self.headImgV.layer.cornerRadius = 3;
     self.headImgV.clipsToBounds = true;

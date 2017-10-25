@@ -29,7 +29,7 @@ static UINavigationController *currentNavigationController;
         //替换ViewController的导航栏返回按钮
         UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         backBtn.contentMode = UIViewContentModeLeft;
-        [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+        [backBtn setImage:[UIImage imageNamed:@"back-拷贝-2"] forState:UIControlStateNormal];
         [backBtn sizeToFit];
         [backBtn addTarget:self action:@selector(dealTapBack) forControlEvents:UIControlEventTouchUpInside];
         viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];

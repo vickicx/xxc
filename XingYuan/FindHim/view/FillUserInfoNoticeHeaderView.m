@@ -17,7 +17,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if([super initWithFrame:frame]){
         UILabel *noticeLabel = [[UILabel alloc] init];
-        noticeLabel.font = FONT(14);
+        noticeLabel.font = FONT_WITH_S(14);
         noticeLabel.textColor = RGBColor(184, 186, 189, 1);
         noticeLabel.text = self.notice == nil ? @"当你完善此项资料，方可解锁其他用户的此项资料":self.notice;
         [self addSubview:noticeLabel];

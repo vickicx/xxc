@@ -17,8 +17,6 @@
 
 
 @interface FindHimCollectionViewCell : UICollectionViewCell
-@property (nonatomic, weak, readonly) UILabel *label;
-
 @property (nonatomic, strong) UILabel *signature;
 @property (nonatomic, strong) UIButton *mainButton;
 @property (nonatomic, strong) UIButton *leftButton;
@@ -27,7 +25,8 @@
 @property (nonatomic, strong) UILabel *address;
 @property (nonatomic, strong) UILabel *userName;
 @property (nonatomic, strong) UILabel *info;
-
+@property (nonatomic,strong) UIImageView *sixImageView;
+@property (nonatomic, assign) NSInteger index;
 
 
 

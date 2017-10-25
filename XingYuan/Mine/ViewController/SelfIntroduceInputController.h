@@ -10,5 +10,5 @@
 
 @interface SelfIntroduceInputController : ViewController
 
-
+@property (nonatomic,strong) void(^callBackBlock)(NSString *introduce);
 @end

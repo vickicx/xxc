@@ -13,6 +13,7 @@
 #import "AccountProtectionViewController.h"
 #import "ModifyPasswordController.h"
 #import "ChangePhoneNumberViewController.h"
+#import "LoginRegisterController.h"
 
 @interface GeneralSettingsViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic,strong) UITableView *tableView;
@@ -54,6 +55,7 @@
     self.logoutButton.frame = CGRectMake(12, 50, 351, 48);
     self.logoutButton.layer.cornerRadius = 10.0f;
     [self.logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
+    [self.logoutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside];
     self.logoutButton.titleLabel.font = [UIFont systemFontOfSize:18];
     self.logoutButton.tintColor = [UIColor whiteColor];
     self.logoutButton.backgroundColor = RGBColor(240, 53, 90, 1);
@@ -61,6 +63,14 @@
     
     [view addSubview:self.logoutButton];
    
+}
+
+- (void)signOut{
+    //成功后直接进入主界面？
+    [[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissViewControllerAnimated:YES completion:nil];
+    LoginRegisterController *loginRegisterController = [[LoginRegisterController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginRegisterController];
+    [[UIApplication sharedApplication] keyWindow].rootViewController = nav;
 }
 
 #pragma mark ---- UITableViewDelegate ----

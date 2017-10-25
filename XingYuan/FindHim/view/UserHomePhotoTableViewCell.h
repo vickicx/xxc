@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SmallPhotoCollectionViewCell.h"
 
 
 @interface UserHomePhotoTableViewCell : UITableViewCell<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic, strong) UICollectionView *collection;
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+
+@property (nonatomic,copy) NSString *photoNum;
+@property (nonatomic,strong) NSMutableArray *picArr;
 
 
 

@@ -19,12 +19,14 @@
                 <outlet property="loginImg" destination="PRR-4f-X3c" id="i3K-4W-5cd"/>
                 <outlet property="loginPasswordTextFeild" destination="rrG-61-9CN" id="oUZ-37-mIG"/>
                 <outlet property="loginPhoneTextFeild" destination="dpK-J6-gag" id="6AA-39-Pkt"/>
+                <outlet property="loginSelectBtn" destination="o4R-2Q-IoG" id="0Dd-wU-8sy"/>
                 <outlet property="registerBtn" destination="l4O-B3-kQQ" id="D3k-QS-ave"/>
                 <outlet property="registerConfirmPasswordTextFeild" destination="8hI-n3-Dnz" id="omT-zS-z94"/>
                 <outlet property="registerContentView" destination="oly-4R-toa" id="KVn-oB-pW5"/>
                 <outlet property="registerImg" destination="TgU-8z-Nr3" id="Og1-Ec-T5r"/>
                 <outlet property="registerPasswordTextFeild" destination="Reo-kA-0ob" id="1EY-Tb-B6a"/>
                 <outlet property="registerPhoneTextFeild" destination="FVt-iU-hfs" id="THh-my-7Mb"/>
+                <outlet property="registerSelectBtn" destination="wwH-FZ-Lus" id="4J0-zj-JAA"/>
                 <outlet property="registerVerificationCode" destination="DGP-oe-zmN" id="Sgi-KQ-89F"/>
                 <outlet property="requestVertificationCodeBtn" destination="Pdw-rM-O1i" id="z8J-uP-NAL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -38,7 +40,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="016-Dc-7fQ">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0qr-rq-yq9">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="图-1" translatesAutoresizingMaskIntoConstraints="NO" id="0qr-rq-yq9">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </imageView>
@@ -55,15 +57,14 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected">
-                                                <color key="titleColor" red="0.22352941179999999" green="0.52549019610000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" red="0.96470588239999999" green="0.31372549020000001" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="dealRegisterSelect:" destination="-1" eventType="touchUpInside" id="VsQ-Ue-Tn7"/>
                                             </connections>
                                         </button>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgU-8z-Nr3">
-                                            <rect key="frame" x="86" y="34" width="16" height="16"/>
-                                            <color key="backgroundColor" red="0.93333333330000001" green="0.20000000000000001" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="形状-1" translatesAutoresizingMaskIntoConstraints="NO" id="TgU-8z-Nr3">
+                                            <rect key="frame" x="86" y="42" width="16" height="8"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -82,19 +83,16 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4R-2Q-IoG">
                                             <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="37" maxX="0.0" maxY="-9"/>
-                                            <state key="normal" title="登录">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
+                                            <state key="normal" title="登录"/>
                                             <state key="selected">
-                                                <color key="titleColor" red="0.22352941179999999" green="0.52549019610000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" red="0.96470588235294119" green="0.31372549019607843" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="dealLoginSelect:" destination="-1" eventType="touchUpInside" id="UUj-MA-Mvp"/>
                                             </connections>
                                         </button>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PRR-4f-X3c">
-                                            <rect key="frame" x="86" y="34" width="16" height="16"/>
-                                            <color key="backgroundColor" red="0.93333333330000001" green="0.20000000000000001" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="形状-1" translatesAutoresizingMaskIntoConstraints="NO" id="PRR-4f-X3c">
+                                            <rect key="frame" x="86" y="42" width="16" height="8"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -195,14 +193,14 @@
                                     <rect key="frame" x="0.0" y="122" width="375" height="60.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u68-uU-9NP">
-                                            <rect key="frame" x="15" y="61" width="345" height="0.5"/>
+                                            <rect key="frame" x="15" y="60.5" width="345" height="0.5"/>
                                             <color key="backgroundColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="0.5" id="20w-2N-ecm"/>
                                             </constraints>
                                         </view>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请再次输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8hI-n3-Dnz">
-                                            <rect key="frame" x="15" y="1" width="345" height="60"/>
+                                            <rect key="frame" x="15" y="0.5" width="345" height="60"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -270,7 +268,7 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4O-B3-kQQ">
                                     <rect key="frame" x="15" y="62" width="345" height="49.5"/>
-                                    <color key="backgroundColor" red="0.22352941179999999" green="0.52549019610000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.96470588239999999" green="0.31372549020000001" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="l4O-B3-kQQ" secondAttribute="height" multiplier="700:100" id="bJ5-gJ-q9Z"/>
                                     </constraints>
@@ -349,31 +347,31 @@
                                             </constraints>
                                         </view>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="111111" placeholder="密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rrG-61-9CN">
-                                            <rect key="frame" x="15" y="0.0" width="211.5" height="57"/>
+                                            <rect key="frame" x="15" y="0.0" width="212" height="57"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iag-qg-Tet">
                                             <rect key="frame" x="261.5" y="12" width="98.5" height="34"/>
-                                            <color key="backgroundColor" red="0.22352941179999999" green="0.52549019610000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.96470588239999999" green="0.31372549020000001" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Iag-qg-Tet" secondAttribute="height" multiplier="200:70" id="yxP-O2-VXT"/>
                                             </constraints>
                                             <state key="normal" title="登录">
-                                                <color key="titleColor" red="0.1333333333" green="0.35294117650000001" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
                                                 <action selector="dealLogin:" destination="-1" eventType="touchUpInside" id="UQr-PT-8Q6"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0V-Vu-nMo">
-                                            <rect key="frame" x="226.5" y="12" width="35" height="34"/>
+                                            <rect key="frame" x="227" y="12" width="34.5" height="34"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="J0V-Vu-nMo" secondAttribute="height" id="P5O-IE-PWn"/>
                                             </constraints>
-                                            <state key="normal" image="登录-查看"/>
-                                            <state key="selected" image="忘记密码-查看"/>
+                                            <state key="normal" image="查看-(1)"/>
+                                            <state key="selected" image="查看"/>
                                             <connections>
                                                 <action selector="dealChangePasswordVisibleStatus:" destination="-1" eventType="touchUpInside" id="pZ0-Xf-XHD"/>
                                             </connections>
@@ -511,9 +509,11 @@
     </objects>
     <resources>
         <image name="QQ" width="44" height="44"/>
+        <image name="图-1" width="375" height="249"/>
+        <image name="形状-1" width="16" height="8"/>
         <image name="微信" width="44" height="44"/>
-        <image name="微博" width="16" height="16"/>
-        <image name="忘记密码-查看" width="20" height="11"/>
-        <image name="登录-查看" width="20" height="11"/>
+        <image name="微博" width="44" height="44"/>
+        <image name="查看" width="20" height="11"/>
+        <image name="查看-(1)" width="20" height="8"/>
     </resources>
 </document>

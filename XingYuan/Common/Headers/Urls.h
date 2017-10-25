@@ -72,7 +72,7 @@
 // MARK: - 展示五级匹配（已对接）
 #define Showmatchingfive @"/mobileapi/showmatchingfive"
 
-// MARK: - 设置择偶要求
+// MARK: - 设置择偶要求（该接口报销）
 #define SetMateSelectionRequire @"/mobileapi/SetMateSelectionRequire"
 
 // MARK: - 获取择偶要求
@@ -114,22 +114,21 @@
 // MARK: - 相册排序照片
 #define Setphotoalbumsort @"/mobileapi/setphotoalbumsort"
 
-// MARK: - 相册排序照片
-#define Setphotoalbumsort @"/mobileapi/setphotoalbumsort"
 
 // MARK: - 我的资料
 #define MyInfo @"/mobileapi/myinfo"
 
-// MARK: - 首页
+// MARK: - 首页(已对接)
 #define KnowTAFirstPage @"/mobileapi/KnowTAFirstPage"
 
+// MARK: - 上传头像
+#define UploadHeadImg @"/mobileapi/UploadHeadImg"
 
+// MARK: - 忘记密码
+#define ResetMemeberPassword @"/mobileapi/resetmemberpassword"
 
-
-
-
-
-
+// MARK: - 修改密码
+#define UpdateMemeberPassword @"/mobileapi/updatememberpwd"
 
 
 #endif /* UrlManager_pch */

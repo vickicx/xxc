@@ -42,7 +42,7 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     [layout setMinimumInteritemSpacing:10];
     [layout setMinimumLineSpacing:10];
-//    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.collectionView.collectionViewLayout = layout;
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     DDLogInfo(@"MyDataIStageInfoCell->awakeFromNib");
@@ -59,7 +59,7 @@
     self.titles = titles;
     self.color = color;
     [self.collectionView reloadData];
-    self.collectionViewHeight.constant = self.collectionView.contentSize.height;
+    self.collectionViewHeight.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -79,7 +79,6 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSLog(@"titles.count:%@",self.titles);
     return self.titles.count;
 }
 
@@ -94,4 +93,5 @@
     CGRect rect = [title getRectWithFont:[UIFont systemFontOfSize:17] width:1000];
     return CGSizeMake(rect.size.width, rect.size.height);
 }
+
 @end

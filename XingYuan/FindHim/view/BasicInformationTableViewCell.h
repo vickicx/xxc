@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserHomePageModel.h"
+#import "OneStageScreeningModel.h"
 
 @interface BasicInformationTableViewCell : UITableViewCell
-
+@property (nonatomic,strong) OneStageScreeningModel *matchingLevelOneModel;
+@property (nonatomic,strong) NSMutableArray *arr;
 @end

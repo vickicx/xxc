@@ -9,10 +9,11 @@
 
 
 #import "UserHomePhotoTableViewCell.h"
+#import "PictureModel.h"
 
 @interface UserHomePhotoTableViewCell()
 
-@property (nonatomic,strong) NSString *photoNum;
+
 
 
 @end
@@ -68,7 +69,7 @@
         _collection.showsVerticalScrollIndicator = NO;
         _collection.showsHorizontalScrollIndicator = NO;
         
-        [_collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+        [_collection registerNib:[UINib nibWithNibName:@"SmallPhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmallPhotoCollectionViewCell"];
         
         [self addSubview:_collection];
         
@@ -77,7 +78,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return self.photoNum.intValue;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -94,8 +95,11 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    SmallPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SmallPhotoCollectionViewCell" forIndexPath:indexPath];
     cell.layer.cornerRadius = 5.0f;
+    cell.imageView.layer.cornerRadius = 5.0f;
+    PictureModel *pic = self.picArr[indexPath.row];
+    [cell.imageView sd_setImageWithURL:Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
     cell.backgroundColor = [UIColor purpleColor];
     return cell;
 }

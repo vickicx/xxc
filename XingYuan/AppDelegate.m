@@ -165,27 +165,27 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
     //登录应用
     if ([Helper memberId]){
         self.window.rootViewController = [[TabBarController alloc] init];
-        //如果未登录NIM
-        if (![[[NIMSDK sharedSDK] loginManager] isLogined]){
-            LoginData *data = [[NTESLoginManager sharedManager] currentLoginData];
-            NSString *account = [data account];
-            NSString *token = [data token];
-            
-            //如果有缓存用户名密码推荐使用自动登录
-            if ([account length] && [token length])
-            {
-                NIMAutoLoginData *loginData = [[NIMAutoLoginData alloc] init];
-                loginData.account = account;
-                loginData.token = token;
-                
-                [[[NIMSDK sharedSDK] loginManager] autoLogin:loginData];
-                [[NTESServiceManager sharedManager] start];
-            }
-            //如果未缓存则手动登录
-            else{
-                [self setupLoginViewController];
-            }
-        }
+//        //如果未登录NIM
+//        if (![[[NIMSDK sharedSDK] loginManager] isLogined]){
+//            LoginData *data = [[NTESLoginManager sharedManager] currentLoginData];
+//            NSString *account = [data account];
+//            NSString *token = [data token];
+//            
+//            //如果有缓存用户名密码推荐使用自动登录
+//            if ([account length] && [token length])
+//            {
+//                NIMAutoLoginData *loginData = [[NIMAutoLoginData alloc] init];
+//                loginData.account = account;
+//                loginData.token = token;
+//                
+//                [[[NIMSDK sharedSDK] loginManager] autoLogin:loginData];
+//                [[NTESServiceManager sharedManager] start];
+//            }
+//            //如果未缓存则手动登录
+//            else{
+//                [self setupLoginViewController];
+//            }
+//        }
     }else{
         [self setupLoginViewController];
     }
@@ -219,7 +219,7 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
 {
     [[NTESLoginManager sharedManager] setCurrentLoginData:nil];
     [[NTESServiceManager sharedManager] destory];
-    [self setupLoginViewController];
+//    [self setupLoginViewController];
 }
 
 

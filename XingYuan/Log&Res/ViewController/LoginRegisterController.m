@@ -22,6 +22,7 @@
 @interface LoginRegisterController ()<UINavigationControllerDelegate,TencentSessionDelegate>
 
 ////登录
+@property (weak, nonatomic) IBOutlet UIButton *loginSelectBtn;
 @property (weak, nonatomic) IBOutlet UITextField *loginPhoneTextFeild;
 @property (weak, nonatomic) IBOutlet UITextField *loginPasswordTextFeild;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
@@ -30,6 +31,7 @@
 
 
 ////注册
+@property (weak, nonatomic) IBOutlet UIButton *registerSelectBtn;
 @property (weak, nonatomic) IBOutlet UITextField *registerPhoneTextFeild;
 @property (weak, nonatomic) IBOutlet UITextField *registerPasswordTextFeild;
 @property (weak, nonatomic) IBOutlet UITextField *registerConfirmPasswordTextFeild;
@@ -49,16 +51,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self dealRegisterSelect:self.registerSelectBtn];
 }
 
 //显示注册区域
 - (IBAction)dealRegisterSelect:(UIButton *)sender {
+    [self.loginSelectBtn setSelected:false];
+    [self.registerSelectBtn setSelected:true];
+    [self.registerImg setHidden:false];
+    [self.loginImg setHidden:true];
     [self.registerContentView setHidden:false];
     [self.loginContentView setHidden:true];
 }
 
 //显示登录区域
 - (IBAction)dealLoginSelect:(UIButton *)sender {
+    [self.registerSelectBtn setSelected:false];
+    [self.loginSelectBtn setSelected:true];
+    [self.registerImg setHidden:true];
+    [self.loginImg setHidden:false];
     [self.registerContentView setHidden:true];
     [self.loginContentView setHidden:false];
 }
@@ -103,12 +114,14 @@
 //            }
             //若都已选择则进入IM登录业务
             //如果已经注册了NIM则直接登录
-            if ([loginResultModel.imaccid length]){
-                [self loginNTESWithAccid:loginResultModel.imaccid Token:loginResultModel.imtoken];
-            }else{
-                //NIM还未注册则向服务器发起注册请求
-                [self requestNTESAccidAndTokenWith:loginResultModel.memberId];
-            }
+//            if ([loginResultModel.imaccid length]){
+//                [self loginNTESWithAccid:loginResultModel.imaccid Token:loginResultModel.imtoken];
+//            }else{
+//                //NIM还未注册则向服务器发起注册请求
+//                [self requestNTESAccidAndTokenWith:loginResultModel.memberId];
+//            }
+            [Helper saveMemberId:loginResultModel.memberId];
+            [UIApplication sharedApplication].keyWindow.rootViewController = [[TabBarController alloc] init];
         }
     } fail:^(NSError *error) {
         NSLog(@"%@",[error localizedDescription]);

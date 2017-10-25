@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SmallPhotoCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="157" height="125"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="157" height="125"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="COr-fx-W5d">
+                        <rect key="frame" x="0.0" y="0.0" width="157" height="125"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="COr-fx-W5d" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7Vm-Vh-vfp"/>
+                <constraint firstItem="COr-fx-W5d" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MeS-pF-Dd8"/>
+                <constraint firstAttribute="trailing" secondItem="COr-fx-W5d" secondAttribute="trailing" id="hLd-xu-xUD"/>
+                <constraint firstAttribute="bottom" secondItem="COr-fx-W5d" secondAttribute="bottom" id="uyb-bw-Lka"/>
+            </constraints>
+            <size key="customSize" width="157" height="125"/>
+            <connections>
+                <outlet property="imageView" destination="COr-fx-W5d" id="ApO-Zo-bG4"/>
+            </connections>
+            <point key="canvasLocation" x="87.5" y="175.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

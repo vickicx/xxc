@@ -105,9 +105,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 - (void)requestData {
     
-    self.pictureModelArr = [NSMutableArray new];
-    
-    self.picUrlArr = [NSMutableArray new];
+   
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
@@ -125,19 +123,12 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     __weak __typeof__(self) weakSelf = self;
     
-    
-    
-    
-    
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    
-    
-    
-    
     [VVNetWorkTool postWithUrl:Url(Myphotoalbum) body:[Helper parametersWith:parameters]
      
                       progress:nil success:^(id result) {
+                          self.pictureModelArr = [NSMutableArray new];
+                          
+                          self.picUrlArr = [NSMutableArray new];
                           
                           NSMutableArray *arr = [result objectForKey:@"data"];
                           

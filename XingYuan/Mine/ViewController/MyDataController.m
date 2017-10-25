@@ -65,12 +65,6 @@
 
 @implementation MyDataController
 
-//-(void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    [self getMyArtistIntroductionData];
-//    
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的资料";
@@ -79,14 +73,6 @@
     tableView.dataSource = self;
     self.tableView = tableView;
     [self.view addSubview:tableView];
-    
-    UIButton *finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.finishBtn = finishBtn;
-    [finishBtn setTitleColor:RGBColor(246, 80, 116, 1) forState:UIControlStateNormal];
-    [finishBtn setTitle:@"完成" forState:UIControlStateNormal];
-    [finishBtn sizeToFit];
-    [finishBtn addTarget:self action:@selector(saveMyMateRequirement) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:finishBtn]];
     
     self.myDataCellTitles = @[@"基本资料",@"个人情况",@"家庭情况",@"未来规划"];
     self.suposeStandardCellTitles = @[@"年龄",@"身高",@"月收入",@"学历",@"婚姻状况",@"体型",@"工作地区",@"是否想要孩子",@"是否抽烟",@"是否喝酒",@"购房情况",@"购车情况"];
@@ -112,6 +98,11 @@
     
      __weak __typeof(self)weakSelf = self;
     self.introduceInputController = [[SelfIntroduceInputController alloc] init];
+    self.introduceInputController.callBackBlock = ^(NSString *introduce){
+        weakSelf.mydataModel.summary = introduce;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+        [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    };
     
     self.myDataSelectTypeCell = [[[NSBundle mainBundle] loadNibNamed:@"MyDataSelectTypeCell" owner:nil options:nil] lastObject];
     self.myDataSelectTypeCell.selectTypeBlock = ^(MyDataSelectType selectType){
@@ -124,7 +115,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"MyDataIStageInfoCell" bundle:nil] forCellReuseIdentifier:@"MyDataIStageInfoCell"];
     
     self.myDataSelectType = MyDataSelectTypeMyData;
-    [self dealSelectType:self.myDataSelectType];
     
     [self requestMyData];
     [self requestMyMateRequireMent];
@@ -152,7 +142,7 @@
         [mydataModel setValuesForKeysWithDictionary:result];
         [mydataModel setValuesForKeysWithDictionary:[result valueForKey:@"data"]];
         self.mydataModel = mydataModel;
-        [self refreshWithMyDataModel:mydataModel];
+        [self.tableView reloadData];
         [JGProgressHUD showErrorWithModel:mydataModel In:self.view];
     } fail:^(NSError *error) {
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
@@ -171,21 +161,6 @@
         self.myMateRequireModel = myMateRequireModel;
         [self refreshWithMyMateRequireModel:myMateRequireModel];
         [JGProgressHUD showErrorWithModel:myMateRequireModel In:self.view];
-    } fail:^(NSError *error) {
-        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
-    }];
-}
-
-//保存我的择偶要求到服务器
-- (void)saveMyMateRequirement{
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[self.myMateRequireModel mj_keyValues]];
-    [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    
-    [VVNetWorkTool postWithUrl:Url(SetMateSelectionRequire) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        BaseModel *model = [BaseModel new];
-        [model setValuesForKeysWithDictionary:result];
-
-        [JGProgressHUD showErrorWithModel:model In:self.view];
     } fail:^(NSError *error) {
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
@@ -243,29 +218,6 @@
     cell.infoValue = model.carstatus;
 }
 
-- (void)refreshWithMyDataModel:(MyDataModel *)model{
-    if([model.headimg length] <= 0){
-        [self.myDataHeadImageCell.headImgV setHidden:true];
-    }else{
-        [self.myDataHeadImageCell.headImgV setHidden:false];
-        [self.myDataHeadImageCell.headImgV sd_setImageWithURL:Url(model.headimg)];
-    }
-    
-    if([model.picturecount isEqual:@0]){
-    }else{
-        self.myalbumCell.infoValue = [NSString stringWithFormat:@"%@",model.picturecount];
-    }
-    
-    if([model.summary length] > 0){
-        self.selfIntroduceCell.infoValue = model.summary;
-    }else{
-        self.selfIntroduceCell.placeHolder = @"未填写";
-        self.selfIntroduceCell.infoValue = nil;
-    }
-    
-    [self.tableView reloadData];
-}
-
 - (void)toChooseHeadImg{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -311,7 +263,34 @@
 #pragma mark --UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo{
     if (image != nil){
-        self.myDataHeadImageCell.headImgV.image = image;
+        //开始上传图片
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        [parameters setValue:[Helper memberId] forKey:@"memberid"];
+        
+        [JGProgressHUD showStatusWith:nil In:self.view];
+        [VVNetWorkTool formSubmissionWithUrl:Url(UploadHeadImg) body:[Helper parametersWith:parameters] progress:^(NSProgress *progress) {
+            NSLog(@"%f",1.0*progress.completedUnitCount/progress.totalUnitCount);
+        } formBlock:^(id<AFMultipartFormData> formData) {
+            NSData *data = UIImagePNGRepresentation(image);
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            // 设置时间格式
+            formatter.dateFormat = @"yyyyMMddHHmmss";
+            NSString *str = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+            
+            [formData appendPartWithFileData:data name:@"file" fileName:fileName mimeType:@"image/png"];
+        } success:^(id result) {
+            //成功
+            BaseModel *model = [BaseModel new];
+            [model setValuesForKeysWithDictionary:result];
+            [JGProgressHUD showErrorWithModel:model In:self.view];
+            if([model.code isEqual:@1]){
+                [self.myDataHeadImageCell.headImgV setHidden:false];
+                self.myDataHeadImageCell.headImgV.image = image;
+            }
+        } fail:^(NSError *error) {
+            [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
+        }];
     }
     [picker dismissViewControllerAnimated:true completion:nil];
 }
@@ -330,7 +309,10 @@
     }
     if(section == 2){
         if(self.myDataSelectType == MyDataSelectTypeMyData){
-            return 4;
+            if(self.mydataModel == nil){return 0;}
+            if(self.mydataModel != nil){
+                return 4;
+            }
         }
         if(self.myDataSelectType == MyDataSelectTypeSuposeStandard){
             return self.suposeStandardCellTitles.count + 1;
@@ -342,12 +324,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
         if(indexPath.row == 0){
+            if([self.mydataModel.headimg length] <= 0){
+                [self.myDataHeadImageCell.headImgV setHidden:true];
+            }else{
+                [self.myDataHeadImageCell.headImgV setHidden:false];
+                [self.myDataHeadImageCell.headImgV sd_setImageWithURL:Url(self.mydataModel.headimg)];
+            }
             return self.myDataHeadImageCell;
         }
         if(indexPath.row == 1){
+            //真是日了🐶了
+            if([self.mydataModel.picturecount isEqual:@0] || (self.mydataModel.picturecount == nil)){
+                
+            }else{
+                self.myalbumCell.infoValue = [NSString stringWithFormat:@"%@",self.mydataModel.picturecount];
+            }
             return self.myalbumCell;
         }
         if(indexPath.row == 2){
+            if([self.mydataModel.summary length] > 0){
+                self.selfIntroduceCell.infoValue = self.mydataModel.summary;
+            }else{
+                self.selfIntroduceCell.placeHolder = @"未填写";
+                self.selfIntroduceCell.infoValue = nil;
+            }
             return self.selfIntroduceCell;
         }
     }
@@ -357,9 +357,6 @@
     if(indexPath.section == 2){
         if(self.myDataSelectType == MyDataSelectTypeMyData){
             MyDataIStageInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyDataIStageInfoCell" forIndexPath:indexPath];
-            if(cell == nil){
-                NSLog(@"CELL 为空 啦");
-            }
             if(indexPath.row == 0){
                 cell.leftLabelTitle = @"基本资料";
                 cell.editBlock = ^(){
@@ -375,7 +372,6 @@
                     TwoStageScreeningController *twoStageScreeningController = [[TwoStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"个人情况"];
                     [self.navigationController pushViewController:twoStageScreeningController animated:true];
                 };
-//                NSArray *titles = @[@"hello my nameis liufeng ",@"hello my nameis liufeng ",@"hello my nameis liufeng ",@"hello my nameis liufeng "];
                 NSArray *titles = [[self.mydataModel.matchingleveltwo mj_keyValues] allValues];
                 [cell configWithTitles:titles color:[UIColor grayColor]];
             }
@@ -400,10 +396,10 @@
             return cell;
         }
         if(self.myDataSelectType == MyDataSelectTypeSuposeStandard){
-            if(indexPath.row == 0){
-                return self.basicInfoCell;
-            }
-            return self.suposeStandardCells[indexPath.row-1];
+//            if(indexPath.row == 0){
+//                return self.basicInfoCell;
+//            }
+//            return self.suposeStandardCells[indexPath.row-1];
         }
     }
     return [UITableViewCell new];
@@ -589,24 +585,5 @@
     }
 }
 
-- (void)getMyArtistIntroductionData {
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
-    [VVNetWorkTool postWithUrl:Url(MyArtistIntroduction) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        NSDictionary *dic = result;
-        NSString *summary = [[dic objectForKey:@"data"] valueForKey:@"summary"];
-        if (summary != nil) {
-            self.selfIntroduceCell.infoValue = @"  ";
-//            self.summary = @" ";
-        }
-        [self.tableView reloadData];
-        
-    } fail:^(NSError *error) {
-        
-    }];
-}
 
 @end

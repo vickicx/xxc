@@ -18,6 +18,7 @@
 #import "UserSpouseStandardTableViewCell.h"
 #import "Masonry.h"
 #import "MatchingTableViewCell.h"
+#import "UserHomePageModel.h"
 
 @interface UserHomePageViewController ()<NavHeadTitleViewDelegate,headLineDelegate,UITableViewDataSource,UITableViewDelegate>
 #define JXColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
@@ -44,6 +45,9 @@
 @property(nonatomic,assign)int rowHeightFu;
 @property(nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong) UIVisualEffectView *visualview;
+@property (nonatomic,assign) float IntroductionHeight;
+
+@property (nonatomic,strong) UserHomePageModel *userHomePageModel;
 @end
 
 @implementation UserHomePageViewController
@@ -53,8 +57,7 @@
      self.navigationController.delegate = self;
     //拉伸顶部图片
 //    [self lashenBgView];
-    //初始化数据源
-    [self loadData];
+   
     //创建TableView
     [self createTableView];
     //创建导航栏
@@ -62,7 +65,7 @@
     [self createTabBar];
     
     [self.tableView reloadData];
-    
+   
     [self requestData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight:) name:@"CellHeightP" object:nil];
@@ -79,31 +82,6 @@
     [self.navigationController setNavigationBarHidden:isShowHomePage animated:YES];
 }
 
-//创建数据源
--(void)loadData{
-    _currentIndex=0;
-    _dataArray0=[[NSMutableArray alloc]init];
-    _dataArray1=[[NSMutableArray alloc]init];
-    _dataArray2=[[NSMutableArray alloc]init];
-    for (int i=0; i < 3; i++) {
-        if (i == 0) {
-            for (int i=0; i<10; i++) {
-                NSString * string=[NSString stringWithFormat:@"第%d行",i];
-                [_dataArray0 addObject:string];
-            }
-        }else if(i == 1){
-            for (int i=1; i<8; i++) {
-                NSString * string=[NSString stringWithFormat:@"%d 娃",i];
-                [_dataArray1 addObject:string];
-            }
-        }else if (i == 2){
-            for (int i=0; i<3; i++) {
-                NSString * string=[NSString stringWithFormat:@"this is %d",i];
-                [_dataArray2 addObject:string];
-            }
-        }
-    }
-}
 
 //创建TableView
 -(void)createTableView{
@@ -267,9 +245,11 @@
             return 180;
         }else if (indexPath.row == 1){
             return 221;
+        }else if (indexPath.row == 2){
+            return self.IntroductionHeight;
         }else if (indexPath.row == 3){
             if(self.rowHeightB == NULL){
-                return 221;
+                return self.rowHeightB + 30;
             }
             return self.rowHeightB + 180;
             
@@ -309,6 +289,8 @@
 - (void)cellHeight1:(NSNotification *)notification{
     NSLog(@"接到通知B");
     self.rowHeightB = [notification.userInfo[@"height"] intValue];
+    NSLog(@"~~~~~~~~%d", self.rowHeightB);
+    
 }
 - (void)cellHeight2:(NSNotification *)notification{
     NSLog(@"接到通知Fa");
@@ -360,6 +342,9 @@
     if (_currentIndex==0) {
         if (indexPath.row == 0) {
             UserHomePhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+            cell.photoNum = self.userHomePageModel.picturecount.stringValue;
+            cell.picArr = self.userHomePageModel.picArr;
+            [cell.collection reloadData];
             return cell;
             
         }else if (indexPath.row == 1){
@@ -368,10 +353,15 @@
             return cell;
         }else if (indexPath.row == 2){
             PersonalIntroductionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"introductionCell"];
-            
+            cell.summary.text = self.userHomePageModel.summary;
+            CGSize summarySize = [cell.summary.text boundingRectWithSize:CGSizeMake(cell.width - 60, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+            cell.summary.width = summarySize.width ;
+            cell.summary.height = summarySize.height;
+            self.IntroductionHeight = cell.summary.height + 100;
             return cell;
         }else if (indexPath.row == 3){
             BasicInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"informationCell"];
+            cell.matchingLevelOneModel = self.userHomePageModel.matchingLevelOne;
             
             return cell;
             
@@ -507,16 +497,16 @@
 - (void)requestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:[Helper memberId] forKey:@"memberid"]; //seememberid  被查看人id
+    [parameters setValue:self.seememberid forKey:@"seememberid"]; //seememberid  被查看人id
     [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
     [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
     [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     __weak __typeof__(self) weakSelf = self;
     [VVNetWorkTool postWithUrl:Url(MemberFirstPage) body:[Helper parametersWith:parameters]
                       progress:nil success:^(id result) {
-                          NSDictionary *dic = result;
-                          NSLog(@"%@", dic);
-                          
+                          NSDictionary *dic = [result objectForKey:@"data"];
+                          self.userHomePageModel = [[UserHomePageModel alloc] initWithDictionary:dic];
+                          [self.tableView reloadData];
                           
                       } fail:^(NSError *error) {
                           

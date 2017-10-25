@@ -36,7 +36,6 @@ typedef NS_ENUM(NSUInteger, MsgType) {
     MsgTypethirdAccountBundLoginAccount = 7
 };
 
-
 //三方登录类型
 typedef NS_ENUM(NSUInteger, ThirdPartyLoginType) {
     //微信

@@ -9,16 +9,16 @@
 #import "BaseModel.h"
 
 @interface FindHimMainModel : BaseModel
-@property (nonatomic,copy) NSString *Nickname;
-@property (nonatomic,copy) NSString *Sex;
-@property (nonatomic,copy) NSString *Age;
-@property (nonatomic,copy) NSString *Stature; //身高
-@property (nonatomic,copy) NSString *Constellation;  //星座
-@property (nonatomic,copy) NSString *Work;
-@property (nonatomic,copy) NSString *Summary;
-@property (nonatomic,copy) NSString *Address;
-@property (nonatomic,copy) NSString *Distance; //距离 km
-@property (nonatomic,copy) NSString *Matchvalue;  // 匹配值
+@property (nonatomic,copy) NSString *nickname;
+@property (nonatomic,copy) NSString *sex;
+@property (nonatomic,copy) NSString *age;
+@property (nonatomic,copy) NSString *stature; //身高
+@property (nonatomic,copy) NSString *constellation;  //星座
+@property (nonatomic,copy) NSString *work;
+@property (nonatomic,copy) NSString *summary;
+@property (nonatomic,copy) NSString *address;
+@property (nonatomic,copy) NSString *distance; //距离 km
+@property (nonatomic,copy) NSString *matchvalue;  // 匹配值
 @property (nonatomic,copy) NSString *nid;
-@property (nonatomic,copy) NSMutableArray *picture;
+@property (nonatomic,strong) NSMutableArray *pictureArr;
 @end

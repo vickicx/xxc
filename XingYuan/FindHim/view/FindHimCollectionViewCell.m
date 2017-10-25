@@ -17,7 +17,6 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
         [self createView];
-        [self addLabel];
         [self createLabels];
         
     }
@@ -25,34 +24,35 @@
 }
 
 - (void)createView {
-    UIButton *mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    mainButton.frame = CGRectMake(0, 0, self.width, 362 * FitHeight);
-    mainButton.backgroundColor = [UIColor whiteColor];
-    [mainButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
-    [mainButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
-    UIView *shadeView = [[UIView alloc] initWithFrame:CGRectMake(mainButton.left, mainButton.top, mainButton.width, mainButton.height)];
+    _mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _mainButton.frame = CGRectMake(0, 0, self.width, 362 * FitHeight);
+    _mainButton.backgroundColor = [UIColor whiteColor];
+    [_mainButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
+    [_mainButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+    UIView *shadeView = [[UIView alloc] initWithFrame:CGRectMake(_mainButton.left, _mainButton.top, _mainButton.width, _mainButton.height)];
     shadeView.backgroundColor = RGBColor(0, 0, 0, 0.5);
     self.shadeView = shadeView;
-    [mainButton addSubview:_shadeView];
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.frame = CGRectMake(10 * FitWidth, mainButton.bottom + 10 * FitHeight , (mainButton.width - 26) / 3, (mainButton.width - 26) / 3);
-    leftButton.backgroundColor = [UIColor whiteColor];
-    [leftButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *middleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    middleButton.frame = CGRectMake(leftButton.right + 3 *FitWidth, leftButton.top, leftButton.width, leftButton.height);
-    middleButton.backgroundColor = [UIColor whiteColor];
-    [middleButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
-    [middleButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *righButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    righButton.frame = CGRectMake(middleButton.right + 3 *FitWidth, leftButton.top, leftButton.width, leftButton.height);
-    righButton.backgroundColor = [UIColor whiteColor];
-    [righButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
-    [righButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:mainButton];
-    [self addSubview:leftButton];
-    [self addSubview:middleButton];
-    [self addSubview:righButton];
+    [_mainButton addSubview:_shadeView];
+
+    _leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _leftButton.frame = CGRectMake(10 * FitWidth, _mainButton.bottom + 10 * FitHeight , (_mainButton.width - 26) / 3, (_mainButton.width - 26) / 3);
+    _leftButton.backgroundColor = [UIColor whiteColor];
+    [_leftButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
+    [_leftButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+    _middleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _middleButton.frame = CGRectMake(_leftButton.right + 3 *FitWidth, _leftButton.top, _leftButton.width, _leftButton.height);
+    _middleButton.backgroundColor = [UIColor whiteColor];
+    [_middleButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
+    [_middleButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+    _righButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _righButton.frame = CGRectMake(_middleButton.right + 3 *FitWidth, _leftButton.top, _leftButton.width, _leftButton.height);
+    _righButton.backgroundColor = [UIColor whiteColor];
+    [_righButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
+    [_righButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_mainButton];
+    [self addSubview:_leftButton];
+    [self addSubview:_middleButton];
+    [self addSubview:_righButton];
    
     
 }
@@ -60,35 +60,36 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         self.backgroundColor = [UIColor clearColor];
-        [self addLabel];
+        
     }
     return self;
 }
 
 - (void)createLabels {
-    UILabel *address = [[UILabel alloc] initWithFrame:CGRectMake(self.width - 80, 10, 60, 20)];
-    UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(15, self.shadeView.height - 100, 100, 20)];
-    UILabel *info = [[UILabel alloc] initWithFrame:CGRectMake(15, userName.bottom + 10, self.shadeView.width - 24, 20)];
-    self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15, info.bottom + 10, self.shadeView.width - 24, 40)];
+    _address = [[UILabel alloc] initWithFrame:CGRectMake(self.width - 200, 10, 180, 20)];
+    _userName = [[UILabel alloc] initWithFrame:CGRectMake(15, self.shadeView.height - 100, 0, 20)];
     
-    address.text = @"成都(3km)";
-    address.textAlignment = NSTextAlignmentRight;
-    address.font = [UIFont systemFontOfSize:12];
+    _address.text = @"成都(3km)";
+    _address.textAlignment = NSTextAlignmentRight;
+    _address.font = [UIFont systemFontOfSize:12];
     
-    userName.text = @"dwefewfwe";
-    userName.font = [UIFont systemFontOfSize:15];
-    CGSize userNameSize = [userName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:userName.font,NSFontAttributeName,nil]];
-    userName.width = userNameSize.width;
-    userName.height = userNameSize.height;
+//    _userName.text = @"dwefewfwe";
+    _userName.font = [UIFont systemFontOfSize:15];
+    CGSize userNameSize = [_userName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_userName.font,NSFontAttributeName,nil]];
+    _userName.width = userNameSize.width ;
+    _userName.height = userNameSize.height;
     
-    UIImageView *sixImageView = [[UIImageView alloc] initWithFrame:CGRectMake(userName.right + 3, userName.top, 20, 20)];
-    [sixImageView setImage:[UIImage imageNamed:@"six_girl"]];
+    _sixImageView = [[UIImageView alloc] initWithFrame:CGRectMake(_userName.right + 3, _userName.top, 20, 20)];
+    [_sixImageView setImage:[UIImage imageNamed:@"six_girl"]];
     
-    info.text = @"24岁 | 166cm | 射手座 | 服装设计";
-    info.font = [UIFont systemFontOfSize:12];
-    CGSize infoSize = [info.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:info.font,NSFontAttributeName,nil]];
-    info.width = infoSize.width;
-    info.height = infoSize.height;
+    _info = [[UILabel alloc] initWithFrame:CGRectMake(15, self.shadeView.height - 70, self.shadeView.width - 24, 20)];
+    self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15, _info.bottom + 10, self.shadeView.width - 24, 40)];
+
+    _info.text = @"24岁 | 166cm | 射手座 | 服装设计";
+    _info.font = [UIFont systemFontOfSize:12];
+//    CGSize infoSize = [_info.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_info.font,NSFontAttributeName,nil]];
+//    _info.width = infoSize.width;
+//    _info.height = infoSize.height;
     
     _signature.text = @"这里是交友的一个签名什么的~";
     _signature.font = [UIFont systemFontOfSize:12];
@@ -97,35 +98,32 @@
     _signature.width = signatureSize.width;
     _signature.height = signatureSize.height;
     
-    address.textColor = userName.textColor = info.textColor = _signature.textColor = [UIColor whiteColor];
+    _address.textColor = _userName.textColor = _info.textColor = _signature.textColor = [UIColor whiteColor];
     
-    [self.shadeView addSubview:address];
-    [self.shadeView addSubview:sixImageView];
-    [self.shadeView addSubview:userName];
-    [self.shadeView addSubview:info];
+    [self.shadeView addSubview:_address];
+    [self.shadeView addSubview:_sixImageView];
+    [self.shadeView addSubview:_userName];
+    [self.shadeView addSubview:_info];
     [self.shadeView addSubview:_signature];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(_mainButton.left, _mainButton.top, _mainButton.width, _mainButton.height)];
+    view.backgroundColor = [UIColor clearColor];
+    UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(mainButtonDidSelect:)];
+    [view addGestureRecognizer:tapGesturRecognizer];
+    [self.shadeView addSubview:view];
     
 }
 
 
-- (void)addLabel {
-    UILabel *label = [[UILabel alloc]init];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:18];
-    [self addSubview:label];
-    _label = label;
-}
+
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _label.frame = self.bounds;
+    
 }
 
 
 -(void)mainButtonDidSelect:(UIButton *)button {
-    //跳转传值未定
-    [self.jumpDelegate jumpTOUserDetail:111];
+    [self.jumpDelegate jumpTOUserDetail:self.index];
     NSLog(@"点击了中间的图片");
 }
 

@@ -98,12 +98,24 @@
 + (void)showAlertControllerWithMessage:(NSString *)message completion:(void(^)(void))completion{
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"警告" message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
+        if(completion != nil){
+            completion();
+        }
     }];
     [alertVC addAction:actionOK];
-    [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alertVC animated:YES completion:completion];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alertVC animated:YES completion:nil];
 }
 
++ (void)showAlertControllerTitle:(NSString *)title Message:(NSString *)message completion:(void(^)(void))completion{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        if(completion != nil){
+            completion();
+        }
+    }];
+    [alertVC addAction:actionOK];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alertVC animated:YES completion:nil];
+}
 
 /**
  从storyboard中获取一个Controller
@@ -116,6 +128,25 @@
     return [[UIStoryboard storyboardWithName:storyBoardName bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:identifier];
 }
 
+//设备            屏幕尺寸        分辨率（pt）	Reader	分辨率（px）	渲染后         PPI
+//iPhone 3GS        3.5吋        320x480     @1x     320x480                     163
+//iPhone 4/4s       3.5吋        320x480     @2x     640x960                     330
+//iPhone 5/5s/5c	4.0吋        320x568     @2x     640x1136                    326
+//iPhone 6          4.7吋        375x667     @2x     750x1334                    326
+//iPhone 6Plus      5.5吋        414x736     @3x     1242x2208	1080x1920        401
+//iPhone 6s         4.7吋        375x667     @2x     750x1334		326
+//iPhone 6sPlus     5.5吋        414x736     @3x     1242x2208	1080x1920        401
+//iPhone 7          4.7吋        375x667     @2x     750x1334		326
+//iPhone 7Plus      5.5吋        414x736     @3x     1242x2208	1080x1920        401
+//iPhone 8          5.5吋        414x736     @3x     1242x2208	1080x1920        401
+
+//
+/**
+ 当设计图给的以plus系列（屏幕宽度414如，6plus、6splus、7plus）为标准时的字体大小
+
+ @param plusFont 设计图给的字体大小
+ @return 适配字体
+ */
 + (UIFont *)adaptiveFontWithPlusFont:(int)plusFont{
     if(SCREEN_WIDTH == 375){
         return [UIFont systemFontOfSize:(375.0/414)*plusFont];
@@ -124,5 +155,22 @@
         return [UIFont systemFontOfSize:(320.0/414)*plusFont];
     }
     return [UIFont systemFontOfSize:plusFont];
+}
+
+
+/**
+ 当设计图给的以S系列（屏幕宽度375如，6、6s、7）为标准时的字体大小
+
+ @param sFont 设计图给的字体大小
+ @return 适配字体
+ */
++ (UIFont *)adaptiveFontWithSFont:(int)sFont{
+    if(SCREEN_WIDTH == 414){
+        return [UIFont systemFontOfSize:(414.0/375.0)*sFont];
+    }
+    if(SCREEN_WIDTH == 320){
+        return [UIFont systemFontOfSize:(320.0/375.0)*sFont];
+    }
+    return [UIFont systemFontOfSize:sFont];
 }
 @end

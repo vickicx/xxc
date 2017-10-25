@@ -11,6 +11,8 @@
 
 @interface BasicInformationTableViewCell()
 @property (nonatomic,copy) NSString *userId;
+@property (nonatomic,strong) UILabel *kong1;
+
 @end
 
 @implementation BasicInformationTableViewCell
@@ -44,46 +46,56 @@
         [self addSubview:userid];
         
         
-        UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12, information.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
-        kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
-        [self addSubview:kong1];
-        
-        
-        ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, kong1.bottom + 2) width:kWIDTH];
-        showView.color = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
-        NSArray *arr = [NSArray arrayWithObjects:@"111111",@"222",@"3111",@"222444",@"11551111",@"22",@"1111555555511",@"226662",@"111111",@"222", nil];
-        NSMutableArray *menuArr = [NSMutableArray array];
-        for (int index = 0; index < [arr count]; index ++ ) {
-            
-            UILabel *menuLabel = [UILabel new];
-            menuLabel.textAlignment = NSTextAlignmentCenter;
-            menuLabel.backgroundColor = [UIColor colorWithRed:240/255.0 green:241/255.0 blue:241/255.0 alpha:1];
-            menuLabel.text = arr[index];
-            menuLabel.font = [UIFont systemFontOfSize:13];
-            menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
-            CGFloat width = [menuLabel widthOfSizeToFit];
-            menuLabel.frame = CGRectMake(0, 0, width + 15 + 15, 30);
-            menuLabel.layer.cornerRadius = 5.0;
-            menuLabel.clipsToBounds = YES;
-            [menuArr addObject:menuLabel];
-        }
-        showView.dataSource = menuArr;
-        int height1 = (showView.i + 1) * 30;
-        NSString *height2 = [NSString stringWithFormat:@"%d",height1];
-        
-        
-        [self addSubview:showView];
-        NSDictionary *dict =[NSDictionary dictionaryWithObject:height2 forKey:@"height"];
-        
-        NSNotification *notification =[NSNotification notificationWithName:@"CellHeightB" object:nil userInfo:dict];
-        
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        _kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12, information.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
+        _kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
+        [self addSubview:_kong1];
         
         
         
+
     }
     return self;
 }
+
+-(void)setMatchingLevelOneModel:(OneStageScreeningModel *)matchingLevelOneModel {
+    if (_matchingLevelOneModel != matchingLevelOneModel) {
+        _matchingLevelOneModel = matchingLevelOneModel;
+    }
+    
+    ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong1.bottom + 2) width:kWIDTH];
+    showView.color = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
+    
+    _arr = [NSMutableArray arrayWithObjects: matchingLevelOneModel.age,matchingLevelOneModel.stature, matchingLevelOneModel.constellation, matchingLevelOneModel.address, matchingLevelOneModel.physique, matchingLevelOneModel.facialfeatures, nil];
+    NSMutableArray *menuArr = [NSMutableArray array];
+    for (int index = 0; index < [_arr count]; index ++ ) {
+        
+        UILabel *menuLabel = [UILabel new];
+        menuLabel.textAlignment = NSTextAlignmentCenter;
+        menuLabel.backgroundColor = [UIColor colorWithRed:240/255.0 green:241/255.0 blue:241/255.0 alpha:1];
+        menuLabel.text = _arr[index];
+        menuLabel.font = [UIFont systemFontOfSize:13];
+        menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
+        CGFloat width = [menuLabel widthOfSizeToFit];
+        menuLabel.frame = CGRectMake(0, 0, width + 15 + 15, 30);
+        menuLabel.layer.cornerRadius = 5.0;
+        menuLabel.clipsToBounds = YES;
+        [menuArr addObject:menuLabel];
+    }
+    showView.dataSource = menuArr;
+    int height1 = (showView.i + 1) * 30;
+    NSString *height2 = [NSString stringWithFormat:@"%d",height1];
+    
+    
+    [self addSubview:showView];
+    NSDictionary *dict =[NSDictionary dictionaryWithObject:height2 forKey:@"height"];
+    
+    NSNotification *notification =[NSNotification notificationWithName:@"CellHeightB" object:nil userInfo:dict];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+}
+
+
 
 
 

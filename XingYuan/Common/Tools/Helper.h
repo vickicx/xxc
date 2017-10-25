@@ -42,6 +42,14 @@
  */
 + (void)showAlertControllerWithMessage:(NSString *)message completion:(void(^)(void))completion;
 
+
+/**
+ 显示一个操作提示框
+
+
+ */
++ (void)showAlertControllerTitle:(NSString *)title Message:(NSString *)message completion:(void(^)(void))completion;
+
 /**
  从storyboard中获取一个Controller
  
@@ -53,10 +61,21 @@
 
 
 /**
- 根据plus机型的字体大小自动返回适配其他机型的字体
-
- @param plusFont plus机型的字体
- @return 相对应机型的大小
+ 当设计图给的以plus系列（屏幕宽度414如，6plus、6splus、7plus）为标准时的字体大小
+ 
+ @param plusFont 设计图给的字体大小
+ @return 适配字体
  */
 + (UIFont *)adaptiveFontWithPlusFont:(int)plusFont;
+
+
+/**
+ 当设计图给的以S系列（屏幕宽度375如，6、6s、7）为标准时的字体大小
+ 
+ @param sFont 设计图给的字体大小
+ @return 适配字体
+ */
++ (UIFont *)adaptiveFontWithSFont:(int)sFont;
+
+
 @end

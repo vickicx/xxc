@@ -17,7 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 255 / 255. green:arc4random() % 255 / 255. blue:arc4random() % 255 / 255. alpha:1];
-    // Do any additional setup after loading the view.
 }
 
 - (void) createTableView {

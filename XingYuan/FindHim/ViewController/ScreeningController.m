@@ -118,7 +118,7 @@
         if(cell.infoValue != nil){
             haveInputCount += 1;
         }
-        UIFont *font = FONT(14);
+        UIFont *font = FONT_WITH_S(14);
         NSDictionary *attributs = @{NSForegroundColorAttributeName:RGBColor(122, 128, 131, 1),
                                     NSFontAttributeName:font};
         NSString *basicInfoCellPreTitle = @"";

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonalIntroductionTableViewCell : UITableViewCell
-
+@property (nonatomic,strong) UILabel *summary;
 @end
