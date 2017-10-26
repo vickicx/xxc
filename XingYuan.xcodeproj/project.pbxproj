@@ -528,6 +528,9 @@
 		59FBDDDE1F94498D008E3212 /* FourStageScreeningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FBDDDD1F94498D008E3212 /* FourStageScreeningController.m */; };
 		59FBDDE11F9449A4008E3212 /* FiveStageScreeningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FBDDE01F9449A4008E3212 /* FiveStageScreeningController.m */; };
 		5B751CB9C37F68FB8639A35E /* Pods_XingYuan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3C4DEA2FF5AB9C2F250B17F /* Pods_XingYuan.framework */; };
+		991C8FB71FA17D3300242E27 /* CertificationCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 991C8FB51FA17D3300242E27 /* CertificationCollectionViewCell.m */; };
+		991C8FB81FA17D3300242E27 /* CertificationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991C8FB61FA17D3300242E27 /* CertificationCollectionViewCell.xib */; };
+		991C8FBB1FA1885100242E27 /* MateSelectionRequireModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 991C8FBA1FA1885100242E27 /* MateSelectionRequireModel.m */; };
 		9986AF641F8DC9E500A6EEC7 /* JYLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9986AF611F8DC9E500A6EEC7 /* JYLegendView.m */; };
 		9986AF651F8DC9E500A6EEC7 /* JYRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 9986AF631F8DC9E500A6EEC7 /* JYRadarChart.m */; };
 		9986AF691F8DF2BF00A6EEC7 /* GradualColor_View.m in Sources */ = {isa = PBXBuildFile; fileRef = 9986AF681F8DF2BF00A6EEC7 /* GradualColor_View.m */; };
@@ -1633,6 +1636,11 @@
 		59FBDDDD1F94498D008E3212 /* FourStageScreeningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourStageScreeningController.m; sourceTree = "<group>"; };
 		59FBDDDF1F9449A4008E3212 /* FiveStageScreeningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveStageScreeningController.h; sourceTree = "<group>"; };
 		59FBDDE01F9449A4008E3212 /* FiveStageScreeningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveStageScreeningController.m; sourceTree = "<group>"; };
+		991C8FB41FA17D3300242E27 /* CertificationCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificationCollectionViewCell.h; sourceTree = "<group>"; };
+		991C8FB51FA17D3300242E27 /* CertificationCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificationCollectionViewCell.m; sourceTree = "<group>"; };
+		991C8FB61FA17D3300242E27 /* CertificationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificationCollectionViewCell.xib; sourceTree = "<group>"; };
+		991C8FB91FA1885100242E27 /* MateSelectionRequireModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MateSelectionRequireModel.h; sourceTree = "<group>"; };
+		991C8FBA1FA1885100242E27 /* MateSelectionRequireModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MateSelectionRequireModel.m; sourceTree = "<group>"; };
 		9986AF601F8DC9E500A6EEC7 /* JYLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLegendView.h; sourceTree = "<group>"; };
 		9986AF611F8DC9E500A6EEC7 /* JYLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLegendView.m; sourceTree = "<group>"; };
 		9986AF621F8DC9E500A6EEC7 /* JYRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYRadarChart.h; sourceTree = "<group>"; };
@@ -3917,6 +3925,8 @@
 				99ADB5971F9F15FC005928B3 /* FindHimMainModel.m */,
 				99ADB5991FA063D9005928B3 /* UserHomePageModel.h */,
 				99ADB59A1FA063D9005928B3 /* UserHomePageModel.m */,
+				991C8FB91FA1885100242E27 /* MateSelectionRequireModel.h */,
+				991C8FBA1FA1885100242E27 /* MateSelectionRequireModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4427,6 +4437,9 @@
 				99ADB59C1FA06A98005928B3 /* SmallPhotoCollectionViewCell.h */,
 				99ADB59D1FA06A98005928B3 /* SmallPhotoCollectionViewCell.m */,
 				99ADB59E1FA06A98005928B3 /* SmallPhotoCollectionViewCell.xib */,
+				991C8FB41FA17D3300242E27 /* CertificationCollectionViewCell.h */,
+				991C8FB51FA17D3300242E27 /* CertificationCollectionViewCell.m */,
+				991C8FB61FA17D3300242E27 /* CertificationCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4603,6 +4616,7 @@
 				5924F2BB1F8B7C3700D2108A /* README.txt in Resources */,
 				59B7A4891F7CE87A00217911 /* ForgetPasswordController.xib in Resources */,
 				99ADB56E1F95D8F6005928B3 /* jquery-1.11.3.js in Resources */,
+				991C8FB81FA17D3300242E27 /* CertificationCollectionViewCell.xib in Resources */,
 				5924F2B01F8B7C3700D2108A /* JResource.bundle in Resources */,
 				5924F1FB1F8B7C3600D2108A /* NTESJionTeamViewController.xib in Resources */,
 				99ADB56C1F95D8F6005928B3 /* matching.css in Resources */,
@@ -4847,6 +4861,7 @@
 				5924F2161F8B7C3600D2108A /* NTESContactDataMember.m in Sources */,
 				5924EF501F8B7BEB00D2108A /* NIMCommonTableDelegate.m in Sources */,
 				5924F24C1F8B7C3600D2108A /* NTESSessionLocalHistoryViewController.m in Sources */,
+				991C8FB71FA17D3300242E27 /* CertificationCollectionViewCell.m in Sources */,
 				5924EF7D1F8B7BEB00D2108A /* NIMLocationContentConfig.m in Sources */,
 				5924EF851F8B7BEB00D2108A /* NIMKitLocationPoint.m in Sources */,
 				5924F2121F8B7C3600D2108A /* NTESLiveMasterInfoView.m in Sources */,
@@ -5175,6 +5190,7 @@
 				5924F28A1F8B7C3600D2108A /* NTESAboutViewController.m in Sources */,
 				5924F2AA1F8B7C3600D2108A /* NTESTimerHolder.m in Sources */,
 				5924EF5F1F8B7BEB00D2108A /* NIMContactDataCell.m in Sources */,
+				991C8FBB1FA1885100242E27 /* MateSelectionRequireModel.m in Sources */,
 				5924F2331F8B7C3600D2108A /* NTESRedPacketAttachment.m in Sources */,
 				5924EF891F8B7BEB00D2108A /* NIMKitAudioCenter.m in Sources */,
 				99AB52521F8CB56C00C8E0B0 /* UILabel+SizeToFit.m in Sources */,

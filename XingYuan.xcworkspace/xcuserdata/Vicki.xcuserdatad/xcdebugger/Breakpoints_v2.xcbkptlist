@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
-            timestampString = "530617572.008225"
+            filePath = "XingYuan/FindHim/View/UserSpouseStandardTableViewCell.m"
+            timestampString = "530697698.391123"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
-            landmarkName = "-tableView:heightForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
-            timestampString = "530617772.334921"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
-            landmarkName = "-cellHeight1:"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "-setArr:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

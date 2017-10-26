@@ -65,7 +65,8 @@
     ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong1.bottom + 2) width:kWIDTH];
     showView.color = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
     
-    _arr = [NSMutableArray arrayWithObjects: matchingLevelOneModel.age,matchingLevelOneModel.stature, matchingLevelOneModel.constellation, matchingLevelOneModel.address, matchingLevelOneModel.physique, matchingLevelOneModel.facialfeatures, nil];
+    _arr = [NSMutableArray arrayWithObjects: matchingLevelOneModel.birthday,matchingLevelOneModel.stature, matchingLevelOneModel.constellation, matchingLevelOneModel.address, matchingLevelOneModel.physique, matchingLevelOneModel.facialfeatures, nil];
+    _arr = [NSMutableArray arrayWithObjects: [NSString stringWithFormat:@"%@岁", matchingLevelOneModel.age],matchingLevelOneModel.stature, matchingLevelOneModel.constellation, matchingLevelOneModel.address,[NSString stringWithFormat:@"相貌自评：%@", matchingLevelOneModel.physique], matchingLevelOneModel.facialfeatures, nil];
     NSMutableArray *menuArr = [NSMutableArray array];
     for (int index = 0; index < [_arr count]; index ++ ) {
         

@@ -10,4 +10,6 @@
 
 @interface UserSpouseStandardTableViewCell : UITableViewCell
 
+@property (nonatomic,strong) NSMutableArray *arr;
+
 @end

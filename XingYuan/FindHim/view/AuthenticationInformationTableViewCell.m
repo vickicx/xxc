@@ -42,10 +42,10 @@
         
         
         _flowLayout = [UICollectionViewFlowLayout new]; // 自定义的布局对象
-        _flowLayout.itemSize = CGSizeMake(50, 50);
+        _flowLayout.itemSize = CGSizeMake(110, 140);
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _flowLayout.minimumLineSpacing = 10;
-        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kong1.bottom + 10 * FitHeight, kWIDTH, 100) collectionViewLayout:_flowLayout];
+        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kong1.bottom + 10 * FitHeight, kWIDTH, 140) collectionViewLayout:_flowLayout];
         _collection.backgroundColor = [UIColor whiteColor];
         _collection.dataSource = self;
         _collection.delegate = self;
@@ -53,7 +53,7 @@
         _collection.showsVerticalScrollIndicator = NO;
         _collection.showsHorizontalScrollIndicator = NO;
         
-        [_collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+         [_collection registerNib:[UINib nibWithNibName:@"CertificationCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"CertificationCollectionViewCell"];
         
         [self addSubview:_collection];
         
@@ -62,7 +62,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return 5;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -79,10 +79,46 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    cell.layer.cornerRadius = 5.0f;
-    cell.backgroundColor = [UIColor purpleColor];
+     CertificationCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CertificationCollectionViewCell" forIndexPath:indexPath];
+    NSArray *imageName = @[@"实名认证", @"手机认证", @"芝麻认证", @"购车认证", @"购房认证"];
+    NSArray *imageName1 = @[@"实名认证1", @"手机认证1", @"芝麻认证1", @"购车认证1", @"购房认证1"];
+    NSArray *titleName = @[@"实名认证", @"手机认证", @"芝麻认证", @"购车认证", @"购房认证"];
+    cell.label.text = titleName[indexPath.row];
+    if (_matchingLevelThreeModel.realnameauthentication.intValue == 2 && indexPath.row == 0) {
+        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+    }else {
+        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+    }
+    if (_matchingLevelThreeModel.phoneauthentication.intValue == 2 && indexPath.row == 1) {
+        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+    }else {
+        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+    }
+    if (_matchingLevelThreeModel.zmxyauthentication.intValue == 2 && indexPath.row == 2) {
+        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+    }else {
+        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+    }
+    if (_matchingLevelThreeModel.buycarauthentication.intValue == 2 && indexPath.row == 3) {
+        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+    }else {
+        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+    }
+    if (_matchingLevelThreeModel.buyhouseauthentication.intValue == 2 && indexPath.row == 4) {
+        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+    }else {
+        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+    }
+    
     return cell;
+}
+
+-(void)setMatchingLevelThreeModel:(ThreeStageScreeningModel *)matchingLevelThreeModel {
+    if (_matchingLevelThreeModel != matchingLevelThreeModel) {
+        _matchingLevelThreeModel = matchingLevelThreeModel;
+    }
+    
+    [_collection reloadData];
 }
 
 

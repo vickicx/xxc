@@ -9,12 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface ChangePhoneNumberViewController : UIViewController
-
-@property (weak, nonatomic) IBOutlet UITextField *phoneNumber;
-
-@property (weak, nonatomic) IBOutlet UITextField *password;
-
-@property (weak, nonatomic) IBOutlet UIButton *bindingsButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *forgetPassword;
 @end

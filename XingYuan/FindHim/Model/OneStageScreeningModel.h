@@ -15,5 +15,7 @@
 @property (nonatomic,copy) NSString *constellation;
 @property (nonatomic,copy) NSString *physique;
 @property (nonatomic,copy) NSString *facialfeatures;
+
+@property (nonatomic,copy) NSString *birthday;
 @property (nonatomic,copy) NSString *age;
 @end

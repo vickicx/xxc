@@ -9,6 +9,12 @@
 #import "SexSelectController.h"
 #import "UserBaseInfoFillInController.h"
 @interface SexSelectController ()
+@property (weak, nonatomic) IBOutlet UILabel *maleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *femaleLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabe;
+
 @end
 
 @implementation SexSelectController
@@ -17,6 +23,12 @@
     [super viewDidLoad];
     self.navigationItem.title = @"性别选择";
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    
+    self.maleLabel.font = FONT_WITH_S(17);
+    self.femaleLabel.font = FONT_WITH_S(17);
+    
+    self.messageLabel.font = FONT_WITH_S(16);
+    self.noticeLabe.font = FONT_WITH_S(14);
 }
 
 //选中了男性

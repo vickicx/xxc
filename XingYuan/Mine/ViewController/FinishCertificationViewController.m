@@ -16,7 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"实名认证";
     // Do any additional setup after loading the view from its nib.
 }
 

@@ -14,4 +14,6 @@
 @property (nonatomic,copy) NSString *zmxyauthentication; // 芝麻认证
 @property (nonatomic,copy) NSString *buyhouseauthentication; // 购房认证
 @property (nonatomic,copy) NSString *buycarauthentication; // 购车认证
+@property (nonatomic,copy) NSString *buycarcertifyaudit; // 购车认证审核
+@property (nonatomic,copy) NSString *buyhousecertifyaudit; // 购房认证审核
 @end

@@ -119,7 +119,7 @@
     
     //生日
     cell = self.cells[1];
-    cell.infoValue = model.age;
+    cell.infoValue = model.birthday;
     
     //身高
     cell = self.cells[2];

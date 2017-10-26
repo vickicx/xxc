@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CertificationCollectionViewCell.h"
+#import "ThreeStageScreeningModel.h"
 
 @interface AuthenticationInformationTableViewCell : UITableViewCell<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic, strong) UICollectionView *collection;
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-
+@property (nonatomic,strong) ThreeStageScreeningModel *matchingLevelThreeModel;
 
 
 @end

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XingYuan/Log&amp;Res/ViewController/BundlePhoneNumForThirdLoginController.m"
-            timestampString = "528372715.078747"
+            timestampString = "530692177.822568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "-dealRequestVertificationCode:"
             landmarkType = "7">
          </BreakpointContent>

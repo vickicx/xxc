@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *vertificationCode;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UIButton *requestVertificationCodeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *bundBtn;
 
 @end
 
@@ -22,6 +23,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"绑定手机号";
+    
+    self.requestVertificationCodeBtn.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
+    self.requestVertificationCodeBtn.layer.borderWidth = 1;
+    self.requestVertificationCodeBtn.titleLabel.font = FONT_WITH_S(14);
+    
+    self.phoneNum.font = FONT_WITH_S(17);
+    self.vertificationCode.font = FONT_WITH_S(17);
+    self.password.font = FONT_WITH_S(17);
+    
+    self.bundBtn.titleLabel.font = FONT_WITH_S(18);
 }
 
 

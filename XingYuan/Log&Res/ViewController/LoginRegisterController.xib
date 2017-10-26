@@ -193,14 +193,14 @@
                                     <rect key="frame" x="0.0" y="122" width="375" height="60.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u68-uU-9NP">
-                                            <rect key="frame" x="15" y="60.5" width="345" height="0.5"/>
+                                            <rect key="frame" x="15" y="61" width="345" height="0.5"/>
                                             <color key="backgroundColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="0.5" id="20w-2N-ecm"/>
                                             </constraints>
                                         </view>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请再次输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8hI-n3-Dnz">
-                                            <rect key="frame" x="15" y="0.5" width="345" height="60"/>
+                                            <rect key="frame" x="15" y="1" width="345" height="60"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -228,19 +228,19 @@
                                             </constraints>
                                         </view>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGP-oe-zmN">
-                                            <rect key="frame" x="15" y="0.5" width="246.5" height="60.5"/>
+                                            <rect key="frame" x="15" y="0.5" width="224.5" height="60.5"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdw-rM-O1i">
-                                            <rect key="frame" x="261.5" y="13" width="98.5" height="34.5"/>
-                                            <color key="backgroundColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.78039215689999997" alpha="0.25278253420000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <rect key="frame" x="239.5" y="10.5" width="120.5" height="40.5"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="Pdw-rM-O1i" secondAttribute="height" multiplier="200:70" id="hha-9y-nTZ"/>
+                                                <constraint firstAttribute="width" secondItem="Pdw-rM-O1i" secondAttribute="height" multiplier="180:60" id="hha-9y-nTZ"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="获取验证码">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="dealRequestVertificationCode:" destination="-1" eventType="touchUpInside" id="OU2-tA-4aD"/>
@@ -252,11 +252,11 @@
                                         <constraint firstItem="dk2-lW-pWp" firstAttribute="leading" secondItem="ega-bC-apd" secondAttribute="leading" constant="15" id="62t-mC-W1R"/>
                                         <constraint firstItem="Pdw-rM-O1i" firstAttribute="trailing" secondItem="dk2-lW-pWp" secondAttribute="trailing" id="Ado-f6-PnU"/>
                                         <constraint firstAttribute="bottom" secondItem="dk2-lW-pWp" secondAttribute="bottom" id="CF7-Fm-4dC"/>
+                                        <constraint firstItem="Pdw-rM-O1i" firstAttribute="height" secondItem="ega-bC-apd" secondAttribute="height" multiplier="80:120" id="Fxu-7f-Lsp"/>
                                         <constraint firstItem="Pdw-rM-O1i" firstAttribute="leading" secondItem="DGP-oe-zmN" secondAttribute="trailing" id="OvL-JJ-zrJ"/>
                                         <constraint firstItem="dk2-lW-pWp" firstAttribute="top" secondItem="DGP-oe-zmN" secondAttribute="bottom" id="Zek-4G-2vN"/>
                                         <constraint firstItem="DGP-oe-zmN" firstAttribute="top" secondItem="ega-bC-apd" secondAttribute="top" id="chK-Qd-cAx"/>
                                         <constraint firstItem="DGP-oe-zmN" firstAttribute="leading" secondItem="dk2-lW-pWp" secondAttribute="leading" id="j6v-8v-tPo"/>
-                                        <constraint firstItem="Pdw-rM-O1i" firstAttribute="width" secondItem="dk2-lW-pWp" secondAttribute="width" multiplier="200:700" id="nRk-c0-6SY"/>
                                         <constraint firstAttribute="trailing" secondItem="dk2-lW-pWp" secondAttribute="trailing" constant="15" id="nru-jY-t50"/>
                                         <constraint firstItem="Pdw-rM-O1i" firstAttribute="centerY" secondItem="ega-bC-apd" secondAttribute="centerY" id="zIs-Zt-cQe"/>
                                     </constraints>
@@ -347,13 +347,13 @@
                                             </constraints>
                                         </view>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="111111" placeholder="密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rrG-61-9CN">
-                                            <rect key="frame" x="15" y="0.0" width="212" height="57"/>
+                                            <rect key="frame" x="15" y="0.0" width="196.5" height="57"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iag-qg-Tet">
-                                            <rect key="frame" x="261.5" y="12" width="98.5" height="34"/>
+                                            <rect key="frame" x="250" y="10" width="110" height="38.5"/>
                                             <color key="backgroundColor" red="0.96470588239999999" green="0.31372549020000001" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Iag-qg-Tet" secondAttribute="height" multiplier="200:70" id="yxP-O2-VXT"/>
@@ -366,7 +366,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0V-Vu-nMo">
-                                            <rect key="frame" x="227" y="12" width="34.5" height="34"/>
+                                            <rect key="frame" x="211.5" y="10" width="38.5" height="38.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="J0V-Vu-nMo" secondAttribute="height" id="P5O-IE-PWn"/>
                                             </constraints>
@@ -381,12 +381,12 @@
                                     <constraints>
                                         <constraint firstItem="Iag-qg-Tet" firstAttribute="leading" secondItem="J0V-Vu-nMo" secondAttribute="trailing" id="2gT-XI-0to"/>
                                         <constraint firstItem="Iag-qg-Tet" firstAttribute="trailing" secondItem="Gkc-rI-le4" secondAttribute="trailing" id="7s7-aO-6Gi"/>
-                                        <constraint firstItem="Iag-qg-Tet" firstAttribute="width" secondItem="Gkc-rI-le4" secondAttribute="width" multiplier="200:700" id="KG4-zk-AK0"/>
                                         <constraint firstItem="rrG-61-9CN" firstAttribute="top" secondItem="flB-5u-w5l" secondAttribute="top" id="R85-Tt-AO3"/>
                                         <constraint firstItem="Iag-qg-Tet" firstAttribute="centerY" secondItem="flB-5u-w5l" secondAttribute="centerY" id="Vd2-KT-BDZ"/>
                                         <constraint firstItem="Gkc-rI-le4" firstAttribute="top" secondItem="rrG-61-9CN" secondAttribute="bottom" id="ZtY-wY-kZv"/>
                                         <constraint firstItem="Iag-qg-Tet" firstAttribute="bottom" secondItem="J0V-Vu-nMo" secondAttribute="bottom" id="amj-Xt-lDc"/>
                                         <constraint firstItem="Gkc-rI-le4" firstAttribute="leading" secondItem="flB-5u-w5l" secondAttribute="leading" constant="15" id="cTe-KJ-bxb"/>
+                                        <constraint firstItem="Iag-qg-Tet" firstAttribute="height" secondItem="flB-5u-w5l" secondAttribute="height" multiplier="80:120" id="gWw-PI-4J2"/>
                                         <constraint firstAttribute="trailing" secondItem="Gkc-rI-le4" secondAttribute="trailing" constant="15" id="gpA-WL-egQ"/>
                                         <constraint firstAttribute="bottom" secondItem="Gkc-rI-le4" secondAttribute="bottom" id="hfT-eB-dy7"/>
                                         <constraint firstItem="rrG-61-9CN" firstAttribute="leading" secondItem="Gkc-rI-le4" secondAttribute="leading" id="ikS-JD-1wG"/>
@@ -456,7 +456,9 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMW-mm-soq">
                             <rect key="frame" x="298" y="130" width="62" height="30"/>
-                            <state key="normal" title="忘记密码"/>
+                            <state key="normal" title="忘记密码">
+                                <color key="titleColor" red="0.94117647058823528" green="0.45490196078431372" blue="0.19215686274509802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="dealForgetPwd:" destination="-1" eventType="touchUpInside" id="JQC-sc-XnS"/>
                             </connections>

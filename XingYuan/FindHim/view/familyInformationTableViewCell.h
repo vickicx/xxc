@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FourStageScreeningModel.h"
 
 @interface familyInformationTableViewCell : UITableViewCell
+
+@property (nonatomic,strong) FourStageScreeningModel *matchingLevelFourModel;
 
 @end

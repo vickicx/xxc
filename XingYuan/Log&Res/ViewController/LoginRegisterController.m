@@ -51,7 +51,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self dealRegisterSelect:self.registerSelectBtn];
+    [self dealLoginSelect:self.loginSelectBtn];
+    
+    self.requestVertificationCodeBtn.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
+    self.requestVertificationCodeBtn.layer.borderWidth = 1;
+    self.requestVertificationCodeBtn.titleLabel.font = FONT_WITH_S(14);
+    
+    self.registerBtn.layer.cornerRadius = 3;
+    self.registerBtn.clipsToBounds = true;
+    
+    self.registerSelectBtn.titleLabel.font = FONT_WITH_S(16)
+    self.loginSelectBtn.titleLabel.font = FONT_WITH_S(16)
+    
+    self.registerBtn.titleLabel.font = FONT_WITH_S(18)
+    self.registerPasswordTextFeild.font = FONT_WITH_S(17)
+    self.registerConfirmPasswordTextFeild.font = FONT_WITH_S(17)
+    self.registerVerificationCode.font = FONT_WITH_S(17)
+    self.registerSelectBtn.titleLabel.font = FONT_WITH_S(17)
+    
+    self.loginBtn.titleLabel.font = FONT_WITH_S(17)
+    self.loginPhoneTextFeild.font = FONT_WITH_S(17)
+    self.loginPasswordTextFeild.font = FONT_WITH_S(17)
+    
 }
 
 //显示注册区域
@@ -96,6 +117,7 @@
         [loginResultModel setValuesForKeysWithDictionary:data];
         self.loginResultModel = loginResultModel;
         [Helper saveMemberId:loginResultModel.memberId];
+        [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
         if ([loginResultModel.code  isEqual: @1]){
             [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
 //            //若未选择性别则跳转性别选选择界面

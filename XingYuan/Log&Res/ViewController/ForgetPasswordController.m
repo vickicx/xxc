@@ -25,6 +25,16 @@
     self.title = @"忘记密码";
     self.finishBtn.layer.cornerRadius = 3;
     self.finishBtn.clipsToBounds = true;
+    
+    self.requestVertificationCodeBtn.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
+    self.requestVertificationCodeBtn.layer.borderWidth = 1;
+    self.requestVertificationCodeBtn.titleLabel.font = FONT_WITH_S(14);
+    
+    self.phoneNum.font = FONT_WITH_S(17)
+    self.vertificationCode.font = FONT_WITH_S(17)
+    self.newpass.font = FONT_WITH_S(17)
+    
+    self.finishBtn.titleLabel.font = FONT_WITH_S(18)
 }
 
 //请求验证码
@@ -46,7 +56,7 @@
 
 - (IBAction)dealChangePasswordVisibleState:(UIButton *)sender {
     [sender setSelected:!sender.selected];
-    [self.newpass setSecureTextEntry:sender.selected];
+    [self.newpass setSecureTextEntry:!sender.selected];
 }
 
 

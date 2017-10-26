@@ -16,6 +16,13 @@
 #import "LoginRegisterController.h"
 
 @interface UserBaseInfoFillInController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabe1;
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel2;
+
+//统一设置字体
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *labes;
+
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
 
 @property (weak, nonatomic) IBOutlet UILabel *nickNameInfo;
@@ -37,10 +44,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"基本信息";
+    
+    self.noticeLabe1.font = FONT_WITH_S(17);
+    self.noticeLabel2.font = FONT_WITH_S(17);
+    
     self.headImg.layer.cornerRadius = 3;
     self.headImg.clipsToBounds = true;
+    
+    for(int i=0;i<self.labes.count;i++){
+        UILabel *label = self.labes[i];
+        label.font = FONT_WITH_S(17);
+    }
+    
+    self.nickNameInfo.font = FONT_WITH_S(17);
+    self.birthdayInfo.font = FONT_WITH_S(17);
+    self.heightInfo.font = FONT_WITH_S(17);
+    self.areaInfo.font = FONT_WITH_S(17);
+    
     self.finishBtn.layer.cornerRadius = 3;
     self.finishBtn.clipsToBounds = true;
+    self.finishBtn.titleLabel.font = FONT_WITH_S(18);
+    
     //基础信息填充完毕需要进行IM登录操作
 }
 

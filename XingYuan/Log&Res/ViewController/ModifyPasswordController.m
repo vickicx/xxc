@@ -10,11 +10,19 @@
 #import "LoginRegisterController.h"
 
 @interface ModifyPasswordController ()
+@property (weak, nonatomic) IBOutlet UILabel *oldPwdLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *pwdNewLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *confirmNewPwdLabel;
+
 @property (weak, nonatomic) IBOutlet UITextField *oldPassword;
 
 @property (weak, nonatomic) IBOutlet UITextField *newsPassword;
 
 @property (weak, nonatomic) IBOutlet UITextField *retypePassword;
+
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *finishButton;
 @end
@@ -24,7 +32,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"修改密码";
-    // Do any additional setup after loading the view from its nib.
+    self.finishButton.layer.cornerRadius = 3;
+    self.finishButton.clipsToBounds = true;
+    
+    self.oldPwdLabel.font = FONT_WITH_S(17);
+    self.pwdNewLabel.font = FONT_WITH_S(17);
+    self.confirmNewPwdLabel.font = FONT_WITH_S(17);
+    
+    self.oldPassword.font = FONT_WITH_S(17);
+    self.newsPassword.font = FONT_WITH_S(17);
+    self.retypePassword.font = FONT_WITH_S(17);
+    
+    self.noticeLabel.font = FONT_WITH_S(15);
+    
+    self.finishButton.titleLabel.font = FONT_WITH_S(18);
+    self.finishButton.layer.cornerRadius = 3;
+    self.finishButton.clipsToBounds = true;
 }
 
 - (IBAction)dealFinish:(UIButton *)sender {

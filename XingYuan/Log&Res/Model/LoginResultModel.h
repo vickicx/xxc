@@ -20,7 +20,7 @@
 //性别
 @property (nonatomic,copy) NSNumber *sex;
 //基础信息
-@property (nonatomic,copy) NSString *baseInfo;
+@property (nonatomic,assign) BOOL issetmemberinfo;
 
 //IM账号
 @property (nonatomic,assign) NSString* imaccid;

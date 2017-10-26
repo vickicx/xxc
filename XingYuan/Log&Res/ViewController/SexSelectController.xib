@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SexSelectController">
             <connections>
+                <outlet property="femaleLabel" destination="Y7N-S6-bXA" id="eUQ-E1-mZf"/>
+                <outlet property="maleLabel" destination="cLK-Fq-Beh" id="zhA-gf-ZHP"/>
+                <outlet property="messageLabel" destination="qKm-Cz-OaD" id="RPT-79-SDg"/>
+                <outlet property="noticeLabe" destination="IYA-Gx-mbi" id="iXN-je-kaY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

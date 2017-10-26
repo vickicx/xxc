@@ -19,6 +19,7 @@
 #import "Masonry.h"
 #import "MatchingTableViewCell.h"
 #import "UserHomePageModel.h"
+#import "MateSelectionRequireModel.h"
 
 @interface UserHomePageViewController ()<NavHeadTitleViewDelegate,headLineDelegate,UITableViewDataSource,UITableViewDelegate>
 #define JXColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
@@ -48,6 +49,8 @@
 @property (nonatomic,assign) float IntroductionHeight;
 
 @property (nonatomic,strong) UserHomePageModel *userHomePageModel;
+@property (nonatomic,strong) MateSelectionRequireModel *mateSelectionRequireModel;
+@property (nonatomic,strong) NSMutableArray *arr;
 @end
 
 @implementation UserHomePageViewController
@@ -249,27 +252,31 @@
             return self.IntroductionHeight;
         }else if (indexPath.row == 3){
             if(self.rowHeightB == NULL){
-                return self.rowHeightB + 30;
+                return 221;
             }
-            return self.rowHeightB + 180;
+            return self.rowHeightB + 100;
             
         }else if (indexPath.row == 4){
             if(self.rowHeightP == NULL){
                 return 221;
             }
-            return self.rowHeightP + 180;
+            return self.rowHeightP + 100;
+            
+        }else if (indexPath.row == 5){
+            
+                return 220;
             
         }else if (indexPath.row == 6){
             if(self.rowHeightFa == NULL){
                 return 221;
             }
-            return self.rowHeightFa + 180;
+            return self.rowHeightFa + 100;
             
         }else if (indexPath.row == 7){
             if(self.rowHeightFu == NULL){
                 return 221;
             }
-            return self.rowHeightFu + 180;
+            return self.rowHeightFu + 100;
             
         }
 
@@ -307,7 +314,7 @@
     if (_currentIndex==0) {
         return 8;
     }else if(_currentIndex==1){
-        return 1;
+        return self.arr.count;
     }else{
         return 1;
     }
@@ -367,20 +374,20 @@
             
         }else if (indexPath.row == 4){
             PersonalCircumstancesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"circumstancesCell"];
-            
+            cell.matchingLevelTwoModel = self.userHomePageModel.matchingLevelTwo;
             return cell;
         }else if (indexPath.row == 5){
             AuthenticationInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AuthenticationInformationCell"];
-           
+            cell.matchingLevelThreeModel = self.userHomePageModel.matchingLevelThree;
             return cell;
             
         }else if (indexPath.row == 6){
             familyInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"familyCell"];
-          
+            cell.matchingLevelFourModel = self.userHomePageModel.matchingLevelFour;
             return cell;
         }else if (indexPath.row == 7){
             futurePlanningTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"futureCell"];
-            
+            cell.matchingLevelFiveModel = self.userHomePageModel.matchingLevelFive;
             return cell;
         }
         cell.textLabel.text=[_dataArray0 objectAtIndex:indexPath.row];
@@ -390,7 +397,7 @@
 
     }else if(_currentIndex==1){
         UserSpouseStandardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpouseStandardCell"];
-        
+        cell.arr = self.arr;
         return cell;
             }else if(_currentIndex==2){
                 MatchingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MatchingTableViewCell"];
@@ -508,6 +515,45 @@
                           self.userHomePageModel = [[UserHomePageModel alloc] initWithDictionary:dic];
                           [self.tableView reloadData];
                           
+                      } fail:^(NSError *error) {
+                          
+                      }];
+    NSMutableDictionary *parameters1 = [NSMutableDictionary new];
+    [parameters1 setValue:self.seememberid forKey:@"memberid"]; //seememberid  被查看人id
+    [parameters1 setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+    [parameters1 setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+    [parameters1 setValue:[Helper sign] forKey:@"sign"];          //签名
+    [parameters1 setValue:@"1" forKey:@"type"]; // type     1:简单，2：标准
+    
+    [VVNetWorkTool postWithUrl:Url(MateSelectionRequire) body:[Helper parametersWith:parameters1] progress:nil success:^(id result) {
+        NSDictionary *dic = [result objectForKey:@"data"];
+        self.mateSelectionRequireModel = [[MateSelectionRequireModel alloc] initWithDictionary:dic];
+        [self.tableView reloadData];
+        self.arr = [NSMutableArray arrayWithObjects: _mateSelectionRequireModel.address, _mateSelectionRequireModel.age, _mateSelectionRequireModel.buycarauthentication.stringValue, _mateSelectionRequireModel.buyhouseauthentication.stringValue,_mateSelectionRequireModel.carstatus, _mateSelectionRequireModel.children, _mateSelectionRequireModel.constellation, _mateSelectionRequireModel.cookingskill, _mateSelectionRequireModel.datingpattern, _mateSelectionRequireModel.drink, _mateSelectionRequireModel.educational, _mateSelectionRequireModel.facialfeatures, _mateSelectionRequireModel.familyranking, _mateSelectionRequireModel.fatherwork, _mateSelectionRequireModel.getmarriedtime, _mateSelectionRequireModel.hometown, _mateSelectionRequireModel.hopeotherlike, _mateSelectionRequireModel.householdduties, _mateSelectionRequireModel.householdregister, _mateSelectionRequireModel.housesstatus, _mateSelectionRequireModel.livingwithbothparents, _mateSelectionRequireModel.maritalstatus, _mateSelectionRequireModel.monthlyincome, _mateSelectionRequireModel.motherwork, _mateSelectionRequireModel.nation, _mateSelectionRequireModel.operatingpost, _mateSelectionRequireModel.parenteconomic,_mateSelectionRequireModel.parentmedicallnsurance, _mateSelectionRequireModel.parentstatus, _mateSelectionRequireModel.phoneauthentication.stringValue, _mateSelectionRequireModel.physique, _mateSelectionRequireModel.realnameauthentication.stringValue, _mateSelectionRequireModel.smoking, _mateSelectionRequireModel.stature, _mateSelectionRequireModel.suxing, _mateSelectionRequireModel.wanthavechildren, _mateSelectionRequireModel.weddingform, _mateSelectionRequireModel.workandrest, _mateSelectionRequireModel.zmxyauthentication.stringValue, nil];
+        
+
+       
+    } fail:^(NSError *error) {
+       
+    }];
+}
+
+
+- (void)defriendRequestData {
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    [parameters setValue:self.seememberid forKey:@"seememberid"]; //seememberid  被查看人id
+    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+    __weak __typeof__(self) weakSelf = self;
+    [VVNetWorkTool postWithUrl:Url(Defriend) body:[Helper parametersWith:parameters]
+                      progress:nil success:^(id result) {
+                          int dic = (int)[result objectForKey:@"code"];
+                          if (dic == 1) {
+                              [JGProgressHUD showSuccessWith: @"拉黑成功！" In:self.view];
+                          }
+                         
                       } fail:^(NSError *error) {
                           
                       }];

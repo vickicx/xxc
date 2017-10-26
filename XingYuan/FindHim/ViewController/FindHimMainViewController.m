@@ -30,8 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:22],NSForegroundColorAttributeName:[UIColor blackColor]}];
     
     self.tabBarController.tabBar.hidden = NO;
 
@@ -43,7 +41,7 @@
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 50, 50);
     [rightButton setTitle:@"筛选" forState:UIControlStateNormal];
-    [rightButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [rightButton setTitleColor:RGBColor(246, 80, 118, 1) forState:UIControlStateNormal];
 
     [rightButton addTarget:self action:@selector(rightButton:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];

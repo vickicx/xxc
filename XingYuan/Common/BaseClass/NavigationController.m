@@ -8,8 +8,6 @@
 
 #import "NavigationController.h"
 
-static UINavigationController *currentNavigationController;
-
 @interface NavigationController ()
 
 @end
@@ -19,6 +17,9 @@ static UINavigationController *currentNavigationController;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationBar setTranslucent:true];
+    UIFont *font = FONT_WITH_S(18);
+    NSDictionary *dic = @{NSFontAttributeName:font};
+    self.navigationBar.titleTextAttributes =dic;
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -30,16 +31,16 @@ static UINavigationController *currentNavigationController;
         UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         backBtn.contentMode = UIViewContentModeLeft;
         [backBtn setImage:[UIImage imageNamed:@"back-拷贝-2"] forState:UIControlStateNormal];
+        backBtn.frame = CGRectMake(0, 0, 40, 20);
         [backBtn sizeToFit];
         [backBtn addTarget:self action:@selector(dealTapBack) forControlEvents:UIControlEventTouchUpInside];
-        viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     }
     [super pushViewController:viewController animated:true];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    currentNavigationController = self;
 }
 
 - (void)dealTapBack{

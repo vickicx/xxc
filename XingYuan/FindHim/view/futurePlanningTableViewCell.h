@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FiveStageScreeningModel.h"
 
 @interface futurePlanningTableViewCell : UITableViewCell
+
+@property (nonatomic,strong) FiveStageScreeningModel *matchingLevelFiveModel;
 
 @end

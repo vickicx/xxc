@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TwoStateScreeningModel.h"
 
 @interface PersonalCircumstancesTableViewCell : UITableViewCell
 
+@property (nonatomic,strong) TwoStateScreeningModel *matchingLevelTwoModel;
 
 @end

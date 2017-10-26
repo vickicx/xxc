@@ -10,6 +10,9 @@
 
 @interface NickNameFillInController ()
 @property (weak, nonatomic) IBOutlet UITextField *nickNameTextField;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *finishBtn;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 
 @end
 
@@ -18,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"昵称";
+    self.titleLabel.font = FONT_WITH_S(17);
+    self.finishBtn.titleLabel.font = FONT_WITH_S(17);
+    self.cancelBtn.titleLabel.font = FONT_WITH_S(17);
 }
 - (IBAction)dealCancel:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];

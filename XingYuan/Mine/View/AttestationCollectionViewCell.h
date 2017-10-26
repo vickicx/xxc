@@ -11,4 +11,5 @@
 @interface AttestationCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *Img;
 @property (weak, nonatomic) IBOutlet UILabel *title;
+@property (nonatomic,assign) int num;
 @end
