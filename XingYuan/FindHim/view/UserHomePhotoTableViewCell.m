@@ -30,11 +30,11 @@
         [self addSubview:kong];
         
         UIImageView *dian = [[UIImageView alloc] init];
-        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5, 5);
+        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5*FitWidth, 5*FitHeight);
         [dian setImage:[UIImage imageNamed:@"椭圆"]];
         [self addSubview:dian];
         
-        UILabel *photo = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 70, 30)];
+        UILabel *photo = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         photo.text = @"他的相册";
         photo.font = [UIFont systemFontOfSize:16];
         
@@ -42,14 +42,14 @@
         if (self.photoNum == nil) {
             self.photoNum = @"12";
         }
-        UILabel *photoNum = [[UILabel alloc] initWithFrame:CGRectMake(photo.right, 15 * FitHeight, 70, 30)];
+        UILabel *photoNum = [[UILabel alloc] initWithFrame:CGRectMake(photo.right, 15 * FitHeight, 70*FitWidth, 30*FitHeight)];
         photoNum.text = [NSString stringWithFormat:@"(%@)",self.photoNum];
         photoNum.font = [UIFont systemFontOfSize:14];
         photoNum.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         [self addSubview:photoNum];
         
         
-        UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12, photo.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
+        UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, photo.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
         kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
         [self addSubview:kong1];
 
@@ -61,7 +61,7 @@
         _flowLayout.itemSize = CGSizeMake(81, 81);
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _flowLayout.minimumLineSpacing = 10;
-        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kong1.bottom + 10 * FitHeight, kWIDTH, 100) collectionViewLayout:_flowLayout];
+        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kong1.bottom + 10 * FitHeight, kWIDTH, 100*FitHeight) collectionViewLayout:_flowLayout];
         _collection.backgroundColor = [UIColor whiteColor];
         _collection.dataSource = self;
         _collection.delegate = self;
@@ -85,7 +85,7 @@
 
 {
     
-    return UIEdgeInsetsMake(0, 11, 0, 0);
+    return UIEdgeInsetsMake(0, 11*FitHeight, 0, 0);
     
 }
 

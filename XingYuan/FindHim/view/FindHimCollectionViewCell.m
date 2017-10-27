@@ -35,7 +35,7 @@
     [_mainButton addSubview:_shadeView];
 
     _leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _leftButton.frame = CGRectMake(10 * FitWidth, _mainButton.bottom + 10 * FitHeight , (_mainButton.width - 26) / 3, (_mainButton.width - 26) / 3);
+    _leftButton.frame = CGRectMake(10 * FitWidth, _mainButton.bottom + 10 * FitHeight , (_mainButton.width - 26*FitWidth) / 3, (_mainButton.width - 26*FitWidth) / 3);
     _leftButton.backgroundColor = [UIColor whiteColor];
     [_leftButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
     [_leftButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
@@ -66,8 +66,8 @@
 }
 
 - (void)createLabels {
-    _address = [[UILabel alloc] initWithFrame:CGRectMake(self.width - 200, 10, 180, 20)];
-    _userName = [[UILabel alloc] initWithFrame:CGRectMake(15, self.shadeView.height - 100, 0, 20)];
+    _address = [[UILabel alloc] initWithFrame:CGRectMake(self.width - 200*FitWidth, 10*FitHeight, 180*FitWidth, 20*FitHeight)];
+    _userName = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, self.shadeView.height - 100*FitHeight, 0, 20*FitHeight)];
     
     _address.text = @"成都(3km)";
     _address.textAlignment = NSTextAlignmentRight;
@@ -79,11 +79,11 @@
     _userName.width = userNameSize.width ;
     _userName.height = userNameSize.height;
     
-    _sixImageView = [[UIImageView alloc] initWithFrame:CGRectMake(_userName.right + 3, _userName.top, 20, 20)];
+    _sixImageView = [[UIImageView alloc] initWithFrame:CGRectMake(_userName.right + 3*FitWidth, _userName.top, 20*FitWidth, 20*FitHeight)];
     [_sixImageView setImage:[UIImage imageNamed:@"six_girl"]];
     
-    _info = [[UILabel alloc] initWithFrame:CGRectMake(15, self.shadeView.height - 70, self.shadeView.width - 24, 20)];
-    self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15, _info.bottom + 10, self.shadeView.width - 24, 40)];
+    _info = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, self.shadeView.height - 70*FitHeight, self.shadeView.width - 24*FitWidth, 20*FitHeight)];
+    self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, _info.bottom + 10*FitHeight, self.shadeView.width - 24*FitWidth, 40*FitHeight)];
 
     _info.text = @"24岁 | 166cm | 射手座 | 服装设计";
     _info.font = [UIFont systemFontOfSize:12];
@@ -94,7 +94,7 @@
     _signature.text = @"这里是交友的一个签名什么的~";
     _signature.font = [UIFont systemFontOfSize:12];
     _signature.numberOfLines = 0;
-     CGSize signatureSize = [_signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+     CGSize signatureSize = [_signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20*FitWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
     _signature.width = signatureSize.width;
     _signature.height = signatureSize.height;
     

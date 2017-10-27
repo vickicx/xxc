@@ -28,16 +28,16 @@
         [self addSubview:kong];
         
         UIImageView *dian = [[UIImageView alloc] init];
-        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5, 5);
+        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5*FitWidth, 5*FitHeight);
         [dian setImage:[UIImage imageNamed:@"椭圆"]];
         [self addSubview:dian];
         
-        UILabel *analysis = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 70, 30)];
+        UILabel *analysis = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         analysis.text = @"各项分析";
         analysis.font = [UIFont systemFontOfSize:16];
         [self addSubview:analysis];
         
-        UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12, analysis.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
+        UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, analysis.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
         kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
         [self addSubview:kong1];
         
@@ -61,7 +61,7 @@
         [self addSubview:p];
 
         GradualColor_View *gradualView = ({
-            GradualColor_View *view = [[GradualColor_View alloc] initWithFrame:(CGRectMake(p.right + 50, p.top, 100, 100))];
+            GradualColor_View *view = [[GradualColor_View alloc] initWithFrame:(CGRectMake(p.right + 50*FitWidth, p.top, 100*FitWidth, 100*FitHeight))];
             view.backgroundColor = [UIColor whiteColor];
             [self addSubview:view];
             view;
@@ -70,7 +70,7 @@
         self.gradualView = gradualView;
         UIButton *starBtn = ({
             UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
-            button.frame = CGRectMake(gradualView.left,gradualView.bottom+20, 80, 40);
+            button.frame = CGRectMake(gradualView.left,gradualView.bottom+20*FitHeight, 80*FitWidth, 40*FitHeight);
             [button setTitle:@"START" forState:(UIControlStateNormal)];
             [button addTarget:self action:@selector(animationStartAction) forControlEvents:(UIControlEventTouchUpInside)];
             button;

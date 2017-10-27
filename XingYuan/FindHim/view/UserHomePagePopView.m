@@ -22,7 +22,7 @@
         if (self=[super initWithFrame:frame]) {
             self.backgroundColor=[UIColor clearColor];
             self.imageView=[[UIImageView alloc]init];
-            self.imageView.frame=CGRectMake((frame.size.width-100)/2, 30, 70, 70);
+            self.imageView.frame=CGRectMake((frame.size.width-100)/2, 30*FitHeight, 70*FitWidth, 70*FitHeight);
             self.imageView.layer.masksToBounds=YES;
             self.imageView.layer.cornerRadius=35;
             [self addSubview:self.imageView];

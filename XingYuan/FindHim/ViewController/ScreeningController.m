@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+    CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64*FitHeight);
     UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -153,28 +153,28 @@
     if(indexPath.row==0){
         return 47;
     }
-    return 45;
+    return 45*FitHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40;
+    return 40*FitHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if(self.controllerType == ScreeningControllerTypeUpdateToServer){
-        return 120;
+        return 120*FitHeight;
     }
     return 0.001;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    FillUserInfoNoticeHeaderView *headerView = [[FillUserInfoNoticeHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    FillUserInfoNoticeHeaderView *headerView = [[FillUserInfoNoticeHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40*FitHeight)];
     return headerView;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if(self.controllerType == ScreeningControllerTypeUpdateToServer){
-        FillUserInfoNextFooterView *footerView = [[FillUserInfoNextFooterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
+        FillUserInfoNextFooterView *footerView = [[FillUserInfoNextFooterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100*FitHeight)];
         footerView.tapNextBlock = ^(){
             [self dealUploadInfo:true];
         };

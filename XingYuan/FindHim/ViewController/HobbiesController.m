@@ -36,7 +36,7 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     [layout setMinimumInteritemSpacing:10];
     [layout setMinimumLineSpacing:10];
-    layout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 50);
+    layout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 50*FitHeight);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor whiteColor];
@@ -48,7 +48,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"MyHobbyCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"MyHobbyCollectionCell"];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.contentInset = UIEdgeInsetsMake(0, 36, 0, 15);
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 36*FitHeight, 0, 15*FitHeight);
     
     self.hobbiesModel = [HobbiesModel new];
     //请求数据
@@ -174,7 +174,7 @@
     ChildHobbyModel *childHobbyModel = superHobbyModel.child[indexPath.row];
     NSString *title = childHobbyModel.name;
     CGRect rect = [title getRectWithFont:[UIFont systemFontOfSize:17] width:1000];
-    return CGSizeMake(rect.size.width+20, rect.size.height+10);
+    return CGSizeMake(rect.size.width+20*FitWidth, rect.size.height+10*FitHeight);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

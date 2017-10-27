@@ -22,18 +22,18 @@
         [self addSubview:kong];
         
         UIImageView *dian = [[UIImageView alloc] init];
-        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5, 5);
+        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5*FitWidth, 5*FitHeight);
         [dian setImage:[UIImage imageNamed:@"椭圆"]];
         [self addSubview:dian];
         
-        UILabel *Authentication = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 70, 30)];
+        UILabel *Authentication = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         Authentication.text = @"认证资料";
         Authentication.font = [UIFont systemFontOfSize:16];
         
         [self addSubview:Authentication];
         
         
-        UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12, Authentication.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
+        UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, Authentication.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
         kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
         [self addSubview:kong1];
         
@@ -42,10 +42,10 @@
         
         
         _flowLayout = [UICollectionViewFlowLayout new]; // 自定义的布局对象
-        _flowLayout.itemSize = CGSizeMake(110, 140);
+        _flowLayout.itemSize = CGSizeMake(110, 120);
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _flowLayout.minimumLineSpacing = 10;
-        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kong1.bottom + 10 * FitHeight, kWIDTH, 140) collectionViewLayout:_flowLayout];
+        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kong1.bottom + 10 * FitHeight, kWIDTH, 140*FitHeight) collectionViewLayout:_flowLayout];
         _collection.backgroundColor = [UIColor whiteColor];
         _collection.dataSource = self;
         _collection.delegate = self;
@@ -69,7 +69,7 @@
 
 {
     
-    return UIEdgeInsetsMake(0, 11, 0, 0);
+    return UIEdgeInsetsMake(0, 11*FitHeight, 0, 0);
     
 }
 

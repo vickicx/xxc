@@ -26,7 +26,7 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     
-    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200*FitHeight)];
     UIImageView *imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"图"]];
     imgV.frame = tableHeaderView.bounds;
     [tableHeaderView addSubview:imgV];
@@ -50,7 +50,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50;
+    return 50*FitHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

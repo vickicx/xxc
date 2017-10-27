@@ -99,7 +99,7 @@
 //创建TableView
 -(void)createTableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64, kWIDTH, kHEIGHT-64 - 49) style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64*FitHeight, kWIDTH, kHEIGHT-64*FitHeight - 49*FitHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor=[UIColor clearColor];
         _tableView.showsVerticalScrollIndicator=NO;
         _tableView.dataSource=self;
@@ -150,7 +150,7 @@
 -(UserHomePagePopView *)headImageView{
     if (!_headImageView) {
         _headImageView=[[UserHomePagePopView alloc]init];
-        _headImageView.frame=CGRectMake(0, 0, kWIDTH, 223);
+        _headImageView.frame=CGRectMake(0, 0, kWIDTH, 223*FitHeight);
         _headImageView.backgroundColor=[UIColor clearColor];
     
         
@@ -158,7 +158,7 @@
         UIImage *image=[UIImage imageNamed:@"头像"];
         //图片的宽度设为屏幕的宽度，高度自适应
         NSLog(@"%f",image.size.height);
-        _backgroundImgV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, 289)];
+        _backgroundImgV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, 289*FitHeight)];
         _backgroundImgV.image=image;
         _backgroundImgV.userInteractionEnabled=YES;
         _backImgHeight=_backgroundImgV.frame.size.height;
@@ -184,7 +184,7 @@
         [self.view addSubview:_headerImg];
         [_headerImg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(_backgroundImgV);
-            make.size.mas_equalTo(CGSizeMake(70, 70));
+            make.size.mas_equalTo(CGSizeMake(70*FitWidth, 70*FitHeight));
         }];
         //昵称
 //        _nickLabel=[[UILabel alloc]init];
@@ -205,23 +205,23 @@
         
         self.ageLabel = [[UILabel alloc] init];
         self.ageLabel.text = @"24岁";
-        [self createBackgroundImg:CGRectMake(40, 20, 60, 60) label:self.ageLabel];
+        [self createBackgroundImg:CGRectMake(40*FitWidth, 20*FitHeight, 60*FitWidth, 60*FitHeight) label:self.ageLabel];
         
         self.statureLabel = [[UILabel alloc] init];
         self.statureLabel.text = @"身高";
-        [self createBackgroundImg:CGRectMake(self.ageLabel.right + 40, self.ageLabel.top + 10, 60, 60) label:self.statureLabel];
+        [self createBackgroundImg:CGRectMake(self.ageLabel.right + 40*FitWidth, self.ageLabel.top + 10*FitHeight, 60*FitWidth, 60*FitHeight) label:self.statureLabel];
         
         self.constellationLabel = [[UILabel alloc] init];
         self.constellationLabel.text = @"星座";
-        [self createBackgroundImg:CGRectMake(30, 90, 80, 80) label:self.constellationLabel];
+        [self createBackgroundImg:CGRectMake(30*FitWidth, 90*FitHeight, 80*FitWidth, 80*FitHeight) label:self.constellationLabel];
         
         self.educationLabel = [[UILabel alloc] init];
         self.educationLabel.text = @"工作";
-        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom, 70, 70) label:self.educationLabel];
+        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom, 70*FitWidth, 70*FitHeight) label:self.educationLabel];
         
         self.addressLabel = [[UILabel alloc] init];
         self.addressLabel.text = @"地址";
-        [self createBackgroundImg:CGRectMake(75, 100, 90, 90) label:self.addressLabel];
+        [self createBackgroundImg:CGRectMake(75*FitWidth, 100*FitHeight, 90*FitWidth, 90*FitHeight) label:self.addressLabel];
     }
     return _headImageView;
 }
@@ -231,7 +231,7 @@
     UIImageView *backImage = [[UIImageView alloc] initWithFrame:back.frame];
     [backImage setImage:[UIImage imageNamed:@"头像框"]];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backImage.width - 10, backImage.height - 10)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backImage.width - 10*FitWidth, backImage.height - 10*FitHeight)];
     view.backgroundColor = RGBColor(0, 0, 0, 0.5);
     view.layer.cornerRadius = view.width/2;
     [back addSubview:view];
@@ -256,7 +256,7 @@
     NSLog(@"修改昵称");
 }
 -(void)createNav{
-    self.NavView=[[NavHeadTitleView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, 64)];
+    self.NavView=[[NavHeadTitleView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, 64*FitHeight)];
     self.NavView.color=[UIColor whiteColor];
     self.NavView.backTitleImage=@"back";
     self.NavView.rightTitleImage=@"分享";
@@ -291,42 +291,42 @@
 #pragma mark ---- UITableViewDelegate ----
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 48;
+    return 48*FitHeight;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_currentIndex == 0) {
         if (indexPath.row == 0 ) {
-            return 180;
+            return 180*FitHeight;
         }else if (indexPath.row == 1){
             return 221;
         }else if (indexPath.row == 2){
             return self.IntroductionHeight;
         }else if (indexPath.row == 3){
             if(self.rowHeightB == NULL){
-                return 221;
+                return 221*FitHeight;
             }
             return self.rowHeightB + 100;
             
         }else if (indexPath.row == 4){
             if(self.rowHeightP == NULL){
-                return 221;
+                return 221*FitHeight;
             }
             return self.rowHeightP + 100;
             
         }else if (indexPath.row == 5){
             
-                return 220;
+                return 220*FitHeight;
             
         }else if (indexPath.row == 6){
             if(self.rowHeightFa == NULL){
-                return 221;
+                return 221*FitHeight;
             }
             return self.rowHeightFa + 100;
             
         }else if (indexPath.row == 7){
             if(self.rowHeightFu == NULL){
-                return 221;
+                return 221*FitHeight;
             }
             return self.rowHeightFu + 100;
             
@@ -334,11 +334,11 @@
 
 
     }else if (_currentIndex == 1){
-        return 400;
+        return 400*FitHeight;
     }else if (_currentIndex == 2) {
-        return 1200;
+        return 1200*FitHeight;
     }
-    return 225;
+    return 225*FitHeight;
 }
 - (void)cellHeight:(NSNotification *)notification{
     NSLog(@"接到通知P");
@@ -382,7 +382,7 @@
 {
     if (!_headLineView) {
         _headLineView=[[HeadLineView alloc]init];
-        _headLineView.frame=CGRectMake(0, 0, kWIDTH, 48);
+        _headLineView.frame=CGRectMake(0, 0, kWIDTH, 48*FitHeight);
         _headLineView.delegate=self;
         [_headLineView setTitleArray:@[@"资料",@"择偶标准",@"匹配"]];
     }
@@ -413,10 +413,10 @@
         }else if (indexPath.row == 2){
             PersonalIntroductionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"introductionCell"];
             cell.summary.text = self.userHomePageModel.summary;
-            CGSize summarySize = [cell.summary.text boundingRectWithSize:CGSizeMake(cell.width - 60, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+            CGSize summarySize = [cell.summary.text boundingRectWithSize:CGSizeMake(cell.width - 60*FitWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
             cell.summary.width = summarySize.width ;
             cell.summary.height = summarySize.height;
-            self.IntroductionHeight = cell.summary.height + 100;
+            self.IntroductionHeight = cell.summary.height*FitHeight + 100*FitHeight;
             return cell;
         }else if (indexPath.row == 3){
             BasicInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"informationCell"];
@@ -473,7 +473,7 @@
     
     int contentOffsety = scrollView.contentOffset.y;
     if (scrollView.contentOffset.y<=170) {
-        self.NavView.headBgView.alpha=scrollView.contentOffset.y/170;
+        self.NavView.headBgView.alpha=scrollView.contentOffset.y/170*FitHeight;
         self.NavView.backTitleImage=@"back";
         self.NavView.rightImageView=@"分享";
          self.NavView.title=@"";
@@ -516,7 +516,7 @@
 
     UIView *likebutton = [[UIView alloc] init];
     likebutton.backgroundColor = [UIColor whiteColor];
-    likebutton.frame = CGRectMake(0, kHEIGHT - 49, kWIDTH / 2, 49);
+    likebutton.frame = CGRectMake(0, kHEIGHT - 49*FitHeight, kWIDTH / 2, 49*FitHeight);
     UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(0,0, kWIDTH, 2 *FitHeight)];
     kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
     [likebutton addSubview:kong1];
@@ -524,10 +524,10 @@
     kong2.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
     [likebutton addSubview:kong2];
     
-    UIImageView *likeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(69 * FitWidth, likebutton.height/2 - 6, 12, 12)];
+    UIImageView *likeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(69 * FitWidth, likebutton.height/2 - 6*FitHeight, 12*FitWidth, 12*FitHeight)];
     [likeImageView setImage:[UIImage imageNamed:@"like1"]];
     [likebutton addSubview:likeImageView];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(likeImageView.right + 5 * FitWidth, likebutton.height/2 -20, 40, 40)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(likeImageView.right + 5 * FitWidth, likebutton.height/2 -20*FitHeight, 40*FitWidth, 40*FitHeight)];
     title.text = @"关注";
     title.font = [UIFont systemFontOfSize:16];
     [likebutton addSubview:title];
@@ -535,15 +535,15 @@
     
     UIView *chatbutton = [[UIView alloc] init];
     chatbutton.backgroundColor = [UIColor whiteColor];
-    chatbutton.frame = CGRectMake(kWIDTH / 2, kHEIGHT - 49, kWIDTH / 2, 49);
+    chatbutton.frame = CGRectMake(kWIDTH / 2, kHEIGHT - 49*FitHeight, kWIDTH / 2, 49*FitHeight);
     UILabel *kong3 = [[UILabel alloc] initWithFrame:CGRectMake(0,0, kWIDTH, 2 *FitHeight)];
     kong3.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
     [chatbutton addSubview:kong3];
 
-    UIImageView *chatImageView = [[UIImageView alloc] initWithFrame:CGRectMake(60 * FitWidth, chatbutton.height/2 - 6, 12, 12)];
+    UIImageView *chatImageView = [[UIImageView alloc] initWithFrame:CGRectMake(60 * FitWidth, chatbutton.height/2 - 6*FitHeight, 12*FitWidth, 12*FitHeight)];
     [chatImageView setImage:[UIImage imageNamed:@"chat"]];
     [chatbutton addSubview:chatImageView];
-    UILabel *title2 = [[UILabel alloc] initWithFrame:CGRectMake(chatImageView.right + 5 * FitWidth, chatbutton.height/2 -20, 60, 40)];
+    UILabel *title2 = [[UILabel alloc] initWithFrame:CGRectMake(chatImageView.right + 5 * FitWidth, chatbutton.height/2 -20*FitHeight, 60*FitWidth, 40*FitHeight)];
     title2.text = @"打招呼";
     title2.font = [UIFont systemFontOfSize:16];
     [chatbutton addSubview:title2];

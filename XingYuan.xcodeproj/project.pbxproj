@@ -3708,7 +3708,6 @@
 			children = (
 				596CD1D91F7E590200ED1C54 /* Headers */,
 				596CD1971F7E55F300ED1C54 /* BaseClass */,
-				596CD19D1F7E55F300ED1C54 /* Manager */,
 				596CD1A31F7E55F300ED1C54 /* Tools */,
 				596CD17B1F7E1E7400ED1C54 /* Extensions */,
 				596CD17F1F7E1E7400ED1C54 /* Libs */,
@@ -3775,13 +3774,6 @@
 				596CD19A1F7E55F300ED1C54 /* BaseModel.m */,
 			);
 			path = BaseModel;
-			sourceTree = "<group>";
-		};
-		596CD19D1F7E55F300ED1C54 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		596CD1A31F7E55F300ED1C54 /* Tools */ = {

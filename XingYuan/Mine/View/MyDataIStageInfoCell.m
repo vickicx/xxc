@@ -90,7 +90,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     NSString *title = self.titles[indexPath.row];
-    CGRect rect = [title getRectWithFont:[UIFont systemFontOfSize:17] width:1000];
+    CGRect rect = [title getRectWithFont:[UIFont systemFontOfSize:17] width:1000*FitWidth];
     return CGSizeMake(rect.size.width, rect.size.height);
 }
 

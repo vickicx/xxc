@@ -25,7 +25,7 @@
             make.left.equalTo(self);
             make.right.equalTo(self);
             make.bottom.equalTo(self);
-            make.height.mas_equalTo(260);
+            make.height.mas_equalTo(260*FitHeight);
         }];
         self.pickerView = pickerView;
         
@@ -37,7 +37,7 @@
             make.left.equalTo(self.pickerView);
             make.right.equalTo(self.pickerView);
             make.bottom.equalTo(self.pickerView.mas_top);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(40*FitHeight);
         }];
         
         UIView *topCoverView = [[UIView alloc] init];
@@ -61,7 +61,7 @@
             make.left.equalTo(toolsContainView);
             make.top.equalTo(toolsContainView);
             make.bottom.equalTo(toolsContainView);
-            make.width.mas_equalTo(50);
+            make.width.mas_equalTo(50*FitWidth);
         }];
         self.cancelBtn = cancelBtn;
         
@@ -74,7 +74,7 @@
             make.right.equalTo(toolsContainView);
             make.top.equalTo(toolsContainView);
             make.bottom.equalTo(toolsContainView);
-            make.width.mas_equalTo(50);
+            make.width.mas_equalTo(50*FitWidth);
         }];
         self.okBtn = okBtn;
         
@@ -86,7 +86,7 @@
             make.top.equalTo(toolsContainView);
             make.left.equalTo(toolsContainView);
             make.right.equalTo(toolsContainView);
-            make.height.mas_equalTo(0.5);
+            make.height.mas_equalTo(0.5*FitHeight);
         }];
         
         UIView *toolContianViewBottomSeparateLine = [[UIView alloc] init];
@@ -96,7 +96,7 @@
             make.bottom.equalTo(toolsContainView);
             make.left.equalTo(toolsContainView);
             make.right.equalTo(toolsContainView);
-            make.height.mas_equalTo(0.5);
+            make.height.mas_equalTo(0.5*FitHeight);
         }];
     }
     return self;

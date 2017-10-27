@@ -24,8 +24,8 @@
         nextBtn.clipsToBounds = true;
         [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);
-            make.top.equalTo(self).offset(50);
-            make.left.equalTo(self).offset(15);
+            make.top.equalTo(self).offset(50*FitHeight);
+            make.left.equalTo(self).offset(15*FitWidth);
             make.height.mas_equalTo(48);
         }];
         [nextBtn addTarget:self action:@selector(dealTap) forControlEvents:UIControlEventTouchUpInside];

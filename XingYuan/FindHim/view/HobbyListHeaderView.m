@@ -31,10 +31,10 @@
         self.redPoint.layer.cornerRadius = 3;
         self.redPoint.clipsToBounds = true;
         [self.redPoint mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(6);
-            make.width.mas_equalTo(6);
+            make.height.mas_equalTo(6*FitHeight);
+            make.width.mas_equalTo(6*FitWidth);
             make.centerY.equalTo(self);
-            make.left.equalTo(self).offset(-21);
+            make.left.equalTo(self).offset(-21*FitWidth);
         }];
         
         UILabel *titleLabel = [[UILabel alloc] init];
@@ -42,7 +42,7 @@
         self.titleLabel = titleLabel;
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
-            make.left.equalTo(self.redPoint.mas_right).offset(15);
+            make.left.equalTo(self.redPoint.mas_right).offset(15*FitWidth);
         }];
         
         UIView *seprateLine = [[UIView alloc] init];

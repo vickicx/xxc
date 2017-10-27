@@ -32,7 +32,7 @@
         _arr = arr;
     }
     
-    ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong.bottom + 2) width:kWIDTH];
+    ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong.bottom + 2*FitHeight) width:kWIDTH];
     //showView.color = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
     NSMutableArray *menuArr = [NSMutableArray array];
     for (int index = 0; index < [arr count]; index ++ ) {
@@ -44,7 +44,7 @@
         menuLabel.font = [UIFont systemFontOfSize:13];
         menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         CGFloat width = [menuLabel widthOfSizeToFit];
-        menuLabel.frame = CGRectMake(0, 0, width + 15 + 15, 30);
+        menuLabel.frame = CGRectMake(0, 0, width + 30*FitWidth, 30*FitHeight);
         menuLabel.layer.cornerRadius = 5.0;
         menuLabel.clipsToBounds = YES;
         [menuArr addObject:menuLabel];

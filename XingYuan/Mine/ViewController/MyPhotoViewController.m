@@ -66,13 +66,13 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     CGFloat width = scrollView.frame.size.width;
     
-    UILabel *advise = [[UILabel alloc] initWithFrame:CGRectMake(kPhotoViewMargin, 5, kWIDTH - 80, 30)];
+    UILabel *advise = [[UILabel alloc] initWithFrame:CGRectMake(kPhotoViewMargin, 5*FitHeight, kWIDTH - 80*FitWidth, 30*FitHeight)];
     advise.text = @"当你照片上传完成后，方可进行效果展示预览";
     advise.textColor = [UIColor colorWithRed:184/255.0 green:186/255.0 blue:189/255.0 alpha:1];
     advise.font = [UIFont systemFontOfSize:14];
     [self.scrollView addSubview:advise];
     
-    HXPhotoView *photoView = [[HXPhotoView alloc] initWithFrame:CGRectMake(kPhotoViewMargin, kPhotoViewMargin + 20, width - kPhotoViewMargin * 2, 0) manager:self.manager];
+    HXPhotoView *photoView = [[HXPhotoView alloc] initWithFrame:CGRectMake(kPhotoViewMargin, kPhotoViewMargin + 20*FitHeight, width - kPhotoViewMargin * 2, 0) manager:self.manager];
     photoView.delegate = self;
     photoView.backgroundColor = [UIColor whiteColor];
     //    self.manager.localImageList = images;

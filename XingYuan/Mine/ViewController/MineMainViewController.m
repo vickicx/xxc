@@ -69,15 +69,15 @@
     self.view.backgroundColor = [UIColor redColor];
     [self createTableView];
     [self createRightButton];
-    self.floatView = [[MyFloatView alloc] initWithFrame:CGRectMake(12, 290, 351, 80)];
+    self.floatView = [[MyFloatView alloc] initWithFrame:CGRectMake(12*FitWidth, 290*FitHeight, kWIDTH - 24 *FitWidth, 80*FitHeight)];
     [self.view addSubview:self.floatView];
-    self.onlineLabel = [[UILabel alloc] initWithFrame:CGRectMake(kWIDTH - 60, self.floatView.top - 30, 50, 20)];
+    self.onlineLabel = [[UILabel alloc] initWithFrame:CGRectMake(kWIDTH - 60*FitWidth, self.floatView.top - 30*FitHeight, 50*FitWidth, 20*FitHeight)];
     self.onlineLabel.textColor = [UIColor whiteColor];
     self.onlineLabel.font = [UIFont systemFontOfSize:12];
     self.onlineLabel.text = @"当前在线";
     [self.view addSubview:self.onlineLabel];
     
-    self.sexImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.onlineLabel.left - 25, self.onlineLabel.top, 20, 20)];
+    self.sexImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.onlineLabel.left - 25*FitWidth, self.onlineLabel.top, 20*FitWidth, 20*FitHeight)];
     [self.sexImageView setImage:[UIImage imageNamed:@"six_girl"]];
     [self.view addSubview:self.sexImageView];
     
@@ -109,12 +109,12 @@
 -(UserHomePagePopView *)headImageView{
     if (!_headImageView) {
         _headImageView=[[UserHomePagePopView alloc]init];
-        _headImageView.frame=CGRectMake(0, 0, kWIDTH, 310);
+        _headImageView.frame=CGRectMake(0, 0, kWIDTH, 310*FitHeight);
         _headImageView.backgroundColor=[UIColor clearColor];
         
         UIImage *image=[UIImage imageNamed:@"头像"];
         //图片的宽度设为屏幕的宽度，高度自适应
-        _backgroundImgV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, 310)];
+        _backgroundImgV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, 310*FitHeight)];
         _backgroundImgV.image=image;
         _backgroundImgV.userInteractionEnabled=YES;
         _backImgHeight=_backgroundImgV.frame.size.height;
@@ -151,23 +151,23 @@
         
         self.ageLabel = [[UILabel alloc] init];
         self.ageLabel.text = @"24岁";
-        [self createBackgroundImg:CGRectMake(40, 20, 60, 60) label:self.ageLabel];
+        [self createBackgroundImg:CGRectMake(40*FitWidth, 20*FitHeight, 60*FitWidth, 60*FitHeight) label:self.ageLabel];
         
         self.statureLabel = [[UILabel alloc] init];
         self.statureLabel.text = @"身高";
-        [self createBackgroundImg:CGRectMake(self.ageLabel.right + 40, self.ageLabel.top + 10, 60, 60) label:self.statureLabel];
+        [self createBackgroundImg:CGRectMake(self.ageLabel.right + 40*FitWidth, self.ageLabel.top + 10*FitHeight, 60*FitWidth, 60*FitHeight) label:self.statureLabel];
         
         self.constellationLabel = [[UILabel alloc] init];
         self.constellationLabel.text = @"星座";
-        [self createBackgroundImg:CGRectMake(30, 90, 80, 80) label:self.constellationLabel];
+        [self createBackgroundImg:CGRectMake(30*FitWidth, 90*FitHeight, 80*FitWidth, 80*FitHeight) label:self.constellationLabel];
         
         self.educationLabel = [[UILabel alloc] init];
         self.educationLabel.text = @"工作";
-        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom, 70, 70) label:self.educationLabel];
+        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom, 70*FitHeight, 70*FitHeight) label:self.educationLabel];
         
         self.addressLabel = [[UILabel alloc] init];
         self.addressLabel.text = @"地址";
-        [self createBackgroundImg:CGRectMake(75, 100, 90, 90) label:self.addressLabel];
+        [self createBackgroundImg:CGRectMake(75*FitWidth, 100*FitHeight, 90*FitWidth, 90*FitHeight) label:self.addressLabel];
         
         
 
@@ -198,7 +198,7 @@
     UIImageView *backImage = [[UIImageView alloc] initWithFrame:back.frame];
     [backImage setImage:[UIImage imageNamed:@"头像框"]];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backImage.width - 10, backImage.height - 10)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backImage.width - 10*FitWidth, backImage.height - 10*FitHeight)];
     view.backgroundColor = RGBColor(0, 0, 0, 0.5);
     view.layer.cornerRadius = view.width/2;
     [back addSubview:view];
@@ -215,7 +215,7 @@
 }
 
 - (void)createRightButton{
-    UIButton *rightBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 30)];
+    UIButton *rightBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40*FitWidth, 30*FitHeight)];
     [rightBtn setImage:[UIImage imageNamed:@"设置"] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(rightBtnAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
@@ -257,7 +257,7 @@
 //}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 54;
+    return 54*FitHeight;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 4;

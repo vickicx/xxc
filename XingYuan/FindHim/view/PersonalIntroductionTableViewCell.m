@@ -23,7 +23,7 @@
         [dian setImage:[UIImage imageNamed:@"椭圆"]];
         [self addSubview:dian];
         
-        UILabel *introduction = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 70, 30)];
+        UILabel *introduction = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         introduction.text = @"个人介绍";
         introduction.font = [UIFont systemFontOfSize:16];
         [self addSubview:introduction];

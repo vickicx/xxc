@@ -26,11 +26,11 @@
         [self addSubview:kong];
         
         UIImageView *dian = [[UIImageView alloc] init];
-        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5, 5);
+        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5*FitWidth, 5*FitHeight);
         [dian setImage:[UIImage imageNamed:@"椭圆"]];
         [self addSubview:dian];
         
-        UILabel *planning = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 70, 30)];
+        UILabel *planning = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         planning.text = @"未来规划";
         planning.font = [UIFont systemFontOfSize:16];
         [self addSubview:planning];
@@ -48,7 +48,7 @@
         _matchingLevelFiveModel = matchingLevelFiveModel;
     }
     
-    ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong1.bottom + 2) width:kWIDTH];
+    ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong1.bottom + 2*FitHeight) width:kWIDTH];
     //showView.color = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
     NSArray *arr = [NSArray arrayWithObjects: matchingLevelFiveModel.getmarriedtime, matchingLevelFiveModel.datingpattern, matchingLevelFiveModel.hopeotherlike, matchingLevelFiveModel.weddingform, matchingLevelFiveModel.livingwithbothparents, matchingLevelFiveModel.wanthavechildren, matchingLevelFiveModel.cookingskill, matchingLevelFiveModel.householdduties, nil];
     NSMutableArray *menuArr = [NSMutableArray array];
@@ -61,7 +61,7 @@
         menuLabel.font = [UIFont systemFontOfSize:13];
         menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         CGFloat width = [menuLabel widthOfSizeToFit];
-        menuLabel.frame = CGRectMake(0, 0, width + 15 + 15, 30);
+        menuLabel.frame = CGRectMake(0, 0, width + 30*FitWidth, 30*FitHeight);
         menuLabel.layer.cornerRadius = 5.0;
         menuLabel.clipsToBounds = YES;
         [menuArr addObject:menuLabel];

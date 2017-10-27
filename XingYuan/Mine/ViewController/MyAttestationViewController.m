@@ -61,11 +61,11 @@
 }
 
 - (void)createView {
-    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40*FitHeight)];
     backgroundView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:backgroundView];
 
-    UILabel *adviceLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, 0, self.view.width - 24, 40)];
+    UILabel *adviceLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, 0, self.view.width - 24*FitWidth, 40*FitHeight)];
     adviceLabel.text = @"当你完善此项资料，方可解锁其他用户的此项资料";
     adviceLabel.font = [UIFont systemFontOfSize:14];
     adviceLabel.textColor = RGBColor(184, 186, 189, 1);
@@ -78,7 +78,7 @@
     // 2.设置行间距
     layout.minimumLineSpacing = 15;
     // 3.设置每个item的大小
-    layout.itemSize = CGSizeMake(50, 50);
+    layout.itemSize = CGSizeMake(50*FitWidth, 50*FitHeight);
     // 5.设置布局方向
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     // 9.10.设置分区的头视图和尾视图是否始终固定在屏幕上边和下边
@@ -146,9 +146,9 @@
 //UICollectionViewCell的大小
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 1){
-        return CGSizeMake(SCREEN_WIDTH, 48);
+        return CGSizeMake(SCREEN_WIDTH, 48*FitHeight);
     }
-    return CGSizeMake(self.attestationCollectionView.width / 3 - 33, 110);
+    return CGSizeMake(self.attestationCollectionView.width / 3 - 33*FitWidth, 110*FitHeight);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -201,7 +201,7 @@
     if(section == 1){
         return UIEdgeInsetsMake(0, 0, 0, 0);
     }
-    return UIEdgeInsetsMake(0, 0, 0, 33);
+    return UIEdgeInsetsMake(0, 0, 0, 33*FitHeight);
 }
 
 //通过设置SupplementaryViewOfKind 来设置头部或者底部的view，其中 ReuseIdentifier 的值必须和 注册是填写的一致，本例都为 “reusableView”
@@ -214,7 +214,7 @@
     }
     UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"reusableView" forIndexPath:indexPath];
     headerView.backgroundColor =[UIColor whiteColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(12, 15, 70, 15)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, 15*FitHeight, 70*FitWidth, 15*FitHeight)];
     label.text = @"认证资料";
     label.font = [UIFont systemFontOfSize:17];
     
@@ -223,7 +223,7 @@
     _label1.textColor = RGBColor(141, 146, 149, 1);
     
     
-    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(12, headerView.bottom - 2, self.view.width - 24, 1)];
+    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, headerView.bottom - 2*FitHeight, self.view.width - 24*FitWidth, 1*FitHeight)];
     line.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [headerView addSubview:label];

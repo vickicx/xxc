@@ -39,7 +39,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(0, 0, 50, 50);
+    rightButton.frame = CGRectMake(0, 0, 50*FitWidth, 50*FitHeight);
     [rightButton setTitle:@"筛选" forState:UIControlStateNormal];
     [rightButton setTitleColor:RGBColor(246, 80, 118, 1) forState:UIControlStateNormal];
 
@@ -128,7 +128,7 @@
     CGSize userNameSize = [cell.userName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:cell.userName.font,NSFontAttributeName,nil]];
     cell.userName.width = userNameSize.width ;
     cell.userName.height = userNameSize.height;
-    cell.sixImageView.frame = CGRectMake(cell.userName.right + 3, cell.userName.top, 20, 20);
+    cell.sixImageView.frame = CGRectMake(cell.userName.right + 3*FitWidth, cell.userName.top, 20*FitWidth, 20*FitHeight);
     if (findModel.sex.intValue == 1) {
         [cell.sixImageView setImage:[UIImage imageNamed:@"six_boy"]];
     }else {

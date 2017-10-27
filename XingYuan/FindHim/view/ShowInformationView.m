@@ -24,7 +24,7 @@
         _labelsArr = [NSMutableArray array];
         _ColumnSpace = 10;
         _RowSpace = 10;
-        _MarginSpace = UIEdgeInsetsMake(10, 10, 10, 10);
+        _MarginSpace = UIEdgeInsetsMake(10*FitWidth, 10*FitHeight, 10*FitWidth, 10*FitHeight);
     }
     return self;
 }

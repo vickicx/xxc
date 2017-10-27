@@ -34,7 +34,7 @@
 //创建TableView
 -(void)createTableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, kHEIGHT-64 - 49) style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, kHEIGHT-64*FitHeight - 49*FitHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor=[UIColor clearColor];
         _tableView.showsVerticalScrollIndicator=NO;
         _tableView.dataSource=self;
@@ -47,12 +47,12 @@
         
         [self.view addSubview:_tableView];
     }
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 410, kWIDTH, 290)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 410*FitHeight, kWIDTH, 290*FitHeight)];
     view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:view];
     
     self.logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.logoutButton.frame = CGRectMake(12, 50, 351, 48);
+    self.logoutButton.frame = CGRectMake(12*FitWidth, 50*FitHeight,kWIDTH - 24*FitWidth, 48*FitHeight);
     self.logoutButton.layer.cornerRadius = 10.0f;
     [self.logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
     [self.logoutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside];
@@ -81,7 +81,7 @@
 //显示每组的头部
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, 10)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, 10*FitHeight)];
     view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     return view;
 }
@@ -89,23 +89,23 @@
 //显示每组的尾部
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, 15)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, 15*FitHeight)];
     view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     return view;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 10*FitHeight;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section {
-    return 15;
+    return 15*FitHeight;
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 45;
+    return 45*FitHeight;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {

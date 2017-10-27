@@ -24,16 +24,16 @@
         [self addSubview:kong];
         
         UIImageView *dian = [[UIImageView alloc] init];
-        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5, 5);
+        dian.frame = CGRectMake(12 * FitWidth, kong.bottom + 17 * FitHeight, 5*FitWidth, 5*FitHeight);
         [dian setImage:[UIImage imageNamed:@"椭圆"]];
         [self addSubview:dian];
         
-        UILabel *family = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 70, 30)];
+        UILabel *family = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         family.text = @"家庭情况";
         family.font = [UIFont systemFontOfSize:16];
         [self addSubview:family];
         
-        _kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12, family.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
+        _kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, family.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
         _kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
         [self addSubview:_kong1];
         
@@ -47,7 +47,7 @@
         _matchingLevelFourModel = matchingLevelFourModel;
     }
     
-    ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong1.bottom + 2) width:kWIDTH];
+    ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong1.bottom + 2*FitHeight) width:kWIDTH];
     //showView.color = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
     NSMutableArray *arr = [NSMutableArray arrayWithObjects: [NSString stringWithFormat:@"家乡:%@", _matchingLevelFourModel.hometown], [NSString stringWithFormat:@"民族:%@", _matchingLevelFourModel.nation], [NSString stringWithFormat:@"生肖:%@", _matchingLevelFourModel.sx], _matchingLevelFourModel.familyranking, _matchingLevelFourModel.parentstatus, _matchingLevelFourModel.fatherwork, _matchingLevelFourModel.motherwork, _matchingLevelFourModel.parenteconomic, _matchingLevelFourModel.parentmedicalinsurance, nil];
     NSMutableArray *menuArr = [NSMutableArray array];
@@ -60,7 +60,7 @@
         menuLabel.font = [UIFont systemFontOfSize:13];
         menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         CGFloat width = [menuLabel widthOfSizeToFit];
-        menuLabel.frame = CGRectMake(0, 0, width + 15 + 15, 30);
+        menuLabel.frame = CGRectMake(0, 0, width + 30*FitWidth, 30*FitHeight);
         menuLabel.layer.cornerRadius = 5.0;
         menuLabel.clipsToBounds = YES;
         [menuArr addObject:menuLabel];

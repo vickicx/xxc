@@ -17,7 +17,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, 1300)];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, 1300*FitHeight)];
         
         [self addSubview:webView];
         

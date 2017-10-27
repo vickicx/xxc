@@ -41,7 +41,7 @@
 }
 
 - (void)createView {
-    self.showView = [[UIView alloc] initWithFrame:CGRectMake(27, 90, self.view.width - 54, self.view.height - 120)];
+    self.showView = [[UIView alloc] initWithFrame:CGRectMake(27*FitWidth, 90*FitHeight, self.view.width - 54*FitWidth, self.view.height - 120*FitHeight)];
     self.showView.backgroundColor = RGBColor(0, 0, 0, 0.5);
     self.showView.layer.cornerRadius = 10.0f;
     [self.view addSubview: _showView];
@@ -60,7 +60,7 @@
 //    [self.showView addSubview:shadeView1];
 
     
-    _leftView = [[UIImageView alloc] initWithFrame:CGRectMake(10 * FitWidth, _mainView.bottom + 10 * FitHeight , (_mainView.width - 32) / 3, (_mainView.width - 32) / 3)];
+    _leftView = [[UIImageView alloc] initWithFrame:CGRectMake(10 * FitWidth, _mainView.bottom + 10 * FitHeight , (_mainView.width - 32*FitWidth) / 3, (_mainView.width - 32*FitWidth) / 3)];
     _leftView.backgroundColor = [UIColor whiteColor];
     
     
@@ -83,10 +83,10 @@
 
 
 - (void)createLabels {
-    self.address = [[UILabel alloc] initWithFrame:CGRectMake(self.showView.width - 80, 10, 60, 20)];
-    self.userName = [[UILabel alloc] initWithFrame:CGRectMake(15, self.shadeView.height - 100, 100, 20)];
-    self.info = [[UILabel alloc] initWithFrame:CGRectMake(15, _userName.bottom + 10, self.shadeView.width - 24, 20)];
-    self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15, _info.bottom + 10, self.shadeView.width - 24, 40)];
+    self.address = [[UILabel alloc] initWithFrame:CGRectMake(self.showView.width - 80*FitWidth, 10*FitHeight, 60*FitWidth, 20*FitHeight)];
+    self.userName = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, self.shadeView.height - 100*FitHeight, 100, 20*FitHeight)];
+    self.info = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, _userName.bottom + 10*FitHeight, self.shadeView.width - 24*FitWidth, 20*FitHeight)];
+    self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, _info.bottom + 10*FitHeight, self.shadeView.width - 24*FitWidth, 40*FitHeight)];
     
     _address.text = @"成都(3km)";
     _address.textAlignment = NSTextAlignmentRight;
@@ -109,7 +109,7 @@
     _signature.text = @"这里是交友的一个签名什么的~";
     _signature.font = [UIFont systemFontOfSize:12];
     _signature.numberOfLines = 0;
-    CGSize signatureSize = [_signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+    CGSize signatureSize = [_signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20*FitWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
     _signature.width = signatureSize.width;
     _signature.height = signatureSize.height;
     
@@ -154,7 +154,7 @@
                               }
                           }
                           [_userName sizeToFit];
-                          _sexImageView.frame = CGRectMake(_userName.right + 3, _userName.top, 20, 20);
+                          _sexImageView.frame = CGRectMake(_userName.right + 3*FitWidth, _userName.top, 20*FitWidth, 20*FitHeight);
                           [_sexImageView setImage:[UIImage imageNamed:@"six_girl"]];
                           
                           
