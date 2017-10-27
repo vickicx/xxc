@@ -76,9 +76,6 @@
 // MARK: - 设置择偶要求（该接口报销）
 #define SetMateSelectionRequire @"/mobileapi/SetMateSelectionRequire"
 
-// MARK: - 获取择偶要求
-#define GetMateSelectionRequire @"/mobileapi/GetMateSelectionRequire"
-
 // MARK: - 用户消息
 #define MemberInformation @"/mobileapi/MemberInformation"
 

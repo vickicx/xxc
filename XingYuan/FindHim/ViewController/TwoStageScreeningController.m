@@ -144,6 +144,9 @@
             [self.navigationController pushViewController:attestationViewController animated:true];
         }
         if([model.code isEqual:@1] && !isToNext){
+            if(self.block != nil){
+                self.block(self.twoStateScreenModel);
+            }
             [self.navigationController popViewControllerAnimated:true];
         }
     } fail:^(NSError *error) {

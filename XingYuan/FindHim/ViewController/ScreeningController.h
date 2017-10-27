@@ -13,8 +13,9 @@
 #import "FillUserInfoNextFooterView.h"
 
 typedef enum _ScreeningControllerType {
-    ScreeningControllerTypeUpdateToServer,  //保存到服务器
-    ScreeningControllerTypeUpdatelocal      //个人资料中编辑
+    ScreeningControllerTypeUpdateToServer,  //保存到服务器（几级精确）
+    ScreeningControllerTypeUpdatelocal,     //个人资料中编辑
+    ScreeningControllerTypeMateRequireMent  //择偶条件
 }ScreeningControllerType;
 
 @interface ScreeningController : ViewController<UITableViewDelegate,UITableViewDataSource>

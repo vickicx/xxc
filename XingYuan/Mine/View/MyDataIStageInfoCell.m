@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
 
 @property (nonatomic,strong) NSArray *titles;
-@property (nonatomic,assign) UIColor *color;
+@property (nonatomic,strong) UIColor *color;
 @end
 @implementation MyDataIStageInfoCell
 

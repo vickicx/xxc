@@ -19,6 +19,7 @@
 #import "ScreeningController.h"
 
 @interface OneStageScreeningController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong) OneStageScreeningModel *oneStageScreeningModel;
 @end
 
 @implementation OneStageScreeningController
@@ -26,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"初次相识";
-
+    self.oneStageScreeningModel = [OneStageScreeningModel new];
     self.cellTitles = @[@"昵称",@"生日",@"身高",@"地区",@"星座",@"体型",@"相貌自评"];
 
     [self requestPrimaryData];
@@ -54,6 +55,7 @@
         OneStageScreeningModel *model = [OneStageScreeningModel new];
         [model setValuesForKeysWithDictionary:result];
         [model setValuesForKeysWithDictionary:result[@"data"]];
+        self.oneStageScreeningModel = model;
         [self refreshWithModel:model];
         [JGProgressHUD showErrorWithModel:model In:self.view];
     } fail:^(NSError *error) {
@@ -103,6 +105,9 @@
             [self.navigationController pushViewController:screeningVC animated:true];
         }
         if([model.code isEqual:@1] && !isToNext){
+            if(self.block != nil){
+                self.block(self.oneStageScreeningModel);
+            }
             [self.navigationController popViewControllerAnimated:true];
         }
     } fail:^(NSError *error) {
@@ -157,8 +162,8 @@
     if(indexPath.row == 1){
         NickNameFillInController *nickNameFillInController = [[NickNameFillInController alloc] init];
         nickNameFillInController.nickNameBlock = ^(NSString *nickName){
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = nickName;
+            self.oneStageScreeningModel.nickname = nickName;
+            [self refreshWithModel:self.oneStageScreeningModel];
         };
         [self presentViewController:nickNameFillInController animated:true completion:nil];
     }
@@ -169,8 +174,9 @@
             NSDateFormatter *formater = [[NSDateFormatter alloc] init];
             [formater setDateFormat:@"yyyy-MM-dd"];//设置时间显示的格式，此处使用的formater格式要与字符串格式完全一致，否则转换失败
             NSString *dateStr = [formater stringFromDate:date];//将日期转换成字符串
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = dateStr;
+            
+            self.oneStageScreeningModel.birthday = dateStr;
+            [self refreshWithModel:self.oneStageScreeningModel];
         };
         datePickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
         [[[UIApplication sharedApplication] keyWindow] addSubview:datePickerView];
@@ -179,8 +185,8 @@
     if(indexPath.row == 3){
         HeightPickerView *heightPickerView = [HeightPickerView heightPickerView];
         heightPickerView.heightPickerBlock = ^(NSString *height){
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = height;
+            self.oneStageScreeningModel.stature = height;
+            [self refreshWithModel:self.oneStageScreeningModel];
         };
         heightPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
         [[[UIApplication sharedApplication] keyWindow] addSubview:heightPickerView];
@@ -189,8 +195,8 @@
     if(indexPath.row == 4){
         AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
         addressPickerView.block = ^(NSString *province, NSString *city){
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = [[province stringByAppendingString:@" "] stringByAppendingString:city];
+            self.oneStageScreeningModel.address = [province stringByAppendingString:city];
+            [self refreshWithModel:self.oneStageScreeningModel];
         };
         addressPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
         [[[UIApplication sharedApplication] keyWindow] addSubview:addressPickerView];
@@ -199,8 +205,8 @@
     if(indexPath.row == 5){
         ConstellationPickerView *constellationPickerView = [ConstellationPickerView constellationPickerView];
         constellationPickerView.constellationPickerBlock = ^(NSString *constellation){
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = constellation;
+            self.oneStageScreeningModel.constellation = constellation;
+            [self refreshWithModel:self.oneStageScreeningModel];
         };
         [constellationPickerView toShow];
     }
@@ -208,8 +214,8 @@
     if(indexPath.row == 6){
         BodyShapPickerView *bodyShapPickerView = [BodyShapPickerView bodyShapPickerView];
         bodyShapPickerView.bodyPickerBlock = ^(NSString *bodyShap){
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = bodyShap;
+            self.oneStageScreeningModel.physique = bodyShap;
+            [self refreshWithModel:self.oneStageScreeningModel];
         };
         [bodyShapPickerView toShow];
     }
@@ -217,8 +223,8 @@
     if(indexPath.row == 7){
         LooksEvaluatePickerView *looksEvaluatePickerView = [LooksEvaluatePickerView looksEvaluatePickerView];
         looksEvaluatePickerView.looksEvaluateBlock = ^(NSString *evaluate){
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = evaluate;
+            self.oneStageScreeningModel.facialfeatures = evaluate;
+            [self refreshWithModel:self.oneStageScreeningModel];
         };
         [looksEvaluatePickerView toShow];
     }

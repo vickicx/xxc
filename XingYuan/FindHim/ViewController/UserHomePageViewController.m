@@ -21,6 +21,7 @@
 #import "UserHomePageModel.h"
 #import "MateSelectionRequireModel.h"
 
+
 @interface UserHomePageViewController ()<NavHeadTitleViewDelegate,headLineDelegate,UITableViewDataSource,UITableViewDelegate>
 #define JXColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 {
@@ -51,6 +52,15 @@
 @property (nonatomic,strong) UserHomePageModel *userHomePageModel;
 @property (nonatomic,strong) MateSelectionRequireModel *mateSelectionRequireModel;
 @property (nonatomic,strong) NSMutableArray *arr;
+
+@property (nonatomic,strong) UILabel *ageLabel;
+@property (nonatomic,strong) UILabel *statureLabel;
+@property (nonatomic,strong) UILabel *constellationLabel;
+@property (nonatomic,strong) UILabel *educationLabel;
+@property (nonatomic,strong) UILabel *addressLabel;
+@property (nonatomic,strong) UILabel *onlineLabel;
+@property (nonatomic,strong) UIImageView *sexImageView;
+@property (nonatomic,strong) UIView *bacView;
 @end
 
 @implementation UserHomePageViewController
@@ -70,7 +80,7 @@
     [self.tableView reloadData];
    
     [self requestData];
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight:) name:@"CellHeightP" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight1:) name:@"CellHeightB" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight3:) name:@"CellHeightFu" object:nil];
@@ -89,7 +99,7 @@
 //创建TableView
 -(void)createTableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64, kWIDTH, kHEIGHT-64 - 49) style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64, kWIDTH, kHEIGHT-64 - 49) style:UITableViewStylePlain];
         _tableView.backgroundColor=[UIColor clearColor];
         _tableView.showsVerticalScrollIndicator=NO;
         _tableView.dataSource=self;
@@ -158,7 +168,7 @@
         
         UIBlurEffect *effct = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         self.visualview = [[UIVisualEffectView alloc] initWithEffect:effct];
-        _visualview.frame = _headImageView.bounds;
+        _visualview.frame = _backgroundImgV.bounds;
         [_backgroundImgV addSubview:_visualview];
 
         //_headImageView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"个人页背景图.png"]];
@@ -192,9 +202,51 @@
 //            make.centerX.equalTo(self.view);
 //            
 //        }];
+        
+        self.ageLabel = [[UILabel alloc] init];
+        self.ageLabel.text = @"24岁";
+        [self createBackgroundImg:CGRectMake(40, 20, 60, 60) label:self.ageLabel];
+        
+        self.statureLabel = [[UILabel alloc] init];
+        self.statureLabel.text = @"身高";
+        [self createBackgroundImg:CGRectMake(self.ageLabel.right + 40, self.ageLabel.top + 10, 60, 60) label:self.statureLabel];
+        
+        self.constellationLabel = [[UILabel alloc] init];
+        self.constellationLabel.text = @"星座";
+        [self createBackgroundImg:CGRectMake(30, 90, 80, 80) label:self.constellationLabel];
+        
+        self.educationLabel = [[UILabel alloc] init];
+        self.educationLabel.text = @"工作";
+        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom, 70, 70) label:self.educationLabel];
+        
+        self.addressLabel = [[UILabel alloc] init];
+        self.addressLabel.text = @"地址";
+        [self createBackgroundImg:CGRectMake(75, 100, 90, 90) label:self.addressLabel];
     }
     return _headImageView;
 }
+
+- (void)createBackgroundImg:(CGRect)rect label:(UILabel *)label{
+    UIView * back = [[UIView alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)];
+    UIImageView *backImage = [[UIImageView alloc] initWithFrame:back.frame];
+    [backImage setImage:[UIImage imageNamed:@"头像框"]];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backImage.width - 10, backImage.height - 10)];
+    view.backgroundColor = RGBColor(0, 0, 0, 0.5);
+    view.layer.cornerRadius = view.width/2;
+    [back addSubview:view];
+    label.frame = view.frame;
+    label.font = [UIFont systemFontOfSize:13];
+    label.centerX = view.centerX = backImage.centerX;
+    label.centerY = view.centerY = backImage.centerY;
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    [_backgroundImgV addSubview:back];
+    [back addSubview:backImage];
+    [back addSubview:label];
+    
+}
+
 //头像点击事件
 -(void)tapClick:(UITapGestureRecognizer *)recognizer{
     NSLog(@"你打到我的头了");
@@ -314,7 +366,7 @@
     if (_currentIndex==0) {
         return 8;
     }else if(_currentIndex==1){
-        return self.arr.count;
+        return 1;
     }else{
         return 1;
     }
@@ -454,7 +506,7 @@
         rect.origin.x = 0;
         rect.origin.y = -contentOffsety;
         _backgroundImgV.frame = rect;
-        _visualview.frame = rect;
+
         
     }
     
@@ -480,8 +532,6 @@
     title.font = [UIFont systemFontOfSize:16];
     [likebutton addSubview:title];
     [self.view addSubview:likebutton];
-    
-    
     
     UIView *chatbutton = [[UIView alloc] init];
     chatbutton.backgroundColor = [UIColor whiteColor];
@@ -531,7 +581,15 @@
         [self.tableView reloadData];
         self.arr = [NSMutableArray arrayWithObjects: _mateSelectionRequireModel.address, _mateSelectionRequireModel.age, _mateSelectionRequireModel.buycarauthentication.stringValue, _mateSelectionRequireModel.buyhouseauthentication.stringValue,_mateSelectionRequireModel.carstatus, _mateSelectionRequireModel.children, _mateSelectionRequireModel.constellation, _mateSelectionRequireModel.cookingskill, _mateSelectionRequireModel.datingpattern, _mateSelectionRequireModel.drink, _mateSelectionRequireModel.educational, _mateSelectionRequireModel.facialfeatures, _mateSelectionRequireModel.familyranking, _mateSelectionRequireModel.fatherwork, _mateSelectionRequireModel.getmarriedtime, _mateSelectionRequireModel.hometown, _mateSelectionRequireModel.hopeotherlike, _mateSelectionRequireModel.householdduties, _mateSelectionRequireModel.householdregister, _mateSelectionRequireModel.housesstatus, _mateSelectionRequireModel.livingwithbothparents, _mateSelectionRequireModel.maritalstatus, _mateSelectionRequireModel.monthlyincome, _mateSelectionRequireModel.motherwork, _mateSelectionRequireModel.nation, _mateSelectionRequireModel.operatingpost, _mateSelectionRequireModel.parenteconomic,_mateSelectionRequireModel.parentmedicallnsurance, _mateSelectionRequireModel.parentstatus, _mateSelectionRequireModel.phoneauthentication.stringValue, _mateSelectionRequireModel.physique, _mateSelectionRequireModel.realnameauthentication.stringValue, _mateSelectionRequireModel.smoking, _mateSelectionRequireModel.stature, _mateSelectionRequireModel.suxing, _mateSelectionRequireModel.wanthavechildren, _mateSelectionRequireModel.weddingform, _mateSelectionRequireModel.workandrest, _mateSelectionRequireModel.zmxyauthentication.stringValue, nil];
         
-
+        self.ageLabel.text = [NSString stringWithFormat:@"%@岁",_mateSelectionRequireModel.age];
+        
+        self.statureLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.stature];
+        
+        self.constellationLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.constellation];
+        
+        self.educationLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.educational];
+        
+        self.addressLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.address];
        
     } fail:^(NSError *error) {
        

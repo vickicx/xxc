@@ -60,7 +60,7 @@
 //我的资料模型
 @property (nonatomic,strong) MyDataModel *mydataModel;
 //我的择偶要求
-@property (nonatomic,strong) MyMateRequireModel *myMateRequireModel;
+@property (nonatomic,strong) MyDataModel *myMateRequireModel;
 @end
 
 @implementation MyDataController
@@ -153,13 +153,15 @@
 - (void)requestMyMateRequireMent{
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    //type     1:简单，2：标准
+    [parameters setValue:@2 forKey:@"type"];
     
-    [VVNetWorkTool postWithUrl:Url(GetMateSelectionRequire) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        MyMateRequireModel *myMateRequireModel = [MyMateRequireModel new];
+    [VVNetWorkTool postWithUrl:Url(MateSelectionRequire) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+        MyDataModel *myMateRequireModel = [MyDataModel new];
         [myMateRequireModel setValuesForKeysWithDictionary:result];
         [myMateRequireModel setValuesForKeysWithDictionary:[result valueForKey:@"data"]];
         self.myMateRequireModel = myMateRequireModel;
-        [self refreshWithMyMateRequireModel:myMateRequireModel];
+        [self.tableView reloadData];
         [JGProgressHUD showErrorWithModel:myMateRequireModel In:self.view];
     } fail:^(NSError *error) {
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
@@ -315,7 +317,10 @@
             }
         }
         if(self.myDataSelectType == MyDataSelectTypeSuposeStandard){
-            return self.suposeStandardCellTitles.count + 1;
+            if(self.myMateRequireModel == nil){return 0;}
+            if(self.myMateRequireModel != nil){
+                return 5;
+            }
         }
     }
     return 0;
@@ -355,6 +360,8 @@
         return self.myDataSelectTypeCell;
     }
     if(indexPath.section == 2){
+        UIColor *lightGray = RGBColor(240, 241, 241, 1);
+        UIColor *lightRed = RGBColor(255, 239, 243, 1);
         if(self.myDataSelectType == MyDataSelectTypeMyData){
             MyDataIStageInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyDataIStageInfoCell" forIndexPath:indexPath];
             if(indexPath.row == 0){
@@ -364,7 +371,7 @@
                     [self.navigationController pushViewController:oneStageScreeningController animated:true];
                 };
                 NSArray *titles = [[self.mydataModel.matchinglevelone mj_keyValues] allValues];
-                [cell configWithTitles:titles color:[UIColor grayColor]];
+                [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 1){
                 cell.leftLabelTitle = @"个人情况";
@@ -373,7 +380,7 @@
                     [self.navigationController pushViewController:twoStageScreeningController animated:true];
                 };
                 NSArray *titles = [[self.mydataModel.matchingleveltwo mj_keyValues] allValues];
-                [cell configWithTitles:titles color:[UIColor grayColor]];
+                [cell configWithTitles:titles color:lightRed];
             }
             if(indexPath.row == 2){
                 cell.leftLabelTitle = @"家庭情况";
@@ -382,7 +389,7 @@
                     [self.navigationController pushViewController:fourStageScreeningController animated:true];
                 };
                 NSArray *titles = [[self.mydataModel.matchinglevelfour mj_keyValues] allValues];
-                [cell configWithTitles:titles color:[UIColor grayColor]];
+                [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 3){
                 cell.leftLabelTitle = @"未来规划";
@@ -391,15 +398,65 @@
                     [self.navigationController pushViewController:fiveStageScreeningController animated:true];
                 };
                 NSArray *titles = [[self.mydataModel.matchinglevelfive mj_keyValues] allValues];
-                [cell configWithTitles:titles color:[UIColor grayColor]];
+                [cell configWithTitles:titles color:lightRed];
             }
             return cell;
         }
+        //选中了择偶条件
         if(self.myDataSelectType == MyDataSelectTypeSuposeStandard){
-//            if(indexPath.row == 0){
-//                return self.basicInfoCell;
-//            }
-//            return self.suposeStandardCells[indexPath.row-1];
+            MyDataIStageInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyDataIStageInfoCell" forIndexPath:indexPath];
+            if(indexPath.row == 0){
+                cell.leftLabelTitle = @"基本资料";
+                cell.editBlock = ^(){
+                    OneStageScreeningController *oneStageScreeningController = [[OneStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"基本资料"];
+                    [self.navigationController pushViewController:oneStageScreeningController animated:true];
+                };
+                NSArray *titles = [[self.myMateRequireModel.matchinglevelone mj_keyValues] allValues];
+                [cell configWithTitles:titles color:lightGray];
+            }
+            if(indexPath.row == 1){
+                cell.leftLabelTitle = @"认证资料";
+                cell.editBlock = ^(){
+                    TwoStageScreeningController *twoStageScreeningController = [[TwoStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"认证资料"];
+                    [self.navigationController pushViewController:twoStageScreeningController animated:true];
+                };
+                NSArray *titles = [[self.myMateRequireModel.matchingleveltwo mj_keyValues] allValues];
+                [cell configWithTitles:titles color:[UIColor grayColor]];
+            }
+            if(indexPath.row == 2){
+                cell.leftLabelTitle = @"个人情况";
+                cell.editBlock = ^(){
+                    FourStageScreeningController *fourStageScreeningController = [[FourStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"个人情况"];
+                    [self.navigationController pushViewController:fourStageScreeningController animated:true];
+                };
+                NSArray *titles = [[self.myMateRequireModel.matchinglevelfour mj_keyValues] allValues];
+                [cell configWithTitles:titles color:lightRed];
+            }
+            if(indexPath.row == 3){
+                cell.leftLabelTitle = @"家庭情况";
+                cell.editBlock = ^(){
+                    FiveStageScreeningController *fiveStageScreeningController = [[FiveStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"家庭情况"];
+                    [self.navigationController pushViewController:fiveStageScreeningController animated:true];
+                };
+                NSArray *titles = [[self.myMateRequireModel.matchinglevelfive mj_keyValues] allValues];
+                [cell configWithTitles:titles color:lightGray];
+            }
+            if(indexPath.row == 4){
+                cell.leftLabelTitle = @"未来规划";
+                cell.editBlock = ^(){
+                    FiveStageScreeningController *fiveStageScreeningController = [[FiveStageScreeningController alloc] initWithType:ScreeningControllerTypeMateRequireMent basicInfoCellPreTitle:@"未来规划"];
+                    fiveStageScreeningController.block = ^(BaseModel *model){
+                        if([model isKindOfClass:[FiveStageScreeningModel class]]){
+                            self.myMateRequireModel.matchinglevelfive = model;
+                            [self.tableView reloadData];
+                        }
+                    };
+                    [self.navigationController pushViewController:fiveStageScreeningController animated:true];
+                };
+                NSArray *titles = [[self.myMateRequireModel.matchinglevelfive mj_keyValues] allValues];
+                [cell configWithTitles:titles color:lightRed];
+            }
+            return cell;
         }
     }
     return [UITableViewCell new];
@@ -425,12 +482,7 @@
         return 40;
     }
     if(indexPath.section == 2){
-        if(self.myDataSelectType == MyDataSelectTypeSuposeStandard){
-            return 40;
-        }
-        if(self.myDataSelectType == MyDataSelectTypeMyData){
-            return UITableViewAutomaticDimension;
-        }
+        return UITableViewAutomaticDimension;
     }
     return 0;
 }
@@ -480,108 +532,6 @@
         
     }
     if(indexPath.section == 2 && self.myDataSelectType == MyDataSelectTypeSuposeStandard){
-        //年龄
-        if(indexPath.row == 1){
-            DatePickerView *datePickerView = [DatePickerView datePickerView];
-            datePickerView.datePickerBlock = ^(NSDate *date){
-                NSDateFormatter *formater = [[NSDateFormatter alloc] init];
-                [formater setDateFormat:@"yyyy-MM-dd"];//设置时间显示的格式，此处使用的formater格式要与字符串格式完全一致，否则转换失败
-                NSString *dateStr = [formater stringFromDate:date];//将日期转换成字符串
-                self.myMateRequireModel.age = dateStr;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            };
-            datePickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
-            [[[UIApplication sharedApplication] keyWindow] addSubview:datePickerView];
-        }
-        //身高
-        if(indexPath.row == 2){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas heights] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.stature = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //月收入
-        if(indexPath.row == 3){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas monthlyIncome] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.monthlyincome = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //学历
-        if(indexPath.row == 4){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas educations] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.educational = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //婚姻状况
-        if(indexPath.row == 5){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas maritalStatus] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.maritalstatus = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //体型
-        if(indexPath.row == 6){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas bodyShaps] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.physique = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //工作地区
-        if(indexPath.row == 7){
-            AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
-            addressPickerView.block = ^(NSString *province,NSString *city){
-                self.myMateRequireModel.nowaddress = [province stringByAppendingString:city];;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            };
-            [addressPickerView toShow];
-        }
-        //是否想要孩子
-        if(indexPath.row == 8){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas wantChildren] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.wanthavechildren = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //是否抽烟
-        if(indexPath.row == 9){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas isSmoking] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.smoking = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //是否喝酒
-        if(indexPath.row == 10){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas isDrink] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.drink = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //购房情况
-        if(indexPath.row == 11){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas housePurchaseStatus] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.housesstatus = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
-        //购车情况
-        if(indexPath.row == 13){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas carPurchaseStatus] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.myMateRequireModel.carstatus = value;
-                [self refreshWithMyMateRequireModel:self.myMateRequireModel];
-            }];
-            [dataPickerView toShow];
-        }
     }
 }
 

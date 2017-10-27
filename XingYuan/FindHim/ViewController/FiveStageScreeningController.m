@@ -13,7 +13,7 @@
 #import "FiveStageScreeningModel.h"
 
 @interface FiveStageScreeningController ()<UITableViewDataSource,UITableViewDelegate>
-
+@property (nonatomic,strong) FiveStageScreeningModel *fiveStageScreeningModel;
 @end
 
 @implementation FiveStageScreeningController
@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"珠联璧合";
-    
+    self.fiveStageScreeningModel = [FiveStageScreeningModel new];
     self.cellTitles = @[@"想何时结婚",@"偏爱约会方式",@"希望对方看中",@"期待婚礼形式",@"愿与对方父母住否",@"是否想要孩子",@"厨艺情况",@"家务分工"];
 
     //网络请求
@@ -49,6 +49,7 @@
         FiveStageScreeningModel *model = [FiveStageScreeningModel new];
         [model setValuesForKeysWithDictionary:result];
         [model setValuesForKeysWithDictionary:result[@"data"]];
+        self.fiveStageScreeningModel = model;
         [self refreshWithModel:model];
         [JGProgressHUD showErrorWithModel:model In:self.view];
     } fail:^(NSError *error) {
@@ -107,35 +108,9 @@
  @param isToNext 请求成功是否跳转下一页
  */
 - (void)uploadInfoToServer:(BOOL)isToNext{
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    NSMutableDictionary *parameters = [self.fiveStageScreeningModel mj_keyValues];
+    parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    
-    FillUserInfoCell *cell;
-    
-    //想何时结婚
-    cell = self.cells[0];
-    [parameters setValue:cell.infoValue forKey:@"getmarriedtime"];
-    //偏爱约会方式
-    cell = self.cells[1];
-    [parameters setValue:cell.infoValue forKey:@"datingpattern"];
-    //希望对方看中
-    cell = self.cells[2];
-    [parameters setValue:cell.infoValue forKey:@"hopeotherlike"];
-    //希望婚礼形式
-    cell = self.cells[3];
-    [parameters setValue:cell.infoValue forKey:@"weddingform"];
-    //愿与对方父母住否
-    cell = self.cells[4];
-    [parameters setValue:cell.infoValue forKey:@"livingwithbothparents"];
-    //是否想要孩子
-    cell = self.cells[5];
-    [parameters setValue:cell.infoValue forKey:@"wanthavechildren"];
-    //厨艺
-    cell = self.cells[6];
-    [parameters setValue:cell.infoValue forKey:@"cookingskill"];
-    //家务分工
-    cell = self.cells[7];
-    [parameters setValue:cell.infoValue forKey:@"householdduties"];
     
     [JGProgressHUD showStatusWith:nil In:self.view];
     [VVNetWorkTool postWithUrl:Url(Matchingfive) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
@@ -143,6 +118,9 @@
         [model setValuesForKeysWithDictionary:result];
         [JGProgressHUD showResultWithModel:model In:self.view];
         if([model.code isEqual:@1]){
+            if(self.block != nil){
+                self.block(self.fiveStageScreeningModel);
+            }
             [self.navigationController popViewControllerAnimated:true];
         }
     } fail:^(NSError *error) {
@@ -166,64 +144,64 @@
     //想要何时结婚
     if(indexPath.row == 1){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas weddingTime] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fiveStageScreeningModel.getmarriedtime = value;
+            [self refreshWithModel:self.fiveStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //偏爱约会方式
     if(indexPath.row == 2){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas datingModel] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fiveStageScreeningModel.datingpattern = value;
+            [self refreshWithModel:self.fiveStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //希望对方看中
     if(indexPath.row == 3){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas hopeOtherImportance] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fiveStageScreeningModel.hopeotherlike = value;
+            [self refreshWithModel:self.fiveStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //期待婚礼形式
     if(indexPath.row == 4){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas hopeWeddingForm] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fiveStageScreeningModel.weddingform = value;
+            [self refreshWithModel:self.fiveStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //愿与对方父母住否
     if(indexPath.row == 5){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas liveWithOtherParents] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fiveStageScreeningModel.livingwithbothparents = value;
+            [self refreshWithModel:self.fiveStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //是否想要孩子
     if(indexPath.row == 6){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas wantChildren] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fiveStageScreeningModel.wanthavechildren = value;
+            [self refreshWithModel:self.fiveStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //厨艺情况
     if(indexPath.row == 7){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas cookingSkill] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fiveStageScreeningModel.cookingskill = value;
+            [self refreshWithModel:self.fiveStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //家务分工
     if(indexPath.row == 8){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas houseworkDivision] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fiveStageScreeningModel.householdduties = value;
+            [self refreshWithModel:self.fiveStageScreeningModel];
         }];
         [dataPickerView toShow];
     }

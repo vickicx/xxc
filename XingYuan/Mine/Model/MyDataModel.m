@@ -33,6 +33,31 @@
         [fiveStageScreeningModel setValuesForKeysWithDictionary:[dic valueForKey:@"matchinglevelfive"]];
         self.matchinglevelfive = fiveStageScreeningModel;
     }
+    if([key isEqualToString:@"mateselectionone"]){
+        OneStageScreeningModel *oneStageScreeningModel = [OneStageScreeningModel new];
+        [oneStageScreeningModel setValuesForKeysWithDictionary:value];
+        self.matchinglevelone = oneStageScreeningModel;
+    }
+    if([key isEqualToString:@"mateselectiontwo"]){
+        TwoStateScreeningModel *twoStateScreeningModel = [TwoStateScreeningModel new];
+        [twoStateScreeningModel setValuesForKeysWithDictionary:value];
+        self.matchingleveltwo = twoStateScreeningModel;
+    }
+    if([key isEqualToString:@"mateselectionthree"]){
+        ThreeStageScreeningModel *threeStageScreeningModel = [ThreeStageScreeningModel new];
+        [threeStageScreeningModel setValuesForKeysWithDictionary:value];
+        self.matchinglevelthree = threeStageScreeningModel;
+    }
+    if([key isEqualToString:@"mateselectionfour"]){
+        FourStageScreeningModel *fourStageScreeningModel = [FourStageScreeningModel new];
+        [fourStageScreeningModel setValuesForKeysWithDictionary:value];
+        self.matchinglevelfour = fourStageScreeningModel;
+    }
+    if([key isEqualToString:@"mateselectionfive"]){
+        FiveStageScreeningModel *fiveStageScreeningModel = [FiveStageScreeningModel new];
+        [fiveStageScreeningModel setValuesForKeysWithDictionary:value];
+        self.matchinglevelfive = fiveStageScreeningModel;
+    }
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key{

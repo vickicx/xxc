@@ -18,7 +18,7 @@
 #import "FourStageScreeningModel.h"
 
 @interface FourStageScreeningController ()<UITableViewDataSource,UITableViewDelegate>
-
+@property (nonatomic,strong) FourStageScreeningModel *fourStageScreeningModel;
 @end
 
 @implementation FourStageScreeningController
@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"情投意合";
-    
+    self.fourStageScreeningModel = [FourStageScreeningModel new];
     self.cellTitles = @[@"家乡",@"户口",@"民族",@"属相",@"家庭排行",@"父母情况",@"父亲工作",@"母亲工作",@"父母经济",@"父母医保"];
 
     //网络请求
@@ -47,13 +47,15 @@
 
 //请求已经服务器已经填写的数据
 - (void)requestPrimaryData{
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    NSMutableDictionary *parameters = [self.fourStageScreeningModel mj_keyValues];
+    parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    
+        
     [VVNetWorkTool postWithUrl:Url(ShowmatchingFour) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         FourStageScreeningModel *model = [FourStageScreeningModel new];
         [model setValuesForKeysWithDictionary:result];
         [model setValuesForKeysWithDictionary:result[@"data"]];
+        self.fourStageScreeningModel = model;
         [self refreshWithModel:model];
         [JGProgressHUD showErrorWithModel:model In:self.view];
     } fail:^(NSError *error) {
@@ -122,41 +124,11 @@
  @param isToNext 请求成功是否跳转下一页
  */
 - (void)uploadInfoToServer:(BOOL)isToNext{
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [super dealUploadInfo:isToNext];
+    
+    NSMutableDictionary *parameters = [self.fourStageScreeningModel mj_keyValues];
+    parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    
-    FillUserInfoCell *cell;
-    
-    //家庭
-    cell = self.cells[0];
-    [parameters setValue:cell.infoValue forKey:@"hometown"];
-    //户口
-    cell = self.cells[1];
-    [parameters setValue:cell.infoValue forKey:@"householdregister"];
-    //民族
-    cell = self.cells[2];
-    [parameters setValue:cell.infoValue forKey:@"nation"];
-    //属相
-    cell = self.cells[3];
-    [parameters setValue:cell.infoValue forKey:@"sx"];
-    //家庭排行
-    cell = self.cells[4];
-    [parameters setValue:cell.infoValue forKey:@"familyranking"];
-    //父母情况
-    cell = self.cells[5];
-    [parameters setValue:cell.infoValue forKey:@"parentstatus"];
-    //父亲工作
-    cell = self.cells[6];
-    [parameters setValue:cell.infoValue forKey:@"fatherwork"];
-    //母亲工作
-    cell = self.cells[7];
-    [parameters setValue:cell.infoValue forKey:@"motherwork"];
-    //父母经济
-    cell = self.cells[8];
-    [parameters setValue:cell.infoValue forKey:@"parenteconomic"];
-    //父母医保
-    cell = self.cells[9];
-    [parameters setValue:cell.infoValue forKey:@"parentmedicalinsurance"];
     
     [JGProgressHUD showStatusWith:nil In:self.view];
     [VVNetWorkTool postWithUrl:Url(MatchingFour) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
@@ -168,6 +140,9 @@
             [self.navigationController pushViewController:screeningVC animated:true];
         }
         if([model.code isEqual:@1] && !isToNext){
+            if(self.block != nil){
+                self.block(self.fourStageScreeningModel);
+            }
             [self.navigationController popViewControllerAnimated:true];
         }
     } fail:^(NSError *error) {
@@ -183,8 +158,8 @@
     if(indexPath.row == 1){
         AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
         addressPickerView.block = ^(NSString *province,NSString *city){
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = [province stringByAppendingString:city];
+            self.fourStageScreeningModel.hometown = [province stringByAppendingString:city];
+            [self refreshWithModel:self.fourStageScreeningModel];
         };
         [addressPickerView toShow];
     }
@@ -192,72 +167,72 @@
     if(indexPath.row == 2){
         AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
         addressPickerView.block = ^(NSString *province,NSString *city){
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = [province stringByAppendingString:city];
+            self.fourStageScreeningModel.householdregister = [province stringByAppendingString:city];
+            [self refreshWithModel:self.fourStageScreeningModel];
         };
         [addressPickerView toShow];
     }
     //民族
     if(indexPath.row == 3){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas nations] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fourStageScreeningModel.nation = value;
+            [self refreshWithModel:self.fourStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //属相
     if(indexPath.row == 4){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas zodiacs] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fourStageScreeningModel.sx = value;
+            [self refreshWithModel:self.fourStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //家庭排行
     if(indexPath.row == 5){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas familyRank] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fourStageScreeningModel.familyranking = value;
+            [self refreshWithModel:self.fourStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //父母情况
     if(indexPath.row == 6){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas parentsSituations] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fourStageScreeningModel.parentstatus = value;
+            [self refreshWithModel:self.fourStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //父亲工作
     if(indexPath.row == 7){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas stations] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fourStageScreeningModel.fatherwork = value;
+            [self refreshWithModel:self.fourStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //母亲工作
     if(indexPath.row == 8){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas stations] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fourStageScreeningModel.motherwork = value;
+            [self refreshWithModel:self.fourStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //父母经济
     if(indexPath.row == 9){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas parentsEconomics] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fourStageScreeningModel.parenteconomic = value;
+            [self refreshWithModel:self.fourStageScreeningModel];
         }];
         [dataPickerView toShow];
     }
     //父母医保
     if(indexPath.row == 10){
         DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas parentsMedicalInsurance] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-            FillUserInfoCell *cell = self.cells[indexPath.row-1];
-            cell.infoValue = value;
+            self.fourStageScreeningModel.parentmedicalinsurance = value;
+            [self refreshWithModel:self.fourStageScreeningModel];
         }];
         [dataPickerView toShow];
     }

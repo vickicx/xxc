@@ -134,6 +134,7 @@
     [label setText:self.titleName[indexPath.row]];
     if (indexPath.row == 3 && self.threeStageScreeningModel.buycarcertifyaudit != nil) {
         cell.num = self.threeStageScreeningModel.buycarcertifyaudit.intValue;
+        
     }
     if (indexPath.row == 4 && self.threeStageScreeningModel.buyhousecertifyaudit != nil) {
         cell.num = self.threeStageScreeningModel.buyhousecertifyaudit.intValue;
@@ -170,23 +171,27 @@
         }
        
     }else if (indexPath.row == 3) {
-        if (self.threeStageScreeningModel.buycarauthentication.intValue == 2) {
-            FinishCertificationViewController *finishCertificationVC = [[FinishCertificationViewController alloc] init];
-            finishCertificationVC.title = @"购车认证";
-            [self.navigationController pushViewController:finishCertificationVC animated:YES];
-        } else {
-            CarCertificationViewController *carVC = [[CarCertificationViewController alloc] init];
-            [self.navigationController pushViewController:carVC animated:YES];
+        if (self.threeStageScreeningModel.buycarcertifyaudit.intValue != 1) {
+            if (self.threeStageScreeningModel.buycarauthentication.intValue == 2) {
+                FinishCertificationViewController *finishCertificationVC = [[FinishCertificationViewController alloc] init];
+                finishCertificationVC.title = @"购车认证";
+                [self.navigationController pushViewController:finishCertificationVC animated:YES];
+            } else {
+                CarCertificationViewController *carVC = [[CarCertificationViewController alloc] init];
+                [self.navigationController pushViewController:carVC animated:YES];
+            }
         }
         
     }else if (indexPath.row == 4) {
-        if (self.threeStageScreeningModel.buyhouseauthentication.intValue == 2) {
-            FinishCertificationViewController *finishCertificationVC = [[FinishCertificationViewController alloc] init];
-            finishCertificationVC.title = @"购房认证";
-            [self.navigationController pushViewController:finishCertificationVC animated:YES];
-        } else {
-            HouseCertificationViewController *houseVC = [[HouseCertificationViewController alloc] init];
-            [self.navigationController pushViewController:houseVC animated:YES];
+        if (self.threeStageScreeningModel.buyhousecertifyaudit.intValue != 1) {
+            if (self.threeStageScreeningModel.buyhouseauthentication.intValue == 2) {
+                FinishCertificationViewController *finishCertificationVC = [[FinishCertificationViewController alloc] init];
+                finishCertificationVC.title = @"购房认证";
+                [self.navigationController pushViewController:finishCertificationVC animated:YES];
+            } else {
+                HouseCertificationViewController *houseVC = [[HouseCertificationViewController alloc] init];
+                [self.navigationController pushViewController:houseVC animated:YES];
+            }
         }
     }
 }
@@ -236,8 +241,6 @@
 
 - (void)requestData {
     
-    
-    
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
@@ -254,10 +257,7 @@
                       progress:nil success:^(id result) {
                           NSDictionary *dic = [result objectForKey:@"data"];
                           self.threeStageScreeningModel = [[ThreeStageScreeningModel alloc] initWithDictionary:dic];
-                         
                       } fail:^(NSError *error) {
-                          
-                          
                       }];
     
 }
@@ -266,9 +266,7 @@
     if (_threeStageScreeningModel != threeStageScreeningModel) {
         _threeStageScreeningModel = threeStageScreeningModel;
     }
-    
     self.temp = 0;
-    
     if (threeStageScreeningModel.phoneauthentication.intValue != 2) {
         self.imageName[1] = self.imageName1[1];
     }else {
