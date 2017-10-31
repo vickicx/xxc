@@ -7,7 +7,13 @@
 //
 
 #import "ViewController.h"
-
+typedef enum _HobbiesControllerType {
+    HobbiesControllerTypeDefault,
+    HobbiesControllerTypeMateRequirement
+}HobbiesControllerType;
 @interface HobbiesController : ViewController
-@property (nonatomic,strong) void(^hobbiesBlock)(NSString *hobbies);
+@property (nonatomic,strong) void(^hobbiesBlock)(NSString *interestids,NSString *hobbiesNames);
+@property (nonatomic,copy) NSString *interestids;
+
+- (instancetype)initWithControllerType:(HobbiesControllerType)controllerType;
 @end

@@ -421,6 +421,13 @@
 		5935BE231F91DFE500BA4196 /* HeightPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE221F91DFE500BA4196 /* HeightPickerView.m */; };
 		5935BE261F91EAF000BA4196 /* TwoStageScreeningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE251F91EAF000BA4196 /* TwoStageScreeningController.m */; };
 		5935BE291F92058400BA4196 /* DataPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE281F92058400BA4196 /* DataPickerView.m */; };
+		593DE0D11FA2CBF900073D0A /* NSDictionary+ScreeningValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 593DE0D01FA2CBF900073D0A /* NSDictionary+ScreeningValues.m */; };
+		593DE0D51FA320B000073D0A /* MateRequirementAuthenticationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 593DE0D31FA320B000073D0A /* MateRequirementAuthenticationCell.m */; };
+		593DE0D61FA320B000073D0A /* MateRequirementAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 593DE0D41FA320B000073D0A /* MateRequirementAuthenticationCell.xib */; };
+		593DE0DA1FA3297B00073D0A /* AuthenticationCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 593DE0D81FA3297B00073D0A /* AuthenticationCollectionCell.m */; };
+		593DE0DB1FA3297B00073D0A /* AuthenticationCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 593DE0D91FA3297B00073D0A /* AuthenticationCollectionCell.xib */; };
+		593DE0DF1FA3358100073D0A /* SelectAuthenticationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 593DE0DD1FA3358100073D0A /* SelectAuthenticationController.m */; };
+		593DE0E01FA3358100073D0A /* SelectAuthenticationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 593DE0DE1FA3358100073D0A /* SelectAuthenticationController.xib */; };
 		59496EF01F948DFF00C8D299 /* PickerDatas.m in Sources */ = {isa = PBXBuildFile; fileRef = 59496EEF1F948DFF00C8D299 /* PickerDatas.m */; };
 		594E86791F9D911E00EE0390 /* AttestationNextCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 594E86771F9D911E00EE0390 /* AttestationNextCollectionViewCell.m */; };
 		594E867A1F9D911E00EE0390 /* AttestationNextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 594E86781F9D911E00EE0390 /* AttestationNextCollectionViewCell.xib */; };
@@ -1466,6 +1473,17 @@
 		5935BE251F91EAF000BA4196 /* TwoStageScreeningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStageScreeningController.m; sourceTree = "<group>"; };
 		5935BE271F92058400BA4196 /* DataPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPickerView.h; sourceTree = "<group>"; };
 		5935BE281F92058400BA4196 /* DataPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataPickerView.m; sourceTree = "<group>"; };
+		593DE0CF1FA2CBF900073D0A /* NSDictionary+ScreeningValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ScreeningValues.h"; sourceTree = "<group>"; };
+		593DE0D01FA2CBF900073D0A /* NSDictionary+ScreeningValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ScreeningValues.m"; sourceTree = "<group>"; };
+		593DE0D21FA320B000073D0A /* MateRequirementAuthenticationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MateRequirementAuthenticationCell.h; sourceTree = "<group>"; };
+		593DE0D31FA320B000073D0A /* MateRequirementAuthenticationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MateRequirementAuthenticationCell.m; sourceTree = "<group>"; };
+		593DE0D41FA320B000073D0A /* MateRequirementAuthenticationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MateRequirementAuthenticationCell.xib; sourceTree = "<group>"; };
+		593DE0D71FA3297B00073D0A /* AuthenticationCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCollectionCell.h; sourceTree = "<group>"; };
+		593DE0D81FA3297B00073D0A /* AuthenticationCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationCollectionCell.m; sourceTree = "<group>"; };
+		593DE0D91FA3297B00073D0A /* AuthenticationCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthenticationCollectionCell.xib; sourceTree = "<group>"; };
+		593DE0DC1FA3358100073D0A /* SelectAuthenticationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAuthenticationController.h; sourceTree = "<group>"; };
+		593DE0DD1FA3358100073D0A /* SelectAuthenticationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAuthenticationController.m; sourceTree = "<group>"; };
+		593DE0DE1FA3358100073D0A /* SelectAuthenticationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAuthenticationController.xib; sourceTree = "<group>"; };
 		59496EEE1F948DFF00C8D299 /* PickerDatas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerDatas.h; sourceTree = "<group>"; };
 		59496EEF1F948DFF00C8D299 /* PickerDatas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerDatas.m; sourceTree = "<group>"; };
 		594E86761F9D911E00EE0390 /* AttestationNextCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttestationNextCollectionViewCell.h; sourceTree = "<group>"; };
@@ -3724,6 +3742,8 @@
 				596CD1C81F7E564100ED1C54 /* VVNetWorkTool+Request.m */,
 				59E0ABE01F9609B0001FFC7A /* NSString+tool.h */,
 				59E0ABE11F9609B0001FFC7A /* NSString+tool.m */,
+				593DE0CF1FA2CBF900073D0A /* NSDictionary+ScreeningValues.h */,
+				593DE0D01FA2CBF900073D0A /* NSDictionary+ScreeningValues.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4292,6 +4312,12 @@
 				59E0ABD61F95E068001FFC7A /* MyDataStageItemInfoCell.h */,
 				59E0ABD71F95E068001FFC7A /* MyDataStageItemInfoCell.m */,
 				59E0ABD81F95E068001FFC7A /* MyDataStageItemInfoCell.xib */,
+				593DE0D21FA320B000073D0A /* MateRequirementAuthenticationCell.h */,
+				593DE0D31FA320B000073D0A /* MateRequirementAuthenticationCell.m */,
+				593DE0D41FA320B000073D0A /* MateRequirementAuthenticationCell.xib */,
+				593DE0D71FA3297B00073D0A /* AuthenticationCollectionCell.h */,
+				593DE0D81FA3297B00073D0A /* AuthenticationCollectionCell.m */,
+				593DE0D91FA3297B00073D0A /* AuthenticationCollectionCell.xib */,
 				99ADB54C1F9596B4005928B3 /* SettingOneTableViewCell.h */,
 				99ADB54D1F9596B4005928B3 /* SettingOneTableViewCell.m */,
 				99ADB54E1F9596B4005928B3 /* SettingOneTableViewCell.xib */,
@@ -4363,6 +4389,9 @@
 				99ADB5851F974425005928B3 /* NobodyLikeMeViewController.xib */,
 				59D942741F983DD600972B90 /* GrowthCenterController.h */,
 				59D942751F983DD600972B90 /* GrowthCenterController.m */,
+				593DE0DC1FA3358100073D0A /* SelectAuthenticationController.h */,
+				593DE0DD1FA3358100073D0A /* SelectAuthenticationController.m */,
+				593DE0DE1FA3358100073D0A /* SelectAuthenticationController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4609,11 +4638,13 @@
 				59B7A4891F7CE87A00217911 /* ForgetPasswordController.xib in Resources */,
 				99ADB56E1F95D8F6005928B3 /* jquery-1.11.3.js in Resources */,
 				991C8FB81FA17D3300242E27 /* CertificationCollectionViewCell.xib in Resources */,
+				593DE0DB1FA3297B00073D0A /* AuthenticationCollectionCell.xib in Resources */,
 				5924F2B01F8B7C3700D2108A /* JResource.bundle in Resources */,
 				5924F1FB1F8B7C3600D2108A /* NTESJionTeamViewController.xib in Resources */,
 				99ADB56C1F95D8F6005928B3 /* matching.css in Resources */,
 				5924F2451F8B7C3600D2108A /* NTESAudio2TextViewController.xib in Resources */,
 				5924F22B1F8B7C3600D2108A /* NTESCustomSysNotificationViewController.xib in Resources */,
+				593DE0E01FA3358100073D0A /* SelectAuthenticationController.xib in Resources */,
 				5924EE671F8B7BEA00D2108A /* NMCVideoFilter.bundle in Resources */,
 				59A60C911F8F4BDE00886A6E /* DatePickerView.xib in Resources */,
 				59E0ABD51F95DE85001FFC7A /* MyDataIStageInfoCell.xib in Resources */,
@@ -4686,6 +4717,7 @@
 				5924E5091F8B6D3D00D2108A /* SVProgressHUD.bundle in Resources */,
 				99B487791F7B408F00D8DE54 /* Main.storyboard in Resources */,
 				59E0ABD01F95A5DB001FFC7A /* MyDataSelectTypeCell.xib in Resources */,
+				593DE0D61FA320B000073D0A /* MateRequirementAuthenticationCell.xib in Resources */,
 				59A60C981F8F618400886A6E /* ProvinceCityList.plist in Resources */,
 				5999A0A71F90B55700CE3686 /* FillUserInfoCell.xib in Resources */,
 				594E867A1F9D911E00EE0390 /* AttestationNextCollectionViewCell.xib in Resources */,
@@ -4840,6 +4872,7 @@
 				5924F2781F8B7C3600D2108A /* NTESVideoChatNetStatusView.m in Sources */,
 				5924F1DC1F8B7C3600D2108A /* NSData+NTES.m in Sources */,
 				5924F1E51F8B7C3600D2108A /* UIScrollView+NTESPullToRefresh.m in Sources */,
+				593DE0D11FA2CBF900073D0A /* NSDictionary+ScreeningValues.m in Sources */,
 				5924F2A41F8B7C3600D2108A /* NTESDevice.m in Sources */,
 				9986AFBD1F8F58B600A6EEC7 /* HXPhotoEditView.m in Sources */,
 				5924F2131F8B7C3600D2108A /* NTESChatroomTextContentView.m in Sources */,
@@ -5040,6 +5073,7 @@
 				59B7A4861F7CE87A00217911 /* LoginRegisterController.m in Sources */,
 				5924E50B1F8B6D3D00D2108A /* SVRadialGradientLayer.m in Sources */,
 				5924F1E11F8B7C3600D2108A /* UIImage+NTES.m in Sources */,
+				593DE0DA1FA3297B00073D0A /* AuthenticationCollectionCell.m in Sources */,
 				5924E4F31F8B6CAA00D2108A /* TZPhotoPickerController.m in Sources */,
 				5924F1E01F8B7C3600D2108A /* UIAlertView+NTESBlock.m in Sources */,
 				99AB522E1F8B890800C8E0B0 /* UserHomePagePopView.m in Sources */,
@@ -5183,6 +5217,7 @@
 				5924F2AA1F8B7C3600D2108A /* NTESTimerHolder.m in Sources */,
 				5924EF5F1F8B7BEB00D2108A /* NIMContactDataCell.m in Sources */,
 				991C8FBB1FA1885100242E27 /* MateSelectionRequireModel.m in Sources */,
+				593DE0DF1FA3358100073D0A /* SelectAuthenticationController.m in Sources */,
 				5924F2331F8B7C3600D2108A /* NTESRedPacketAttachment.m in Sources */,
 				5924EF891F8B7BEB00D2108A /* NIMKitAudioCenter.m in Sources */,
 				99AB52521F8CB56C00C8E0B0 /* UILabel+SizeToFit.m in Sources */,
@@ -5213,6 +5248,7 @@
 				5924EFAA1F8B7BEC00D2108A /* NIMTeamMemberCardViewController.m in Sources */,
 				5924EFA01F8B7BEB00D2108A /* NIMSessionListCell.m in Sources */,
 				5924E5071F8B6D3D00D2108A /* SVIndefiniteAnimatedView.m in Sources */,
+				593DE0D51FA320B000073D0A /* MateRequirementAuthenticationCell.m in Sources */,
 				5924F2371F8B7C3600D2108A /* NTESRedPacketManager.m in Sources */,
 				5924F1F71F8B7C3600D2108A /* NTESSessionCustomContentConfig.m in Sources */,
 				5924F1E91F8B7C3600D2108A /* UINavigationItem+Swizzling.m in Sources */,

@@ -36,7 +36,6 @@
     [self createView];
     [self createLabels];
     [self requestData];
-    
     // Do any additional setup after loading the view.
 }
 
@@ -59,28 +58,21 @@
 //    shadeView1.backgroundColor = RGBColor(0, 0, 0, 0.5);
 //    [self.showView addSubview:shadeView1];
 
-    
     _leftView = [[UIImageView alloc] initWithFrame:CGRectMake(10 * FitWidth, _mainView.bottom + 10 * FitHeight , (_mainView.width - 32*FitWidth) / 3, (_mainView.width - 32*FitWidth) / 3)];
     _leftView.backgroundColor = [UIColor whiteColor];
-    
     
     _middleView = [[UIImageView alloc] initWithFrame:CGRectMake(_leftView.right + 6 *FitWidth, _leftView.top, _leftView.width, _leftView.height)];
     _middleView.backgroundColor = [UIColor whiteColor];
    
-    
     _rightView = [[UIImageView alloc] initWithFrame:CGRectMake(_middleView.right + 6 *FitWidth, _middleView.top, _middleView.width, _middleView.height)];
     _rightView.backgroundColor = [UIColor whiteColor];
-    
     
     _leftView.layer.cornerRadius =  _middleView.layer.cornerRadius = _rightView.layer.cornerRadius = 10.0f;
     [self.showView addSubview:_mainView];
     [self.showView addSubview:_leftView];
     [self.showView addSubview:_middleView];
     [self.showView addSubview:_rightView];
-    
-    
 }
-
 
 - (void)createLabels {
     self.address = [[UILabel alloc] initWithFrame:CGRectMake(self.showView.width - 80*FitWidth, 10*FitHeight, 60*FitWidth, 20*FitHeight)];
@@ -90,24 +82,22 @@
     
     _address.text = @"成都(3km)";
     _address.textAlignment = NSTextAlignmentRight;
-    _address.font = [UIFont systemFontOfSize:12];
+    _address.font = FONT_WITH_S(12);
     
     _userName.text = @"dwefewfwe";
-    _userName.font = [UIFont systemFontOfSize:15];
+    _userName.font = FONT_WITH_S(15);
     CGSize userNameSize = [_userName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_userName.font,NSFontAttributeName,nil]];
     _userName.width = userNameSize.width;
     _userName.height = userNameSize.height;
     
- 
-    
     _info.text = @"24岁 | 166cm | 射手座 | 服装设计";
-    _info.font = [UIFont systemFontOfSize:12];
+    _info.font = FONT_WITH_S(12);
     CGSize infoSize = [_info.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_info.font,NSFontAttributeName,nil]];
     _info.width = infoSize.width;
     _info.height = infoSize.height;
     
     _signature.text = @"这里是交友的一个签名什么的~";
-    _signature.font = [UIFont systemFontOfSize:12];
+    _signature.font = FONT_WITH_S(12);
     _signature.numberOfLines = 0;
     CGSize signatureSize = [_signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20*FitWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
     _signature.width = signatureSize.width;
@@ -120,9 +110,7 @@
     [self.shadeView addSubview:_userName];
     [self.shadeView addSubview:_info];
     [self.shadeView addSubview:_signature];
-    
 }
-
 
 - (void)requestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -134,9 +122,7 @@
     [VVNetWorkTool postWithUrl:Url(PhotoAlbumPreview) body:[Helper parametersWith:parameters]
                       progress:nil success:^(id result) {
                           NSDictionary *dic = [result objectForKey:@"data"];
-                          
                           self.photoPreviewModel = [[PhotoPreviewModel alloc] initWithDictionary:dic];
-                          
                           _address.text = self.photoPreviewModel.address;
                           _userName.text = self.photoPreviewModel.nickname;
                           _signature.text = self.photoPreviewModel.summary;
@@ -156,18 +142,11 @@
                           [_userName sizeToFit];
                           _sexImageView.frame = CGRectMake(_userName.right + 3*FitWidth, _userName.top, 20*FitWidth, 20*FitHeight);
                           [_sexImageView setImage:[UIImage imageNamed:@"six_girl"]];
-                          
-                          
-                          
-                          
-                          
-                          
+                        
                       } fail:^(NSError *error) {
                           
                       }];
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

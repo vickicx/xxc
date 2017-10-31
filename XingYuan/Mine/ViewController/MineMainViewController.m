@@ -64,8 +64,6 @@
     [super viewDidLoad];
     self.imageArr = [NSArray arrayWithObjects:@"喜欢我的", @"我喜欢的", @"关注", @"成长", nil];
     self.titleArr = [NSArray arrayWithObjects:@"喜欢我的", @"我喜欢的", @"我关注的", @"成长中心", nil];
-    
-    
     self.view.backgroundColor = [UIColor redColor];
     [self createTableView];
     [self createRightButton];
@@ -73,7 +71,7 @@
     [self.view addSubview:self.floatView];
     self.onlineLabel = [[UILabel alloc] initWithFrame:CGRectMake(kWIDTH - 60*FitWidth, self.floatView.top - 30*FitHeight, 50*FitWidth, 20*FitHeight)];
     self.onlineLabel.textColor = [UIColor whiteColor];
-    self.onlineLabel.font = [UIFont systemFontOfSize:12];
+    self.onlineLabel.font = FONT_WITH_S(12);
     self.onlineLabel.text = @"当前在线";
     [self.view addSubview:self.onlineLabel];
     
@@ -97,9 +95,6 @@
     };
     
     [self requestData];
-
-    
-    
     // Do any additional setup after loading the view.
 }
 
@@ -134,7 +129,6 @@
         [_backgroundImgV addSubview:view];
         
         //_headImageView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"个人页背景图.png"]];
-        
         _headerImg=[[UIImageView alloc]init];
         [_headerImg setImage:[UIImage imageNamed:@"头像"]];
         [_headerImg.layer setMasksToBounds:YES];
@@ -168,11 +162,6 @@
         self.addressLabel = [[UILabel alloc] init];
         self.addressLabel.text = @"地址";
         [self createBackgroundImg:CGRectMake(75*FitWidth, 100*FitHeight, 90*FitWidth, 90*FitHeight) label:self.addressLabel];
-        
-        
-
-        
-        
 //        //昵称
 //        _nickLabel=[[UILabel alloc]init];
 //        _nickLabel.text=@"执念12o3";
@@ -203,7 +192,7 @@
     view.layer.cornerRadius = view.width/2;
     [back addSubview:view];
     label.frame = view.frame;
-    label.font = [UIFont systemFontOfSize:13];
+    label.font = FONT_WITH_S(13);
     label.centerX = view.centerX = backImage.centerX;
     label.centerY = view.centerY = backImage.centerY;
     label.textColor = [UIColor whiteColor];
@@ -211,7 +200,6 @@
     [_backgroundImgV addSubview:back];
     [back addSubview:backImage];
     [back addSubview:label];
-    
 }
 
 - (void)createRightButton{
@@ -220,7 +208,6 @@
     [rightBtn addTarget:self action:@selector(rightBtnAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem=rightItem;
-
 }
 
 -(void)rightBtnAction{
@@ -273,7 +260,6 @@
         //[UIColor colorWithRed:184/255.0 green:186/255.0 blue:189/255.0 alpha:1];
     }
     return cell;
-
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -300,7 +286,7 @@
                           UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(160, 0, 120, 50)];
                           titleText.backgroundColor = [UIColor clearColor];
                           titleText.textColor=RGBColor(96, 96, 104, 1);
-                          [titleText setFont:[UIFont systemFontOfSize:17.0]];
+                          titleText.font = FONT_WITH_S(17);
                           [titleText setText:self.aboutMeModel.nickname];
                           self.navigationItem.titleView=titleText;
                           if (self.aboutMeModel.authenticationschedule.intValue != 0) {
@@ -330,11 +316,7 @@
                           } else {
                               self.onlineLabel.text = @"当前离线";
                           }
-                       
-
-                          
-
-                          
+                     
                       } fail:^(NSError *error) {
                           
                       }];

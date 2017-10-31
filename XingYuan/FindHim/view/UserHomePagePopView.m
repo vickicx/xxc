@@ -30,13 +30,13 @@
             self.NameLab=[[UILabel alloc]init];
             self.NameLab.textAlignment=NSTextAlignmentCenter;
             self.NameLab.textColor=[UIColor whiteColor];
-            self.NameLab.font=[UIFont boldSystemFontOfSize:16.0f];
+            self.NameLab.font=FONT_WITH_S(16);
             [self addSubview:self.NameLab];
             
             self.contentLab=[[UILabel alloc]init];
             self.contentLab.textAlignment=NSTextAlignmentCenter;
             self.contentLab.textColor=[UIColor whiteColor];
-            self.contentLab.font=[UIFont systemFontOfSize:12.0f];
+            self.contentLab.font=FONT_WITH_S(12);
             self.contentLab.numberOfLines=0;
             [self addSubview:self.contentLab];
         }

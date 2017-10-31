@@ -47,21 +47,20 @@
         
         [self.view addSubview:_tableView];
     }
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 410*FitHeight, kWIDTH, 290*FitHeight)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 429*FitHeight, kWIDTH, 290*FitHeight)];
     view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:view];
     
     self.logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.logoutButton.frame = CGRectMake(12*FitWidth, 50*FitHeight,kWIDTH - 24*FitWidth, 48*FitHeight);
+    self.logoutButton.frame = CGRectMake(12*FitWidth,450*FitHeight,kWIDTH - 24*FitWidth, 48*FitHeight);
     self.logoutButton.layer.cornerRadius = 10.0f;
     [self.logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
     [self.logoutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside];
-    self.logoutButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    self.logoutButton.titleLabel.font = FONT_WITH_S(18);
     self.logoutButton.tintColor = [UIColor whiteColor];
     self.logoutButton.backgroundColor = RGBColor(240, 53, 90, 1);
     
-    
-    [view addSubview:self.logoutButton];
+    [self.view addSubview:self.logoutButton];
    
 }
 
@@ -238,9 +237,6 @@
     }
     return folderSize/(1024*1024.0);
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

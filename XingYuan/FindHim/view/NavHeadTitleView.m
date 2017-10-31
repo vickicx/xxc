@@ -35,7 +35,7 @@
         self.backgroundColor=[UIColor clearColor];
         self.label=[[UILabel alloc]initWithFrame:CGRectMake(44*FitWidth, 20*FitHeight, frame.size.width-88*FitWidth, 44*FitHeight)];
         self.label.textAlignment=NSTextAlignmentCenter;
-        self.label.font = [UIFont systemFontOfSize:18];
+        self.label.font = FONT_WITH_S(18);
         [self addSubview:self.label];
         
         self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];

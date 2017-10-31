@@ -36,7 +36,7 @@
     
     
     self.title = [[UILabel alloc] initWithFrame:CGRectMake(self.image.right + 10*FitWidth,0, 100*FitWidth, 54*FitHeight)];
-    self.title.font = [UIFont systemFontOfSize:16];
+    self.title.font = FONT_WITH_S(16);
     self.title.textColor = [UIColor colorWithRed:43/255.0 green:48/255.0 blue:52/255.0 alpha:1];
     [background addSubview:_title];
     

@@ -30,7 +30,7 @@
         
         UILabel *family = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         family.text = @"家庭情况";
-        family.font = [UIFont systemFontOfSize:16];
+        family.font = FONT_WITH_S(16);
         [self addSubview:family];
         
         _kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, family.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
@@ -57,7 +57,7 @@
         menuLabel.textAlignment = NSTextAlignmentCenter;
         menuLabel.backgroundColor = [UIColor colorWithRed:240/255.0 green:241/255.0 blue:241/255.0 alpha:1];
         menuLabel.text = arr[index];
-        menuLabel.font = [UIFont systemFontOfSize:13];
+        menuLabel.font = FONT_WITH_S(13);
         menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         CGFloat width = [menuLabel widthOfSizeToFit];
         menuLabel.frame = CGRectMake(0, 0, width + 30*FitWidth, 30*FitHeight);

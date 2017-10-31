@@ -36,7 +36,7 @@
         
         UILabel *photo = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         photo.text = @"他的相册";
-        photo.font = [UIFont systemFontOfSize:16];
+        photo.font = FONT_WITH_S(16);
         
         [self addSubview:photo];
         if (self.photoNum == nil) {
@@ -44,7 +44,7 @@
         }
         UILabel *photoNum = [[UILabel alloc] initWithFrame:CGRectMake(photo.right, 15 * FitHeight, 70*FitWidth, 30*FitHeight)];
         photoNum.text = [NSString stringWithFormat:@"(%@)",self.photoNum];
-        photoNum.font = [UIFont systemFontOfSize:14];
+        photoNum.font = FONT_WITH_S(14);
         photoNum.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         [self addSubview:photoNum];
         

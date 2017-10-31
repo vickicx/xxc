@@ -29,20 +29,17 @@
     view.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:0.6];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, view.width, view.height)];
     label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:12];
+    label.font = FONT_WITH_S(12);
     [view addSubview:label];
-
-    if (_num == 2) {
+    [self.contentView addSubview:view];
+    
+    if(_num == 0 || _num == 2){
         [view setHidden:YES];
-    }else {
+    }else{
         [view setHidden:NO];
-        if (_num == 1) {
-            label.text = @"审核中";
-        }else if(_num == 3) {
-            label.text = @"未通过";
-        }
-        [self addSubview:view];
     }
+    if(_num == 1){label.text = @"审核中";}
+    if(_num == 3){label.text = @"未通过";}
 }
 
 @end

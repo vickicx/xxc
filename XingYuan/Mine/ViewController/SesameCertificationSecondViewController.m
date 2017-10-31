@@ -35,7 +35,6 @@
     [self.codeButton.layer setMasksToBounds:YES];
     self.codeButton.clipsToBounds = YES;
     self.codeButton.layer.cornerRadius = 5;
-    
     self.subButton.clipsToBounds = YES;
     self.subButton.layer.cornerRadius = 5;
     

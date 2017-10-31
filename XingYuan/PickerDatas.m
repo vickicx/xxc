@@ -15,6 +15,15 @@
     return @[];
 }
 
+//年龄
++ (NSArray *)ages{
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    for(int i=18;i<40;i++){
+        [dataArray addObject:[NSString stringWithFormat:@"%d",i]];
+    }
+    return dataArray;
+}
+
 //身高
 + (NSArray *)heights{
     NSMutableArray *dataArray = [NSMutableArray new];

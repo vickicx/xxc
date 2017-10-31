@@ -50,4 +50,5 @@
 @property (nonatomic,copy) NSString *workandrest;
 @property (nonatomic,copy) NSNumber *zmxyauthentication;
 
+
 @end

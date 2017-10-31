@@ -30,7 +30,7 @@
     [MyTreasureView addSubview:imageView];
     
     UILabel *treasure = [[UILabel alloc] initWithFrame:CGRectMake(imageView.left - 10*FitWidth, imageView.bottom + 10*FitHeight, 100*FitWidth, 14*FitHeight)];
-    treasure.font = [UIFont systemFontOfSize:13];
+    treasure.font = FONT_WITH_S(13);
     treasure.textColor = [UIColor colorWithRed:43/255.0 green:48/255.0 blue:52/255.0 alpha:1];
     treasure.text = @"我的财富";
     [MyTreasureView addSubview:treasure];
@@ -47,14 +47,14 @@
     [MyCertificationView addSubview:imageView1];
     
     UILabel *treasure1 = [[UILabel alloc] initWithFrame:CGRectMake(imageView1.left - 10*FitWidth, imageView1.bottom + 10*FitHeight, 100*FitWidth, 14*FitHeight)];
-    treasure1.font = [UIFont systemFontOfSize:13];
+    treasure1.font = FONT_WITH_S(13);
     treasure1.textColor = [UIColor colorWithRed:43/255.0 green:48/255.0 blue:52/255.0 alpha:1];
     treasure1.text = @"我的认证";
     [MyCertificationView addSubview:treasure1];
     
     self.authenticationschedule = [[UILabel alloc] initWithFrame:CGRectMake(imageView1.left, treasure1.bottom + 2*FitHeight, 70*FitWidth, 14*FitHeight)];
     self.authenticationschedule.centerX = imageView1.centerX;
-    self.authenticationschedule.font = [UIFont systemFontOfSize:10];
+    self.authenticationschedule.font = FONT_WITH_S(10);
     self.authenticationschedule.textColor = [UIColor colorWithRed:190/255.0 green:195/255.0 blue:199/255.0 alpha:1];
     self.authenticationschedule.textAlignment = NSTextAlignmentCenter;
     self.authenticationschedule.text = @"(未认证)";
@@ -72,14 +72,14 @@
     [MyInformationView addSubview:imageView2];
     
     UILabel *treasure2 = [[UILabel alloc] initWithFrame:CGRectMake(imageView2.left - 12*FitWidth, imageView2.bottom + 10*FitHeight, 100*FitWidth, 14*FitHeight)];
-    treasure2.font = [UIFont systemFontOfSize:13];
+    treasure2.font = FONT_WITH_S(13);
     treasure2.textColor = [UIColor colorWithRed:43/255.0 green:48/255.0 blue:52/255.0 alpha:1];
     treasure2.text = @"我的资料";
     [MyInformationView addSubview:treasure2];
     
     self.memberinfoschedule = [[UILabel alloc] initWithFrame:CGRectMake(0, treasure2.bottom + 2*FitHeight, 70*FitWidth, 14*FitHeight)];
     self.memberinfoschedule.centerX = imageView2.centerX;
-    self.memberinfoschedule.font = [UIFont systemFontOfSize:10];
+    self.memberinfoschedule.font = FONT_WITH_S(10);
     self.memberinfoschedule.textColor = [UIColor colorWithRed:190/255.0 green:195/255.0 blue:199/255.0 alpha:1];
     self.memberinfoschedule.text = @"(完成度30%)";
     self.memberinfoschedule.textAlignment = NSTextAlignmentCenter;

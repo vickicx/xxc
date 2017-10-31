@@ -34,7 +34,7 @@
         
         UILabel *analysis = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         analysis.text = @"各项分析";
-        analysis.font = [UIFont systemFontOfSize:16];
+        analysis.font = FONT_WITH_S(16);
         [self addSubview:analysis];
         
         UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, analysis.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];

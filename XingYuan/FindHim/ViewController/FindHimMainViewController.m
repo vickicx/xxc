@@ -30,11 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tabBarController.tabBar.hidden = NO;
-
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254.9/255.0 alpha:1];
-    
     self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -42,18 +39,14 @@
     rightButton.frame = CGRectMake(0, 0, 50*FitWidth, 50*FitHeight);
     [rightButton setTitle:@"筛选" forState:UIControlStateNormal];
     [rightButton setTitleColor:RGBColor(246, 80, 118, 1) forState:UIControlStateNormal];
-
     [rightButton addTarget:self action:@selector(rightButton:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
         self.title =@"识TA";
-    
     [self addPagerView];
     [self pipeilabel];
-    
     [self loadData];
-    
-    
+  
     // Do any additional setup after loading the view.
 }
 
@@ -61,7 +54,6 @@
 
 - (void)addPagerView {
     TYCyclePagerView *pagerView = [[TYCyclePagerView alloc]init];
-   
     pagerView.isInfiniteLoop = YES;
     pagerView.autoScrollInterval = 3.0;
     pagerView.dataSource = self;
@@ -77,14 +69,14 @@
     UILabel *label = [[UILabel alloc]init];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor blackColor];
-    label.font = [UIFont systemFontOfSize:20];
+    label.font = FONT_WITH_S(20);
     label.frame =  CGRectMake(100 * FitWidth, _pagerView.bottom + 10 * FitHeight , 120 * FitWidth, 30 *FitHeight);
     label.text = @"综合匹配值";
     
     UILabel *Numlabel = [[UILabel alloc]init];
     Numlabel.textAlignment = NSTextAlignmentCenter;
     Numlabel.textColor = [UIColor redColor];
-    Numlabel.font = [UIFont systemFontOfSize:20];
+    Numlabel.font = FONT_WITH_S(20);
     Numlabel.frame =  CGRectMake(label.right, label.top, 50 * FitWidth, 30 *FitHeight);
     Numlabel.text = [NSString stringWithFormat:@"%@%%",@"20"];
     self.pipeiValueLabel = Numlabel;
@@ -102,7 +94,6 @@
         [datas addObject:[UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:arc4random()%255/255.0]];
     }
     _datas = [datas copy];
-    
     [_pagerView reloadData];
 }
 
@@ -115,7 +106,6 @@
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     FindHimMainModel *findModel = self.peopleArr[index];
-    
     FindHimCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndex:index];
     _pipeiValueLabel.text = [NSString stringWithFormat:@"%@%%",findModel.matchvalue];
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -135,23 +125,33 @@
          [cell.sixImageView setImage:[UIImage imageNamed:@"six_girl"]];
     }
     cell.info.text = [NSString stringWithFormat:@"%@岁 | %@cm | %@ | %@", findModel.age, findModel.stature, findModel.constellation, findModel.work];
-    PictureModel *p1 = _picArr[index][0];
-    PictureModel *p2 = _picArr[index][1];
-    PictureModel *p3 = _picArr[index][2];
-    PictureModel *p4 = _picArr[index][3];
     UIImageView *image = [[UIImageView alloc] init];
-    [image sd_setImageWithURL:Url(p1.pic)];
     UIImageView *image1 = [[UIImageView alloc] init];
-    [image1 sd_setImageWithURL:Url(p2.pic)];
     UIImageView *image2 = [[UIImageView alloc] init];
-    [image2 sd_setImageWithURL:Url(p3.pic)];
     UIImageView *image3 = [[UIImageView alloc] init];
-    [image3 sd_setImageWithURL:Url(p4.pic)];
-    
+    if (_picArr.count != 0) {
+        NSArray *picc = _picArr[index];
+        if (picc.count != 0) {
+            PictureModel *p1 = picc[0];
+            PictureModel *p2 = picc[1];
+            PictureModel *p3 = picc[2];
+            PictureModel *p4 = picc[3];
+            [image sd_setImageWithURL:(NSURL*)Url(p1.pic)];
+            [image1 sd_setImageWithURL:(NSURL*)Url(p2.pic)];
+            [image2 sd_setImageWithURL:(NSURL*)Url(p3.pic)];
+            [image3 sd_setImageWithURL:(NSURL*)Url(p4.pic)];
+        }else{
+            [image setImage:[UIImage imageNamed:@"照片"]];
+            [image1 setImage:[UIImage imageNamed:@"照片"]];
+            [image2 setImage:[UIImage imageNamed:@"照片"]];
+            [image3 setImage:[UIImage imageNamed:@"照片"]];
+        }
+     
     [cell.mainButton setBackgroundImage:image.image forState:UIControlStateNormal];
     [cell.leftButton setBackgroundImage:image1.image forState:UIControlStateNormal];
     [cell.middleButton setBackgroundImage:image2.image forState:UIControlStateNormal];
     [cell.righButton setBackgroundImage:image3.image forState:UIControlStateNormal];
+    }
     return cell;
 }
 
@@ -177,7 +177,6 @@
     UserHomePageViewController *userPage = [[UserHomePageViewController alloc] init];
     userPage.seememberid = findModel.nId;
     [self.navigationController pushViewController:userPage animated:YES];
-
 }
 
 #pragma mark - 点开小图展示大图
@@ -230,13 +229,11 @@
     [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
     [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     [VVNetWorkTool postWithUrl:Url(KnowTAFirstPage) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        
         self.peopleArr = [NSMutableArray new];
         self.picArr = [NSMutableArray new];
         NSMutableArray *arr = [result objectForKey:@"data"];
         NSMutableArray *picArr = [NSMutableArray new];
         NSMutableArray *pic = [NSMutableArray new];
-       
         for (NSDictionary *dic in arr) {
             FindHimMainModel *findHimMainModel = [[FindHimMainModel alloc] initWithDictionary:dic];
             [pic addObject:findHimMainModel.pictureArr];
@@ -250,7 +247,6 @@
         }
         [self.pagerView reloadData];
     } fail:^(NSError *error) {
-        
     }];
 }
 

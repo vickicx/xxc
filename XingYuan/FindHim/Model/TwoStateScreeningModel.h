@@ -9,6 +9,7 @@
 #import "BaseModel.h"
 
 @interface TwoStateScreeningModel : BaseModel
+@property (nonatomic,copy) NSString *interestnames; //兴趣名称列表
 @property (nonatomic,copy) NSString *interestids; //兴趣爱好，格式：“1，2，3，4，5”
 @property (nonatomic,copy) NSString *educational; // 个人学历
 @property (nonatomic,copy) NSString *operatingpost; // 工作岗位

@@ -25,7 +25,7 @@
         
         UILabel *introduction = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         introduction.text = @"个人介绍";
-        introduction.font = [UIFont systemFontOfSize:16];
+        introduction.font = FONT_WITH_S(16);
         [self addSubview:introduction];
         
         UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12, introduction.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
@@ -33,7 +33,7 @@
         [self addSubview:kong1];
         
         _summary = [[UILabel alloc] initWithFrame:CGRectMake(30, kong1.bottom + 15 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
-        _summary.font = [UIFont systemFontOfSize:14];
+        _summary.font = FONT_WITH_S(14);
         _summary.textColor = RGBColor(141, 146, 149, 1);
         _summary.numberOfLines = 0;
     

@@ -17,9 +17,25 @@
 @property (nonatomic,strong) NSArray *dataArray;
 @property (nonatomic,strong) HobbiesModel *hobbiesModel;
 @property (nonatomic,weak) UIButton *finishBtn;
+
+@property (nonatomic,assign) HobbiesControllerType controllerType;
 @end
 
 @implementation HobbiesController
+
+- (instancetype)init{
+    if([super init]){
+        self.controllerType = HobbiesControllerTypeDefault;
+    }
+    return self;
+}
+
+- (instancetype)initWithControllerType:(HobbiesControllerType)controllerType{
+    if([self init]){
+       self.controllerType = controllerType;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,7 +44,12 @@
     UIButton *finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.finishBtn = finishBtn;
     [finishBtn setTitleColor:RGBColor(246, 80, 116, 1) forState:UIControlStateNormal];
-    [finishBtn setTitle:@"保存" forState:UIControlStateNormal];
+    if(self.controllerType == HobbiesControllerTypeDefault){
+        [finishBtn setTitle:@"保存" forState:UIControlStateNormal];
+    }
+    if(self.controllerType == HobbiesControllerTypeMateRequirement){
+        [finishBtn setTitle:@"完成" forState:UIControlStateNormal];
+    }
     [finishBtn sizeToFit];
     [finishBtn addTarget:self action:@selector(dealToSave) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:finishBtn]];
@@ -61,10 +82,9 @@
 
 #pragma mark - misc
 - (void)dealToSave{
-    
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:[self getSelectedInterestWithModel:self.hobbiesModel] forKey:@"sids"];
+    [parameters setValue:[self getSelectedInterestSeperatedByVerticalLineWithModel:self.hobbiesModel] forKey:@"sids"];
     
     [JGProgressHUD showStatusWith:nil In:self.view];
     [VVNetWorkTool postWithUrl:Url(Setinterest) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
@@ -73,7 +93,10 @@
         [JGProgressHUD showResultWithModel:model In:self.view];
         if([model.code isEqual:@1]){
             if(self.hobbiesBlock != nil){
-                self.hobbiesBlock([self getSelectedInterestWithModel:self.hobbiesModel]);
+                NSString *ids = [self getSelectedInterestSeperatedByCommaWith:[self getSelectedInterestSeperatedByVerticalLineWithModel:self.hobbiesModel]];
+                NSString *names = [self getInterestNamesByModel:self.hobbiesModel];
+                
+                self.hobbiesBlock(ids,names);
             }
             [self.navigationController popViewControllerAnimated:true];
         }
@@ -82,7 +105,8 @@
     }];
 }
 
-- (NSString *)getSelectedInterestWithModel:(HobbiesModel *)model{
+//根据模型获取选中的兴趣的ID(上传参数以竖线“|”逗号“，”隔开)，这里本可以通过二维数组上传给服务器的，但搞不懂服务端这里为何用这种令人费解的形式上传参数
+- (NSString *)getSelectedInterestSeperatedByVerticalLineWithModel:(HobbiesModel *)model{
     NSMutableString *selectedInterest = [NSMutableString stringWithString:@""];
     for(int i=0;i<model.data.count;i++){
         SuperHobbyModel *superHobbyModel = model.data[i];
@@ -108,6 +132,30 @@
     return selectedInterest;
 }
 
+//根据以竖线“|”逗号“，”隔开的字符串获取全部以逗号“，”隔开的字符串
+- (NSString *)getSelectedInterestSeperatedByCommaWith:(NSString *)str{
+    return [str stringByReplacingOccurrencesOfString:@"|" withString:@","];
+}
+
+//根据模型获取选中的兴趣的名字
+- (NSString *)getInterestNamesByModel:(HobbiesModel *)model{
+    NSMutableString *selectedInterestNames = [NSMutableString stringWithString:@""];
+    for(int i=0;i<model.data.count;i++){
+        SuperHobbyModel *superHobbyModel = model.data[i];
+        for(int j=0;j<superHobbyModel.child.count;j++){
+            ChildHobbyModel *childHobbyModel = superHobbyModel.child[j];
+            if(childHobbyModel.isselect){
+                [selectedInterestNames appendFormat:@"%@,",childHobbyModel.name];
+            }
+        }
+    }
+    //删掉最后的分隔符 |
+    if([selectedInterestNames length]>=2){
+        selectedInterestNames = [NSMutableString stringWithString:[selectedInterestNames substringToIndex:[selectedInterestNames length]-1]];
+    }
+    return selectedInterestNames;
+}
+
 /**
  判断SuperHobbyModel下的选中的ChildHobbyModel数量是否大于3
 
@@ -128,9 +176,17 @@
 //请求已经服务器已经填写的数据
 - (void)requestHobbies{
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    NSString *url;
+    if(self.controllerType == HobbiesControllerTypeDefault){
+        [parameters setValue:[Helper memberId] forKey:@"memberid"];
+        url = Memberinterest;
+    }
+    if(self.controllerType == HobbiesControllerTypeMateRequirement){
+        [parameters setValue:self.interestids forKey:@"interestids"];
+        url = Interestbyids;
+    }
     
-    [VVNetWorkTool postWithUrl:Url(Memberinterest) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+    [VVNetWorkTool postWithUrl:Url(url) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         HobbiesModel *hobbiesModel = [HobbiesModel new];
         [hobbiesModel setValuesForKeysWithDictionary:result];
         self.hobbiesModel = hobbiesModel;

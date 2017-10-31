@@ -45,7 +45,17 @@
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     
-    [VVNetWorkTool postWithUrl:Url(Showmatchingfive) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+    //匹配
+    NSString *url = Showmatchingfive;
+    //我的资料
+    if(self.controllerType == ScreeningControllerTypeUpdatelocal){
+        url = Showmatchingfive;
+    }else if(self.controllerType == ScreeningControllerTypeMateRequireMent){
+        //择偶要求
+        url = ShowMateSelectionMatchingFive;
+    }
+    
+    [VVNetWorkTool postWithUrl:Url(url) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         FiveStageScreeningModel *model = [FiveStageScreeningModel new];
         [model setValuesForKeysWithDictionary:result];
         [model setValuesForKeysWithDictionary:result[@"data"]];
@@ -112,8 +122,18 @@
     parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     
+    NSString *url;
+    if(self.controllerType == ScreeningControllerTypeUpdateToServer){
+        url = Matchingfive;
+    }
+    if(self.controllerType == ScreeningControllerTypeUpdatelocal){
+        url = Matchingfive;
+    }
+    if(self.controllerType == ScreeningControllerTypeMateRequireMent){
+        url = SetMateSelectionMatchingFive;
+    }
     [JGProgressHUD showStatusWith:nil In:self.view];
-    [VVNetWorkTool postWithUrl:Url(Matchingfive) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+    [VVNetWorkTool postWithUrl:Url(url) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         BaseModel *model = [BaseModel new];
         [model setValuesForKeysWithDictionary:result];
         [JGProgressHUD showResultWithModel:model In:self.view];

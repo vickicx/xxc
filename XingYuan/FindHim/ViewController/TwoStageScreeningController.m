@@ -48,8 +48,17 @@
 - (void)requestPrimaryData{
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    //匹配
+    NSString *url = Showmatchingtwo;
+    //我的资料
+    if(self.controllerType == ScreeningControllerTypeUpdatelocal){
+        url = Showmatchingtwo;
+    }else if(self.controllerType == ScreeningControllerTypeMateRequireMent){
+        //择偶要求
+        url = ShowMateSelectionMatchingTwo;
+    }
     
-    [VVNetWorkTool postWithUrl:Url(Showmatchingtwo) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+    [VVNetWorkTool postWithUrl:Url(url) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         TwoStateScreeningModel *model = [TwoStateScreeningModel new];
         self.twoStateScreenModel = model;
         [model setValuesForKeysWithDictionary:result];
@@ -134,8 +143,18 @@
     parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     
+    NSString *url;
+    if(self.controllerType == ScreeningControllerTypeUpdateToServer){
+        url = Matchingtwo;
+    }
+    if(self.controllerType == ScreeningControllerTypeUpdatelocal){
+        url = Matchingtwo;
+    }
+    if(self.controllerType == ScreeningControllerTypeMateRequireMent){
+        url = SetMateSelectionMatchingTwo;
+    }
     [JGProgressHUD showStatusWith:nil In:self.view];
-    [VVNetWorkTool postWithUrl:Url(Matchingtwo) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+    [VVNetWorkTool postWithUrl:Url(url) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         BaseModel *model = [BaseModel new];
         [model setValuesForKeysWithDictionary:result];
         [JGProgressHUD showResultWithModel:model In:self.view];
@@ -159,9 +178,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //兴趣爱好
     if(indexPath.row == 1){
-        HobbiesController *hobbiesController = [[HobbiesController alloc] init];
-        hobbiesController.hobbiesBlock = ^(NSString *hobbies){
-            self.twoStateScreenModel.interestids = hobbies;
+        HobbiesController *hobbiesController;
+        if(self.controllerType == ScreeningControllerTypeMateRequireMent){
+            hobbiesController = [[HobbiesController alloc] initWithControllerType:HobbiesControllerTypeMateRequirement];
+            hobbiesController.interestids = self.twoStateScreenModel.interestids;
+        }else{
+            hobbiesController = [[HobbiesController alloc] init];
+        }
+        hobbiesController.hobbiesBlock = ^(NSString *interestids,NSString *hobbiesNames){
+            self.twoStateScreenModel.interestids = interestids;
+            self.twoStateScreenModel.interestnames = hobbiesNames;
             [self refreshWithModel:self.twoStateScreenModel];
         };
         [self.navigationController pushViewController:hobbiesController animated:true];

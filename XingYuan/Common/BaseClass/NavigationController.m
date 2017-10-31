@@ -19,7 +19,8 @@
     [self.navigationBar setTranslucent:true];
     UIFont *font = FONT_WITH_S(18);
     NSDictionary *dic = @{NSFontAttributeName:font};
-    self.navigationBar.titleTextAttributes =dic;
+    [self.navigationBar setTitleTextAttributes:dic];
+    
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -27,14 +28,16 @@
     if (self.viewControllers.count > 0){
         //push时隐藏tabbar
         viewController.hidesBottomBarWhenPushed = true;
+        //
         //替换ViewController的导航栏返回按钮
-        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        backBtn.contentMode = UIViewContentModeLeft;
-        [backBtn setImage:[UIImage imageNamed:@"back-拷贝-2"] forState:UIControlStateNormal];
-        backBtn.frame = CGRectMake(0, 0, 40, 20);
-        [backBtn sizeToFit];
-        [backBtn addTarget:self action:@selector(dealTapBack) forControlEvents:UIControlEventTouchUpInside];
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+//        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [backBtn setImage:[UIImage imageNamed:@"back-拷贝-2"] forState:UIControlStateNormal];
+//        backBtn.frame = CGRectMake(0, 0, 40, 20);
+//        backBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 20);
+//        [backBtn sizeToFit];
+//        [backBtn addTarget:self action:@selector(dealTapBack) forControlEvents:UIControlEventTouchUpInside];
+//        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+        
     }
     [super pushViewController:viewController animated:true];
 }

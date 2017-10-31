@@ -71,10 +71,10 @@
     
     _address.text = @"成都(3km)";
     _address.textAlignment = NSTextAlignmentRight;
-    _address.font = [UIFont systemFontOfSize:12];
+    _address.font = FONT_WITH_S(12);
     
 //    _userName.text = @"dwefewfwe";
-    _userName.font = [UIFont systemFontOfSize:15];
+    _userName.font = FONT_WITH_S(15);
     CGSize userNameSize = [_userName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_userName.font,NSFontAttributeName,nil]];
     _userName.width = userNameSize.width ;
     _userName.height = userNameSize.height;
@@ -86,13 +86,13 @@
     self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, _info.bottom + 10*FitHeight, self.shadeView.width - 24*FitWidth, 40*FitHeight)];
 
     _info.text = @"24岁 | 166cm | 射手座 | 服装设计";
-    _info.font = [UIFont systemFontOfSize:12];
+    _info.font = FONT_WITH_S(12);
 //    CGSize infoSize = [_info.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_info.font,NSFontAttributeName,nil]];
 //    _info.width = infoSize.width;
 //    _info.height = infoSize.height;
     
     _signature.text = @"这里是交友的一个签名什么的~";
-    _signature.font = [UIFont systemFontOfSize:12];
+    _signature.font = FONT_WITH_S(12);
     _signature.numberOfLines = 0;
      CGSize signatureSize = [_signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20*FitWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
     _signature.width = signatureSize.width;

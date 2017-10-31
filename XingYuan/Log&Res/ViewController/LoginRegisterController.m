@@ -120,30 +120,30 @@
         [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
         if ([loginResultModel.code  isEqual: @1]){
             [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
-//            //若未选择性别则跳转性别选选择界面
-//            if (!loginResultModel.sex){
-//                SexSelectController *sexSelectController = [[SexSelectController alloc] init];
-//                sexSelectController.memberId = loginResultModel.memberId;
-//                [self.navigationController pushViewController:sexSelectController animated:true];
-//                return;
-//            }
-//            //若未选择用户基础信息则跳转基础信息填写界面
-//            if (!loginResultModel.baseInfo){          
-//                UserBaseInfoFillInController *baseInfoFillInController = [[UserBaseInfoFillInController alloc] init];
-//                baseInfoFillInController.memberId = loginResultModel.memberId;
-//                [self.navigationController pushViewController:baseInfoFillInController animated:true];
-//                return;
-//            }
-            //若都已选择则进入IM登录业务
-            //如果已经注册了NIM则直接登录
-//            if ([loginResultModel.imaccid length]){
-//                [self loginNTESWithAccid:loginResultModel.imaccid Token:loginResultModel.imtoken];
-//            }else{
-//                //NIM还未注册则向服务器发起注册请求
-//                [self requestNTESAccidAndTokenWith:loginResultModel.memberId];
-//            }
-            [Helper saveMemberId:loginResultModel.memberId];
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[TabBarController alloc] init];
+            //若未选择性别则跳转性别选选择界面
+            if (!loginResultModel.sex){
+                SexSelectController *sexSelectController = [[SexSelectController alloc] init];
+                sexSelectController.memberId = loginResultModel.memberId;
+                [self.navigationController pushViewController:sexSelectController animated:true];
+                return;
+            }
+            //若未选择用户基础信息则跳转基础信息填写界面
+            if (!loginResultModel.issetmemberinfo){
+                UserBaseInfoFillInController *baseInfoFillInController = [[UserBaseInfoFillInController alloc] init];
+                baseInfoFillInController.memberId = loginResultModel.memberId;
+                [self.navigationController pushViewController:baseInfoFillInController animated:true];
+                return;
+            }
+//            若都已选择则进入IM登录业务
+//            如果已经注册了NIM则直接登录
+            if ([loginResultModel.imaccid length]){
+                [self loginNTESWithAccid:loginResultModel.imaccid Token:loginResultModel.imtoken];
+            }else{
+                //NIM还未注册则向服务器发起注册请求
+                [self requestNTESAccidAndTokenWith:loginResultModel.memberId];
+            }
+//            [Helper saveMemberId:loginResultModel.memberId];
+//            [UIApplication sharedApplication].keyWindow.rootViewController = [[TabBarController alloc] init];
         }
     } fail:^(NSError *error) {
         NSLog(@"%@",[error localizedDescription]);

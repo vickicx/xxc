@@ -32,7 +32,7 @@
         
         UILabel *planning = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         planning.text = @"未来规划";
-        planning.font = [UIFont systemFontOfSize:16];
+        planning.font = FONT_WITH_S(16);
         [self addSubview:planning];
         
         _kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12, planning.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
@@ -58,7 +58,7 @@
         menuLabel.textAlignment = NSTextAlignmentCenter;
         menuLabel.backgroundColor = [UIColor colorWithRed:255/255.0 green:239/255.0 blue:243/255.0 alpha:1];
         menuLabel.text = arr[index];
-        menuLabel.font = [UIFont systemFontOfSize:13];
+        menuLabel.font = FONT_WITH_S(13);
         menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         CGFloat width = [menuLabel widthOfSizeToFit];
         menuLabel.frame = CGRectMake(0, 0, width + 30*FitWidth, 30*FitHeight);

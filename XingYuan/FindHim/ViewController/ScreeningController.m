@@ -9,7 +9,6 @@
 #import "ScreeningController.h"
 
 @interface ScreeningController ()
-@property (nonatomic,assign) ScreeningControllerType controllerType;
 @property (nonatomic,copy) NSString *basicInfoCellPreTitle;
 @end
 

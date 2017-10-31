@@ -33,7 +33,7 @@
         
         UILabel *introduction = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         introduction.text = @"个人情况";
-        introduction.font = [UIFont systemFontOfSize:16];
+        introduction.font = FONT_WITH_S(16);
         [self addSubview:introduction];
         
         _kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, introduction.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
@@ -63,7 +63,7 @@
         menuLabel.textAlignment = NSTextAlignmentCenter;
         menuLabel.backgroundColor = [UIColor colorWithRed:255/255.0 green:239/255.0 blue:243/255.0 alpha:1];
         menuLabel.text = arr[index];
-        menuLabel.font = [UIFont systemFontOfSize:13];
+        menuLabel.font = FONT_WITH_S(13);
         menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         CGFloat width = [menuLabel widthOfSizeToFit];
         menuLabel.frame = CGRectMake(0, 0, width + 30 *FitWidth, 30*FitHeight);

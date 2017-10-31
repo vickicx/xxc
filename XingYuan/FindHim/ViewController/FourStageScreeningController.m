@@ -43,6 +43,7 @@
     [super dealUploadInfo:isToNext];
     //网络请求，更新信息到服务器,并在网络回调中根据isToNext判断是否跳转下一页
     [self uploadInfoToServer:isToNext];
+    
 }
 
 //请求已经服务器已经填写的数据
@@ -51,7 +52,17 @@
     parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
         
-    [VVNetWorkTool postWithUrl:Url(ShowmatchingFour) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+    //匹配
+    NSString *url = ShowmatchingFour;
+    //我的资料
+    if(self.controllerType == ScreeningControllerTypeUpdatelocal){
+        url = ShowmatchingFour;
+    }else if(self.controllerType == ScreeningControllerTypeMateRequireMent){
+        //择偶要求
+        url = ShowMateSelectionMatchingFour;
+    }
+    
+    [VVNetWorkTool postWithUrl:Url(url) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         FourStageScreeningModel *model = [FourStageScreeningModel new];
         [model setValuesForKeysWithDictionary:result];
         [model setValuesForKeysWithDictionary:result[@"data"]];
@@ -130,8 +141,18 @@
     parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     
+    NSString *url;
+    if(self.controllerType == ScreeningControllerTypeUpdateToServer){
+        url = MatchingFour;
+    }
+    if(self.controllerType == ScreeningControllerTypeUpdatelocal){
+        url = MatchingFour;
+    }
+    if(self.controllerType == ScreeningControllerTypeMateRequireMent){
+        url = SetMateSelectionMatchingFour;
+    }
     [JGProgressHUD showStatusWith:nil In:self.view];
-    [VVNetWorkTool postWithUrl:Url(MatchingFour) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+    [VVNetWorkTool postWithUrl:Url(url) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         BaseModel *model = [BaseModel new];
         [model setValuesForKeysWithDictionary:result];
         [JGProgressHUD showResultWithModel:model In:self.view];

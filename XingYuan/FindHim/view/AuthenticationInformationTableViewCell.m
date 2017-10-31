@@ -28,7 +28,7 @@
         
         UILabel *Authentication = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         Authentication.text = @"认证资料";
-        Authentication.font = [UIFont systemFontOfSize:16];
+        Authentication.font = FONT_WITH_S(16);
         
         [self addSubview:Authentication];
         
@@ -84,27 +84,27 @@
     NSArray *imageName1 = @[@"实名认证1", @"手机认证1", @"芝麻认证1", @"购车认证1", @"购房认证1"];
     NSArray *titleName = @[@"实名认证", @"手机认证", @"芝麻认证", @"购车认证", @"购房认证"];
     cell.label.text = titleName[indexPath.row];
-    if (_matchingLevelThreeModel.realnameauthentication.intValue == 2 && indexPath.row == 0) {
+    if (_matchingLevelThreeModel.realnameauthentication && indexPath.row == 0) {
         [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
     }else {
         [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
     }
-    if (_matchingLevelThreeModel.phoneauthentication.intValue == 2 && indexPath.row == 1) {
+    if (_matchingLevelThreeModel.phoneauthentication && indexPath.row == 1) {
         [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
     }else {
         [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
     }
-    if (_matchingLevelThreeModel.zmxyauthentication.intValue == 2 && indexPath.row == 2) {
+    if (_matchingLevelThreeModel.zmxyauthentication && indexPath.row == 2) {
         [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
     }else {
         [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
     }
-    if (_matchingLevelThreeModel.buycarauthentication.intValue == 2 && indexPath.row == 3) {
+    if (_matchingLevelThreeModel.buycarauthentication && indexPath.row == 3) {
         [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
     }else {
         [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
     }
-    if (_matchingLevelThreeModel.buyhouseauthentication.intValue == 2 && indexPath.row == 4) {
+    if (_matchingLevelThreeModel.buyhouseauthentication && indexPath.row == 4) {
         [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
     }else {
         [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];

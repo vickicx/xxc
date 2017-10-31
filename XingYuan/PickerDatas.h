@@ -13,6 +13,9 @@
 //兴趣爱好
 + (NSArray *)hobbies;
 
+//年龄
++ (NSArray *)ages;
+
 //身高
 + (NSArray *)heights;
 

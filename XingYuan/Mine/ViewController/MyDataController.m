@@ -27,6 +27,9 @@
 #import "TwoStageScreeningController.h"
 #import "FourStageScreeningController.h"
 #import "FiveStageScreeningController.h"
+#import "NSDictionary+ScreeningValues.h"
+#import "MateRequirementAuthenticationCell.h"
+#import "SelectAuthenticationController.h"
 
 @interface MyDataController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,weak) UITableView *tableView;
@@ -37,15 +40,12 @@
 @property (nonatomic,strong) FillUserInfoCell *myalbumCell;
 //个人介绍
 @property (nonatomic,strong) FillUserInfoCell *selfIntroduceCell;
-
 //选项卡
 @property (nonatomic,strong) MyDataSelectTypeCell *myDataSelectTypeCell;
-
 //我的资料Cells
 @property (nonatomic,strong) NSArray  *myDataCells;
 //我的资料Cell的title列表
 @property (nonatomic,copy) NSArray *myDataCellTitles;
-
 //择偶标准下择偶标准信息填写数目Cell
 @property (nonatomic,strong) BasiceInfoCell *basicInfoCell;
 //择偶标准Cells
@@ -111,15 +111,13 @@
     
     self.basicInfoCell = [[[NSBundle mainBundle] loadNibNamed:@"BasiceInfoCell" owner:nil options:nil] lastObject];
     self.basicInfoCell.title = @"择偶标准";
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:@"MyDataIStageInfoCell" bundle:nil] forCellReuseIdentifier:@"MyDataIStageInfoCell"];
-    
+    [self.tableView registerNib:[UINib nibWithNibName:@"MateRequirementAuthenticationCell" bundle:nil] forCellReuseIdentifier:@"MateRequirementAuthenticationCell"];
     self.myDataSelectType = MyDataSelectTypeMyData;
-    
     [self requestMyData];
     [self requestMyMateRequireMent];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -185,7 +183,6 @@
     //学历
     cell = self.suposeStandardCells[3];
     cell.infoValue = model.educational;
-    
     
     //婚姻状况
     cell = self.suposeStandardCells[4];
@@ -279,7 +276,6 @@
             formatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
             NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-            
             [formData appendPartWithFileData:data name:@"file" fileName:fileName mimeType:@"image/png"];
         } success:^(id result) {
             //成功
@@ -368,36 +364,60 @@
                 cell.leftLabelTitle = @"基本资料";
                 cell.editBlock = ^(){
                     OneStageScreeningController *oneStageScreeningController = [[OneStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"基本资料"];
+                    oneStageScreeningController.block = ^(BaseModel *model){
+                        if([model isKindOfClass:[OneStageScreeningModel class]]){
+                            self.mydataModel.matchinglevelone = model;
+                            [self.tableView reloadData];
+                        }
+                    };
                     [self.navigationController pushViewController:oneStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.mydataModel.matchinglevelone mj_keyValues] allValues];
+                NSArray *titles = [[self.mydataModel.matchinglevelone mj_keyValues] allScreeningValues];
                 [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 1){
                 cell.leftLabelTitle = @"个人情况";
                 cell.editBlock = ^(){
                     TwoStageScreeningController *twoStageScreeningController = [[TwoStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"个人情况"];
+                    twoStageScreeningController.block = ^(BaseModel *model){
+                        if([model isKindOfClass:[TwoStateScreeningModel class]]){
+                            self.mydataModel.matchingleveltwo = model;
+                            [self.tableView reloadData];
+                        }
+                    };
                     [self.navigationController pushViewController:twoStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.mydataModel.matchingleveltwo mj_keyValues] allValues];
+                NSArray *titles = [[self.mydataModel.matchingleveltwo mj_keyValues] allScreeningValues];
                 [cell configWithTitles:titles color:lightRed];
             }
             if(indexPath.row == 2){
                 cell.leftLabelTitle = @"家庭情况";
                 cell.editBlock = ^(){
                     FourStageScreeningController *fourStageScreeningController = [[FourStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"家庭情况"];
+                    fourStageScreeningController.block = ^(BaseModel *model){
+                        if([model isKindOfClass:[FourStageScreeningModel class]]){
+                            self.mydataModel.matchinglevelfour = model;
+                            [self.tableView reloadData];
+                        }
+                    };
                     [self.navigationController pushViewController:fourStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.mydataModel.matchinglevelfour mj_keyValues] allValues];
+                NSArray *titles = [[self.mydataModel.matchinglevelfour mj_keyValues] allScreeningValues];
                 [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 3){
                 cell.leftLabelTitle = @"未来规划";
                 cell.editBlock = ^(){
                     FiveStageScreeningController *fiveStageScreeningController = [[FiveStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"未来规划"];
+                    fiveStageScreeningController.block = ^(BaseModel *model){
+                        if([model isKindOfClass:[FiveStageScreeningModel class]]){
+                            self.mydataModel.matchinglevelfive = model;
+                            [self.tableView reloadData];
+                        }
+                    };
                     [self.navigationController pushViewController:fiveStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.mydataModel.matchinglevelfive mj_keyValues] allValues];
+                NSArray *titles = [[self.mydataModel.matchinglevelfive mj_keyValues] allScreeningValues];
                 [cell configWithTitles:titles color:lightRed];
             }
             return cell;
@@ -408,37 +428,60 @@
             if(indexPath.row == 0){
                 cell.leftLabelTitle = @"基本资料";
                 cell.editBlock = ^(){
-                    OneStageScreeningController *oneStageScreeningController = [[OneStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"基本资料"];
+                    OneStageScreeningController *oneStageScreeningController = [[OneStageScreeningController alloc] initWithType:ScreeningControllerTypeMateRequireMent basicInfoCellPreTitle:@"基本资料"];
+                    oneStageScreeningController.block = ^(BaseModel *model){
+                        if([model isKindOfClass:[OneStageScreeningModel class]]){
+                            self.myMateRequireModel.matchinglevelone = model;
+                            [self.tableView reloadData];
+                        }
+                    };
                     [self.navigationController pushViewController:oneStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchinglevelone mj_keyValues] allValues];
+                NSArray *titles = [[self.myMateRequireModel.matchinglevelone mj_keyValues] allScreeningValues];
                 [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 1){
-                cell.leftLabelTitle = @"认证资料";
-                cell.editBlock = ^(){
-                    TwoStageScreeningController *twoStageScreeningController = [[TwoStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"认证资料"];
-                    [self.navigationController pushViewController:twoStageScreeningController animated:true];
+                MateRequirementAuthenticationCell *mateRequirementAuthenticationCell = [tableView dequeueReusableCellWithIdentifier:@"MateRequirementAuthenticationCell" forIndexPath:indexPath];
+                
+                mateRequirementAuthenticationCell.editBlock = ^(){
+                    SelectAuthenticationController *selectAuthenticationController = [[SelectAuthenticationController alloc] init];
+                    selectAuthenticationController.callBackBlock = ^(ThreeStageScreeningModel *model){
+                        self.myMateRequireModel.matchinglevelthree = model;
+                        [self.tableView reloadData];
+                    };
+                    [self.navigationController pushViewController:selectAuthenticationController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchingleveltwo mj_keyValues] allValues];
-                [cell configWithTitles:titles color:[UIColor grayColor]];
+                [mateRequirementAuthenticationCell configWithModel:self.myMateRequireModel.matchinglevelthree];
+                return mateRequirementAuthenticationCell;
             }
             if(indexPath.row == 2){
                 cell.leftLabelTitle = @"个人情况";
                 cell.editBlock = ^(){
-                    FourStageScreeningController *fourStageScreeningController = [[FourStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"个人情况"];
-                    [self.navigationController pushViewController:fourStageScreeningController animated:true];
+                    TwoStageScreeningController *twoStageScreeningController = [[TwoStageScreeningController alloc] initWithType:ScreeningControllerTypeMateRequireMent basicInfoCellPreTitle:@"个人情况"];
+                    twoStageScreeningController.block = ^(BaseModel *model){
+                        if([model isKindOfClass:[TwoStateScreeningModel class]]){
+                            self.myMateRequireModel.matchingleveltwo = model;
+                            [self.tableView reloadData];
+                        }
+                    };
+                    [self.navigationController pushViewController:twoStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchinglevelfour mj_keyValues] allValues];
+                NSArray *titles = [[self.myMateRequireModel.matchingleveltwo mj_keyValues] allScreeningValues];
                 [cell configWithTitles:titles color:lightRed];
             }
             if(indexPath.row == 3){
                 cell.leftLabelTitle = @"家庭情况";
                 cell.editBlock = ^(){
-                    FiveStageScreeningController *fiveStageScreeningController = [[FiveStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdatelocal basicInfoCellPreTitle:@"家庭情况"];
-                    [self.navigationController pushViewController:fiveStageScreeningController animated:true];
+                    FourStageScreeningController *fourStageScreeningController = [[FourStageScreeningController alloc] initWithType:ScreeningControllerTypeMateRequireMent basicInfoCellPreTitle:@"家庭情况"];
+                    fourStageScreeningController.block = ^(BaseModel *model){
+                        if([model isKindOfClass:[FourStageScreeningModel class]]){
+                            self.myMateRequireModel.matchinglevelfour = model;
+                            [self.tableView reloadData];
+                        }
+                    };
+                    [self.navigationController pushViewController:fourStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchinglevelfive mj_keyValues] allValues];
+                NSArray *titles = [[self.myMateRequireModel.matchinglevelfour mj_keyValues] allScreeningValues];
                 [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 4){
@@ -453,7 +496,7 @@
                     };
                     [self.navigationController pushViewController:fiveStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchinglevelfive mj_keyValues] allValues];
+                NSArray *titles = [[self.myMateRequireModel.matchinglevelfive mj_keyValues] allScreeningValues];
                 [cell configWithTitles:titles color:lightRed];
             }
             return cell;

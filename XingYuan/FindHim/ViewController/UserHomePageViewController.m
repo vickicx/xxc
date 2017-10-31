@@ -61,6 +61,9 @@
 @property (nonatomic,strong) UILabel *onlineLabel;
 @property (nonatomic,strong) UIImageView *sexImageView;
 @property (nonatomic,strong) UIView *bacView;
+@property (nonatomic,strong) UILabel *guanzhuLabel;
+@property (nonatomic,strong) UILabel *dazhaohuLabel;
+@property (nonatomic,assign) BOOL guanzhu;
 @end
 
 @implementation UserHomePageViewController
@@ -70,21 +73,20 @@
      self.navigationController.delegate = self;
     //拉伸顶部图片
 //    [self lashenBgView];
-   
     //创建TableView
     [self createTableView];
     //创建导航栏
     [self createNav];
     [self createTabBar];
-    
     [self.tableView reloadData];
-   
     [self requestData];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight:) name:@"CellHeightP" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight1:) name:@"CellHeightB" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight3:) name:@"CellHeightFu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeight2:) name:@"CellHeightFa" object:nil];
+    
+    
 }
 #pragma mark - UINavigationControllerDelegate
 // 将要显示控制器
@@ -114,7 +116,7 @@
         [_tableView registerClass:[familyInformationTableViewCell class] forCellReuseIdentifier:@"familyCell"];
         [_tableView registerClass:[futurePlanningTableViewCell class] forCellReuseIdentifier:@"futureCell"];
         [_tableView registerClass:[UserSpouseStandardTableViewCell class] forCellReuseIdentifier:@"SpouseStandardCell"];
-         [_tableView registerClass:[MatchingTableViewCell class] forCellReuseIdentifier:@"MatchingTableViewCell"];
+        [_tableView registerClass:[MatchingTableViewCell class] forCellReuseIdentifier:@"MatchingTableViewCell"];
         
                [self.view addSubview:_tableView];
     }
@@ -153,8 +155,6 @@
         _headImageView.frame=CGRectMake(0, 0, kWIDTH, 223*FitHeight);
         _headImageView.backgroundColor=[UIColor clearColor];
     
-        
-       
         UIImage *image=[UIImage imageNamed:@"头像"];
         //图片的宽度设为屏幕的宽度，高度自适应
         NSLog(@"%f",image.size.height);
@@ -236,7 +236,7 @@
     view.layer.cornerRadius = view.width/2;
     [back addSubview:view];
     label.frame = view.frame;
-    label.font = [UIFont systemFontOfSize:13];
+    label.font = FONT_WITH_S(13);
     label.centerX = view.centerX = backImage.centerX;
     label.centerY = view.centerY = backImage.centerY;
     label.textColor = [UIColor whiteColor];
@@ -244,7 +244,6 @@
     [_backgroundImgV addSubview:back];
     [back addSubview:backImage];
     [back addSubview:label];
-    
 }
 
 //头像点击事件
@@ -276,7 +275,6 @@
     sheet.actionSheetStyle = UIActionSheetStyleDefault;
     //显示
     [sheet showInView:self.view];
-    
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -284,7 +282,6 @@
         NSLog(@"点击举报");
     }else if(buttonIndex == 1){
         NSLog(@"点击拉黑");
-
     }
 }
 
@@ -329,10 +326,7 @@
                 return 221*FitHeight;
             }
             return self.rowHeightFu + 100;
-            
         }
-
-
     }else if (_currentIndex == 1){
         return 400*FitHeight;
     }else if (_currentIndex == 2) {
@@ -387,7 +381,6 @@
         [_headLineView setTitleArray:@[@"资料",@"择偶标准",@"匹配"]];
     }
     //如果headLineView需要添加图片，请到HeadLineView.m中去设置就可以了，里面有注释
-    
     return _headLineView;
 }
 
@@ -405,10 +398,8 @@
             cell.picArr = self.userHomePageModel.picArr;
             [cell.collection reloadData];
             return cell;
-            
         }else if (indexPath.row == 1){
             UserAnalysisTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"analysisCell"];
-            
             return cell;
         }else if (indexPath.row == 2){
             PersonalIntroductionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"introductionCell"];
@@ -421,9 +412,7 @@
         }else if (indexPath.row == 3){
             BasicInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"informationCell"];
             cell.matchingLevelOneModel = self.userHomePageModel.matchingLevelOne;
-            
             return cell;
-            
         }else if (indexPath.row == 4){
             PersonalCircumstancesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"circumstancesCell"];
             cell.matchingLevelTwoModel = self.userHomePageModel.matchingLevelTwo;
@@ -432,7 +421,6 @@
             AuthenticationInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AuthenticationInformationCell"];
             cell.matchingLevelThreeModel = self.userHomePageModel.matchingLevelThree;
             return cell;
-            
         }else if (indexPath.row == 6){
             familyInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"familyCell"];
             cell.matchingLevelFourModel = self.userHomePageModel.matchingLevelFour;
@@ -446,18 +434,14 @@
                 cell.detailTextLabel.text=[_dataArray0 objectAtIndex:indexPath.row];
                 [cell.imageView setImage:[UIImage imageNamed:@"23.jpg"]];
                 return cell;
-
     }else if(_currentIndex==1){
         UserSpouseStandardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpouseStandardCell"];
         cell.arr = self.arr;
         return cell;
             }else if(_currentIndex==2){
                 MatchingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MatchingTableViewCell"];
-                
                 return cell;
             }
-
-    
     return nil;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -506,14 +490,11 @@
         rect.origin.x = 0;
         rect.origin.y = -contentOffsety;
         _backgroundImgV.frame = rect;
-
-        
     }
     
 }
 
 - (void)createTabBar {
-
     UIView *likebutton = [[UIView alloc] init];
     likebutton.backgroundColor = [UIColor whiteColor];
     likebutton.frame = CGRectMake(0, kHEIGHT - 49*FitHeight, kWIDTH / 2, 49*FitHeight);
@@ -527,10 +508,12 @@
     UIImageView *likeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(69 * FitWidth, likebutton.height/2 - 6*FitHeight, 12*FitWidth, 12*FitHeight)];
     [likeImageView setImage:[UIImage imageNamed:@"like1"]];
     [likebutton addSubview:likeImageView];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(likeImageView.right + 5 * FitWidth, likebutton.height/2 -20*FitHeight, 40*FitWidth, 40*FitHeight)];
-    title.text = @"关注";
-    title.font = [UIFont systemFontOfSize:16];
-    [likebutton addSubview:title];
+    _guanzhuLabel = [[UILabel alloc] initWithFrame:CGRectMake(likeImageView.right + 5 * FitWidth, likebutton.height/2 -20*FitHeight, 60*FitWidth, 40*FitHeight)];
+   
+    _guanzhuLabel.font = FONT_WITH_S(16);
+    [likebutton addSubview:_guanzhuLabel];
+    UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(likeButtonDidSelecte:)];
+    [likebutton addGestureRecognizer:tapGesturRecognizer];
     [self.view addSubview:likebutton];
     
     UIView *chatbutton = [[UIView alloc] init];
@@ -543,13 +526,54 @@
     UIImageView *chatImageView = [[UIImageView alloc] initWithFrame:CGRectMake(60 * FitWidth, chatbutton.height/2 - 6*FitHeight, 12*FitWidth, 12*FitHeight)];
     [chatImageView setImage:[UIImage imageNamed:@"chat"]];
     [chatbutton addSubview:chatImageView];
-    UILabel *title2 = [[UILabel alloc] initWithFrame:CGRectMake(chatImageView.right + 5 * FitWidth, chatbutton.height/2 -20*FitHeight, 60*FitWidth, 40*FitHeight)];
-    title2.text = @"打招呼";
-    title2.font = [UIFont systemFontOfSize:16];
-    [chatbutton addSubview:title2];
+    _dazhaohuLabel = [[UILabel alloc] initWithFrame:CGRectMake(chatImageView.right + 5 * FitWidth, chatbutton.height/2 -20*FitHeight, 60*FitWidth, 40*FitHeight)];
+    _dazhaohuLabel.text = @"打招呼";
+    _dazhaohuLabel.font = FONT_WITH_S(16);
+    [chatbutton addSubview:_dazhaohuLabel];
+    UITapGestureRecognizer *tapGesturRecognizer1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dzhButtonDidSelecte:)];
+    [chatbutton addGestureRecognizer:tapGesturRecognizer1];
     [self.view addSubview:chatbutton];
+}
+- (void)likeButtonDidSelecte:(UIButton *)button {
+    NSNumber *handletype = @0;
+    if (self.guanzhu == YES) {
+        handletype = @2;
+        _guanzhuLabel.text = @"关注";
+    } else {
+        handletype = @1;
+        _guanzhuLabel.text = @"取关";
+    }
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    [parameters setValue:self.seememberid forKey:@"followmemberid"]; //seememberid  被查看人id
+    [parameters setValue:handletype forKey:@"handletype"];
+    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+    
+    [VVNetWorkTool postWithUrl:Url(FollowMemeber) body:[Helper parametersWith:parameters]
+                      progress:nil success:^(id result) {
+                          if (self.guanzhu == YES) {
+                               [JGProgressHUD showSuccessWith: @"取消关注成功！" In:self.view];
+                          } else {
+                              [JGProgressHUD showSuccessWith: @"关注成功！" In:self.view];
+                          }
+                          self.guanzhu = !_guanzhu;
+                      } fail:^(NSError *error) {
+                      }];
     
 }
+
+//打招呼按钮点击事件
+- (void)dzhButtonDidSelecte:(UIButton *)button {
+    if (self.userHomePageModel.isfriend == YES) {
+        _dazhaohuLabel.text = @"聊天";
+    }
+    
+}
+
+
 
 - (void)requestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -564,9 +588,14 @@
                           NSDictionary *dic = [result objectForKey:@"data"];
                           self.userHomePageModel = [[UserHomePageModel alloc] initWithDictionary:dic];
                           [self.tableView reloadData];
+                          self.guanzhu = self.userHomePageModel.isfollow;
                           
+                          if (self.userHomePageModel.isfollow == YES) {
+                              _guanzhuLabel.text = @"取关";
+                          } else {
+                              _guanzhuLabel.text = @"关注";
+                          }
                       } fail:^(NSError *error) {
-                          
                       }];
     NSMutableDictionary *parameters1 = [NSMutableDictionary new];
     [parameters1 setValue:self.seememberid forKey:@"memberid"]; //seememberid  被查看人id
@@ -592,10 +621,8 @@
         self.addressLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.address];
        
     } fail:^(NSError *error) {
-       
     }];
 }
-
 
 - (void)defriendRequestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -613,13 +640,7 @@
                           }
                          
                       } fail:^(NSError *error) {
-                          
                       }];
 }
-
-
-
-
-
 
 @end

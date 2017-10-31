@@ -19,6 +19,7 @@
     [super awakeFromNib];
     self.infoLabel.layer.cornerRadius = 3;
     self.infoLabel.clipsToBounds = true;
+    self.infoLabel.font = FONT_WITH_S(15)
 }
 
 - (void)configWithTitle:(NSString *)title backgroundColor:(UIColor *)color{

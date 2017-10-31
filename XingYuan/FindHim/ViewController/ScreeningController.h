@@ -25,7 +25,7 @@ typedef enum _ScreeningControllerType {
 @property (nonatomic,strong) BasiceInfoCell *basiceInfoCell;
 @property (nonatomic,strong) NSArray *cells;
 @property (nonatomic,strong) NSArray *cellTitles;
-
+@property (nonatomic,assign) ScreeningControllerType controllerType;
 
 /**
  回调block

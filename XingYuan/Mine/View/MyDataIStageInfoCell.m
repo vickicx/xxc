@@ -89,8 +89,9 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *title = self.titles[indexPath.row];
-    CGRect rect = [title getRectWithFont:[UIFont systemFontOfSize:17] width:1000*FitWidth];
+    //避免直接取出来的不是NSString类型，造成崩溃
+    NSString *title = [NSString stringWithFormat:@"%@",self.titles[indexPath.row]];
+    CGRect rect = [title getRectWithFont:[UIFont systemFontOfSize:17] width:SCREEN_WIDTH-30];
     return CGSizeMake(rect.size.width, rect.size.height);
 }
 

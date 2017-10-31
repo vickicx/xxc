@@ -15,6 +15,8 @@ NSString *FillUserInfoCellRightInfoValueChangedNotice = @"FillUserInfoCellRightI
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.rightInfoLabel.font = FONT_WITH_S(15);
+    self.leftLabel.font = FONT_WITH_S(16)
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.infoValue = nil;
 }

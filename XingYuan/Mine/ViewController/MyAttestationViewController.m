@@ -31,7 +31,6 @@
 
 @implementation MyAttestationViewController
 
-
 - (instancetype)init{
     self = [super init];
     if(self){
@@ -48,16 +47,32 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+}
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.imageName = [NSMutableArray arrayWithArray:@[@"实名认证", @"手机认证", @"芝麻认证", @"购车认证", @"购房认证"]];
     self.imageName1 = @[@"实名认证1", @"手机认证1", @"芝麻认证1", @"购车认证1", @"购房认证1"];
     self.titleName = @[@"实名认证", @"手机认证", @"芝麻认证", @"购车认证", @"购房认证"];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"我的认证";   
+    self.title = @"我的认证";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self createView];
     [self requestData];
+//    UIView* titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
+//    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
+//    title.textAlignment = NSTextAlignmentCenter;
+//    title.text = @"我的认证!!";
+//    [titleView addSubview:title];
+//    [titleView intrinsicContentSize];
+//    [self.navigationItem setTitleView:titleView];
 }
 
 - (void)createView {
@@ -67,7 +82,7 @@
 
     UILabel *adviceLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, 0, self.view.width - 24*FitWidth, 40*FitHeight)];
     adviceLabel.text = @"当你完善此项资料，方可解锁其他用户的此项资料";
-    adviceLabel.font = [UIFont systemFontOfSize:14];
+    adviceLabel.font = FONT_WITH_S(14);
     adviceLabel.textColor = RGBColor(184, 186, 189, 1);
     adviceLabel.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:adviceLabel];
@@ -90,14 +105,10 @@
     self.attestationCollectionView.dataSource = self;
    
     [ self.attestationCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"reusableView"];
-
-    
     [self.attestationCollectionView registerNib:[UINib nibWithNibName:@"AttestationCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"AttestationCollectionViewCellID"];
     [self.attestationCollectionView registerNib:[UINib nibWithNibName:@"AttestationNextCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"AttestationNextCollectionViewCell"];
     self.attestationCollectionView.backgroundColor = [UIColor whiteColor];
-    
     [self.view addSubview:self.attestationCollectionView];
-    
 }
 
 
@@ -111,6 +122,9 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if(section == 1){
         return 1;
+    }
+    if(section == 0 && self.threeStageScreeningModel == nil){
+        return 0;
     }
     return 5;
 }
@@ -126,18 +140,18 @@
         return cell;
     }
     AttestationCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AttestationCollectionViewCellID" forIndexPath:indexPath];
-   
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];   //在创建Xib的时候给了控件相应的tag值
     UILabel *label = (UILabel *)[cell viewWithTag:2];
     
     [imageView setImage:[UIImage imageNamed:self.imageName[indexPath.row]]];
     [label setText:self.titleName[indexPath.row]];
+
     if (indexPath.row == 3 && self.threeStageScreeningModel.buycarcertifyaudit != nil) {
-        cell.num = self.threeStageScreeningModel.buycarcertifyaudit.intValue;
-        
+    
+        cell.num = self.threeStageScreeningModel.buycarcertifyaudit;
     }
-    if (indexPath.row == 4 && self.threeStageScreeningModel.buyhousecertifyaudit != nil) {
-        cell.num = self.threeStageScreeningModel.buyhousecertifyaudit.intValue;
+    if(indexPath.row == 4){
+        cell.num = self.threeStageScreeningModel.buyhousecertifyaudit;
     }
     return cell;
     
@@ -153,7 +167,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
-        if (self.threeStageScreeningModel.realnameauthentication.intValue == 2) {
+        if(self.threeStageScreeningModel.realnameauthentication){
             FinishCertificationViewController *finishCertificationVC = [[FinishCertificationViewController alloc] init];
             finishCertificationVC.title = @"实名认证";
             [self.navigationController pushViewController:finishCertificationVC animated:YES];
@@ -162,33 +176,47 @@
             [self.navigationController pushViewController:CertificationVC animated:YES];
         }
     }else if (indexPath.row == 2) {
-        if (self.threeStageScreeningModel.zmxyauthentication.intValue == 2) {
+        if (self.threeStageScreeningModel.zmxyauthentication) {
             FinishSesameViewController *finishSesameVC = [[FinishSesameViewController alloc] init];
              [self.navigationController pushViewController:finishSesameVC animated:YES];
         } else {
             SesameCertificationFirstViewController *sesameVC = [[SesameCertificationFirstViewController alloc] init];
             [self.navigationController pushViewController:sesameVC animated:YES];
         }
-       
     }else if (indexPath.row == 3) {
-        if (self.threeStageScreeningModel.buycarcertifyaudit.intValue != 1) {
-            if (self.threeStageScreeningModel.buycarauthentication.intValue == 2) {
+        //如果已经进行认证（进入审核完成界面或无操作）
+        if(self.threeStageScreeningModel.buycarauthentication){
                 FinishCertificationViewController *finishCertificationVC = [[FinishCertificationViewController alloc] init];
                 finishCertificationVC.title = @"购车认证";
                 [self.navigationController pushViewController:finishCertificationVC animated:YES];
-            } else {
+        }
+        //如果没进行认证（进入认证界面）
+        if(!self.threeStageScreeningModel.buycarauthentication){
+            //审核中则无操作
+            if(self.threeStageScreeningModel.buycarcertifyaudit == 1){
+                
+            }
+            if(self.threeStageScreeningModel.buycarcertifyaudit != 1){
                 CarCertificationViewController *carVC = [[CarCertificationViewController alloc] init];
                 [self.navigationController pushViewController:carVC animated:YES];
+
             }
         }
         
     }else if (indexPath.row == 4) {
-        if (self.threeStageScreeningModel.buyhousecertifyaudit.intValue != 1) {
-            if (self.threeStageScreeningModel.buyhouseauthentication.intValue == 2) {
-                FinishCertificationViewController *finishCertificationVC = [[FinishCertificationViewController alloc] init];
-                finishCertificationVC.title = @"购房认证";
-                [self.navigationController pushViewController:finishCertificationVC animated:YES];
-            } else {
+        //如果已经进行认证（进入审核完成界面或无操作）
+        if(self.threeStageScreeningModel.buyhouseauthentication){
+            FinishCertificationViewController *finishCertificationVC = [[FinishCertificationViewController alloc] init];
+            finishCertificationVC.title = @"购房认证";
+            [self.navigationController pushViewController:finishCertificationVC animated:YES];
+        }
+        //如果没进行认证（进入认证界面）
+        if(!self.threeStageScreeningModel.buyhouseauthentication){
+            //审核中则无操作
+            if(self.threeStageScreeningModel.buyhousecertifyaudit == 1){
+                
+            }
+            if(self.threeStageScreeningModel.buyhousecertifyaudit != 1){
                 HouseCertificationViewController *houseVC = [[HouseCertificationViewController alloc] init];
                 [self.navigationController pushViewController:houseVC animated:YES];
             }
@@ -216,12 +244,11 @@
     headerView.backgroundColor =[UIColor whiteColor];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, 15*FitHeight, 70*FitWidth, 15*FitHeight)];
     label.text = @"认证资料";
-    label.font = [UIFont systemFontOfSize:17];
+    label.font = FONT_WITH_S(17);
     
     _label1 = [[UILabel alloc] initWithFrame:CGRectMake(label.right, label.top, label.width, label.height)];
-    _label1.font = [UIFont systemFontOfSize:14];
+    _label1.font = FONT_WITH_S(14);
     _label1.textColor = RGBColor(141, 146, 149, 1);
-    
     
     UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, headerView.bottom - 2*FitHeight, self.view.width - 24*FitWidth, 1*FitHeight)];
     line.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -231,8 +258,6 @@
     [headerView addSubview:line];
     return headerView;
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -251,9 +276,7 @@
     
     [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     
-    
     [VVNetWorkTool postWithUrl:Url(ShowmatchingThree) body:[Helper parametersWith:parameters]
-     
                       progress:nil success:^(id result) {
                           NSDictionary *dic = [result objectForKey:@"data"];
                           self.threeStageScreeningModel = [[ThreeStageScreeningModel alloc] initWithDictionary:dic];
@@ -267,27 +290,27 @@
         _threeStageScreeningModel = threeStageScreeningModel;
     }
     self.temp = 0;
-    if (threeStageScreeningModel.phoneauthentication.intValue != 2) {
+    if (!threeStageScreeningModel.phoneauthentication) {
         self.imageName[1] = self.imageName1[1];
     }else {
         self.temp++;
     }
-    if (threeStageScreeningModel.realnameauthentication.intValue != 2) {
+    if (!threeStageScreeningModel.realnameauthentication) {
         self.imageName[0] = self.imageName1[0];
     }else {
         self.temp++;
     }
-    if (threeStageScreeningModel.zmxyauthentication.intValue != 2) {
+    if (!threeStageScreeningModel.zmxyauthentication) {
         self.imageName[2] = self.imageName1[2];
     }else {
         self.temp++;
     }
-    if (threeStageScreeningModel.buycarauthentication.intValue != 2) {
+    if (!threeStageScreeningModel.buycarauthentication) {
         self.imageName[3] = self.imageName1[3];
     }else {
         self.temp++;
     }
-    if (threeStageScreeningModel.buyhouseauthentication.intValue != 2) {
+    if (!threeStageScreeningModel.buyhouseauthentication) {
         self.imageName[4] = self.imageName1[4];
     }else {
         self.temp++;
@@ -297,10 +320,6 @@
      [_attestationCollectionView reloadData];
     
 }
-
-
-
-
 
 /*
 #pragma mark - Navigation

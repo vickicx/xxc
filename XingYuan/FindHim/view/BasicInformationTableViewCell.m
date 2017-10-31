@@ -33,7 +33,7 @@
         
         UILabel *information = [[UILabel alloc] initWithFrame:CGRectMake(dian.right + 10 * FitWidth, 15 * FitHeight, 80*FitWidth, 30*FitHeight)];
         information.text = @"基本资料";
-        information.font = [UIFont systemFontOfSize:16];
+        information.font = FONT_WITH_S(16);
         
         [self addSubview:information];
         if (self.userId == nil) {
@@ -41,7 +41,7 @@
         }
         UILabel *userid = [[UILabel alloc] initWithFrame:CGRectMake(information.right, 15 * FitHeight, 170*FitWidth, 30*FitHeight)];
         userid.text = [NSString stringWithFormat:@"(%@)",self.userId];
-        userid.font = [UIFont systemFontOfSize:14];
+        userid.font = FONT_WITH_S(14);
         userid.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
         [self addSubview:userid];
         
@@ -71,7 +71,7 @@
             menuLabel.textAlignment = NSTextAlignmentCenter;
             menuLabel.backgroundColor = [UIColor colorWithRed:240/255.0 green:241/255.0 blue:241/255.0 alpha:1];
             menuLabel.text = _arr[index];
-            menuLabel.font = [UIFont systemFontOfSize:13];
+            menuLabel.font = FONT_WITH_S(13);
             menuLabel.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
             CGFloat width = [menuLabel widthOfSizeToFit];
             menuLabel.frame = CGRectMake(0, 0, width + 30*FitWidth, 30*FitHeight);

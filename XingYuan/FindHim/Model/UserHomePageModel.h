@@ -38,5 +38,7 @@
 @property (nonatomic,strong) FourStageScreeningModel *matchingLevelFour;
 @property (nonatomic,strong) FiveStageScreeningModel *matchingLevelFive;
 
+@property (nonatomic,assign) BOOL isfollow;
+@property (nonatomic,assign) BOOL isfriend;
 
 @end
