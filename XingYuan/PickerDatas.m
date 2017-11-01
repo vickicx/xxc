@@ -15,6 +15,11 @@
     return @[];
 }
 
+//相貌自评
++ (NSArray *)lookEvaluates{
+    return @[@"1分",@"2分",@"3分",@"4分",@"5分",@"6分",@"7分",@"8分",@"9分",@"10分"];
+}
+
 //年龄
 + (NSArray *)ages{
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
@@ -29,7 +34,7 @@
     NSMutableArray *dataArray = [NSMutableArray new];
     [dataArray addObject:@"140以下"];
     for (int i=140;i<=230;i++){
-        [dataArray addObject:[NSString stringWithFormat:@"%d",i]];
+        [dataArray addObject:[NSString stringWithFormat:@"%dcm",i]];
     }
     [dataArray addObject:@"230以上"];
     return dataArray;
@@ -38,6 +43,11 @@
 //体型
 + (NSArray *)bodyShaps{
     return @[@"很瘦",@"较瘦",@"苗条",@"均匀",@"高挑",@"丰满",@"健壮",@"较胖",@"胖"];
+}
+
+//星座
++ (NSArray *)constellations{
+    return @[@"摩羯座",@"摩羯座",@"水瓶座",@"双鱼座",@"白羊座",@"金牛座",@"双子座",@"巨蟹座",@"狮子座",@"处女座",@"天秤座",@"天蝎座",@"射手座"];
 }
 
 //个人学历
@@ -57,7 +67,7 @@
 
 //子女情况
 + (NSArray *)childStatus{
-    return @[@"子女",@"有，和我住在一起",@"有，有时和我住一起",@"大有，不和我住一起"];
+    return @[@"无子女",@"有，和我住在一起",@"有，有时和我住一起",@"有，不和我住一起"];
 }
 
 //是否喝酒

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PickerView : UIView
-@property (nonatomic,weak) UIPickerView *pickerView;
+@property (nonatomic,weak) UIView *pickerContainView;
 
 //取消按钮点击事件
 - (void)dealCancel;

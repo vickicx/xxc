@@ -7,6 +7,8 @@
 //
 
 #import "AddressPickerView.h"
+#import "ProvinceModel.h"
+#import "CityModel.h"
 
 @interface AddressPickerView ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *aboveView;
@@ -30,8 +32,16 @@
     self.pickerView.dataSource = self;
     
     //获取plist中的数据
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"ProvinceCityList" ofType:@"plist"];
-    self.dataArray = [[NSMutableArray alloc] initWithContentsOfFile:path];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Province_city_area" ofType:@"plist"];
+    NSArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:path];
+    NSMutableArray *dataArray = [NSMutableArray new];
+    for(int i=0;i<arr.count;i++){
+        ProvinceModel *provinceModel = [ProvinceModel new];
+        [provinceModel setValuesForKeysWithDictionary:arr[i]];
+        [dataArray addObject:provinceModel];
+    }
+    self.dataArray = dataArray;
+    [self.pickerView reloadAllComponents];
 }
 
 - (IBAction)dealTapCancel:(id)sender {
@@ -44,10 +54,14 @@
 
 
 - (void)dealTapAboveView{
-    NSString *province = self.dataArray[[self.pickerView selectedRowInComponent:0]][@"state"];
-    NSArray *cities = self.dataArray[[self.pickerView selectedRowInComponent:0]][@"cities"];
-    NSString *city = cities[[self.pickerView selectedRowInComponent:1]];
-    self.block(province, city);
+    ProvinceModel *provinceModel = self.dataArray[[self.pickerView selectedRowInComponent:0]];
+    NSString *provinceName = provinceModel.name;
+    CityModel *cityModel = provinceModel.city[[self.pickerView selectedRowInComponent:1]];
+    NSString *cityName = cityModel.name;
+//    NSString *province = self.dataArray[[self.pickerView selectedRowInComponent:0]][@"state"];
+//    NSArray *cities = self.dataArray[[self.pickerView selectedRowInComponent:0]][@"cities"];
+//    NSString *city = cities[[self.pickerView selectedRowInComponent:1]];
+    self.block(provinceName, cityName);
     [self removeFromSuperview];
 }
 
@@ -62,19 +76,25 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    NSInteger section = [pickerView selectedRowInComponent:0];
-    NSArray *cities = self.dataArray[section][@"cities"];
-    return cities.count;
+    if(component == 0){
+        return self.dataArray.count;
+    }
+    if(component == 1){
+        ProvinceModel *provinceModel = self.dataArray[[pickerView selectedRowInComponent:0]];
+        return provinceModel.city.count;
+    }
+    return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if (component == 0){
-        return self.dataArray[row][@"state"];
+        ProvinceModel *provinceModel = self.dataArray[row];
+        return provinceModel.name;
     }
     if (component == 1){
-        NSInteger section = [pickerView selectedRowInComponent:0];
-        NSArray *cities = self.dataArray[section][@"cities"];
-        return cities[row];
+        ProvinceModel *provinceModel = self.dataArray[[pickerView selectedRowInComponent:0]];
+        CityModel *cityModel = provinceModel.city[row];
+        return cityModel.name;
     }
     return @"";
 }

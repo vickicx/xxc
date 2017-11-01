@@ -17,9 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationBar setTranslucent:true];
-    UIFont *font = FONT_WITH_S(18);
-    NSDictionary *dic = @{NSFontAttributeName:font};
-    [self.navigationBar setTitleTextAttributes:dic];
+//    UIFont *font = FONT_WITH_S(18);
+//    NSDictionary *dic = @{NSFontAttributeName:font};
+//    [self.navigationBar setTitleTextAttributes:dic];
     
 }
 

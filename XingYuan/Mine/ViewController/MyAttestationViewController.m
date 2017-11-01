@@ -62,17 +62,18 @@
     self.imageName1 = @[@"实名认证1", @"手机认证1", @"芝麻认证1", @"购车认证1", @"购房认证1"];
     self.titleName = @[@"实名认证", @"手机认证", @"芝麻认证", @"购车认证", @"购房认证"];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"我的认证";
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self createView];
     [self requestData];
-//    UIView* titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
-//    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
-//    title.textAlignment = NSTextAlignmentCenter;
-//    title.text = @"我的认证!!";
-//    [titleView addSubview:title];
-//    [titleView intrinsicContentSize];
-//    [self.navigationItem setTitleView:titleView];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    label.text = @"我的认证";
+    label.font = FONT_WITH_S(18);
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
+    self.navigationItem.rightBarButtonItem = itme;
+    self.navigationItem.titleView = label;
+
 }
 
 - (void)createView {

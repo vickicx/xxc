@@ -13,6 +13,9 @@
 //兴趣爱好
 + (NSArray *)hobbies;
 
+//相貌自评
++ (NSArray *)lookEvaluates;
+
 //年龄
 + (NSArray *)ages;
 
@@ -21,6 +24,9 @@
 
 //体型
 + (NSArray *)bodyShaps;
+
+//星座
++ (NSArray *)constellations;
 
 //个人学历
 + (NSArray *)educations;

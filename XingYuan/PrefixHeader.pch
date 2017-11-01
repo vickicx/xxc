@@ -37,7 +37,6 @@
 #import "Macros.h"
 #import "UIImageView+WebCache.h"
 
-
 #ifdef DEBUG
 static DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #else

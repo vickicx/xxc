@@ -415,10 +415,6 @@
 		5924F2CE1F8B98AA00D2108A /* NTESConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5924F2CD1F8B98AA00D2108A /* NTESConfig.m */; };
 		5924F2D01F8C5FDB00D2108A /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5924F2CF1F8C5FDB00D2108A /* UserNotifications.framework */; };
 		5935BE171F91B9B800BA4196 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE161F91B9B800BA4196 /* PickerView.m */; };
-		5935BE1A1F91BCDB00BA4196 /* BodyShapPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE191F91BCDB00BA4196 /* BodyShapPickerView.m */; };
-		5935BE1D1F91C1AF00BA4196 /* ConstellationPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE1C1F91C1AF00BA4196 /* ConstellationPickerView.m */; };
-		5935BE201F91D71300BA4196 /* LooksEvaluatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE1F1F91D71300BA4196 /* LooksEvaluatePickerView.m */; };
-		5935BE231F91DFE500BA4196 /* HeightPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE221F91DFE500BA4196 /* HeightPickerView.m */; };
 		5935BE261F91EAF000BA4196 /* TwoStageScreeningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE251F91EAF000BA4196 /* TwoStageScreeningController.m */; };
 		5935BE291F92058400BA4196 /* DataPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5935BE281F92058400BA4196 /* DataPickerView.m */; };
 		593DE0D11FA2CBF900073D0A /* NSDictionary+ScreeningValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 593DE0D01FA2CBF900073D0A /* NSDictionary+ScreeningValues.m */; };
@@ -494,6 +490,12 @@
 		59A60C981F8F618400886A6E /* ProvinceCityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59A60C951F8F618400886A6E /* ProvinceCityList.plist */; };
 		59A60C9B1F8F62AB00886A6E /* AddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A60C9A1F8F62AB00886A6E /* AddressPickerView.m */; };
 		59A60C9D1F8F62BD00886A6E /* AddressPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59A60C9C1F8F62BD00886A6E /* AddressPickerView.xib */; };
+		59A92FEF1FA719CA0066D6F9 /* MyFollowersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A92FED1FA719C90066D6F9 /* MyFollowersController.m */; };
+		59A92FF31FA71A1E0066D6F9 /* IFollowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A92FF21FA71A1E0066D6F9 /* IFollowsController.m */; };
+		59A92FF61FA71A5E0066D6F9 /* MyIMFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A92FF51FA71A5E0066D6F9 /* MyIMFriendsController.m */; };
+		59A92FF91FA727720066D6F9 /* MemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A92FF81FA727720066D6F9 /* MemberModel.m */; };
+		59A930001FA72EEF0066D6F9 /* MemberListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A92FFE1FA72EEF0066D6F9 /* MemberListCell.m */; };
+		59A930011FA72EF00066D6F9 /* MemberListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59A92FFF1FA72EEF0066D6F9 /* MemberListCell.xib */; };
 		59B7A4791F7CE84800217911 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B7A4781F7CE84800217911 /* AppDelegate.m */; };
 		59B7A4861F7CE87A00217911 /* LoginRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B7A47B1F7CE87A00217911 /* LoginRegisterController.m */; };
 		59B7A4871F7CE87A00217911 /* LoginRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59B7A47C1F7CE87A00217911 /* LoginRegisterController.xib */; };
@@ -508,6 +510,9 @@
 		59BFA7D91F988E5800D7A08C /* ScreeningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFA7D81F988E5800D7A08C /* ScreeningController.m */; };
 		59BFA7DC1F98C47500D7A08C /* TwoStateScreeningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFA7DB1F98C47500D7A08C /* TwoStateScreeningModel.m */; };
 		59BFA7DF1F98C8A100D7A08C /* ThreeStageScreeningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFA7DE1F98C8A100D7A08C /* ThreeStageScreeningModel.m */; };
+		59CAC4271FA82B9B00FBE6CE /* Province_city_area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59CAC4261FA82B9B00FBE6CE /* Province_city_area.plist */; };
+		59CAC42A1FA82C9E00FBE6CE /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CAC4291FA82C9E00FBE6CE /* ProvinceModel.m */; };
+		59CAC42D1FA82CB000FBE6CE /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CAC42C1FA82CB000FBE6CE /* CityModel.m */; };
 		59D942761F983DD600972B90 /* GrowthCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D942751F983DD600972B90 /* GrowthCenterController.m */; };
 		59D9427A1F9844A700972B90 /* GrowthCenterTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D942781F9844A700972B90 /* GrowthCenterTaskCell.m */; };
 		59D9427B1F9844A700972B90 /* GrowthCenterTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59D942791F9844A700972B90 /* GrowthCenterTaskCell.xib */; };
@@ -532,6 +537,8 @@
 		59E0ABDE1F95F320001FFC7A /* SelfIntroduceInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E0ABDC1F95F320001FFC7A /* SelfIntroduceInputController.m */; };
 		59E0ABDF1F95F320001FFC7A /* SelfIntroduceInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59E0ABDD1F95F320001FFC7A /* SelfIntroduceInputController.xib */; };
 		59E0ABE21F9609B0001FFC7A /* NSString+tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E0ABE11F9609B0001FFC7A /* NSString+tool.m */; };
+		59E397FA1FA862870064E0CD /* AgeRangePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E397F91FA862870064E0CD /* AgeRangePickerView.m */; };
+		59E397FD1FA87B120064E0CD /* HeightRangePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E397FC1FA87B120064E0CD /* HeightRangePickerView.m */; };
 		59FBDDDE1F94498D008E3212 /* FourStageScreeningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FBDDDD1F94498D008E3212 /* FourStageScreeningController.m */; };
 		59FBDDE11F9449A4008E3212 /* FiveStageScreeningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FBDDE01F9449A4008E3212 /* FiveStageScreeningController.m */; };
 		5B751CB9C37F68FB8639A35E /* Pods_XingYuan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3C4DEA2FF5AB9C2F250B17F /* Pods_XingYuan.framework */; };
@@ -1461,14 +1468,6 @@
 		5924F2CF1F8C5FDB00D2108A /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		5935BE151F91B9B800BA4196 /* PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView.h; sourceTree = "<group>"; };
 		5935BE161F91B9B800BA4196 /* PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView.m; sourceTree = "<group>"; };
-		5935BE181F91BCDB00BA4196 /* BodyShapPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyShapPickerView.h; sourceTree = "<group>"; };
-		5935BE191F91BCDB00BA4196 /* BodyShapPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyShapPickerView.m; sourceTree = "<group>"; };
-		5935BE1B1F91C1AF00BA4196 /* ConstellationPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstellationPickerView.h; sourceTree = "<group>"; };
-		5935BE1C1F91C1AF00BA4196 /* ConstellationPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstellationPickerView.m; sourceTree = "<group>"; };
-		5935BE1E1F91D71300BA4196 /* LooksEvaluatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LooksEvaluatePickerView.h; sourceTree = "<group>"; };
-		5935BE1F1F91D71300BA4196 /* LooksEvaluatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LooksEvaluatePickerView.m; sourceTree = "<group>"; };
-		5935BE211F91DFE500BA4196 /* HeightPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeightPickerView.h; path = XingYuan/FindHim/view/HeightPickerView.h; sourceTree = SOURCE_ROOT; };
-		5935BE221F91DFE500BA4196 /* HeightPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeightPickerView.m; path = XingYuan/FindHim/view/HeightPickerView.m; sourceTree = SOURCE_ROOT; };
 		5935BE241F91EAF000BA4196 /* TwoStageScreeningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStageScreeningController.h; sourceTree = "<group>"; };
 		5935BE251F91EAF000BA4196 /* TwoStageScreeningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStageScreeningController.m; sourceTree = "<group>"; };
 		5935BE271F92058400BA4196 /* DataPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPickerView.h; sourceTree = "<group>"; };
@@ -1585,6 +1584,17 @@
 		59A60C991F8F62AB00886A6E /* AddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerView.h; sourceTree = "<group>"; };
 		59A60C9A1F8F62AB00886A6E /* AddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerView.m; sourceTree = "<group>"; };
 		59A60C9C1F8F62BD00886A6E /* AddressPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressPickerView.xib; sourceTree = "<group>"; };
+		59A92FEC1FA719C90066D6F9 /* MyFollowersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFollowersController.h; sourceTree = "<group>"; };
+		59A92FED1FA719C90066D6F9 /* MyFollowersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFollowersController.m; sourceTree = "<group>"; };
+		59A92FF11FA71A1E0066D6F9 /* IFollowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFollowsController.h; sourceTree = "<group>"; };
+		59A92FF21FA71A1E0066D6F9 /* IFollowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFollowsController.m; sourceTree = "<group>"; };
+		59A92FF41FA71A5E0066D6F9 /* MyIMFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIMFriendsController.h; sourceTree = "<group>"; };
+		59A92FF51FA71A5E0066D6F9 /* MyIMFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIMFriendsController.m; sourceTree = "<group>"; };
+		59A92FF71FA727720066D6F9 /* MemberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberModel.h; sourceTree = "<group>"; };
+		59A92FF81FA727720066D6F9 /* MemberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberModel.m; sourceTree = "<group>"; };
+		59A92FFD1FA72EEF0066D6F9 /* MemberListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListCell.h; sourceTree = "<group>"; };
+		59A92FFE1FA72EEF0066D6F9 /* MemberListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListCell.m; sourceTree = "<group>"; };
+		59A92FFF1FA72EEF0066D6F9 /* MemberListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberListCell.xib; sourceTree = "<group>"; };
 		59B7A4771F7CE84800217911 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		59B7A4781F7CE84800217911 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		59B7A47A1F7CE87A00217911 /* LoginRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRegisterController.h; sourceTree = "<group>"; };
@@ -1609,6 +1619,11 @@
 		59BFA7DB1F98C47500D7A08C /* TwoStateScreeningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStateScreeningModel.m; sourceTree = "<group>"; };
 		59BFA7DD1F98C8A100D7A08C /* ThreeStageScreeningModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeStageScreeningModel.h; sourceTree = "<group>"; };
 		59BFA7DE1F98C8A100D7A08C /* ThreeStageScreeningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeStageScreeningModel.m; sourceTree = "<group>"; };
+		59CAC4261FA82B9B00FBE6CE /* Province_city_area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Province_city_area.plist; sourceTree = "<group>"; };
+		59CAC4281FA82C9E00FBE6CE /* ProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceModel.h; sourceTree = "<group>"; };
+		59CAC4291FA82C9E00FBE6CE /* ProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceModel.m; sourceTree = "<group>"; };
+		59CAC42B1FA82CB000FBE6CE /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		59CAC42C1FA82CB000FBE6CE /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		59D942741F983DD600972B90 /* GrowthCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowthCenterController.h; sourceTree = "<group>"; };
 		59D942751F983DD600972B90 /* GrowthCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowthCenterController.m; sourceTree = "<group>"; };
 		59D942771F9844A700972B90 /* GrowthCenterTaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowthCenterTaskCell.h; sourceTree = "<group>"; };
@@ -1650,6 +1665,10 @@
 		59E0ABDD1F95F320001FFC7A /* SelfIntroduceInputController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfIntroduceInputController.xib; sourceTree = "<group>"; };
 		59E0ABE01F9609B0001FFC7A /* NSString+tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+tool.h"; sourceTree = "<group>"; };
 		59E0ABE11F9609B0001FFC7A /* NSString+tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+tool.m"; sourceTree = "<group>"; };
+		59E397F81FA862870064E0CD /* AgeRangePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeRangePickerView.h; sourceTree = "<group>"; };
+		59E397F91FA862870064E0CD /* AgeRangePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeRangePickerView.m; sourceTree = "<group>"; };
+		59E397FB1FA87B120064E0CD /* HeightRangePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeightRangePickerView.h; sourceTree = "<group>"; };
+		59E397FC1FA87B120064E0CD /* HeightRangePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeightRangePickerView.m; sourceTree = "<group>"; };
 		59FBDDDC1F94498D008E3212 /* FourStageScreeningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourStageScreeningController.h; sourceTree = "<group>"; };
 		59FBDDDD1F94498D008E3212 /* FourStageScreeningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourStageScreeningController.m; sourceTree = "<group>"; };
 		59FBDDDF1F9449A4008E3212 /* FiveStageScreeningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveStageScreeningController.h; sourceTree = "<group>"; };
@@ -3906,9 +3925,14 @@
 		59A60C921F8F618400886A6E /* AddressPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				59CAC4281FA82C9E00FBE6CE /* ProvinceModel.h */,
+				59CAC4291FA82C9E00FBE6CE /* ProvinceModel.m */,
+				59CAC42B1FA82CB000FBE6CE /* CityModel.h */,
+				59CAC42C1FA82CB000FBE6CE /* CityModel.m */,
 				59A60C991F8F62AB00886A6E /* AddressPickerView.h */,
 				59A60C9A1F8F62AB00886A6E /* AddressPickerView.m */,
 				59A60C9C1F8F62BD00886A6E /* AddressPickerView.xib */,
+				59CAC4261FA82B9B00FBE6CE /* Province_city_area.plist */,
 				59A60C951F8F618400886A6E /* ProvinceCityList.plist */,
 			);
 			path = AddressPickerView;
@@ -3970,8 +3994,6 @@
 				59A60C8D1F8F4BD000886A6E /* DatePickerView.h */,
 				59A60C8E1F8F4BD000886A6E /* DatePickerView.m */,
 				59A60C901F8F4BDE00886A6E /* DatePickerView.xib */,
-				5935BE211F91DFE500BA4196 /* HeightPickerView.h */,
-				5935BE221F91DFE500BA4196 /* HeightPickerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4286,6 +4308,8 @@
 				594E867C1F9DCFBF00EE0390 /* MyDataModel.m */,
 				594E867E1F9DE5F100EE0390 /* MyMateRequireModel.h */,
 				594E867F1F9DE5F100EE0390 /* MyMateRequireModel.m */,
+				59A92FF71FA727720066D6F9 /* MemberModel.h */,
+				59A92FF81FA727720066D6F9 /* MemberModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4333,6 +4357,13 @@
 				594E86761F9D911E00EE0390 /* AttestationNextCollectionViewCell.h */,
 				594E86771F9D911E00EE0390 /* AttestationNextCollectionViewCell.m */,
 				594E86781F9D911E00EE0390 /* AttestationNextCollectionViewCell.xib */,
+				59A92FFD1FA72EEF0066D6F9 /* MemberListCell.h */,
+				59A92FFE1FA72EEF0066D6F9 /* MemberListCell.m */,
+				59A92FFF1FA72EEF0066D6F9 /* MemberListCell.xib */,
+				59E397F81FA862870064E0CD /* AgeRangePickerView.h */,
+				59E397F91FA862870064E0CD /* AgeRangePickerView.m */,
+				59E397FB1FA87B120064E0CD /* HeightRangePickerView.h */,
+				59E397FC1FA87B120064E0CD /* HeightRangePickerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4387,6 +4418,12 @@
 				99ADB5831F974425005928B3 /* NobodyLikeMeViewController.h */,
 				99ADB5841F974425005928B3 /* NobodyLikeMeViewController.m */,
 				99ADB5851F974425005928B3 /* NobodyLikeMeViewController.xib */,
+				59A92FEC1FA719C90066D6F9 /* MyFollowersController.h */,
+				59A92FED1FA719C90066D6F9 /* MyFollowersController.m */,
+				59A92FF11FA71A1E0066D6F9 /* IFollowsController.h */,
+				59A92FF21FA71A1E0066D6F9 /* IFollowsController.m */,
+				59A92FF41FA71A5E0066D6F9 /* MyIMFriendsController.h */,
+				59A92FF51FA71A5E0066D6F9 /* MyIMFriendsController.m */,
 				59D942741F983DD600972B90 /* GrowthCenterController.h */,
 				59D942751F983DD600972B90 /* GrowthCenterController.m */,
 				593DE0DC1FA3358100073D0A /* SelectAuthenticationController.h */,
@@ -4442,12 +4479,6 @@
 				5935BE161F91B9B800BA4196 /* PickerView.m */,
 				5935BE271F92058400BA4196 /* DataPickerView.h */,
 				5935BE281F92058400BA4196 /* DataPickerView.m */,
-				5935BE181F91BCDB00BA4196 /* BodyShapPickerView.h */,
-				5935BE191F91BCDB00BA4196 /* BodyShapPickerView.m */,
-				5935BE1B1F91C1AF00BA4196 /* ConstellationPickerView.h */,
-				5935BE1C1F91C1AF00BA4196 /* ConstellationPickerView.m */,
-				5935BE1E1F91D71300BA4196 /* LooksEvaluatePickerView.h */,
-				5935BE1F1F91D71300BA4196 /* LooksEvaluatePickerView.m */,
 				99ADB55E1F95D6F6005928B3 /* MatchingTableViewCell.h */,
 				99ADB55F1F95D6F6005928B3 /* MatchingTableViewCell.m */,
 				59DA85E71F9995ED00089DBB /* MyHobbyCollectionCell.h */,
@@ -4639,6 +4670,8 @@
 				99ADB56E1F95D8F6005928B3 /* jquery-1.11.3.js in Resources */,
 				991C8FB81FA17D3300242E27 /* CertificationCollectionViewCell.xib in Resources */,
 				593DE0DB1FA3297B00073D0A /* AuthenticationCollectionCell.xib in Resources */,
+				59A930011FA72EF00066D6F9 /* MemberListCell.xib in Resources */,
+				59CAC4271FA82B9B00FBE6CE /* Province_city_area.plist in Resources */,
 				5924F2B01F8B7C3700D2108A /* JResource.bundle in Resources */,
 				5924F1FB1F8B7C3600D2108A /* NTESJionTeamViewController.xib in Resources */,
 				99ADB56C1F95D8F6005928B3 /* matching.css in Resources */,
@@ -4908,7 +4941,6 @@
 				5924EF861F8B7BEB00D2108A /* NIMKitMessageAtModel.m in Sources */,
 				597471461F8DAEC80063A6AB /* ConversationMainViewController.m in Sources */,
 				596CD1C21F7E55F300ED1C54 /* TYCyclePagerView.m in Sources */,
-				5935BE1D1F91C1AF00BA4196 /* ConstellationPickerView.m in Sources */,
 				5924EF731F8B7BEB00D2108A /* NIMKitEvent.m in Sources */,
 				5924F24F1F8B7C3600D2108A /* NTESSessionViewController.m in Sources */,
 				99B489391F7C998600D8DE54 /* FindHimCollectionViewCell.m in Sources */,
@@ -4916,6 +4948,7 @@
 				5924F26B1F8B7C3600D2108A /* renderer.c in Sources */,
 				5924F2741F8B7C3600D2108A /* NTESGLView.m in Sources */,
 				9986AFCA1F8F58B600A6EEC7 /* HXPresentTransition.m in Sources */,
+				59CAC42D1FA82CB000FBE6CE /* CityModel.m in Sources */,
 				59D9427A1F9844A700972B90 /* GrowthCenterTaskCell.m in Sources */,
 				5924F2591F8B7C3600D2108A /* NTESVideoDataTimeoutChecker.m in Sources */,
 				5924E5161F8B6D6100D2108A /* M80AttributedLabel.m in Sources */,
@@ -4937,7 +4970,6 @@
 				99AB524C1F8CA46900C8E0B0 /* futurePlanningTableViewCell.m in Sources */,
 				5924EF621F8B7BEB00D2108A /* NIMContactDataItem.m in Sources */,
 				99ADB58A1F998C37005928B3 /* AboutMeModel.m in Sources */,
-				5935BE201F91D71300BA4196 /* LooksEvaluatePickerView.m in Sources */,
 				5924EFB31F8B7BEC00D2108A /* NIMKitFileLocationHelper.m in Sources */,
 				9986AFC01F8F58B600A6EEC7 /* HXPhotoModel.m in Sources */,
 				5924F23D1F8B7C3600D2108A /* NTESSessionChartletContentView.m in Sources */,
@@ -4953,7 +4985,6 @@
 				59BFA7D61F98862000D7A08C /* OneStageScreeningModel.m in Sources */,
 				9986AFC51F8F58B600A6EEC7 /* HXPhotoTools.m in Sources */,
 				5924F2081F8B7C3600D2108A /* NTESChatroomMemberListViewController.m in Sources */,
-				5935BE1A1F91BCDB00BA4196 /* BodyShapPickerView.m in Sources */,
 				59B7A48A1F7CE87A00217911 /* ModifyPasswordController.m in Sources */,
 				99ADB5741F95F972005928B3 /* AccountProtectionViewController.m in Sources */,
 				5924F23E1F8B7C3600D2108A /* NTESSessionJankenponContentView.m in Sources */,
@@ -4972,6 +5003,7 @@
 				5924EF561F8B7BEB00D2108A /* NIMKit.m in Sources */,
 				5924F2951F8B7C3600D2108A /* NTESUserInfoSettingViewController.m in Sources */,
 				99AB52491F8CA39200C8E0B0 /* familyInformationTableViewCell.m in Sources */,
+				59A92FF31FA71A1E0066D6F9 /* IFollowsController.m in Sources */,
 				5924F2861F8B7C3600D2108A /* NTESNoDisturbSettingViewController.m in Sources */,
 				5924EF681F8B7BEB00D2108A /* NIMGrowingTextView.m in Sources */,
 				99ADB58D1F9D7DC9005928B3 /* PhotoPreviewModel.m in Sources */,
@@ -5001,6 +5033,7 @@
 				5924EF8E1F8B7BEB00D2108A /* NIMSessionMsgDatasource.m in Sources */,
 				5924F1DF1F8B7C3600D2108A /* UIActionSheet+NTESBlock.m in Sources */,
 				5924F26D1F8B7C3600D2108A /* renderer_yuv420p.c in Sources */,
+				59A92FF91FA727720066D6F9 /* MemberModel.m in Sources */,
 				99ADB5381F94A540005928B3 /* CarCertificationViewController.m in Sources */,
 				5924F24A1F8B7C3600D2108A /* NTESGalleryViewController.m in Sources */,
 				5924EF511F8B7BEB00D2108A /* NIMKitColorButtonCell.m in Sources */,
@@ -5041,6 +5074,7 @@
 				5924F2941F8B7C3600D2108A /* NTESSignSettingViewController.m in Sources */,
 				5924E4EF1F8B6CAA00D2108A /* TZImageManager.m in Sources */,
 				5924EF941F8B7BEB00D2108A /* NIMSessionImageContentView.m in Sources */,
+				59E397FD1FA87B120064E0CD /* HeightRangePickerView.m in Sources */,
 				59DA85E31F99841C00089DBB /* FiveStageScreeningModel.m in Sources */,
 				9986AFD11F8F58B600A6EEC7 /* UIImage+HXExtension.m in Sources */,
 				99ADB5291F948EBB005928B3 /* SesameCertificationFirstViewController.m in Sources */,
@@ -5136,6 +5170,7 @@
 				5924EF881F8B7BEB00D2108A /* NIMMessageMaker.m in Sources */,
 				596CD1C51F7E55F300ED1C54 /* UIView+Extension.m in Sources */,
 				9986AFC31F8F58B600A6EEC7 /* HXPhotoResultModel.m in Sources */,
+				59CAC42A1FA82C9E00FBE6CE /* ProvinceModel.m in Sources */,
 				5924EFB41F8B7BEC00D2108A /* NIMKitResourceResizer.m in Sources */,
 				5999A0A21F90B22A00CE3686 /* OneStageScreeningController.m in Sources */,
 				5924F2111F8B7C3600D2108A /* NTESLiveBroadcastView.m in Sources */,
@@ -5179,6 +5214,7 @@
 				5924E4F51F8B6CAA00D2108A /* TZPhotoPreviewController.m in Sources */,
 				5924F21F1F8B7C3600D2108A /* NTESContactAddFriendViewController.m in Sources */,
 				5924EF9F1F8B7BEB00D2108A /* NIMSessionListViewController.m in Sources */,
+				59A930001FA72EEF0066D6F9 /* MemberListCell.m in Sources */,
 				5924F1E61F8B7C3600D2108A /* UIView+NTES.m in Sources */,
 				9986AFD51F90529100A6EEC7 /* MyPhotoViewController.m in Sources */,
 				9986AFC91F8F58B600A6EEC7 /* HXPhotoViewController.m in Sources */,
@@ -5235,6 +5271,7 @@
 				5924F29A1F8B7C3600D2108A /* NTESSettingSwitcherCell.m in Sources */,
 				99B487701F7B408F00D8DE54 /* main.m in Sources */,
 				5924EFA41F8B7BEC00D2108A /* NIMTeamInfoData.m in Sources */,
+				59A92FEF1FA719CA0066D6F9 /* MyFollowersController.m in Sources */,
 				596CD1C91F7E564100ED1C54 /* VVNetWorkTool+Request.m in Sources */,
 				5924EF571F8B7BEB00D2108A /* NIMAvatarImageView.m in Sources */,
 				59A60C8F1F8F4BD000886A6E /* DatePickerView.m in Sources */,
@@ -5290,7 +5327,7 @@
 				5924F2981F8B7C3600D2108A /* NTESSettingCheckCell.m in Sources */,
 				99AB52461F8CA1C400C8E0B0 /* AuthenticationInformationTableViewCell.m in Sources */,
 				596CD1C41F7E55F300ED1C54 /* UIColor+HexString.m in Sources */,
-				5935BE231F91DFE500BA4196 /* HeightPickerView.m in Sources */,
+				59A92FF61FA71A5E0066D6F9 /* MyIMFriendsController.m in Sources */,
 				59E0ABE21F9609B0001FFC7A /* NSString+tool.m in Sources */,
 				5924EF791F8B7BEB00D2108A /* NIMAudioContentConfig.m in Sources */,
 				5924F2A01F8B7C3600D2108A /* NTESBundleSetting.m in Sources */,
@@ -5314,6 +5351,7 @@
 				5924EFA51F8B7BEC00D2108A /* NIMUsrInfoData.m in Sources */,
 				5924F2921F8B7C3600D2108A /* NTESMobileSettingViewController.m in Sources */,
 				5924F2021F8B7C3600D2108A /* NTESTeamListViewController.m in Sources */,
+				59E397FA1FA862870064E0CD /* AgeRangePickerView.m in Sources */,
 				9986AFB21F8F58B600A6EEC7 /* HXAlbumListView.m in Sources */,
 				5924E4FC1F8B6D1700D2108A /* UIView+Toast.m in Sources */,
 				59DA85E01F99840000089DBB /* FourStageScreeningModel.m in Sources */,

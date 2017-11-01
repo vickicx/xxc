@@ -18,25 +18,25 @@
     if([super initWithFrame:frame]){
         self.backgroundColor = [UIColor clearColor];
         
-        UIPickerView *pickerView = [[UIPickerView alloc] init];
-        pickerView.backgroundColor = [UIColor whiteColor];
-        [self addSubview:pickerView];
-        [pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIView *pickerContainView = [[UIView alloc] init];
+        pickerContainView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:pickerContainView];
+        [pickerContainView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self);
             make.right.equalTo(self);
             make.bottom.equalTo(self);
             make.height.mas_equalTo(260*FitHeight);
         }];
-        self.pickerView = pickerView;
+        self.pickerContainView = pickerContainView;
         
         UIView *toolsContainView = [[UIView alloc] init];
         toolsContainView.backgroundColor = [UIColor whiteColor
                                             ];
         [self addSubview:toolsContainView];
         [toolsContainView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.pickerView);
-            make.right.equalTo(self.pickerView);
-            make.bottom.equalTo(self.pickerView.mas_top);
+            make.left.equalTo(self.pickerContainView);
+            make.right.equalTo(self.pickerContainView);
+            make.bottom.equalTo(self.pickerContainView.mas_top);
             make.height.mas_equalTo(40*FitHeight);
         }];
         

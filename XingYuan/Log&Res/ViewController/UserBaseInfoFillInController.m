@@ -11,9 +11,10 @@
 #import "NickNameFillInController.h"
 #import "DatePickerView.h"
 #import "AddressPickerView.h"
-#import "HeightPickerView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "LoginRegisterController.h"
+#import "DataPickerView.h"
+#import "PickerDatas.h"
 
 @interface UserBaseInfoFillInController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -191,19 +192,18 @@
 
 //身高
 - (IBAction)dealTapHeight:(id)sender {
-    HeightPickerView *heightPickerView = [HeightPickerView heightPickerView];
-    heightPickerView.heightPickerBlock = ^(NSString *height){
-        self.height = height;
-    };
-    heightPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
-    [[[UIApplication sharedApplication] keyWindow] addSubview:heightPickerView];
+    DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas heights] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
+        self.height = value;
+    }];
+    [dataPickerView toShow];
 }
 
 //地区
 - (IBAction)dealTapArea:(id)sender {
     AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
     addressPickerView.block = ^(NSString *province, NSString *city){
-        self.area = [[province stringByAppendingString:@" "] stringByAppendingString:city];
+        NSString *address = [NSString stringWithFormat:@"%@ %@",province,city];
+        self.area = address;
     };
     addressPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
     [[[UIApplication sharedApplication] keyWindow] addSubview:addressPickerView];

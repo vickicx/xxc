@@ -24,6 +24,18 @@
 - (instancetype)initWithFrame:(CGRect)frame dataArray:(NSArray *)dataArray dataPickerBlock:(void(^)(NSString *))block{
     if([super initWithFrame:frame]){
         self.dataArray = dataArray;
+        
+        UIPickerView *pickerView = [[UIPickerView alloc] init];
+        pickerView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:pickerView];
+        [pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.pickerContainView);
+            make.right.equalTo(self.pickerContainView);
+            make.bottom.equalTo(self.pickerContainView);
+            make.top.equalTo(self.pickerContainView);
+        }];
+        self.pickerView = pickerView;
+        
         self.pickerView.delegate = self;
         self.pickerView.dataSource = self;
         self.dataPickerBlock = block;

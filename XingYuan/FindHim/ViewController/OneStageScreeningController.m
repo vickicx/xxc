@@ -9,16 +9,14 @@
 #import "OneStageScreeningController.h"
 #import "NickNameFillInController.h"
 #import "DatePickerView.h"
-#import "HeightPickerView.h"
 #import "AddressPickerView.h"
-#import "BodyShapPickerView.h"
-#import "ConstellationPickerView.h"
-#import "LooksEvaluatePickerView.h"
 #import "TwoStageScreeningController.h"
 #import "OneStageScreeningModel.h"
 #import "ScreeningController.h"
 #import "DataPickerView.h"
 #import "PickerDatas.h"
+#import "AgeRangePickerView.h"
+#import "HeightRangePickerView.h"
 
 @interface OneStageScreeningController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) OneStageScreeningModel *oneStageScreeningModel;
@@ -215,19 +213,18 @@
         }
         //身高
         if(indexPath.row == 3){
-            HeightPickerView *heightPickerView = [HeightPickerView heightPickerView];
-            heightPickerView.heightPickerBlock = ^(NSString *height){
-                self.oneStageScreeningModel.stature = height;
+            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas heights] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
+                self.oneStageScreeningModel.stature = value;
                 [self refreshWithModel:self.oneStageScreeningModel];
-            };
-            heightPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
-            [[[UIApplication sharedApplication] keyWindow] addSubview:heightPickerView];
+            }];
+            [dataPickerView toShow];
         }
         //地区
         if(indexPath.row == 4){
             AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
             addressPickerView.block = ^(NSString *province, NSString *city){
-                self.oneStageScreeningModel.address = [province stringByAppendingString:city];
+                NSString *address = [NSString stringWithFormat:@"%@ %@",province,city];
+                self.oneStageScreeningModel.address = address;
                 [self refreshWithModel:self.oneStageScreeningModel];
             };
             addressPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
@@ -235,69 +232,53 @@
         }
         //星座
         if(indexPath.row == 5){
-            ConstellationPickerView *constellationPickerView = [ConstellationPickerView constellationPickerView];
-            constellationPickerView.constellationPickerBlock = ^(NSString *constellation){
-                self.oneStageScreeningModel.constellation = constellation;
+            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas constellations] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
+                self.oneStageScreeningModel.constellation = value;
                 [self refreshWithModel:self.oneStageScreeningModel];
-            };
-            [constellationPickerView toShow];
+            }];
+            [dataPickerView toShow];
         }
         //体型
         if(indexPath.row == 6){
-            BodyShapPickerView *bodyShapPickerView = [BodyShapPickerView bodyShapPickerView];
-            bodyShapPickerView.bodyPickerBlock = ^(NSString *bodyShap){
-                self.oneStageScreeningModel.physique = bodyShap;
+            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas bodyShaps] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
+                self.oneStageScreeningModel.physique = value;
                 [self refreshWithModel:self.oneStageScreeningModel];
-            };
-            [bodyShapPickerView toShow];
+            }];
+            [dataPickerView toShow];
         }
         //相貌自评
         if(indexPath.row == 7){
-            LooksEvaluatePickerView *looksEvaluatePickerView = [LooksEvaluatePickerView looksEvaluatePickerView];
-            looksEvaluatePickerView.looksEvaluateBlock = ^(NSString *evaluate){
-                self.oneStageScreeningModel.facialfeatures = evaluate;
+            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas lookEvaluates] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
+                self.oneStageScreeningModel.facialfeatures = value;
                 [self refreshWithModel:self.oneStageScreeningModel];
-            };
-            [looksEvaluatePickerView toShow];
+            }];
+            [dataPickerView toShow];
         }
     }else{
         //择偶条件
         
         //年龄
         if(indexPath.row == 1){
-            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas ages] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
-                self.oneStageScreeningModel.age = value;
+            AgeRangePickerView *ageRangePickerView = [AgeRangePickerView pickerViewWithBlock:^(NSInteger smallValue, NSInteger bigValue) {
+                self.oneStageScreeningModel.age = [NSString stringWithFormat:@"%lu-%lu",smallValue,bigValue];
                 [self refreshWithModel:self.oneStageScreeningModel];
             }];
-            [dataPickerView toShow];
-            
-//            DatePickerView *datePickerView = [DatePickerView datePickerView];
-//            datePickerView.datePickerBlock = ^(NSDate *date){
-//                NSDateFormatter *formater = [[NSDateFormatter alloc] init];
-//                [formater setDateFormat:@"yyyy-MM-dd"];//设置时间显示的格式，此处使用的formater格式要与字符串格式完全一致，否则转换失败
-//                NSString *dateStr = [formater stringFromDate:date];//将日期转换成字符串
-//                
-//                self.oneStageScreeningModel.birthday = dateStr;
-//                [self refreshWithModel:self.oneStageScreeningModel];
-//            };
-//            datePickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
-//            [[[UIApplication sharedApplication] keyWindow] addSubview:datePickerView];
+            [ageRangePickerView toShow];
         }
         //身高
         if(indexPath.row == 2){
-            HeightPickerView *heightPickerView = [HeightPickerView heightPickerView];
-            heightPickerView.heightPickerBlock = ^(NSString *height){
-                self.oneStageScreeningModel.stature = height;
+            HeightRangePickerView *heightRangePickerView = [HeightRangePickerView pickerViewWithBlock:^(NSInteger smallValue, NSInteger bigValue) {
+                self.oneStageScreeningModel.stature = [NSString stringWithFormat:@"%lu-%lu",smallValue,bigValue];
                 [self refreshWithModel:self.oneStageScreeningModel];
-            };
-            heightPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
-            [[[UIApplication sharedApplication] keyWindow] addSubview:heightPickerView];
+            }];
+            [heightRangePickerView toShow];
         }
         //地区
         if(indexPath.row == 3){
             AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
             addressPickerView.block = ^(NSString *province, NSString *city){
-                self.oneStageScreeningModel.address = [province stringByAppendingString:city];
+                NSString *address = [NSString stringWithFormat:@"%@ %@",province,city];
+                self.oneStageScreeningModel.address = address;
                 [self refreshWithModel:self.oneStageScreeningModel];
             };
             addressPickerView.frame = CGRectMake(0, 0, kWIDTH, kHEIGHT);
@@ -305,30 +286,27 @@
         }
         //星座
         if(indexPath.row == 4){
-            ConstellationPickerView *constellationPickerView = [ConstellationPickerView constellationPickerView];
-            constellationPickerView.constellationPickerBlock = ^(NSString *constellation){
-                self.oneStageScreeningModel.constellation = constellation;
+            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas constellations] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
+                self.oneStageScreeningModel.constellation = value;
                 [self refreshWithModel:self.oneStageScreeningModel];
-            };
-            [constellationPickerView toShow];
+            }];
+            [dataPickerView toShow];
         }
         //体型
         if(indexPath.row == 5){
-            BodyShapPickerView *bodyShapPickerView = [BodyShapPickerView bodyShapPickerView];
-            bodyShapPickerView.bodyPickerBlock = ^(NSString *bodyShap){
-                self.oneStageScreeningModel.physique = bodyShap;
+            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas bodyShaps] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
+                self.oneStageScreeningModel.physique = value;
                 [self refreshWithModel:self.oneStageScreeningModel];
-            };
-            [bodyShapPickerView toShow];
+            }];
+            [dataPickerView toShow];
         }
         //相貌自评
         if(indexPath.row == 6){
-            LooksEvaluatePickerView *looksEvaluatePickerView = [LooksEvaluatePickerView looksEvaluatePickerView];
-            looksEvaluatePickerView.looksEvaluateBlock = ^(NSString *evaluate){
-                self.oneStageScreeningModel.facialfeatures = evaluate;
+            DataPickerView *dataPickerView = [DataPickerView pickerViewWithDataArray:[PickerDatas lookEvaluates] initialSelectRow:0 dataPickerBlock:^(NSString *value) {
+                self.oneStageScreeningModel.facialfeatures = value;
                 [self refreshWithModel:self.oneStageScreeningModel];
-            };
-            [looksEvaluatePickerView toShow];
+            }];
+            [dataPickerView toShow];
         }
     }
 }

@@ -28,8 +28,8 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
     [tapGesture addTarget:self action:@selector(toHidden)];
     [self.topCoverView addGestureRecognizer:tapGesture];
-    self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:-80*365*24*60*60];
-    self.datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:-18*365*24*60*60];
+    [self.datePicker setMinimumDate:[NSDate dateWithTimeIntervalSinceNow:-80*365*24*60*60]];
+    [self.datePicker setMaximumDate:[NSDate dateWithTimeIntervalSinceNow:-18*365*24*60*60]];
 }
 
 - (IBAction)dealTapCancel:(id)sender {

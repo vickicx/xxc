@@ -164,8 +164,14 @@
 // MARK: - 1.9获取短信验证码（已对接）
 #define HYZX @"/mobileapi/sendsmscode"
 
+// MARK: - 2.5我关注的人（已对接）
+#define Myfollowmember @"/mobileapi/myfollowmember"
+
 // MARK: - 2.6关注用户（已对接）
 #define FollowMemeber @"/mobileapi/followmember"
+
+// MARK: - 3.8关注我的人（已对接）
+#define Myfollower @"/mobileapi/myfollower"
 
 // MARK: - 3.9修改密码（已对接）
 #define UpdateMemeberPassword @"/mobileapi/updatememberpwd"

@@ -179,7 +179,8 @@
     if(indexPath.row == 1){
         AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
         addressPickerView.block = ^(NSString *province,NSString *city){
-            self.fourStageScreeningModel.hometown = [province stringByAppendingString:city];
+            NSString *address = [NSString stringWithFormat:@"%@ %@",province,city];
+            self.fourStageScreeningModel.hometown = address;
             [self refreshWithModel:self.fourStageScreeningModel];
         };
         [addressPickerView toShow];
@@ -188,7 +189,8 @@
     if(indexPath.row == 2){
         AddressPickerView *addressPickerView = [AddressPickerView addressPickerView];
         addressPickerView.block = ^(NSString *province,NSString *city){
-            self.fourStageScreeningModel.householdregister = [province stringByAppendingString:city];
+            NSString *address = [NSString stringWithFormat:@"%@ %@",province,city];
+            self.fourStageScreeningModel.householdregister = address;
             [self refreshWithModel:self.fourStageScreeningModel];
         };
         [addressPickerView toShow];

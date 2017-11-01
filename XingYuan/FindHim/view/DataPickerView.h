@@ -9,6 +9,7 @@
 #import "PickerView.h"
 
 @interface DataPickerView : PickerView
+@property (nonatomic,weak) UIPickerView *pickerView;
 
 /**
  easy way to get a DataPickerView instance

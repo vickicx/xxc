@@ -17,6 +17,9 @@
 #import "LikeMeViewController.h"
 #import "GrowthCenterController.h"
 #import "AboutMeModel.h"
+#import "MyFollowersController.h"
+#import "IFollowsController.h"
+#import "MyIMFriendsController.h"
 
 @interface MineMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -63,10 +66,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.imageArr = [NSArray arrayWithObjects:@"喜欢我的", @"我喜欢的", @"关注", @"成长", nil];
-    self.titleArr = [NSArray arrayWithObjects:@"喜欢我的", @"我喜欢的", @"我关注的", @"成长中心", nil];
+    self.titleArr = [NSArray arrayWithObjects:@"关注我的", @"我关注的", @"我的好友", @"成长中心", nil];
     self.view.backgroundColor = [UIColor redColor];
     [self createTableView];
     [self createRightButton];
+    [self creatLeftButton];
     self.floatView = [[MyFloatView alloc] initWithFrame:CGRectMake(12*FitWidth, 290*FitHeight, kWIDTH - 24 *FitWidth, 80*FitHeight)];
     [self.view addSubview:self.floatView];
     self.onlineLabel = [[UILabel alloc] initWithFrame:CGRectMake(kWIDTH - 60*FitWidth, self.floatView.top - 30*FitHeight, 50*FitWidth, 20*FitHeight)];
@@ -95,7 +99,6 @@
     };
     
     [self requestData];
-    // Do any additional setup after loading the view.
 }
 
 
@@ -202,12 +205,26 @@
     [back addSubview:label];
 }
 
+//创建右侧设置按钮
 - (void)createRightButton{
     UIButton *rightBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40*FitWidth, 30*FitHeight)];
     [rightBtn setImage:[UIImage imageNamed:@"设置"] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(rightBtnAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem=rightItem;
+}
+
+//创建左侧通知消息按钮
+- (void)creatLeftButton{
+    UIButton *leftBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40*FitWidth, 30*FitHeight)];
+    [leftBtn setImage:[UIImage imageNamed:@"通知-(4)"] forState:UIControlStateNormal];
+    [leftBtn addTarget:self action:@selector(leftBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithCustomView:leftBtn];
+    self.navigationItem.leftBarButtonItem=leftItem;
+}
+
+- (void)leftBtnAction{
+    //进入通知中心
 }
 
 -(void)rightBtnAction{
@@ -263,11 +280,28 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //cell被点击恢复
+    //关注我的
+    if(indexPath.row == 0){
+        MyFollowersController *myFollowersController = [[MyFollowersController alloc] init];
+        [self.navigationController pushViewController:myFollowersController animated:true];
+    }
+    //我关注的
+    if(indexPath.row == 1){
+        IFollowsController *ifollowsController = [[IFollowsController alloc] init];
+        [self.navigationController pushViewController:ifollowsController animated:true];
+    }
+    //我的好友
+    if(indexPath.row == 2){
+        MyIMFriendsController *myIMFriendsController = [[MyIMFriendsController alloc] init];
+        [self.navigationController pushViewController:myIMFriendsController animated:true];
+    }
+    //成长中心
+    if(indexPath.row == 3){
+        GrowthCenterController *grothCenterController = [[GrowthCenterController alloc] init];
+        [self.navigationController pushViewController:grothCenterController animated:true];
+    }
 //    LikeMeViewController *likeMeVC = [[LikeMeViewController alloc] init];
 //    [self.navigationController pushViewController:likeMeVC animated:YES];
-    GrowthCenterController *grothCenterController = [[GrowthCenterController alloc] init];
-    [self.navigationController pushViewController:grothCenterController animated:true];
 }
 
 - (void)requestData {
@@ -327,17 +361,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
