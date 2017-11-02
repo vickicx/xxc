@@ -444,6 +444,7 @@
             }
     return nil;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //cell被点击恢复
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -534,6 +535,7 @@
     [chatbutton addGestureRecognizer:tapGesturRecognizer1];
     [self.view addSubview:chatbutton];
 }
+
 - (void)likeButtonDidSelecte:(UIButton *)button {
     NSNumber *handletype = @0;
     if (self.guanzhu == YES) {
@@ -572,8 +574,6 @@
     }
     
 }
-
-
 
 - (void)requestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];

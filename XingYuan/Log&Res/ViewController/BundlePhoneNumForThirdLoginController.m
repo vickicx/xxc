@@ -22,7 +22,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"绑定手机号";
+//    self.title = @"绑定手机号";
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    label.text = @"绑定手机号";
+    label.font = FONT_WITH_S(18);
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
+    self.navigationItem.rightBarButtonItem = itme;
+    self.navigationItem.titleView = label;
     
     self.requestVertificationCodeBtn.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
     self.requestVertificationCodeBtn.layer.borderWidth = 1;
@@ -34,8 +41,6 @@
     
     self.bundBtn.titleLabel.font = FONT_WITH_S(18);
 }
-
-
 
 //改变密码输入框是否可见状态
 - (IBAction)dealChangePasswordVisibleStatus:(UIButton *)sender {
@@ -64,7 +69,6 @@
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
 }
-
 //使按钮在一定时间内不可操作
 //- (void)makeBtnCannotBeHandleWith:(UIButton *)button{
 //        button.isUserInteractionEnabled = false

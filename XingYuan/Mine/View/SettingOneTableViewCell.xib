@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,6 +38,7 @@
                     </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="HkC-4p-OTS" firstAttribute="leading" secondItem="o8s-lw-5QG" secondAttribute="trailing" constant="165" id="5L3-13-fgq"/>
                     <constraint firstItem="o8s-lw-5QG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="JEG-gX-6AW"/>
                     <constraint firstAttribute="trailingMargin" secondItem="HkC-4p-OTS" secondAttribute="trailing" constant="12" id="atj-Ox-O06"/>
                     <constraint firstItem="HkC-4p-OTS" firstAttribute="centerY" secondItem="o8s-lw-5QG" secondAttribute="centerY" id="gx6-ky-X5E"/>

@@ -41,6 +41,8 @@
     [super viewDidLoad];
     self.title = @"兴趣爱好";
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     UIButton *finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.finishBtn = finishBtn;
     [finishBtn setTitleColor:RGBColor(246, 80, 116, 1) forState:UIControlStateNormal];
@@ -59,7 +61,8 @@
     [layout setMinimumLineSpacing:10];
     layout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 50*FitHeight);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
@@ -82,27 +85,40 @@
 
 #pragma mark - misc
 - (void)dealToSave{
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:[self getSelectedInterestSeperatedByVerticalLineWithModel:self.hobbiesModel] forKey:@"sids"];
     
-    [JGProgressHUD showStatusWith:nil In:self.view];
-    [VVNetWorkTool postWithUrl:Url(Setinterest) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        BaseModel *model = [BaseModel new];
-        [model setValuesForKeysWithDictionary:result];
-        [JGProgressHUD showResultWithModel:model In:self.view];
-        if([model.code isEqual:@1]){
-            if(self.hobbiesBlock != nil){
-                NSString *ids = [self getSelectedInterestSeperatedByCommaWith:[self getSelectedInterestSeperatedByVerticalLineWithModel:self.hobbiesModel]];
-                NSString *names = [self getInterestNamesByModel:self.hobbiesModel];
-                
-                self.hobbiesBlock(ids,names);
-            }
-            [self.navigationController popViewControllerAnimated:true];
+//    if(self.controllerType == HobbiesControllerTypeMateRequirement){
+        if(self.hobbiesBlock != nil){
+            NSString *ids = [self getSelectedInterestSeperatedByCommaWith:[self getSelectedInterestSeperatedByVerticalLineWithModel:self.hobbiesModel]];
+            NSString *names = [self getInterestNamesByModel:self.hobbiesModel];
+            
+            self.hobbiesBlock(ids,names);
         }
-    } fail:^(NSError *error) {
-        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
-    }];
+        [self.navigationController popViewControllerAnimated:true];
+//    }
+//    if(self.controllerType != HobbiesControllerTypeMateRequirement){
+//        NSMutableDictionary *parameters = [NSMutableDictionary new];
+//        [parameters setValue:[Helper memberId] forKey:@"memberid"];
+//        [parameters setValue:[self getSelectedInterestSeperatedByVerticalLineWithModel:self.hobbiesModel] forKey:@"sids"];
+//        
+//        [JGProgressHUD showStatusWith:nil In:self.view];
+//        [VVNetWorkTool postWithUrl:Url(Setinterest) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+//            BaseModel *model = [BaseModel new];
+//            [model setValuesForKeysWithDictionary:result];
+//            [JGProgressHUD showResultWithModel:model In:self.view];
+//            if([model.code isEqual:@1]){
+//                if(self.hobbiesBlock != nil){
+//                    NSString *ids = [self getSelectedInterestSeperatedByCommaWith:[self getSelectedInterestSeperatedByVerticalLineWithModel:self.hobbiesModel]];
+//                    NSString *names = [self getInterestNamesByModel:self.hobbiesModel];
+//                    
+//                    self.hobbiesBlock(ids,names);
+//                }
+//                [self.navigationController popViewControllerAnimated:true];
+//            }
+//        } fail:^(NSError *error) {
+//            [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
+//        }];
+//
+//    }
 }
 
 //根据模型获取选中的兴趣的ID(上传参数以竖线“|”逗号“，”隔开)，这里本可以通过二维数组上传给服务器的，但搞不懂服务端这里为何用这种令人费解的形式上传参数
@@ -177,14 +193,14 @@
 - (void)requestHobbies{
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     NSString *url;
-    if(self.controllerType == HobbiesControllerTypeDefault){
-        [parameters setValue:[Helper memberId] forKey:@"memberid"];
-        url = Memberinterest;
-    }
-    if(self.controllerType == HobbiesControllerTypeMateRequirement){
+//    if(self.controllerType == HobbiesControllerTypeDefault){
+//        [parameters setValue:[Helper memberId] forKey:@"memberid"];
+//        url = Memberinterest;
+//    }
+//    if(self.controllerType == HobbiesControllerTypeMateRequirement){
         [parameters setValue:self.interestids forKey:@"interestids"];
         url = Interestbyids;
-    }
+//    }
     
     [VVNetWorkTool postWithUrl:Url(url) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         HobbiesModel *hobbiesModel = [HobbiesModel new];

@@ -58,7 +58,7 @@
     NSMutableArray *arr = [NSMutableArray arrayWithObjects: _matchingLevelTwoModel.operatingpost, _matchingLevelTwoModel.maritalstatus, _matchingLevelTwoModel.drink, _matchingLevelTwoModel.smoking, _matchingLevelTwoModel.monthlyincome, _matchingLevelTwoModel.educational, _matchingLevelTwoModel.workandrest, _matchingLevelTwoModel.housesstatus, _matchingLevelTwoModel.carstatus, _matchingLevelTwoModel.children, nil];
     NSMutableArray *menuArr = [NSMutableArray array];
     for (int index = 0; index < [arr count]; index ++ ) {
-        
+         if (![arr[index] isEqualToString:@""]) {
         UILabel *menuLabel = [UILabel new];
         menuLabel.textAlignment = NSTextAlignmentCenter;
         menuLabel.backgroundColor = [UIColor colorWithRed:255/255.0 green:239/255.0 blue:243/255.0 alpha:1];
@@ -70,6 +70,7 @@
         menuLabel.layer.cornerRadius = 5.0;
         menuLabel.clipsToBounds = YES;
         [menuArr addObject:menuLabel];
+         }
     }
     showView.dataSource = menuArr;
     

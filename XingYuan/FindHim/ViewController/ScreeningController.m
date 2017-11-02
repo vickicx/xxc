@@ -52,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64*FitHeight);
+    CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64);
     UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     tableView.delegate = self;
     tableView.dataSource = self;

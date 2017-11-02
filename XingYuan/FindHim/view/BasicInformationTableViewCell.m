@@ -66,7 +66,7 @@
     NSMutableArray *menuArr = [NSMutableArray array];
     if(matchingLevelOneModel.age){
         for (int index = 0; index < [_arr count]; index ++ ) {
-            
+             if (![_arr[index] isEqualToString:@""]) {
             UILabel *menuLabel = [UILabel new];
             menuLabel.textAlignment = NSTextAlignmentCenter;
             menuLabel.backgroundColor = [UIColor colorWithRed:240/255.0 green:241/255.0 blue:241/255.0 alpha:1];
@@ -78,6 +78,7 @@
             menuLabel.layer.cornerRadius = 5.0;
             menuLabel.clipsToBounds = YES;
             [menuArr addObject:menuLabel];
+             }
         }
     }
     

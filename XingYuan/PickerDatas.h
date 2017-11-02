@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HeightRangeModel.h"
+#import "AgeRangeModel.h"
 
 @interface PickerDatas : NSObject
 
-//兴趣爱好
-+ (NSArray *)hobbies;
+////兴趣爱好
+//+ (NSArray *)hobbies;
 
 //相貌自评
 + (NSArray *)lookEvaluates;
@@ -21,6 +23,12 @@
 
 //身高
 + (NSArray *)heights;
+
+//身高范围数组
++ (NSArray *)heightsRange;
+
+//年龄范围数组
++ (NSArray *)ageRanges;
 
 //体型
 + (NSArray *)bodyShaps;

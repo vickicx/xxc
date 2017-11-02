@@ -10,8 +10,7 @@
 #import "PickerDatas.h"
 
 @interface HeightRangePickerView ()<UIPickerViewDelegate,UIPickerViewDataSource>
-@property (nonatomic,copy) NSArray *smallDataArray;
-@property (nonatomic,copy) NSArray *bigDataArray;
+@property (nonatomic,copy) NSArray *dataArray;
 @property (nonatomic,strong) HeightRangeBlock heightRangeBlock;
 @end
 
@@ -27,8 +26,7 @@
     self = [super initWithFrame:frame];
     if(self){
         self.heightRangeBlock = block;
-        self.smallDataArray = [PickerDatas heights];
-        self.bigDataArray = [PickerDatas heights];
+        self.dataArray = [PickerDatas heightsRange];
         UIPickerView *pickerView = [[UIPickerView alloc] init];
         pickerView.delegate = self;
         pickerView.dataSource = self;
@@ -54,16 +52,12 @@
 - (void)dealOK{
     [super dealOK];
     if(self.heightRangeBlock != nil){
-        NSString *smallStr = self.smallDataArray[[self.pickerView selectedRowInComponent:0]];
-        NSString *bigStr = self.smallDataArray[[self.pickerView selectedRowInComponent:1]];
-        int smallValue = smallStr.intValue;
-        int bigValue = bigStr.intValue;
-        if(bigValue <= smallValue){
-            [Helper showAlertControllerWithMessage:@"右边的值必须大于左边的值" completion:nil];
-        }
-        if(bigValue > smallValue){
-            self.heightRangeBlock(smallValue,bigValue);
-        }
+        HeightRangeModel *heightRangeModel = self.dataArray[[self.pickerView selectedRowInComponent:0]];
+        NSInteger smallValue = heightRangeModel.littleHeight;
+        NSNumber *bigNumber = heightRangeModel.biggerHeights[[self.pickerView selectedRowInComponent:1]];
+        NSInteger bigValue = [bigNumber integerValue];
+
+        self.heightRangeBlock(smallValue,bigValue);
     }
     [self toDismiss];
 }
@@ -83,26 +77,31 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     if(component == 0){
-        return self.smallDataArray.count;
+        return  self.dataArray.count;
     }
     if(component == 1){
-        return self.bigDataArray.count;
+        HeightRangeModel *heightRangeModel = self.dataArray[[pickerView selectedRowInComponent:0]];
+        return heightRangeModel.biggerHeights.count;
     }
     return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if(component == 0){
-        return self.smallDataArray[row];
+        HeightRangeModel *heightRangeModel = self.dataArray[row];
+        return [NSString stringWithFormat:@"%lu",heightRangeModel.littleHeight];
     }
     if(component == 1){
-        return self.bigDataArray[row];
+        HeightRangeModel *heightRangeModel = self.dataArray[[pickerView selectedRowInComponent:0]];
+        return [NSString stringWithFormat:@"%@",heightRangeModel.biggerHeights[row]];
     }
     return @"";
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
+    if(component == 0){
+        [pickerView reloadComponent:1];
+    }
 }
 
 

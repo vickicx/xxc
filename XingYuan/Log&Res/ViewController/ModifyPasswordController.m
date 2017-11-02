@@ -31,7 +31,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"修改密码";
+//    self.title = @"修改密码";
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    label.text = @"修改密码";
+    label.font = FONT_WITH_S(18);
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
+    self.navigationItem.rightBarButtonItem = itme;
+    self.navigationItem.titleView = label;
+    
     self.finishButton.layer.cornerRadius = 3;
     self.finishButton.clipsToBounds = true;
     
@@ -75,7 +83,6 @@
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

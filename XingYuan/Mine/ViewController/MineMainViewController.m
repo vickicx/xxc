@@ -20,6 +20,7 @@
 #import "MyFollowersController.h"
 #import "IFollowsController.h"
 #import "MyIMFriendsController.h"
+#import "SystemMessageListController.h"
 
 @interface MineMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -225,6 +226,8 @@
 
 - (void)leftBtnAction{
     //进入通知中心
+    SystemMessageListController *systemMessageListController = [[SystemMessageListController alloc] init];
+    [self.navigationController pushViewController:systemMessageListController animated:true];
 }
 
 -(void)rightBtnAction{

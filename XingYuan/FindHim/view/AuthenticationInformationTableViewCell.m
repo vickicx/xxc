@@ -38,9 +38,6 @@
         [self addSubview:kong1];
         
         
-        
-        
-        
         _flowLayout = [UICollectionViewFlowLayout new]; // 自定义的布局对象
         _flowLayout.itemSize = CGSizeMake(110, 120);
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -72,9 +69,6 @@
     return UIEdgeInsetsMake(0, 11*FitHeight, 0, 0);
     
 }
-
-
-
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

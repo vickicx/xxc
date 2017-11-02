@@ -91,12 +91,10 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
     DDLogInfo(@"receive remote notification:  %@", userInfo);
 }
 
-
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
     DDLogError(@"fail to get apns token :%@",error);
 }
-
 
 #pragma mark PKPushRegistryDelegate
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
@@ -257,8 +255,6 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
     [self showAutoLoginErrorAlert:error];
 }
 
-
-
 #pragma mark - logic impl
 - (void)setupServices
 {   
@@ -322,8 +318,6 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
                                                             }];
         [vc addAction:retryAction];
     }
-    
-    
     
     UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"注销"
                                                            style:UIAlertActionStyleDestructive

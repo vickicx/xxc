@@ -338,8 +338,6 @@
     NSLog(@"网络故障");
 }
 
-
-
 #pragma UINavigationControllerDelegate
 //隐藏导航栏
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated{

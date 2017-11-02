@@ -18,7 +18,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"成长中心";
+//    self.title = @"成长中心";
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    label.text = @"成长中心";
+    label.font = FONT_WITH_S(18);
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
+    self.navigationItem.rightBarButtonItem = itme;
+    self.navigationItem.titleView = label;
+
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView = tableView;

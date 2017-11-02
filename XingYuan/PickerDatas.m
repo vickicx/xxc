@@ -10,10 +10,10 @@
 
 @implementation PickerDatas
 
-//兴趣爱好
-+ (NSArray *)hobbies{
-    return @[];
-}
+////兴趣爱好
+//+ (NSArray *)hobbies{
+//    return @[];
+//}
 
 //相貌自评
 + (NSArray *)lookEvaluates{
@@ -32,12 +32,62 @@
 //身高
 + (NSArray *)heights{
     NSMutableArray *dataArray = [NSMutableArray new];
-    [dataArray addObject:@"140以下"];
+    [dataArray addObject:@"0-140"];
     for (int i=140;i<=230;i++){
-        [dataArray addObject:[NSString stringWithFormat:@"%dcm",i]];
+        [dataArray addObject:[NSString stringWithFormat:@"%d",i]];
     }
-    [dataArray addObject:@"230以上"];
+    [dataArray addObject:@"230-1000"];
     return dataArray;
+}
+
+//身高范围数组
++ (NSArray *)heightsRange{
+    NSMutableArray *heightRangeModels = [NSMutableArray new];
+    //第一个
+    HeightRangeModel *firstHeightRangeModel = [HeightRangeModel new];
+    firstHeightRangeModel.littleHeight = 0;
+    firstHeightRangeModel.biggerHeights = @[@140];
+    [heightRangeModels addObject:firstHeightRangeModel];
+    
+    //中间140-230
+    for(int i=140;i<230;i++){
+        HeightRangeModel *heightRangeModel = [HeightRangeModel new];
+        heightRangeModel.littleHeight = i;
+        NSMutableArray *biggerHeights = [NSMutableArray new];
+        for(int j=i+1;j<=230;j++){
+            [biggerHeights addObject:[NSNumber numberWithInt:j]];
+        }
+        heightRangeModel.biggerHeights = biggerHeights;
+        
+        [heightRangeModels addObject:heightRangeModel];
+    }
+    
+    //最后一个
+    HeightRangeModel *lastHeightRangeModel = [HeightRangeModel new];
+    lastHeightRangeModel.littleHeight = 230;
+    lastHeightRangeModel.biggerHeights = @[@1000];
+    [heightRangeModels addObject:lastHeightRangeModel];
+    
+    return heightRangeModels;
+}
+
++ (NSArray *)ageRanges{
+    NSMutableArray *ageRangeModels = [NSMutableArray new];
+    
+    //中间18-40
+    for(int i=18;i<80;i++){
+        AgeRangeModel *ageRangeModel = [AgeRangeModel new];
+        ageRangeModel.littleAge = i;
+        NSMutableArray *biggerAges = [NSMutableArray new];
+        for(int j=i+1;j<=80;j++){
+            [biggerAges addObject:[NSNumber numberWithInt:j]];
+        }
+        ageRangeModel.biggeraAges = biggerAges;
+        
+        [ageRangeModels addObject:ageRangeModel];
+    }
+    
+    return ageRangeModels;
 }
 
 //体型

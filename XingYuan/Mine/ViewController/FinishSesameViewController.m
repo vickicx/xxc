@@ -16,7 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"芝麻信用授权";
+//    self.title = @"芝麻信用授权";
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    label.text = @"芝麻信用授权";
+    label.font = FONT_WITH_S(18);
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
+    self.navigationItem.rightBarButtonItem = itme;
+    self.navigationItem.titleView = label;
     // Do any additional setup after loading the view from its nib.
 }
 

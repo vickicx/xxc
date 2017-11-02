@@ -25,9 +25,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"通用设置";
+//    self.title = @"通用设置";
     self.titleArr = @[@"账户保护", @"更换手机号", @"修改密码", @"清空缓存", @"关于星缘", @"意见反馈", @"网络诊断"];
     [self createTableView];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    label.text = @"通用设置";
+    label.font = FONT_WITH_S(18);
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
+    self.navigationItem.rightBarButtonItem = itme;
+    self.navigationItem.titleView = label;
     // Do any additional setup after loading the view.
 }
 
@@ -53,7 +60,7 @@
     
     self.logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.logoutButton.frame = CGRectMake(12*FitWidth,450*FitHeight,kWIDTH - 24*FitWidth, 48*FitHeight);
-    self.logoutButton.layer.cornerRadius = 10.0f;
+    self.logoutButton.layer.cornerRadius = 3.0f;
     [self.logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
     [self.logoutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside];
     self.logoutButton.titleLabel.font = FONT_WITH_S(18);

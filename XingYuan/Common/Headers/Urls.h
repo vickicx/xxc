@@ -19,11 +19,11 @@
 // MARK: - 1.1拉黑(已对接)
 #define Defriend @"/mobileapi/defriend"
 
-// MARK: - 1.2选择兴趣（已对接）
-#define Setinterest @"/mobileapi/setinterest"
+// MARK: - 1.2选择兴趣（删除）
+//#define Setinterest @"/mobileapi/setinterest"
 
-// MARK: - 1.3用户兴趣（已对接）
-#define Memberinterest @"/mobileapi/memberinterest"
+// MARK: - 1.3用户兴趣（删除）
+//#define Memberinterest @"/mobileapi/memberinterest"
 
 // MARK: - 1.4一级匹配（已对接）
 #define Matchingone @"/mobileapi/matchingone"

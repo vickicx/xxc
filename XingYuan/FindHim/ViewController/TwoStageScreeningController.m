@@ -179,12 +179,12 @@
     //兴趣爱好
     if(indexPath.row == 1){
         HobbiesController *hobbiesController;
-        if(self.controllerType == ScreeningControllerTypeMateRequireMent){
+//        if(self.controllerType == ScreeningControllerTypeMateRequireMent){
             hobbiesController = [[HobbiesController alloc] initWithControllerType:HobbiesControllerTypeMateRequirement];
             hobbiesController.interestids = self.twoStateScreenModel.interestids;
-        }else{
-            hobbiesController = [[HobbiesController alloc] init];
-        }
+//        }else{
+//            hobbiesController = [[HobbiesController alloc] init];
+//        }
         hobbiesController.hobbiesBlock = ^(NSString *interestids,NSString *hobbiesNames){
             self.twoStateScreenModel.interestids = interestids;
             self.twoStateScreenModel.interestnames = hobbiesNames;

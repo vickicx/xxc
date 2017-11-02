@@ -8,6 +8,10 @@
 
 #import "FindHimMainViewController.h"
 #import "OneStageScreeningController.h"
+#import "TwoStageScreeningController.h"
+#import "MyAttestationViewController.h"
+#import "FourStageScreeningController.h"
+#import "FiveStageScreeningController.h"
 #import "FindHimMainModel.h"
 #import "PictureModel.h"
 
@@ -16,8 +20,9 @@
 @property (nonatomic,copy) NSString *signature;
 @property (nonatomic,strong) NSMutableArray *peopleArr;
 @property (nonatomic,strong) NSMutableArray *picArr;
-
+@property (nonatomic,strong) NSNumber *currentmatchinglevel;//当前用户匹配等级
 @property (nonatomic,strong) UILabel *pipeiValueLabel;
+@property (nonatomic,strong) MyAttestationViewController *attestationViewController;
 @end
 
 @implementation FindHimMainViewController
@@ -34,7 +39,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254.9/255.0 alpha:1];
     self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    _attestationViewController = [[MyAttestationViewController alloc] initWithType:AttestationControllerTypeScreening];
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 50*FitWidth, 50*FitHeight);
     [rightButton setTitle:@"筛选" forState:UIControlStateNormal];
@@ -50,8 +55,6 @@
     // Do any additional setup after loading the view.
 }
 
-
-
 - (void)addPagerView {
     TYCyclePagerView *pagerView = [[TYCyclePagerView alloc]init];
     pagerView.isInfiniteLoop = YES;
@@ -65,6 +68,7 @@
     _pagerView = pagerView;
     
 }
+
 -(void)pipeilabel {
     UILabel *label = [[UILabel alloc]init];
     label.textAlignment = NSTextAlignmentCenter;
@@ -84,6 +88,7 @@
     [self.view addSubview:label];
     [self.view addSubview:_pipeiValueLabel];
 }
+
 - (void)loadData {
     NSMutableArray *datas = [NSMutableArray array];
     for (int i = 0; i < 5; ++i) {
@@ -96,7 +101,6 @@
     _datas = [datas copy];
     [_pagerView reloadData];
 }
-
 
 #pragma mark - TYCyclePagerViewDataSource
 
@@ -181,29 +185,40 @@
 
 #pragma mark - 点开小图展示大图
 
-
 - (void)jumpToBigImg:(NSString *)image {
     
 }
 
 #pragma mark - 跳转到筛选界面
 
-
 - (void) rightButton:(UIButton *)button {
-    [self.navigationController pushViewController:[OneStageScreeningController new] animated:true];
+    switch (self.currentmatchinglevel.intValue) {
+        case 0:
+            [self.navigationController pushViewController:[OneStageScreeningController new] animated:true];
+            break;
+        case 1:
+            [self.navigationController pushViewController:[TwoStageScreeningController new] animated:true];
+            break;
+        case 2:
+            [self.navigationController pushViewController:self.attestationViewController animated:true];
+            break;
+        case 3:
+            [self.navigationController pushViewController:[FourStageScreeningController new] animated:true];
+            break;
+        case 4:
+            [self.navigationController pushViewController:[FiveStageScreeningController new] animated:true];
+            break;
+        default:
+            [self.navigationController pushViewController:[OneStageScreeningController new] animated:true];
+            break;
+    }
+    
 }
-
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 //- (void)getMyArtistIntroductionData {
 //    NSMutableDictionary *parameters = [NSMutableDictionary new];
 //    [parameters setValue:[Helper memberId] forKey:@"memberid"];
@@ -231,7 +246,8 @@
     [VVNetWorkTool postWithUrl:Url(KnowTAFirstPage) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         self.peopleArr = [NSMutableArray new];
         self.picArr = [NSMutableArray new];
-        NSMutableArray *arr = [result objectForKey:@"data"];
+        self.currentmatchinglevel = [[result objectForKey:@"data"] objectForKey:@"currentmatchinglevel"];
+        NSMutableArray *arr = [[result objectForKey:@"data"] objectForKey:@"matchingmember"];
         NSMutableArray *picArr = [NSMutableArray new];
         NSMutableArray *pic = [NSMutableArray new];
         for (NSDictionary *dic in arr) {
