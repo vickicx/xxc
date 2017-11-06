@@ -15,6 +15,7 @@
 #import "PictureModel.h"
 @interface UserHomePageModel : BaseModel
 @property (nonatomic,copy) NSString *headimg;
+@property (nonatomic,copy) NSString *imaccid;
 @property (nonatomic,copy) NSString *address;
 @property (nonatomic,copy) NSNumber *age;
 @property (nonatomic,copy) NSString *constellation;

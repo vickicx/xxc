@@ -44,7 +44,6 @@
     self.codeButton.layer.cornerRadius = 5;
     self.subButton.clipsToBounds = YES;
     self.subButton.layer.cornerRadius = 5;
-    
 }
 //选中
 - (IBAction)Select:(id)sender {

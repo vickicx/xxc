@@ -40,6 +40,7 @@
     self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     _attestationViewController = [[MyAttestationViewController alloc] initWithType:AttestationControllerTypeScreening];
+    _peopleArr = [NSMutableArray new];
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 50*FitWidth, 50*FitHeight);
     [rightButton setTitle:@"筛选" forState:UIControlStateNormal];
@@ -50,7 +51,7 @@
         self.title =@"识TA";
     [self addPagerView];
     [self pipeilabel];
-    [self loadData];
+//    [self loadData];
   
     // Do any additional setup after loading the view.
 }
@@ -244,7 +245,7 @@
     [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
     [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     [VVNetWorkTool postWithUrl:Url(KnowTAFirstPage) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        self.peopleArr = [NSMutableArray new];
+        [self.peopleArr removeAllObjects];
         self.picArr = [NSMutableArray new];
         self.currentmatchinglevel = [[result objectForKey:@"data"] objectForKey:@"currentmatchinglevel"];
         NSMutableArray *arr = [[result objectForKey:@"data"] objectForKey:@"matchingmember"];

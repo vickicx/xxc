@@ -24,7 +24,6 @@
     UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
     self.navigationItem.rightBarButtonItem = itme;
     self.navigationItem.titleView = label;
-    
     // Do any additional setup after loading the view from its nib.
 }
 

@@ -21,6 +21,8 @@
 #import "IFollowsController.h"
 #import "MyIMFriendsController.h"
 #import "SystemMessageListController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 @interface MineMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -46,7 +48,7 @@
 @property (nonatomic,strong) UILabel *addressLabel;
 @property (nonatomic,strong) UILabel *onlineLabel;
 @property (nonatomic,strong) UIImageView *sexImageView;
-
+@property (nonatomic,copy) NSString *img;
 
 
 @end
@@ -134,12 +136,12 @@
         
         //_headImageView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"个人页背景图.png"]];
         _headerImg=[[UIImageView alloc]init];
-        [_headerImg setImage:[UIImage imageNamed:@"头像"]];
+       
         [_headerImg.layer setMasksToBounds:YES];
         [_headerImg.layer setCornerRadius:35];
         _headerImg.backgroundColor=[UIColor whiteColor];
         _headerImg.userInteractionEnabled=YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toChooseHeadImg)];
         [_headerImg addGestureRecognizer:tap];
         [self.view addSubview:_headerImg];
         [_headerImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -149,7 +151,7 @@
         
         self.ageLabel = [[UILabel alloc] init];
         self.ageLabel.text = @"24岁";
-        [self createBackgroundImg:CGRectMake(40*FitWidth, 20*FitHeight, 60*FitWidth, 60*FitHeight) label:self.ageLabel];
+        [self createBackgroundImg:CGRectMake(40*FitWidth, 40*FitHeight, 60*FitWidth, 60*FitHeight) label:self.ageLabel];
         
         self.statureLabel = [[UILabel alloc] init];
         self.statureLabel.text = @"身高";
@@ -161,10 +163,11 @@
         
         self.educationLabel = [[UILabel alloc] init];
         self.educationLabel.text = @"工作";
-        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom, 70*FitHeight, 70*FitHeight) label:self.educationLabel];
+        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom - 20*FitHeight, 70*FitHeight, 70*FitHeight) label:self.educationLabel];
         
         self.addressLabel = [[UILabel alloc] init];
         self.addressLabel.text = @"地址";
+        self.addressLabel.numberOfLines = 0;
         [self createBackgroundImg:CGRectMake(75*FitWidth, 100*FitHeight, 90*FitWidth, 90*FitHeight) label:self.addressLabel];
 //        //昵称
 //        _nickLabel=[[UILabel alloc]init];
@@ -185,6 +188,82 @@
     }
     return _headImageView;
 }
+
+- (void)toChooseHeadImg{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            //资源类型为相机
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            picker.delegate = self;
+            //设置选择后的图片可被编辑
+            picker.allowsEditing = YES;
+            [self presentModalViewController:picker animated:YES];
+        }else{
+            [Helper showAlertControllerWithMessage:@"该设备不支持相机" completion:nil];
+        }
+    }];
+    UIAlertAction *toAlbum = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //先检测是否得到相册授权
+        ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
+        if (status == ALAuthorizationStatusRestricted || status == ALAuthorizationStatusDenied)
+        {
+            // 无权限
+            // do something...
+            [Helper showAlertControllerWithMessage:@"未获得相册授权，请先设置" completion:nil];
+        }else{
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            //资源类型为图片库
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            picker.delegate = self;
+            //设置选择后的图片可被编辑
+            picker.allowsEditing = YES;
+            [self presentModalViewController:picker animated:YES];
+        }
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:takePhoto];
+    [alertController addAction:toAlbum];
+    [alertController addAction:cancel];
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
+#pragma mark --UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo{
+    if (image != nil){
+        //开始上传图片
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        [parameters setValue:[Helper memberId] forKey:@"memberid"];
+        [JGProgressHUD showStatusWith:nil In:self.view];
+        [VVNetWorkTool formSubmissionWithUrl:Url(UploadHeadImg) body:[Helper parametersWith:parameters] progress:^(NSProgress *progress) {
+            NSLog(@"%f",1.0*progress.completedUnitCount/progress.totalUnitCount);
+        } formBlock:^(id<AFMultipartFormData> formData) {
+            NSData *data = UIImagePNGRepresentation(image);
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            // 设置时间格式
+            formatter.dateFormat = @"yyyyMMddHHmmss";
+            NSString *str = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+            [formData appendPartWithFileData:data name:@"file" fileName:fileName mimeType:@"image/png"];
+        } success:^(id result) {
+            //成功
+            BaseModel *model = [BaseModel new];
+            [model setValuesForKeysWithDictionary:result];
+            [JGProgressHUD showErrorWithModel:model In:self.view];
+            if([model.code isEqual:@1]){
+                [_headerImg setHidden:false];
+                _headerImg.image = image;
+            }
+        } fail:^(NSError *error) {
+            [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
+        }];
+    }
+    [picker dismissViewControllerAnimated:true completion:nil];
+}
+
 
 - (void)createBackgroundImg:(CGRect)rect label:(UILabel *)label{
     UIView * back = [[UIView alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)];
@@ -324,6 +403,7 @@
                           titleText.backgroundColor = [UIColor clearColor];
                           titleText.textColor=RGBColor(96, 96, 104, 1);
                           titleText.font = FONT_WITH_S(17);
+                          titleText.textAlignment = NSTextAlignmentCenter;
                           [titleText setText:self.aboutMeModel.nickname];
                           self.navigationItem.titleView=titleText;
                           if (self.aboutMeModel.authenticationschedule.intValue != 0) {
@@ -353,14 +433,12 @@
                           } else {
                               self.onlineLabel.text = @"当前离线";
                           }
-                     
+                           [_headerImg sd_setImageWithURL:Url(self.aboutMeModel.headimg) placeholderImage:[UIImage imageNamed:@"照片"]];
+                          
                       } fail:^(NSError *error) {
                           
                       }];
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

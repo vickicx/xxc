@@ -9,8 +9,10 @@
 #import "IFollowsController.h"
 #import "MemberModel.h"
 #import "MemberListCell.h"
+#import "UserHomePageViewController.h"
+#import  <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
-@interface IFollowsController ()<UITableViewDelegate,UITableViewDataSource>
+@interface IFollowsController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 @property (weak,nonatomic) UITableView *tableView;
 @property (strong,nonatomic) NSArray *dataArray;
 @property (nonatomic,assign) NSNumber *pageIndex;
@@ -30,11 +32,12 @@
     self.navigationItem.rightBarButtonItem = itme;
     self.navigationItem.titleView = label;
 
-    
     UITableView *tableView = [[UITableView alloc] init];
     tableView.frame = self.view.bounds;
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.emptyDataSetDelegate = self;
+    tableView.emptyDataSetSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView registerNib:[UINib nibWithNibName:@"MemberListCell" bundle:nil] forCellReuseIdentifier:@"MemberListCell"];
     tableView.estimatedRowHeight = 200;
@@ -76,6 +79,18 @@
     }];
 }
 
+#pragma mark - DZNEmptyDataSetSource,DZNEmptyDataSetDelegate
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIImage imageNamed:@"还没有新内容哦"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    UIFont *font = FONT_WITH_S(15);
+    NSDictionary *attributes = @{NSFontAttributeName:font};
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:@"你还没关注任何人哦" attributes:attributes];
+    return attributedString;
+}
+
 #pragma - UITableViewDelegate,UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -99,6 +114,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //cell点击事件
-    //
+    MemberModel *memberModel = self.dataArray[indexPath.row];
+    UserHomePageViewController *userPage = [[UserHomePageViewController alloc] init];
+    userPage.seememberid = [NSString stringWithFormat:@"%d",memberModel.followmemberid];
+    [self.navigationController pushViewController:userPage animated:YES];
 }
 @end

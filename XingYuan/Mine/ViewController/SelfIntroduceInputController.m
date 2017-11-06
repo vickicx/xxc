@@ -68,8 +68,6 @@
     }];
 }
 
-
-
 - (void)getdata {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];

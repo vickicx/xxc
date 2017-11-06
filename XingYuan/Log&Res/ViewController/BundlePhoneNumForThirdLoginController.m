@@ -98,7 +98,7 @@
         [model setValuesForKeysWithDictionary:dic];
         if ([model.code isEqual:@1]){
             [Helper saveMemberId:self.memberId];
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[TabBarController alloc] init];
+            [Helper setupMainViewController];
         }
         [JGProgressHUD showErrorWithModel:model In:self.view];
     } fail:^(NSError *error) {

@@ -64,6 +64,7 @@
     self.loginSelectBtn.titleLabel.font = FONT_WITH_S(16)
     
     self.registerBtn.titleLabel.font = FONT_WITH_S(18)
+    self.registerPhoneTextFeild.font = FONT_WITH_S(17)
     self.registerPasswordTextFeild.font = FONT_WITH_S(17)
     self.registerConfirmPasswordTextFeild.font = FONT_WITH_S(17)
     self.registerVerificationCode.font = FONT_WITH_S(17)
@@ -73,6 +74,7 @@
     self.loginPhoneTextFeild.font = FONT_WITH_S(17)
     self.loginPasswordTextFeild.font = FONT_WITH_S(17)
     
+    self.loginPhoneTextFeild.text = [Helper account];
 }
 
 //显示注册区域
@@ -101,11 +103,6 @@
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.loginPhoneTextFeild.text forKey:@"loginname"];
     [parameters setValue:self.loginPasswordTextFeild.text forKey:@"pwd"];
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名MD5_32(timestamp+randomnumber+SignValidateKey)
-
-    //[UIApplication sharedApplication].keyWindow.rootViewController = [[TabBarController alloc] init];
     
     [JGProgressHUD showStatusWith:nil In:self.view];
     [VVNetWorkTool postWithUrl:Url(LOGIN) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
@@ -116,34 +113,21 @@
         NSDictionary *data = [dic valueForKey:@"data"];
         [loginResultModel setValuesForKeysWithDictionary:data];
         self.loginResultModel = loginResultModel;
-        [Helper saveMemberId:loginResultModel.memberId];
         [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
+        
+        //对登录结果进行检测
         if ([loginResultModel.code  isEqual: @1]){
-            [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
-            //若未选择性别则跳转性别选选择界面
-            if (!loginResultModel.sex){
-                SexSelectController *sexSelectController = [[SexSelectController alloc] init];
-                sexSelectController.memberId = loginResultModel.memberId;
-                [self.navigationController pushViewController:sexSelectController animated:true];
-                return;
-            }
-            //若未选择用户基础信息则跳转基础信息填写界面
-            if (!loginResultModel.issetmemberinfo){
-                UserBaseInfoFillInController *baseInfoFillInController = [[UserBaseInfoFillInController alloc] init];
-                baseInfoFillInController.memberId = loginResultModel.memberId;
-                [self.navigationController pushViewController:baseInfoFillInController animated:true];
-                return;
-            }
-//            若都已选择则进入IM登录业务
-//            如果已经注册了NIM则直接登录
+            [Helper saveAccount:self.loginPhoneTextFeild.text];
+            [Helper savePassword:self.loginPasswordTextFeild.text];
+            
+            //进入IM登录业务
+            //如果已经注册了NIM则直接登录
             if ([loginResultModel.imaccid length]){
                 [self loginNTESWithAccid:loginResultModel.imaccid Token:loginResultModel.imtoken];
             }else{
                 //NIM还未注册则向服务器发起注册请求
                 [self requestNTESAccidAndTokenWith:loginResultModel.memberId];
             }
-//            [Helper saveMemberId:loginResultModel.memberId];
-//            [UIApplication sharedApplication].keyWindow.rootViewController = [[TabBarController alloc] init];
         }
     } fail:^(NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
@@ -163,10 +147,11 @@
         [loginResultModel setValuesForKeysWithDictionary:dic];
         NSDictionary *data = [dic valueForKey:@"data"];
         [loginResultModel setValuesForKeysWithDictionary:data];
+        [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
         if ([loginResultModel.code isEqual:@1]){
+            //登录网易云信账号
             [self loginNTESWithAccid:loginResultModel.accid Token:loginResultModel.token];
         }
-        [JGProgressHUD showErrorWithModel:loginResultModel In:self.view];
     } fail:^(NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
@@ -183,16 +168,30 @@
                                   completion:^(NSError *error) {
                                       if (error == nil)
                                       {
+                                          
                                           LoginData *sdkData = [[LoginData alloc] init];
                                           sdkData.account   = accid;
                                           sdkData.token     = token;
                                           [[NTESLoginManager sharedManager] setCurrentLoginData:sdkData];
-                                          
                                           [[NTESServiceManager sharedManager] start];
+                                          
+                                          //若未选择性别则跳转性别选选择界面
+                                          if ([self.loginResultModel.sex isEqual:@0]){
+                                              SexSelectController *sexSelectController = [[SexSelectController alloc] init];
+                                              sexSelectController.loginResultModel = self.loginResultModel;
+                                              [self.navigationController pushViewController:sexSelectController animated:true];
+                                              return;
+                                          }
+                                          //若未选择用户基础信息则跳转基础信息填写界面
+                                          if (!self.loginResultModel.issetmemberinfo){
+                                              UserBaseInfoFillInController *baseInfoFillInController = [[UserBaseInfoFillInController alloc] init];
+                                              baseInfoFillInController.loginResultModel = self.loginResultModel;
+                                              [self.navigationController pushViewController:baseInfoFillInController animated:true];
+                                              return;
+                                          }
+                                          
                                           [Helper saveMemberId:self.loginResultModel.memberId];
-                                          [UIApplication sharedApplication].keyWindow.rootViewController = [[TabBarController alloc] init];
-                                          //NTESMainTabController * mainTab = [[NTESMainTabController alloc] initWithNibName:nil bundle:nil];
-                                          //[UIApplication sharedApplication].keyWindow.rootViewController = mainTab;
+                                          [Helper setupMainViewController];
                                       }
                                       else
                                       {
@@ -204,16 +203,21 @@
 
 // MARK: - 注册
 - (IBAction)dealRegister:(UIButton *)sender {
+    //对控件中的值进行判断。。
+    
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setValue:@"" forKey:@"mobilephone"];
-    [parameters setValue:@"" forKey:@"pwd"];
-    [parameters setValue:@"" forKey:@"surepwd"];
-    [parameters setValue:@"" forKey:@"smscode"];
+    [parameters setValue:self.registerPhoneTextFeild.text forKey:@"mobilephone"];
+    [parameters setValue:self.registerPasswordTextFeild.text forKey:@"pwd"];
+    [parameters setValue:self.registerConfirmPasswordTextFeild.text forKey:@"surepwd"];
+    [parameters setValue:self.registerVerificationCode.text forKey:@"smscode"];
 
     [VVNetWorkTool postWithUrl:Url(REGISTER) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         BaseModel *model = [BaseModel new];
         [model setValuesForKeysWithDictionary:result];
         [JGProgressHUD showResultWithModel:model In:self.view];
+        if([model.code isEqual:@1]){
+            [self.navigationController popViewControllerAnimated:true];
+        }
     } fail:^(NSError *error) {
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
@@ -313,7 +317,7 @@
         //如果绑定了直接跳TabBarController
         if (loginResultModel.isbindingloginname){
             [Helper saveMemberId:loginResultModel.memberId];
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[TabBarController alloc] init];
+            [Helper setupMainViewController];
         }
         //如果没绑定就去绑定
         if (!loginResultModel.isbindingloginname){

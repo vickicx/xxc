@@ -60,16 +60,16 @@
 // MARK: - 2.6设置用户性别（已对接）
 #define SetMemberSex @"/MobileAPI/SetMemberSex"
 
-// MARK: - 2.7用户消息
+// MARK: - 2.7用户消息（已对接）
 #define MemberInformation @"/mobileapi/MemberInformation"
 
-// MARK: - 2.8阅读消息
+// MARK: - 2.8阅读消息（已对接）
 #define ReadInformation @"/mobileapi/ReadInformation"
 
 // MARK: - 2.9提交意见（已对接）
 #define SubmitFeedBack @"/mobileapi/SubmitFeedBack"
 
-// MARK: - 3.0我的个人介绍 （部分已对接）
+// MARK: - 3.0我的个人介绍 （已对接）
 #define MyArtistIntroduction @"/mobileapi/MyArtistIntroduction"
 
 // MARK: - 3.1设置个人介绍 （已对接）
@@ -81,7 +81,7 @@
 // MARK: - 3.3相册预览 （已对接）
 #define PhotoAlbumPreview @"/mobileapi/PhotoAlbumPreview"
 
-// MARK: - 3.4 IM好友列表
+// MARK: - 3.4 IM好友列表（已对接）
 #define IMFriend @"/IM/IMFriend"
 
 // MARK: - 3.5我的 （已对接）
@@ -184,6 +184,12 @@
 
 // MARK: - 4.2账号与三方账号绑定（已对接）
 #define BundThirdAccount @"/mobileapi/bindthirdparty"
+
+// MARK: - 5.1 实名认证
+#define Realnameauthentication @"/mobileapi/realnameauthentication"
+
+// MARK: - 5.5 上传用户实时地理位置信息
+#define Uploadmemberlocation @"/mobileapi/uploadmemberlocation"
 
 // MARK: - 5.7相册上传照片（已对接）
 #define Uploadmemberpicturewall @"/mobileapi/uploadmemberpicturewall"

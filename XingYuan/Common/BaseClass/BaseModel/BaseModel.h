@@ -25,5 +25,5 @@
  */
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key;
 
-
+- (NSArray *)propertyDescriptions;
 @end

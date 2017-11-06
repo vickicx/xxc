@@ -47,14 +47,6 @@
     return self;
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-}
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,7 +65,6 @@
     UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
     self.navigationItem.rightBarButtonItem = itme;
     self.navigationItem.titleView = label;
-
 }
 
 - (void)createView {
@@ -92,7 +83,7 @@
     // 1.设置列间距
     layout.minimumInteritemSpacing = 15;
     // 2.设置行间距
-    layout.minimumLineSpacing = 15;
+//    layout.minimumLineSpacing = 15;
     // 3.设置每个item的大小
     layout.itemSize = CGSizeMake(50*FitWidth, 50*FitHeight);
     // 5.设置布局方向
@@ -155,7 +146,6 @@
         cell.num = self.threeStageScreeningModel.buyhousecertifyaudit;
     }
     return cell;
-    
 }
 
 //UICollectionViewCell的大小
@@ -200,7 +190,6 @@
             if(self.threeStageScreeningModel.buycarcertifyaudit != 1){
                 CarCertificationViewController *carVC = [[CarCertificationViewController alloc] init];
                 [self.navigationController pushViewController:carVC animated:YES];
-
             }
         }
         
@@ -230,7 +219,7 @@
     if(section == 1){
         return UIEdgeInsetsMake(0, 0, 0, 0);
     }
-    return UIEdgeInsetsMake(0, 0, 0, 33*FitHeight);
+    return UIEdgeInsetsMake(15, 20*FitHeight, 0, 33*FitHeight);
 }
 
 //通过设置SupplementaryViewOfKind 来设置头部或者底部的view，其中 ReuseIdentifier 的值必须和 注册是填写的一致，本例都为 “reusableView”
@@ -318,8 +307,7 @@
     }
     _label1.text = [NSString stringWithFormat:@"(%d/5)", self.temp];
     
-     [_attestationCollectionView reloadData];
-    
+     [_attestationCollectionView reloadData];    
 }
 
 /*

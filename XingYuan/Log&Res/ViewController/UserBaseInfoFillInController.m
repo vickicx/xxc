@@ -221,7 +221,7 @@
     //
     if(![self isParameterIntegrity]){return;}
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setValue:self.memberId forKey:@"memberid"];
+    [parameters setValue:self.loginResultModel.memberId forKey:@"memberid"];
     [parameters setValue:self.nickName forKey:@"nickname"];
     [parameters setValue:self.height forKey:@"stature"];
     [parameters setValue:self.area forKey:@"address"];
@@ -241,10 +241,13 @@
         [formData appendPartWithFileData:data name:@"file" fileName:fileName mimeType:@"image/png"];
     } success:^(id result) {
         //成功后直接进入主界面？
-        [[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissViewControllerAnimated:YES completion:nil];
-        LoginRegisterController *loginRegisterController = [[LoginRegisterController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginRegisterController];
-        [[UIApplication sharedApplication] keyWindow].rootViewController = nav;
+        BaseModel *baseModel = [BaseModel new];
+        [baseModel setValuesForKeysWithDictionary:result];
+        [JGProgressHUD showErrorWithModel:baseModel In:self.view];
+        if([baseModel.code isEqual:@1]){
+            [Helper saveMemberId:self.loginResultModel.memberId];
+            [Helper setupMainViewController];
+        }
     } fail:^(NSError *error) {
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];

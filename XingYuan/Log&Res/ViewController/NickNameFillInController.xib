@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -38,7 +39,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yg-EC-uFi">
                                     <rect key="frame" x="329" y="8" width="31" height="30"/>
                                     <state key="normal" title="完成">
-                                        <color key="titleColor" red="0.96470588239999999" green="0.31372549020000001" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" name="appThemeColor"/>
                                     </state>
                                     <connections>
                                         <action selector="dealFinish:" destination="-1" eventType="touchUpInside" id="WS3-BX-6JH"/>
@@ -47,7 +48,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7p-m6-hWC">
                                     <rect key="frame" x="15" y="8" width="31" height="30"/>
                                     <state key="normal" title="取消">
-                                        <color key="titleColor" red="0.96470588235294119" green="0.31372549019607843" blue="0.46274509803921571" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" name="appThemeColor"/>
                                     </state>
                                     <connections>
                                         <action selector="dealCancel:" destination="-1" eventType="touchUpInside" id="7q5-Ze-LuE"/>
@@ -108,4 +109,9 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <namedColor name="appThemeColor">
+            <color red="0.9649999737739563" green="0.31400001049041748" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

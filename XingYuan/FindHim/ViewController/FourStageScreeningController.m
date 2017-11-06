@@ -157,7 +157,7 @@
         [model setValuesForKeysWithDictionary:result];
         [JGProgressHUD showResultWithModel:model In:self.view];
         if([model.code isEqual:@1] && isToNext){
-            FiveStageScreeningController *screeningVC = [[FiveStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdateToServer basicInfoCellPreTitle:@"嘿嘿嘿"];
+            FiveStageScreeningController *screeningVC = [[FiveStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdateToServer basicInfoCellPreTitle:@"未来规划"];
             [self.navigationController pushViewController:screeningVC animated:true];
         }
         if([model.code isEqual:@1] && !isToNext){

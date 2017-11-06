@@ -17,7 +17,6 @@
     [super awakeFromNib];
     self.nextBtn.layer.cornerRadius = 3;
     self.nextBtn.clipsToBounds = true;
-    
 }
 - (IBAction)dealToNext:(UIButton *)sender {
     if(self.nextBlock != nil){

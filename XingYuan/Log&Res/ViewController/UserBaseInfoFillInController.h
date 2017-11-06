@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "LoginResultModel.h"
 
 @interface UserBaseInfoFillInController : ViewController
-@property (nonatomic,copy) NSNumber *memberId;
+@property (nonatomic,weak) LoginResultModel *loginResultModel;
 @end

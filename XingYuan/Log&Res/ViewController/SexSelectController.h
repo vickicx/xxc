@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "LoginResultModel.h"
 
 @interface SexSelectController : ViewController
-@property (nonatomic,copy) NSNumber *memberId;
+@property (nonatomic,weak) LoginResultModel *loginResultModel;
 @end

@@ -69,6 +69,7 @@
     [super viewDidLoad];
 //    self.title = @"我的资料";
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.delegate = self;
     tableView.dataSource = self;
     self.tableView = tableView;
@@ -380,7 +381,7 @@
                     };
                     [self.navigationController pushViewController:oneStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.mydataModel.matchinglevelone mj_keyValues] allScreeningValues];
+                NSArray *titles = [self.mydataModel.matchinglevelone propertyDescriptions];
                 [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 1){
@@ -395,7 +396,7 @@
                     };
                     [self.navigationController pushViewController:twoStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.mydataModel.matchingleveltwo mj_keyValues] allScreeningValues];
+                NSArray *titles = [self.mydataModel.matchingleveltwo propertyDescriptions];
                 [cell configWithTitles:titles color:lightRed];
             }
             if(indexPath.row == 2){
@@ -410,7 +411,7 @@
                     };
                     [self.navigationController pushViewController:fourStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.mydataModel.matchinglevelfour mj_keyValues] allScreeningValues];
+                NSArray *titles = [self.mydataModel.matchinglevelfour propertyDescriptions];
                 [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 3){
@@ -425,7 +426,7 @@
                     };
                     [self.navigationController pushViewController:fiveStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.mydataModel.matchinglevelfive mj_keyValues] allScreeningValues];
+                NSArray *titles = [self.mydataModel.matchinglevelfive propertyDescriptions];
                 [cell configWithTitles:titles color:lightRed];
             }
             return cell;
@@ -445,7 +446,7 @@
                     };
                     [self.navigationController pushViewController:oneStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchinglevelone mj_keyValues] allScreeningValues];
+                NSArray *titles = [self.myMateRequireModel.matchinglevelone propertyDescriptions];
                 [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 1){
@@ -474,7 +475,7 @@
                     };
                     [self.navigationController pushViewController:twoStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchingleveltwo mj_keyValues] allScreeningValues];
+                NSArray *titles = [self.myMateRequireModel.matchingleveltwo propertyDescriptions];
                 [cell configWithTitles:titles color:lightRed];
             }
             if(indexPath.row == 3){
@@ -489,7 +490,7 @@
                     };
                     [self.navigationController pushViewController:fourStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchinglevelfour mj_keyValues] allScreeningValues];
+                NSArray *titles = [self.myMateRequireModel.matchinglevelfour propertyDescriptions];
                 [cell configWithTitles:titles color:lightGray];
             }
             if(indexPath.row == 4){
@@ -504,7 +505,7 @@
                     };
                     [self.navigationController pushViewController:fiveStageScreeningController animated:true];
                 };
-                NSArray *titles = [[self.myMateRequireModel.matchinglevelfive mj_keyValues] allScreeningValues];
+                NSArray *titles = [self.myMateRequireModel.matchinglevelfive propertyDescriptions];
                 [cell configWithTitles:titles color:lightRed];
             }
             return cell;

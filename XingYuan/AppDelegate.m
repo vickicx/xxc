@@ -29,6 +29,9 @@
 #import "NTESSubscribeManager.h"
 #import "NTESRedPacketManager.h"
 #import "NTESBundleSetting.h"
+#import "TZLocationManager.h"
+
+
 
 @import PushKit;
 
@@ -49,6 +52,29 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
     [self registerPushService];
     [self commonInitListenEvents];
     [self setupMainViewController];
+    [TZLocationManager manager];
+    [TZLocationManager.manager startLocation];
+    [TZLocationManager.manager startLocationWithSuccessBlock:^(CLLocation *location, CLLocation *oldLocation) {
+        NSLog(@"经度%f,纬度%f",location.coordinate.longitude,location.coordinate.latitude);
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        [parameters setValue:[Helper memberId] forKey:@"memberid"];
+        [parameters setValue:[NSString stringWithFormat:@"%f", location.coordinate.latitude] forKey:@"lat"];
+        [parameters setValue:[NSString stringWithFormat:@"%f", location.coordinate.longitude] forKey:@"lnt"];
+        [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+        [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+        [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+        __weak __typeof__(self) weakSelf = self;
+        [VVNetWorkTool postWithUrl:Url(MemberFirstPage) body:[Helper parametersWith:parameters]
+                          progress:nil success:^(id result) {
+                              if ([result objectForKey:@"code"] == @"1") {
+                                  NSLog(@"位置上传成功");
+                              }
+                         
+                          } fail:^(NSError *error) {
+                          }];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
     
     DDLogInfo(@"launch with options %@",launchOptions);
     
@@ -163,7 +189,7 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
 {
     //登录应用
     if ([Helper memberId]){
-        self.window.rootViewController = [[TabBarController alloc] init];
+        [Helper setupMainViewController];
         //如果未登录NIM
         if (![[[NIMSDK sharedSDK] loginManager] isLogined]){
             LoginData *data = [[NTESLoginManager sharedManager] currentLoginData];
@@ -182,11 +208,11 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
             }
             //如果未缓存则手动登录
             else{
-                [self setupLoginViewController];
+                [Helper logOut];
             }
         }
     }else{
-        [self setupLoginViewController];
+        [Helper logOut];
     }
 }
 
@@ -200,25 +226,11 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
     [[[NIMSDK sharedSDK] loginManager] addDelegate:self];
 }
 
-- (void)setupLoginViewController
-{
-    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
-    LoginRegisterController *loginRegisterController = [[LoginRegisterController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginRegisterController];
-    self.window.rootViewController = nav;
-}
 
 #pragma mark - 注销
 -(void)logout:(NSNotification *)note
 {
-    [self doLogout];
-}
-
-- (void)doLogout
-{
-    [[NTESLoginManager sharedManager] setCurrentLoginData:nil];
-    [[NTESServiceManager sharedManager] destory];
-    [self setupLoginViewController];
+    [Helper logOut];
 }
 
 
@@ -332,6 +344,9 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
                                                  animated:YES
                                                completion:nil];
 }
+
+
+
 
 #pragma QQApiInterfaceDelegate
 /**

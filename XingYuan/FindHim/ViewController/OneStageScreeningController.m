@@ -102,7 +102,7 @@
         [model setValuesForKeysWithDictionary:result];
         [JGProgressHUD showResultWithModel:model In:self.view];
         if([model.code isEqual:@1] && isToNext){
-            TwoStageScreeningController *screeningVC = [[TwoStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdateToServer basicInfoCellPreTitle:@"嘿嘿嘿"];
+            TwoStageScreeningController *screeningVC = [[TwoStageScreeningController alloc] initWithType:ScreeningControllerTypeUpdateToServer basicInfoCellPreTitle:@"个人情况"];
             [self.navigationController pushViewController:screeningVC animated:true];
         }
         if([model.code isEqual:@1] && !isToNext){

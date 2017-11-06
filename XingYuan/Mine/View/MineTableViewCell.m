@@ -19,7 +19,6 @@
     if (self) {
         self.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [self createView];
-
     }
     return self;
 }
@@ -31,9 +30,7 @@
     [self addSubview:background];
     
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(30 * FitWidth, 20 * FitHeight, 10*FitWidth, 10*FitHeight)];
-    
     [background addSubview:_image];
-    
     
     self.title = [[UILabel alloc] initWithFrame:CGRectMake(self.image.right + 10*FitWidth,0, 100*FitWidth, 54*FitHeight)];
     self.title.font = FONT_WITH_S(16);
@@ -47,13 +44,6 @@
     self.line = [[UILabel alloc] initWithFrame:CGRectMake(self.title.left, background.bottom - 1*FitHeight, background.width - self.title.left - 10*FitWidth, 1*FitHeight)];
     [background addSubview:self.line];
     
-    
-    
-
-
-
 }
-
-
 
 @end

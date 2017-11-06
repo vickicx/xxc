@@ -73,14 +73,10 @@
 
 - (void)signOut{
     //成功后直接进入主界面？
-    [[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissViewControllerAnimated:YES completion:nil];
-    LoginRegisterController *loginRegisterController = [[LoginRegisterController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginRegisterController];
-    [[UIApplication sharedApplication] keyWindow].rootViewController = nav;
+    [Helper logOut];
 }
 
 #pragma mark ---- UITableViewDelegate ----
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }

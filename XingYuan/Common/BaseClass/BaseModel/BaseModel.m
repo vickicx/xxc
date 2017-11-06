@@ -24,5 +24,7 @@
     }
 }
 
-
+- (NSArray *)propertyDescriptions{
+    return [[self mj_keyValues] allValues];
+}
 @end

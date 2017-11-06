@@ -18,6 +18,7 @@
 @property (nonatomic,copy) NSString *sex; // 性别
 @property (nonatomic,copy) NSString *authenticationschedule; // 我的认证完成进度
 @property (nonatomic,copy) NSString *memberinfoschedule; // 我的资料完成进度
+@property (nonatomic,copy) NSString *headimg;
 @property (nonatomic,assign) BOOL online; // 是否在线
 
 @end

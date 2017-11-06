@@ -7,6 +7,7 @@
 //
 
 #import "FinishCertificationViewController.h"
+#import "MyAttestationViewController.h"
 
 @interface FinishCertificationViewController ()
 
@@ -16,7 +17,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //替换ViewController的导航栏返回按钮
+            UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [backBtn setImage:[UIImage imageNamed:@"back-拷贝-2"] forState:UIControlStateNormal];
+            backBtn.frame = CGRectMake(0, 0, 40, 20);
+            backBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 20);
+            [backBtn sizeToFit];
+            [backBtn addTarget:self action:@selector(dealTapBack) forControlEvents:UIControlEventTouchUpInside];
+            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)dealTapBack{
+    MyAttestationViewController *VC = [MyAttestationViewController new];
+    [self.navigationController popToViewController:VC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

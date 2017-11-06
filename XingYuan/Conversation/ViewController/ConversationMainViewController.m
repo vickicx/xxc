@@ -12,7 +12,7 @@
 #import "NTESCustomSysNotificationViewController.h"
 @interface ConversationMainViewController ()
 @property (nonatomic,weak) UISegmentedControl *segmentedControl;
-@property (nonatomic,strong) UIViewController *conversasionVC;
+@property (nonatomic,strong) NTESSessionListViewController *conversasionVC;
 @property (nonatomic,strong) NTESSystemNotificationViewController *systemNotoficationController;
 @end
 
@@ -41,7 +41,6 @@
     }];
     
     NTESCustomSysNotificationViewController *systemNotificationController = [[NTESCustomSysNotificationViewController alloc] init];
-    systemNotificationController.view.backgroundColor = [UIColor redColor];
     self.systemNotoficationController = systemNotificationController;
     [self addChildViewController:systemNotificationController];
     [self.view addSubview:systemNotificationController.view];
@@ -53,7 +52,6 @@
     }];
     
     NTESSessionListViewController *conversationVC = [[NTESSessionListViewController alloc] init];
-    conversationVC.view.backgroundColor = [UIColor redColor];
     self.conversasionVC = conversationVC;
     [self addChildViewController:conversationVC];
     [self.view addSubview:conversationVC.view];

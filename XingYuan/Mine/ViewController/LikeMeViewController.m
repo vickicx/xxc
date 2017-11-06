@@ -41,7 +41,6 @@
         [_tableView registerNib:[UINib nibWithNibName:@"LikeMeTableViewCell" bundle:nil] forCellReuseIdentifier:@"LikeMeTableViewCell"];
         [self.view addSubview:_tableView];
     }
-    
 }
 #pragma mark ---- UITableViewDelegate ----
 
@@ -58,15 +57,12 @@
     
 //    [cell.image setImage:[UIImage imageNamed:self.imageArr[indexPath.row]]];
 //    cell.title.text = self.titleArr[indexPath.row];
-
     return cell;
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //cell被点击恢复
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 

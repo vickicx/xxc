@@ -20,7 +20,8 @@
 #import "MatchingTableViewCell.h"
 #import "UserHomePageModel.h"
 #import "MateSelectionRequireModel.h"
-
+#import "NTESBundleSetting.h"
+#import "NTESSessionViewController.h"
 
 @interface UserHomePageViewController ()<NavHeadTitleViewDelegate,headLineDelegate,UITableViewDataSource,UITableViewDelegate>
 #define JXColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
@@ -172,7 +173,6 @@
         [_backgroundImgV addSubview:_visualview];
 
         //_headImageView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"个人页背景图.png"]];
-        
         _headerImg=[[UIImageView alloc]init];
         [_headerImg setImage:[UIImage imageNamed:@"头像"]];
         [_headerImg.layer setMasksToBounds:YES];
@@ -205,7 +205,7 @@
         
         self.ageLabel = [[UILabel alloc] init];
         self.ageLabel.text = @"24岁";
-        [self createBackgroundImg:CGRectMake(40*FitWidth, 20*FitHeight, 60*FitWidth, 60*FitHeight) label:self.ageLabel];
+        [self createBackgroundImg:CGRectMake(40*FitWidth, 40*FitHeight, 60*FitWidth, 60*FitHeight) label:self.ageLabel];
         
         self.statureLabel = [[UILabel alloc] init];
         self.statureLabel.text = @"身高";
@@ -217,10 +217,11 @@
         
         self.educationLabel = [[UILabel alloc] init];
         self.educationLabel.text = @"工作";
-        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom, 70*FitWidth, 70*FitHeight) label:self.educationLabel];
+        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom - 20*FitHeight, 70*FitWidth, 70*FitHeight) label:self.educationLabel];
         
         self.addressLabel = [[UILabel alloc] init];
         self.addressLabel.text = @"地址";
+        self.addressLabel.numberOfLines = 0;
         [self createBackgroundImg:CGRectMake(75*FitWidth, 100*FitHeight, 90*FitWidth, 90*FitHeight) label:self.addressLabel];
     }
     return _headImageView;
@@ -328,7 +329,7 @@
             return self.rowHeightFu + 100;
         }
     }else if (_currentIndex == 1){
-        return 400*FitHeight;
+        return 500*FitHeight;
     }else if (_currentIndex == 2) {
         return 1200*FitHeight;
     }
@@ -569,10 +570,91 @@
 
 //打招呼按钮点击事件
 - (void)dzhButtonDidSelecte:(UIButton *)button {
-    if (self.userHomePageModel.isfriend == YES) {
-        _dazhaohuLabel.text = @"聊天";
+    //判断是否为好友
+    //若为好友直接进入聊天
+    if(self.userHomePageModel.isfriend){
+        [self chat];
     }
+    //若非好友则向该用户打招呼
+    if(!self.userHomePageModel.isfriend){
+        [self addFriend];
+    }
+}
+
+- (void)chat{
+    UINavigationController *nav = self.navigationController;
+    NIMSession *session = [NIMSession session:self.userHomePageModel.imaccid type:NIMSessionTypeP2P];
+    NTESSessionViewController *vc = [[NTESSessionViewController alloc] initWithSession:session];
+    [nav pushViewController:vc animated:YES];
+    UIViewController *root = nav.viewControllers[0];
+    nav.viewControllers = @[root,vc];
+}
+
+- (void)addFriend{
+    //先判断是否关注
+    //若已经关注则直接打招呼
+    NIMUserRequest *request = [[NIMUserRequest alloc] init];
+    request.userId = self.userHomePageModel.imaccid;
+    request.operation = NIMUserOperationRequest;
+    request.message = @"跪求通过";
     
+    NSString *successText = @"打招呼成功";
+    NSString *failedText =  @"打招呼失败";
+    
+    __weak typeof(self) wself = self;
+    [JGProgressHUD showStatusWith:nil In:self.view];
+    [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+        [JGProgressHUD dissmiss];
+        if (!error) {
+            [JGProgressHUD showSuccessWith:successText In:self.view];
+        }else{
+            [JGProgressHUD showErrorWith:failedText In:self.view];
+        }
+    }];
+//    if(self.userHomePageModel.isfollow){
+//        NIMUserRequest *request = [[NIMUserRequest alloc] init];
+//        request.userId = self.userHomePageModel.imaccid;
+//        request.operation = NIMUserOperationRequest;
+//        request.message = @"跪求通过";
+//        
+//        NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"打招呼成功";
+//        NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败" : @"打招呼失败";
+//        
+//        __weak typeof(self) wself = self;
+//        [JGProgressHUD showStatusWith:nil In:self.view];
+//        [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+//            [JGProgressHUD dissmiss];
+//            if (!error) {
+//                [JGProgressHUD showSuccessWith:successText In:self.view];
+//            }else{
+//                [JGProgressHUD showErrorWith:failedText In:self.view];
+//            }
+//        }];
+//    }
+//    //若未关注则先调关注
+//    if(!self.userHomePageModel.isfollow){
+//        
+//    }
+}
+
+- (void)followMemberWith:(UserHomePageModel *)model{
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    [parameters setValue:self.seememberid forKey:@"followmemberid"]; //seememberid  被查看人id
+    NSNumber *handleType = model.isfollow ? @2:@1;
+
+    [parameters setValue:handleType forKey:@"handletype"];
+    
+    [VVNetWorkTool postWithUrl:Url(FollowMemeber) body:[Helper parametersWith:parameters]
+                      progress:nil success:^(id result) {
+                          if (self.guanzhu == YES) {
+                              [JGProgressHUD showSuccessWith: @"取消关注成功！" In:self.view];
+                          } else {
+                              [JGProgressHUD showSuccessWith: @"关注成功！" In:self.view];
+                          }
+                          self.guanzhu = !_guanzhu;
+                      } fail:^(NSError *error) {
+                      }];
 }
 
 - (void)requestData {
@@ -594,6 +676,11 @@
                               _guanzhuLabel.text = @"取关";
                           } else {
                               _guanzhuLabel.text = @"关注";
+                          }
+                          if(self.userHomePageModel.isfriend){
+                              self.dazhaohuLabel.text = @"发消息";
+                          }else{
+                              self.dazhaohuLabel.text = @"打招呼";
                           }
                       } fail:^(NSError *error) {
                       }];

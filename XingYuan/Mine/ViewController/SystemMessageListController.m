@@ -10,8 +10,9 @@
 #import "SystemMessageCell.h"
 #import "SystemMessageModel.h"
 #import "SystemMessageDetailController.h"
+#import  <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
-@interface SystemMessageListController ()<UITableViewDelegate,UITableViewDataSource>
+@interface SystemMessageListController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 @property (nonatomic,weak) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArray;
 @property (nonatomic,assign) NSNumber *pageIndex;
@@ -22,22 +23,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"我的消息";
-    
     UITableView *tableView = [[UITableView alloc] init];
     tableView.frame = self.view.bounds;
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.emptyDataSetDelegate = self;
+    tableView.emptyDataSetSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView registerNib:[UINib nibWithNibName:@"SystemMessageCell" bundle:nil] forCellReuseIdentifier:@"SystemMessageCell"];
     tableView.estimatedRowHeight = 200;
     self.tableView = tableView;
     [self.view addSubview:self.tableView];
-    
     self.pageIndex = @1;
     self.pageSize = @20;
-    
     [self requestData];
 }
 
@@ -68,6 +67,18 @@
     } fail:^(NSError *error) {
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
+}
+
+#pragma mark - DZNEmptyDataSetSource,DZNEmptyDataSetDelegate
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIImage imageNamed:@"还没有新内容哦"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    UIFont *font = FONT_WITH_S(15);
+    NSDictionary *attributes = @{NSFontAttributeName:font};
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:@"没有新的通知" attributes:attributes];
+    return attributedString;
 }
 
 #pragma - UITableViewDelegate,UITableViewDataSource

@@ -257,7 +257,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
                           }
                   
                           [self.manager addLocalImage:images selected:YES];
-                          
                           weakSelf.photoView.manager = self.manager;
                           [weakSelf.photoView refreshView];
                           [hud dismissAnimated:YES];

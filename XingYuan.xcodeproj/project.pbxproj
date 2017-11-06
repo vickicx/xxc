@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59035E711FAB237300EE5C95 /* BundleSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 59035E701FAB237200EE5C95 /* BundleSetting.m */; };
 		5921D1991FA9BCFA00962CD0 /* SystemMessageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5921D1981FA9BCFA00962CD0 /* SystemMessageListController.m */; };
 		5921D1A41FA9C4C300962CD0 /* SystemMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5921D1A31FA9C4C300962CD0 /* SystemMessageModel.m */; };
 		5921D1A81FA9C4E000962CD0 /* SystemMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5921D1A61FA9C4E000962CD0 /* SystemMessageCell.m */; };
@@ -690,6 +691,8 @@
 		053F070F090204A86AAFF3BC /* Pods_XingYuanUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XingYuanUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F0D04CD2432811309835AA7 /* Pods-XingYuan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XingYuan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XingYuan/Pods-XingYuan.debug.xcconfig"; sourceTree = "<group>"; };
 		257A92E7753A15DDEDC28442 /* Pods_XingYuanTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XingYuanTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59035E6F1FAB237200EE5C95 /* BundleSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleSetting.h; sourceTree = "<group>"; };
+		59035E701FAB237200EE5C95 /* BundleSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundleSetting.m; sourceTree = "<group>"; };
 		5921D1971FA9BCFA00962CD0 /* SystemMessageListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageListController.h; sourceTree = "<group>"; };
 		5921D1981FA9BCFA00962CD0 /* SystemMessageListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMessageListController.m; sourceTree = "<group>"; };
 		5921D1A21FA9C4C300962CD0 /* SystemMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageModel.h; sourceTree = "<group>"; };
@@ -1700,6 +1703,7 @@
 		991C8FB61FA17D3300242E27 /* CertificationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificationCollectionViewCell.xib; sourceTree = "<group>"; };
 		991C8FB91FA1885100242E27 /* MateSelectionRequireModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MateSelectionRequireModel.h; sourceTree = "<group>"; };
 		991C8FBA1FA1885100242E27 /* MateSelectionRequireModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MateSelectionRequireModel.m; sourceTree = "<group>"; };
+		996EB30C1FAC5DE2002BFA03 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9986AF601F8DC9E500A6EEC7 /* JYLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLegendView.h; sourceTree = "<group>"; };
 		9986AF611F8DC9E500A6EEC7 /* JYLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLegendView.m; sourceTree = "<group>"; };
 		9986AF621F8DC9E500A6EEC7 /* JYRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYRadarChart.h; sourceTree = "<group>"; };
@@ -3853,6 +3857,8 @@
 				5999A09F1F90AD8500CE3686 /* Macros.h */,
 				596CD1DC1F7E59C900ED1C54 /* Helper.h */,
 				596CD1DD1F7E59C900ED1C54 /* Helper.m */,
+				59035E6F1FAB237200EE5C95 /* BundleSetting.h */,
+				59035E701FAB237200EE5C95 /* BundleSetting.m */,
 				99ADB5931F9EDF54005928B3 /* FileUtils.h */,
 				99ADB5941F9EDF54005928B3 /* FileUtils.m */,
 			);
@@ -4054,6 +4060,7 @@
 		7A6954B6B416587DB75D764C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				996EB30C1FAC5DE2002BFA03 /* CoreLocation.framework */,
 				99ADB5911F9D8EF2005928B3 /* SDWebImage.framework */,
 				5924F2CF1F8C5FDB00D2108A /* UserNotifications.framework */,
 				5924F2CA1F8B819200D2108A /* CoreMotion.framework */,
@@ -4081,6 +4088,13 @@
 				E3C4DEA2FF5AB9C2F250B17F /* Pods_XingYuan.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		996EB30B1FAC5C78002BFA03 /* photo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = photo;
 			sourceTree = "<group>";
 		};
 		9986AF5F1F8DC9C100A6EEC7 /* RadarChart */ = {
@@ -4314,6 +4328,7 @@
 		99B487AE1F7B450200D8DE54 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				996EB30B1FAC5C78002BFA03 /* photo */,
 				99B488ED1F7B47F300D8DE54 /* Model */,
 				99B488EE1F7B47F300D8DE54 /* View */,
 				99B488EF1F7B47F300D8DE54 /* ViewController */,
@@ -4905,7 +4920,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5262,6 +5277,7 @@
 				9986AFC91F8F58B600A6EEC7 /* HXPhotoViewController.m in Sources */,
 				99AB524F1F8CA63F00C8E0B0 /* ShowInformationView.m in Sources */,
 				5924F2311F8B7C3600D2108A /* NTESChartletAttachment.m in Sources */,
+				59035E711FAB237300EE5C95 /* BundleSetting.m in Sources */,
 				5924EF7B1F8B7BEB00D2108A /* NIMFileContentConfig.m in Sources */,
 				5924EF671F8B7BEB00D2108A /* NIMGrowingInternalTextView.m in Sources */,
 				99ADB5901F9D7E55005928B3 /* PictureModel.m in Sources */,

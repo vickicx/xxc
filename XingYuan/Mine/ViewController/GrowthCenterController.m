@@ -26,7 +26,6 @@
     UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
     self.navigationItem.rightBarButtonItem = itme;
     self.navigationItem.titleView = label;
-
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView = tableView;

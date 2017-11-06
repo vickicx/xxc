@@ -9,8 +9,10 @@
 #import "MyFollowersController.h"
 #import "MemberModel.h"
 #import "MemberListCell.h"
+#import "UserHomePageViewController.h"
+#import  <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
-@interface MyFollowersController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MyFollowersController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 @property (weak,nonatomic) UITableView *tableView;
 @property (strong,nonatomic) NSArray *dataArray;
 @property (nonatomic,assign) NSNumber *pageIndex;
@@ -29,12 +31,12 @@
     UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
     self.navigationItem.rightBarButtonItem = itme;
     self.navigationItem.titleView = label;
-
     
     UITableView *tableView = [[UITableView alloc] init];
     tableView.frame = self.view.bounds;
     tableView.delegate = self;
     tableView.dataSource = self;
+
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView registerNib:[UINib nibWithNibName:@"MemberListCell" bundle:nil] forCellReuseIdentifier:@"MemberListCell"];
     tableView.estimatedRowHeight = 200;
@@ -69,11 +71,25 @@
             [dataArray addObject:memberModel];
         }
         self.dataArray = dataArray;
+        self. tableView.emptyDataSetDelegate = self;
+        self.tableView.emptyDataSetSource = self;
         [self.tableView reloadData];
         [JGProgressHUD showErrorWithModel:baseModel In:self.view];
     } fail:^(NSError *error) {
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
+}
+
+#pragma mark - DZNEmptyDataSetSource,DZNEmptyDataSetDelegate
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIImage imageNamed:@"还没有新内容哦"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    UIFont *font = FONT_WITH_S(15);
+    NSDictionary *attributes = @{NSFontAttributeName:font};
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:@"暂时没有人关注你哦" attributes:attributes];
+    return attributedString;
 }
 
 #pragma - UITableViewDelegate,UITableViewDataSource
@@ -98,5 +114,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //cell点击事件
+    MemberModel *memberModel = self.dataArray[indexPath.row];
+    UserHomePageViewController *userPage = [[UserHomePageViewController alloc] init];
+    userPage.seememberid = [NSString stringWithFormat:@"%d",memberModel.memberid];
+    [self.navigationController pushViewController:userPage animated:YES];
 }
 @end

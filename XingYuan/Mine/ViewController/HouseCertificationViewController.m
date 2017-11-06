@@ -107,16 +107,11 @@
     if (image != nil){
         self.img = image;
         
-        
         [self.button setBackgroundImage:image forState:UIControlStateNormal];
         [self requestData];
-        
     }
     [picker dismissViewControllerAnimated:true completion:nil];
 }
-
-
-
 
 /*
 #pragma mark - Navigation

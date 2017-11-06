@@ -99,5 +99,4 @@
     self.goMyInformationView();
 }
 
-
 @end

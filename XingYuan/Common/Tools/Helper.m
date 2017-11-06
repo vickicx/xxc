@@ -7,10 +7,16 @@
 //
 
 #import "Helper.h"
+#import "NTESLoginManager.h"
+#import "NTESService.h"
+#import "LoginRegisterController.h"
+#import "TabBarController.h"
+
 @interface Helper ()
 
 @property (nonatomic,retain) NSTimer *timer;
 @property (nonatomic,assign) int time;
+
 @end
 
 @implementation Helper
@@ -47,6 +53,26 @@
 //获取memberId
 + (NSNumber *)memberId{
     return [[NSUserDefaults standardUserDefaults] valueForKey:@"memberId"];
+}
+
+//存储账号
++ (void)saveAccount:(NSString *)account{
+    [[NSUserDefaults standardUserDefaults] setValue:account forKey:@"account"];
+}
+
+//获取账号
++ (NSString *)account{
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"account"];
+}
+
+//存储密码
++ (void)savePassword:(NSString *)password{
+     [[NSUserDefaults standardUserDefaults] setValue:password forKey:@"password"];
+}
+
+//获取密码
++ (NSString *)password{
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"password"];
 }
 
 //获取时间戳
@@ -87,6 +113,24 @@
             self.timer = nil;
         }
     }];
+}
+
+//进入主界面
++ (void)setupMainViewController{
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    keyWindow.rootViewController = [[TabBarController alloc] init];
+}
+
+//退出登录
++ (void)logOut{
+    [[NTESLoginManager sharedManager] setCurrentLoginData:nil];
+    [[NTESServiceManager sharedManager] destory];
+    
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    [keyWindow.rootViewController dismissViewControllerAnimated:true completion:nil];
+    LoginRegisterController *loginRegisterController = [[LoginRegisterController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginRegisterController];
+    keyWindow.rootViewController = nav;
 }
 
 /**

@@ -12,6 +12,7 @@ target 'XingYuan' do
 	pod 'MJRefresh'
   	pod 'IQKeyboardManager'
   	pod 'SDAutoLayout'
+	pod 'DZNEmptyDataSet'
     pod 'CocoaLumberjack'
     pod 'Reachability'
     pod 'SSZipArchive'

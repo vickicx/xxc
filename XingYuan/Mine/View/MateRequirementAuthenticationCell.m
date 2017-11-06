@@ -44,7 +44,6 @@
     self.collectionView.collectionViewLayout = layout;
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-
 }
 
 - (void)configWithModel:(ThreeStageScreeningModel *)model{
@@ -75,7 +74,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
 }
 
 - (IBAction)dealToEdit:(UIButton *)sender {

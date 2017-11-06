@@ -46,8 +46,6 @@
 //正在改变
 - (void)textViewDidChange:(UITextView *)textView
 {
-    
-    
     //允许提交按钮点击操作
     self.button.userInteractionEnabled = YES;
     //实时显示字数
@@ -58,7 +56,6 @@
         
         textView.text = [textView.text substringToIndex:100];
         self.stirngLenghLabel.text = @"1500/1500";
-        
     }
     
     //取消按钮点击权限，并显示提示文字

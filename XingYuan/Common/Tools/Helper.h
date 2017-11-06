@@ -21,6 +21,18 @@
 //获取memberId
 + (NSNumber *)memberId;
 
+//存储账号
++ (void)saveAccount:(NSString *)account;
+
+//获取账号
++ (NSString *)account;
+
+//存储密码
++ (void)savePassword:(NSString *)password;
+
+//获取密码
++ (NSString *)password;
+
 //获取时间戳
 + (NSString *)timeStamp;
 
@@ -33,6 +45,11 @@
 //使获取验证码button在一段时间内不可操作
 - (void)makeBtnCannotBeHandleWith:(UIButton *)button;
 
+//进入主界面
++ (void)setupMainViewController;
+
+//退出登录
++ (void)logOut;
 
 /**
  显示一个警告框

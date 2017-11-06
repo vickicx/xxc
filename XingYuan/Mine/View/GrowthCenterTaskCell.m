@@ -27,8 +27,7 @@
 
 - (void)configWithData:(NSNumber *)data{
     UIColor *handleAbleColor = RGBColor(43, 48, 52, 1);
-    UIColor *unHandleAbleColor = RGBColor(141, 146, 149, 1);
-    
+    UIColor *unHandleAbleColor = RGBColor(141, 146, 149, 1);    
     self.handleBtn.layer.borderWidth = 1;
     if([data isEqual:@1]){
         [self.handleBtn setTitleColor:handleAbleColor forState:UIControlStateNormal];

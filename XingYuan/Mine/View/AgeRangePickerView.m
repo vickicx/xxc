@@ -54,7 +54,6 @@
         NSInteger smallValue = ageRangeModel.littleAge;
         NSNumber *bigNumber = ageRangeModel.biggeraAges[[self.pickerView selectedRowInComponent:1]];
         NSInteger bigValue = [bigNumber integerValue];
-
         self.ageRangeBlock(smallValue,bigValue);
     }
     [self toDismiss];

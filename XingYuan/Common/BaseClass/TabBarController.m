@@ -129,18 +129,18 @@ typedef NS_ENUM(NSInteger,TabType) {
 - (void)loadChildControllers{
     //创建各个子Controller
     FindHimMainViewController *findVC = [[FindHimMainViewController alloc] init];
-    NavigationController *findNav = [self getChildNavControllerWith:findVC Title:@"识TA" TabBarItemImg:@"tabX_producted" TabBarItemSelectImg:@"tabX_producted_h"];
+    NavigationController *findNav = [self getChildNavControllerWith:findVC Title:@"识TA" TabBarItemImg:@"识TA" TabBarItemSelectImg:@"识TA-"];
     
     ConversationMainViewController *conversationVC = [[ConversationMainViewController alloc] init];
-    NavigationController *conversationNav = [self getChildNavControllerWith:conversationVC Title:@"我的消息" TabBarItemImg:@"tabX_account" TabBarItemSelectImg:@"tabX_accounted_h"];
+    NavigationController *conversationNav = [self getChildNavControllerWith:conversationVC Title:@"我的消息" TabBarItemImg:@"xx" TabBarItemSelectImg:@"xx-"];
     
     MineMainViewController *myVC = [[MineMainViewController alloc] init];
-    NavigationController *myNav = [self getChildNavControllerWith:myVC Title:@"我的账户" TabBarItemImg:@"tabX_account" TabBarItemSelectImg:@"tabX_accounted_h"];
+    NavigationController *myNav = [self getChildNavControllerWith:myVC Title:@"我的账户" TabBarItemImg:@"wd" TabBarItemSelectImg:@"W-"];
     
 
     self.viewControllers = @[findNav,conversationNav,myNav];
     self.selectedIndex = 0;
-    self.tabBar.tintColor = [UIColor redColor];
+    self.tabBar.tintColor = RGBColor(246, 80, 118, 1);
     [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(10, -5)];
 }
 

@@ -9,7 +9,8 @@
 #import "BaseModel.h"
 
 @interface MemberModel : BaseModel
-@property (nonatomic,assign) int Id;    //没得用
+@property (nonatomic,assign) int Id;    //IM好友memberId
+@property (nonatomic,assign) int memberid;    //关注我的用户的ID
 @property (nonatomic,assign) int followmemberid;    //我关注的用户的ID
 @property (nonatomic,copy) NSString *headimg;   //用户头像
 @property (nonatomic,copy) NSString *nickname;  //用户昵称
