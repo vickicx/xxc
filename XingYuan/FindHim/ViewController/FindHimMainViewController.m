@@ -14,6 +14,7 @@
 #import "FiveStageScreeningController.h"
 #import "FindHimMainModel.h"
 #import "PictureModel.h"
+#import "TZLocationManager.h"
 
 @interface FindHimMainViewController ()
 
@@ -23,6 +24,7 @@
 @property (nonatomic,strong) NSNumber *currentmatchinglevel;//当前用户匹配等级
 @property (nonatomic,strong) UILabel *pipeiValueLabel;
 @property (nonatomic,strong) MyAttestationViewController *attestationViewController;
+@property (nonatomic,assign) int pageindex;
 @end
 
 @implementation FindHimMainViewController
@@ -30,6 +32,31 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.pageindex = 0;
+    [TZLocationManager manager];
+    [TZLocationManager.manager startLocation];
+    [TZLocationManager.manager startLocationWithSuccessBlock:^(CLLocation *location, CLLocation *oldLocation) {
+        NSLog(@"经度%f,纬度%f",location.coordinate.longitude,location.coordinate.latitude);
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        [parameters setValue:[Helper memberId] forKey:@"memberid"];
+        [parameters setValue:[NSString stringWithFormat:@"%f", location.coordinate.latitude] forKey:@"lat"];
+        [parameters setValue:[NSString stringWithFormat:@"%f", location.coordinate.longitude] forKey:@"lnt"];
+        [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+        [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+        [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+        __weak __typeof__(self) weakSelf = self;
+        [VVNetWorkTool postWithUrl:Url(Uploadmemberlocation) body:[Helper parametersWith:parameters]
+                          progress:nil success:^(id result) {
+                              NSString *str = [result objectForKey:@"code"];
+                              if (str.intValue == 1) {
+                                  NSLog(@"位置上传成功");
+                              }
+                              
+                          } fail:^(NSError *error) {
+                          }];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
     [self requestData];
 }
 
@@ -51,6 +78,7 @@
         self.title =@"识TA";
     [self addPagerView];
     [self pipeilabel];
+    
 //    [self loadData];
   
     // Do any additional setup after loading the view.
@@ -173,6 +201,16 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
         //[_pageControl setCurrentPage:newIndex animate:YES];
     NSLog(@"%ld ->  %ld",fromIndex,toIndex);
+//    if (self.peopleArr != NULL) {
+//        int i = (self.peopleArr.count / (self.pageindex + 1)) - 2;
+//        if (fromIndex == i ) {
+//            self.pageindex++;
+//            [self requestData];
+//        }
+//    }
+    
+    
+    
 }
 
 #pragma mark - 跳转到用户详情界面
@@ -220,32 +258,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//- (void)getMyArtistIntroductionData {
-//    NSMutableDictionary *parameters = [NSMutableDictionary new];
-//    [parameters setValue:[Helper memberId] forKey:@"memberid"];
-//    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-//    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-//    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
-//    [VVNetWorkTool postWithUrl:Url(MyArtistIntroduction) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-//        NSDictionary *dic = result;
-//        NSString *summary = [[dic objectForKey:@"data"] valueForKey:@"summary"];
-//        if (summary != nil) {
-//            self.signature = summary;
-//        }
-//        
-//    } fail:^(NSError *error) {
-//        
-//    }];
-//}
+
 
 - (void)requestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    [parameters setValue:[NSString stringWithFormat:@"%d", self.pageindex] forKey:@"pageindex"];
+    [parameters setValue:@"5" forKey:@"pagesize"];
     [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
     [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
     [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     [VVNetWorkTool postWithUrl:Url(KnowTAFirstPage) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        [self.peopleArr removeAllObjects];
         self.picArr = [NSMutableArray new];
         self.currentmatchinglevel = [[result objectForKey:@"data"] objectForKey:@"currentmatchinglevel"];
         NSMutableArray *arr = [[result objectForKey:@"data"] objectForKey:@"matchingmember"];

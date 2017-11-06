@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
-            timestampString = "531390908.116926"
+            timestampString = "531642018.700868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "493"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
-            timestampString = "531390908.11708"
+            timestampString = "531642018.701022"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "484"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
-            timestampString = "531390908.117215"
+            timestampString = "531642018.701101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "485"
@@ -202,7 +202,7 @@
                   moduleName = "XingYuan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicki/XXingyuan/XingYuan/Log&amp;Res/ViewController/LoginRegisterController.m"
-                  timestampString = "531625774.523934"
+                  timestampString = "531642019.438804"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "214"
@@ -217,7 +217,7 @@
                   moduleName = "XingYuan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicki/XXingyuan/XingYuan/Log&amp;Res/ViewController/LoginRegisterController.m"
-                  timestampString = "531625774.531811"
+                  timestampString = "531642019.444439"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "214"
@@ -265,77 +265,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingYuan/AppDelegate.m"
-            timestampString = "531626251.343142"
+            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
+            timestampString = "531642018.701351"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[AppDelegate application:didFinishLaunchingWithOptions:]"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/AppDelegate.m"
-                  timestampString = "531625774.606951"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "765">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__57-[AppDelegate application:didFinishLaunchingWithOptions:]_block_invoke"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/AppDelegate.m"
-                  timestampString = "531625774.619191"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "84">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingYuan/AppDelegate.m"
-            timestampString = "531626251.429414"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingYuan/AppDelegate.m"
-            timestampString = "531626251.430268"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "-requestData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

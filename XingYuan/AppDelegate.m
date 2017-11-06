@@ -29,7 +29,7 @@
 #import "NTESSubscribeManager.h"
 #import "NTESRedPacketManager.h"
 #import "NTESBundleSetting.h"
-#import "TZLocationManager.h"
+
 
 
 
@@ -52,29 +52,7 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
     [self registerPushService];
     [self commonInitListenEvents];
     [self setupMainViewController];
-    [TZLocationManager manager];
-    [TZLocationManager.manager startLocation];
-    [TZLocationManager.manager startLocationWithSuccessBlock:^(CLLocation *location, CLLocation *oldLocation) {
-        NSLog(@"经度%f,纬度%f",location.coordinate.longitude,location.coordinate.latitude);
-        NSMutableDictionary *parameters = [NSMutableDictionary new];
-        [parameters setValue:[Helper memberId] forKey:@"memberid"];
-        [parameters setValue:[NSString stringWithFormat:@"%f", location.coordinate.latitude] forKey:@"lat"];
-        [parameters setValue:[NSString stringWithFormat:@"%f", location.coordinate.longitude] forKey:@"lnt"];
-        [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-        [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-        [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
-        __weak __typeof__(self) weakSelf = self;
-        [VVNetWorkTool postWithUrl:Url(MemberFirstPage) body:[Helper parametersWith:parameters]
-                          progress:nil success:^(id result) {
-                              if ([result objectForKey:@"code"] == @"1") {
-                                  NSLog(@"位置上传成功");
-                              }
-                         
-                          } fail:^(NSError *error) {
-                          }];
-    } failureBlock:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    
     
     DDLogInfo(@"launch with options %@",launchOptions);
     

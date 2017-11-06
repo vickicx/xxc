@@ -696,16 +696,32 @@
         self.mateSelectionRequireModel = [[MateSelectionRequireModel alloc] initWithDictionary:dic];
         [self.tableView reloadData];
         self.arr = [NSMutableArray arrayWithObjects: _mateSelectionRequireModel.address, _mateSelectionRequireModel.age, _mateSelectionRequireModel.buycarauthentication.stringValue, _mateSelectionRequireModel.buyhouseauthentication.stringValue,_mateSelectionRequireModel.carstatus, _mateSelectionRequireModel.children, _mateSelectionRequireModel.constellation, _mateSelectionRequireModel.cookingskill, _mateSelectionRequireModel.datingpattern, _mateSelectionRequireModel.drink, _mateSelectionRequireModel.educational, _mateSelectionRequireModel.facialfeatures, _mateSelectionRequireModel.familyranking, _mateSelectionRequireModel.fatherwork, _mateSelectionRequireModel.getmarriedtime, _mateSelectionRequireModel.hometown, _mateSelectionRequireModel.hopeotherlike, _mateSelectionRequireModel.householdduties, _mateSelectionRequireModel.householdregister, _mateSelectionRequireModel.housesstatus, _mateSelectionRequireModel.livingwithbothparents, _mateSelectionRequireModel.maritalstatus, _mateSelectionRequireModel.monthlyincome, _mateSelectionRequireModel.motherwork, _mateSelectionRequireModel.nation, _mateSelectionRequireModel.operatingpost, _mateSelectionRequireModel.parenteconomic,_mateSelectionRequireModel.parentmedicallnsurance, _mateSelectionRequireModel.parentstatus, _mateSelectionRequireModel.phoneauthentication.stringValue, _mateSelectionRequireModel.physique, _mateSelectionRequireModel.realnameauthentication.stringValue, _mateSelectionRequireModel.smoking, _mateSelectionRequireModel.stature, _mateSelectionRequireModel.suxing, _mateSelectionRequireModel.wanthavechildren, _mateSelectionRequireModel.weddingform, _mateSelectionRequireModel.workandrest, _mateSelectionRequireModel.zmxyauthentication.stringValue, nil];
-        
-        self.ageLabel.text = [NSString stringWithFormat:@"%@岁",_mateSelectionRequireModel.age];
-        
-        self.statureLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.stature];
-        
-        self.constellationLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.constellation];
-        
-        self.educationLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.educational];
-        
-        self.addressLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.address];
+        if (_mateSelectionRequireModel.age != NULL) {
+            self.ageLabel.text = [NSString stringWithFormat:@"%@岁",_mateSelectionRequireModel.age];
+        } else {
+            self.ageLabel.text = @"未填写";
+        }
+        if (_mateSelectionRequireModel.stature != NULL) {
+              self.statureLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.stature];
+        } else {
+             self.statureLabel.text = @"未填写";
+        }
+        if (_mateSelectionRequireModel.constellation != NULL) {
+             self.constellationLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.constellation];
+        } else {
+            self.constellationLabel.text = @"未填写";
+        }
+        if (_mateSelectionRequireModel.educational != NULL) {
+            self.educationLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.educational];
+        } else {
+            self.educationLabel.text = @"未填写";
+        }
+        if (_mateSelectionRequireModel.address != NULL) {
+            self.addressLabel.text = [NSString stringWithFormat:@"%@",_mateSelectionRequireModel.address];
+        } else {
+            self.addressLabel.text = @"未填写";
+        }
+       
        
     } fail:^(NSError *error) {
     }];
