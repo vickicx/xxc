@@ -12,73 +12,68 @@
 #import "PhotoPreviewViewController.h"
 #import "PictureModel.h"
 #import "FileUtils.h"
+#import "TZImagePickerController.h"
+#import "AddNewPhotoCollectionViewCell.h"
+#import "ShowPhotoCollectionViewCell.h"
+#import "PhotoDetailViewController.h"
+#import "LxGridViewFlowLayout.h"
 
 static const CGFloat kPhotoViewMargin = 12.0;
 
-@interface MyPhotoViewController ()<HXPhotoViewDelegate>
+@interface MyPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,TZImagePickerControllerDelegate>
 
-@property (strong, nonatomic) HXPhotoManager *manager;
-@property (weak, nonatomic) HXPhotoView *photoView;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (nonatomic,strong) NSMutableArray *pictureModelArr;
 @property (nonatomic,strong) NSMutableArray *picUrlArr;
 @property (nonatomic,strong) NSMutableArray *picPostArr;
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) LxGridViewFlowLayout *flowLayout;
+@property (nonatomic, strong) NSArray * dataSource;
+@property (nonatomic, strong) NSMutableArray *cellArray;
+// 传入展示界面的数组
+@property (nonatomic, strong) NSArray<UIImage *> *imageArray;
 @end
 
 @implementation MyPhotoViewController
-- (HXPhotoManager *)manager {
-    if (!_manager) {
-        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
-        _manager.openCamera = YES;
-        _manager.cacheAlbum = YES;
-        _manager.lookLivePhoto = YES;
-        //        _manager.outerCamera = YES;
-        _manager.open3DTouchPreview = YES;
-        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
-        _manager.photoMaxNum = 21;
-        _manager.videoMaxNum = 9;
-        _manager.maxNum = 21;
-        _manager.saveSystemAblum = NO;
-    }
-    return _manager;
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    self.dataSource = [NSArray new];
+    self.cellArray = [NSMutableArray new];
     //    self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = YES;
     // 加载本地图片
-//    NSMutableArray *images = [NSMutableArray array];
+    //    NSMutableArray *images = [NSMutableArray array];
     
-//    for (int i = 0 ; i < 4; i++) {
-//        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i]];
-//        
-//        [images addObject:image];
-//    }
+    //    for (int i = 0 ; i < 4; i++) {
+    //        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i]];
+    //
+    //        [images addObject:image];
+    //    }
     //    [self.manager addLocalImageToAlbumWithImages:images];
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, kHEIGHT - 48*FitHeight)];
     scrollView.alwaysBounceVertical = YES;
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
     
-    CGFloat width = scrollView.frame.size.width;
-    
     UILabel *advise = [[UILabel alloc] initWithFrame:CGRectMake(kPhotoViewMargin, 5*FitHeight, kWIDTH - 80*FitWidth, 30*FitHeight)];
-    advise.text = @"当你照片上传完成后，方可进行效果展示预览";
+    advise.text = @"当你照片上传完成后，方可进行效xx果展示预览";
     advise.textColor = [UIColor colorWithRed:184/255.0 green:186/255.0 blue:189/255.0 alpha:1];
     advise.font = FONT_WITH_S(14);
     [self.scrollView addSubview:advise];
     
-    HXPhotoView *photoView = [[HXPhotoView alloc] initWithFrame:CGRectMake(kPhotoViewMargin, kPhotoViewMargin + 20*FitHeight, width - kPhotoViewMargin * 2, 0) manager:self.manager];
-    photoView.delegate = self;
-    photoView.backgroundColor = [UIColor whiteColor];
-    //    self.manager.localImageList = images;
-//    [self.manager addLocalImage:images selected:YES];
-//    [photoView refreshView];
-    [scrollView addSubview:photoView];
-    self.photoView = photoView;
+    self.flowLayout = [[LxGridViewFlowLayout alloc] init];
+    self.flowLayout.itemSize = CGSizeMake(self.view.width/3 - 10, (self.view.height - 118*FitHeight)/4);
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,advise.bottom,kWIDTH,self.view.height - 118*FitHeight - 64) collectionViewLayout:self.flowLayout];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate  = self;
+    [self.collectionView registerClass:[AddNewPhotoCollectionViewCell class] forCellWithReuseIdentifier:@"addcell"];
+    [self.collectionView registerClass:[ShowPhotoCollectionViewCell class] forCellWithReuseIdentifier:@"showcell"];
+    [self.scrollView addSubview:_collectionView];
     
     UIView *previewButton = [[UIView alloc] initWithFrame:CGRectMake(0, kHEIGHT - 48 *FitHeight, kWIDTH, 48*FitHeight)];
     previewButton.backgroundColor = RGBColor(246, 80, 118, 1);
@@ -101,35 +96,94 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (self.dataSource.count >= 21) {
+        return self.dataSource.count;
+    } else {
+        return 1 + self.dataSource.count;
+    }
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    AddNewPhotoCollectionViewCell *addcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"addcell" forIndexPath:indexPath];
+    ShowPhotoCollectionViewCell *showcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"showcell" forIndexPath:indexPath];
+    __weak __typeof__(self) weakSelf = self;
+    
+    if (indexPath.row < self.dataSource.count) {
+        PictureModel *model = self.dataSource[indexPath.row];
+        showcell.picModel = model;
+        showcell.DeletePicBlock = ^(UIButton *sender) {
+            [weakSelf deletepicWithIds:model.ids];
+        };
+        return showcell;
+    } else {
+        return addcell;
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == self.dataSource.count) {
+        TZImagePickerController *imagePickController = [[TZImagePickerController alloc] initWithMaxImagesCount:21 - self.dataSource.count delegate:self];
+        //是否 在相册中显示拍照按钮
+        imagePickController.allowTakePicture = NO;
+        //是否可以选择显示原图
+        imagePickController.allowPickingOriginalPhoto = NO;
+        //是否 在相册中可以选择视频
+        imagePickController.allowPickingVideo = NO;
+        imagePickController.maxImagesCount = 21 - self.dataSource.count;
+        
+        [self.navigationController presentViewController:imagePickController animated:YES completion:nil];
+    } else {
+        {
+            NSMutableArray *mutableArray = [NSMutableArray new];
+            
+            for (int i = 0; i < self.dataSource.count; i++) {
+                NSIndexPath *indexPaths = [NSIndexPath indexPathForRow:i inSection:0];
+                ShowPhotoCollectionViewCell *cell = (ShowPhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPaths];
+                [mutableArray addObject:cell.imageviews.image];
+            }
+            self.imageArray = [NSArray arrayWithArray:mutableArray];
+            UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+            flowLayout.minimumLineSpacing = 30;
+            flowLayout.minimumInteritemSpacing = 0;
+            // 设置滚动方向
+            flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+            PhotoDetailViewController *vc = [[PhotoDetailViewController alloc] initWithCollectionViewLayout:flowLayout];
+            vc.dataSource = self.imageArray;
+            vc.tag = indexPath.row;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+    }
+}
+
+
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
+    [self.cellArray addObjectsFromArray:photos];
+    [self savePicData];
+}
+
 - (void)lookClick {
     PhotoPreviewViewController *photoView = [[PhotoPreviewViewController alloc] init];
     [self.navigationController pushViewController:photoView animated:YES];
 }
 
 - (void)savePhoto {
-    [self savePicData];
+    [self selectsort];
 }
 
-- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
-    NSSLog(@"%@",allList);
-    [HXPhotoTools getSelectedListResultModel:allList complete:^(NSArray<HXPhotoResultModel *> *alls, NSArray<HXPhotoResultModel *> *photos, NSArray<HXPhotoResultModel *> *videos) {
-        NSLog(@"111%@",photos[1].fullSizeImageURL);
-        self.picPostArr = [NSMutableArray new];
-        NSMutableArray *arr = [NSMutableArray new];
-        for (HXPhotoModel *model in photos) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[model.fullSizeImageURL absoluteString] substringFromIndex:7]];
-            [arr addObject:image];
-            NSLog(@"~~~~~~~%@",[[model.fullSizeImageURL absoluteString] substringFromIndex:7]);
-        }
-        self.picPostArr = arr;
-    }];
-}
 
 - (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
     NSSLog(@"%@",NSStringFromCGRect(frame));
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
 }
-- (void)deletepic {
+- (void)deletepicWithIds:(NSString *)ids {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     NSMutableArray *arr = [NSMutableArray new];
     for (PictureModel *pic in self.pictureModelArr) {
@@ -137,7 +191,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     }
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     
-    [parameters setValue:[arr componentsJoinedByString:@","] forKey:@"delpicids"]; //待删除照片下标
+    [parameters setValue:ids forKey:@"delpicids"]; //待删除照片下标
     
     [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
     
@@ -145,16 +199,17 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     
-    __weak __typeof__(self) weakSelf = self;
-    
     [VVNetWorkTool postWithUrl:Url(Deletememberpicturewall) body:[Helper parametersWith:parameters]
      
                       progress:nil success:^(id result) {
-                          
+                          if ([result[@"code"] integerValue]==1) {
+                              [self requestData];
+                          }
                       } fail:^(NSError *error) {
                           
                       }];
 }
+
 
 - (void)savePicData{
     JGProgressHUD *hud = [[JGProgressHUD alloc] initWithStyle:0];
@@ -168,25 +223,32 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
     [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
     [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
-     for (int i = 0; i < self.picPostArr.count; i++) {
-    [VVNetWorkTool formSubmissionWithUrl:Url(Uploadmemberpicturewall) body:[Helper parametersWith:    parameters] progress:^(NSProgress *progress) {
-        NSLog(@"%f",1.0*progress.completedUnitCount/progress.totalUnitCount);
-    } formBlock:^(id<AFMultipartFormData> formData) {
-        NSData *data = UIImageJPEGRepresentation(self.picPostArr[i], 0.5);
-//        UIImagePNGRepresentation(self.picPostArr[i]);
+    dispatch_group_t upLoadGroup = dispatch_group_create();
+    
+    for (int i = 0; i < self.cellArray.count; i++) {
+        dispatch_group_enter(upLoadGroup);
+        [VVNetWorkTool formSubmissionWithUrl:Url(Uploadmemberpicturewall) body:[Helper parametersWith:    parameters] progress:^(NSProgress *progress) {
+            NSLog(@"%f",1.0*progress.completedUnitCount/progress.totalUnitCount);
+        } formBlock:^(id<AFMultipartFormData> formData) {
+            NSData *data = UIImageJPEGRepresentation(self.cellArray[i], 0.5);
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             // 设置时间格式
             formatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
             NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
             [formData appendPartWithFileData:data name:@"file" fileName:fileName mimeType:@"image/png"];
-    } success:^(id result) {
+        } success:^(id result) {
+            dispatch_group_leave(upLoadGroup);
+            
+        } fail:^(NSError *error) {
+            
+        }];
+    }
+    dispatch_group_notify(upLoadGroup, dispatch_get_main_queue(), ^{
         [hud dismissAnimated:YES];
-    } fail:^(NSError *error) {
-        NSLog(@"失败");
-    }];
-     }
-    [self deletepic];
+        [self requestData];
+    });
+    
 }
 
 - (void)requestData {
@@ -196,6 +258,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     [hud showInView:self.view];
     NSMutableDictionary *parameters = [NSMutableDictionary new];
+    NSMutableArray *mutableArr = [NSMutableArray new];
     
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     
@@ -214,56 +277,99 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [VVNetWorkTool postWithUrl:Url(Myphotoalbum) body:[Helper parametersWith:parameters]
      
                       progress:nil success:^(id result) {
-                          self.pictureModelArr = [NSMutableArray new];
                           
-                          self.picUrlArr = [NSMutableArray new];
                           
-                          NSMutableArray *arr = [result objectForKey:@"data"];
+                          NSArray *arr = [result objectForKey:@"data"];
                           
                           for (NSDictionary *dic in arr) {
                               
                               PictureModel *pic = [[PictureModel alloc] initWithDictionary:dic];
                               
-                              [self.pictureModelArr addObject:pic];
-                             
-                              NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:Url(pic.pic)]];
+                              [mutableArr addObject:pic];
                               
-                              UIImage *image = [UIImage imageWithData:data]; // 取得图片
-                         
-//                              [FileUtils creatFile:[NSString stringWithFormat:@"nnn%@",pic.sort] withData:data];
-                              NSString *path_sandox = NSHomeDirectory();
-                              //设置一个图片的存储路径
-                              NSString *imagePath = [path_sandox stringByAppendingString:[NSString stringWithFormat:@"/nnn%@.png",pic.sort]];
-                              //把图片直接保存到指定的路径（同时应该把图片的路径imagePath存起来，下次就可以直接用来取）
-                              [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
-                        
-                              if ( [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES]) {
-                                  NSLog(@"成功");
-                              }else {
-                                  NSLog(@"失败");
-                              }
+                              //                              NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:Url(pic.pic)]];
+                              //
+                              //                              UIImage *image = [UIImage imageWithData:data]; // 取得图片
+                              //
+                              ////                              [FileUtils creatFile:[NSString stringWithFormat:@"nnn%@",pic.sort] withData:data];
+                              //                              NSString *path_sandox = NSHomeDirectory();
+                              //                              //设置一个图片的存储路径
+                              //                              NSString *imagePath = [path_sandox stringByAppendingString:[NSString stringWithFormat:@"/nnn%@.png",pic.sort]];
+                              //                              //把图片直接保存到指定的路径（同时应该把图片的路径imagePath存起来，下次就可以直接用来取）
+                              //                              [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+                              //
+                              //                              if ( [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES]) {
+                              //                                  NSLog(@"成功");
+                              //                              }else {
+                              //                                  NSLog(@"失败");
+                              //                              }
                           }
+                          self.dataSource = [NSArray arrayWithArray:mutableArr];
                           
-                          NSMutableArray *images = [NSMutableArray array];
-                      
-                          for (PictureModel *pic in self.pictureModelArr) {
-                              
-                              //借助以上获取的沙盒路径读取图片
-                              // 读取沙盒路径图片
-                              NSString *aPath3=[NSString stringWithFormat:@"%@/nnn%@.png",NSHomeDirectory(),pic.sort];
-                              // 拿到沙盒路径图片
-                              UIImage *imgFromUrl3=[[UIImage alloc]initWithContentsOfFile:aPath3];
-                              [images addObject:imgFromUrl3];
-                          }
-                  
-                          [self.manager addLocalImage:images selected:YES];
-                          weakSelf.photoView.manager = self.manager;
-                          [weakSelf.photoView refreshView];
+                          [self.collectionView reloadData];
+                          
                           [hud dismissAnimated:YES];
+                          
                       } fail:^(NSError *error) {
                           
                       }];
     
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)sourceIndexPath canMoveToIndexPath:(NSIndexPath *)destinationIndexPath {
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.dataSource];
+    [array removeObjectAtIndex:sourceIndexPath.row];
+    [array insertObject:self.dataSource[sourceIndexPath.row] atIndex:destinationIndexPath.row];
+    self.dataSource = [NSArray arrayWithArray:array];
+    return YES;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)sourceIndexPath didMoveToIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+}
+
+- (void)selectsort {
+    JGProgressHUD *hud = [[JGProgressHUD alloc] initWithStyle:0];
+    
+    hud.textLabel.text = @"保存中";
+    
+    [hud showInView:self.view];
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    [parameters setValue:[Helper memberId] forKey:@"memberid"];
+    
+    [parameters setValue:@"1" forKey:@"pageindex"]; //分页下标
+    
+    [parameters setValue:@"21" forKey:@"pagesize"]; //每页数据条数
+    
+    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
+    
+    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
+    
+    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+    __block  NSMutableString *sortStr = [NSMutableString new];
+    [self.dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        PictureModel *model = obj;
+        NSLog(@"%@  %@",model.ids,model.sort);
+        if (idx == 0) {
+            [sortStr appendString:[NSString stringWithFormat:@"%@|%lu",model.ids,(unsigned long)idx]];
+        } else {
+            [sortStr appendString:[NSString stringWithFormat:@",%@|%lu",model.ids,idx]];
+        }
+    }];
+    [parameters setValue:sortStr forKey:@"picturesort"];
+    
+    [VVNetWorkTool postWithUrl:Url(Setphotoalbumsort) body:[Helper parametersWith:parameters] progress:^(NSProgress *progress) {
+        
+    } success:^(id result) {
+        [hud dismissAnimated:YES];
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 @end

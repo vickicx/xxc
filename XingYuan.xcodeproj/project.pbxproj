@@ -554,6 +554,12 @@
 		991C8FB71FA17D3300242E27 /* CertificationCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 991C8FB51FA17D3300242E27 /* CertificationCollectionViewCell.m */; };
 		991C8FB81FA17D3300242E27 /* CertificationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991C8FB61FA17D3300242E27 /* CertificationCollectionViewCell.xib */; };
 		991C8FBB1FA1885100242E27 /* MateSelectionRequireModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 991C8FBA1FA1885100242E27 /* MateSelectionRequireModel.m */; };
+		9921748A1FB038FF002971A9 /* addimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 992174811FB038FC002971A9 /* addimage.png */; };
+		9921748B1FB038FF002971A9 /* PhotoDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992174841FB038FD002971A9 /* PhotoDetailCollectionViewCell.m */; };
+		9921748C1FB038FF002971A9 /* ShowPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992174851FB038FE002971A9 /* ShowPhotoCollectionViewCell.m */; };
+		9921748D1FB038FF002971A9 /* AddNewPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992174861FB038FE002971A9 /* AddNewPhotoCollectionViewCell.m */; };
+		9921748E1FB038FF002971A9 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 992174891FB038FF002971A9 /* LxGridViewFlowLayout.m */; };
+		992174911FB0398B002971A9 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992174901FB0398B002971A9 /* PhotoDetailViewController.m */; };
 		9986AF641F8DC9E500A6EEC7 /* JYLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9986AF611F8DC9E500A6EEC7 /* JYLegendView.m */; };
 		9986AF651F8DC9E500A6EEC7 /* JYRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 9986AF631F8DC9E500A6EEC7 /* JYRadarChart.m */; };
 		9986AF691F8DF2BF00A6EEC7 /* GradualColor_View.m in Sources */ = {isa = PBXBuildFile; fileRef = 9986AF681F8DF2BF00A6EEC7 /* GradualColor_View.m */; };
@@ -1703,6 +1709,17 @@
 		991C8FB61FA17D3300242E27 /* CertificationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificationCollectionViewCell.xib; sourceTree = "<group>"; };
 		991C8FB91FA1885100242E27 /* MateSelectionRequireModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MateSelectionRequireModel.h; sourceTree = "<group>"; };
 		991C8FBA1FA1885100242E27 /* MateSelectionRequireModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MateSelectionRequireModel.m; sourceTree = "<group>"; };
+		992174811FB038FC002971A9 /* addimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addimage.png; sourceTree = "<group>"; };
+		992174821FB038FC002971A9 /* AddNewPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		992174831FB038FD002971A9 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
+		992174841FB038FD002971A9 /* PhotoDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailCollectionViewCell.m; sourceTree = "<group>"; };
+		992174851FB038FE002971A9 /* ShowPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		992174861FB038FE002971A9 /* AddNewPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		992174871FB038FE002971A9 /* PhotoDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		992174881FB038FF002971A9 /* ShowPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		992174891FB038FF002971A9 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
+		9921748F1FB0398B002971A9 /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
+		992174901FB0398B002971A9 /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
 		996EB30C1FAC5DE2002BFA03 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9986AF601F8DC9E500A6EEC7 /* JYLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLegendView.h; sourceTree = "<group>"; };
 		9986AF611F8DC9E500A6EEC7 /* JYLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLegendView.m; sourceTree = "<group>"; };
@@ -4410,6 +4427,15 @@
 				5921D1A51FA9C4E000962CD0 /* SystemMessageCell.h */,
 				5921D1A61FA9C4E000962CD0 /* SystemMessageCell.m */,
 				5921D1A71FA9C4E000962CD0 /* SystemMessageCell.xib */,
+				992174811FB038FC002971A9 /* addimage.png */,
+				992174821FB038FC002971A9 /* AddNewPhotoCollectionViewCell.h */,
+				992174861FB038FE002971A9 /* AddNewPhotoCollectionViewCell.m */,
+				992174831FB038FD002971A9 /* LxGridViewFlowLayout.h */,
+				992174891FB038FF002971A9 /* LxGridViewFlowLayout.m */,
+				992174871FB038FE002971A9 /* PhotoDetailCollectionViewCell.h */,
+				992174841FB038FD002971A9 /* PhotoDetailCollectionViewCell.m */,
+				992174881FB038FF002971A9 /* ShowPhotoCollectionViewCell.h */,
+				992174851FB038FE002971A9 /* ShowPhotoCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4421,6 +4447,8 @@
 				99B488FA1F7B488B00D8DE54 /* MineMainViewController.m */,
 				9986AFD31F90529100A6EEC7 /* MyPhotoViewController.h */,
 				9986AFD41F90529100A6EEC7 /* MyPhotoViewController.m */,
+				9921748F1FB0398B002971A9 /* PhotoDetailViewController.h */,
+				992174901FB0398B002971A9 /* PhotoDetailViewController.m */,
 				9986AFD61F90A89200A6EEC7 /* PhotoPreviewViewController.h */,
 				9986AFD71F90A89200A6EEC7 /* PhotoPreviewViewController.m */,
 				9986AFD91F91AD3D00A6EEC7 /* MyAttestationViewController.h */,
@@ -4813,6 +4841,7 @@
 				59E0ABDA1F95E068001FFC7A /* MyDataStageItemInfoCell.xib in Resources */,
 				5924F2AE1F8B7C3600D2108A /* AlipaySDK.bundle in Resources */,
 				5924E4F01F8B6CAA00D2108A /* TZImagePickerController.bundle in Resources */,
+				9921748A1FB038FF002971A9 /* addimage.png in Resources */,
 				9986AFE21F91B3F100A6EEC7 /* AttestationCollectionViewCell.xib in Resources */,
 				5924F2471F8B7C3600D2108A /* NTESFilePreViewController.xib in Resources */,
 				99ADB5501F9596B4005928B3 /* SettingOneTableViewCell.xib in Resources */,
@@ -5042,6 +5071,7 @@
 				5924F2081F8B7C3600D2108A /* NTESChatroomMemberListViewController.m in Sources */,
 				59B7A48A1F7CE87A00217911 /* ModifyPasswordController.m in Sources */,
 				99ADB5741F95F972005928B3 /* AccountProtectionViewController.m in Sources */,
+				992174911FB0398B002971A9 /* PhotoDetailViewController.m in Sources */,
 				5924F23E1F8B7C3600D2108A /* NTESSessionJankenponContentView.m in Sources */,
 				5924F2CE1F8B98AA00D2108A /* NTESConfig.m in Sources */,
 				59DA85F71F99D50200089DBB /* HobbyListHeaderView.m in Sources */,
@@ -5074,6 +5104,7 @@
 				5924F2AC1F8B7C3600D2108A /* NTESPinyinConverter.m in Sources */,
 				5924EF4B1F8B7BEB00D2108A /* NSString+NIMKit.m in Sources */,
 				5924F2A51F8B7C3600D2108A /* NTESFileLocationHelper.m in Sources */,
+				9921748C1FB038FF002971A9 /* ShowPhotoCollectionViewCell.m in Sources */,
 				99ADB5421F94B177005928B3 /* HouseCertificationViewController.m in Sources */,
 				5924EF591F8B7BEB00D2108A /* NIMCustomLeftBarView.m in Sources */,
 				5924F2AD1F8B7C3600D2108A /* NTESSpellingCenter.m in Sources */,
@@ -5152,6 +5183,7 @@
 				5924F2B31F8B7C3700D2108A /* JRMFSington.m in Sources */,
 				9986AFE61F945D3A00A6EEC7 /* CertificationViewController.m in Sources */,
 				5924EF5D1F8B7BEB00D2108A /* NIMMemberGroupView.m in Sources */,
+				9921748E1FB038FF002971A9 /* LxGridViewFlowLayout.m in Sources */,
 				5924F1E81F8B7C3600D2108A /* UINavigationController+Swizzling.m in Sources */,
 				5924F1F91F8B7C3600D2108A /* NTESColorButtonCell.m in Sources */,
 				59E0ABDE1F95F320001FFC7A /* SelfIntroduceInputController.m in Sources */,
@@ -5183,6 +5215,7 @@
 				5924F29E1F8B7C3600D2108A /* NTESDemoService.m in Sources */,
 				596CD1801F7E1E7400ED1C54 /* JGProgressHUD+Show.m in Sources */,
 				5924F27D1F8B7C3600D2108A /* NTESTextHeaderView.m in Sources */,
+				9921748D1FB038FF002971A9 /* AddNewPhotoCollectionViewCell.m in Sources */,
 				5924F23C1F8B7C3600D2108A /* NTESSearchMessageEntraceCell.m in Sources */,
 				5924F1E21F8B7C3600D2108A /* UIImage+NTESColor.m in Sources */,
 				5924EF811F8B7BEB00D2108A /* NIMTipContentConfig.m in Sources */,
@@ -5402,6 +5435,7 @@
 				5924EF6D1F8B7BEB00D2108A /* NIMInputEmoticonManager.m in Sources */,
 				5924F2881F8B7C3600D2108A /* NTESNoDisturbTimeCell.m in Sources */,
 				9986AFB31F8F58B600A6EEC7 /* HXAlbumModel.m in Sources */,
+				9921748B1FB038FF002971A9 /* PhotoDetailCollectionViewCell.m in Sources */,
 				99ADB5981F9F15FC005928B3 /* FindHimMainModel.m in Sources */,
 				5924F2721F8B7C3600D2108A /* ijksdl_timer.c in Sources */,
 				5924F20E1F8B7C3600D2108A /* NTESChatroomMemberCell.m in Sources */,

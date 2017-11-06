@@ -25,6 +25,8 @@
 @property (nonatomic,strong) UILabel *pipeiValueLabel;
 @property (nonatomic,strong) MyAttestationViewController *attestationViewController;
 @property (nonatomic,assign) int pageindex;
+@property (nonatomic,assign) int index;
+@property (nonatomic,assign) int indextemp;
 @end
 
 @implementation FindHimMainViewController
@@ -68,6 +70,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     _attestationViewController = [[MyAttestationViewController alloc] initWithType:AttestationControllerTypeScreening];
     _peopleArr = [NSMutableArray new];
+    self.picArr = [NSMutableArray new];
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 50*FitWidth, 50*FitHeight);
     [rightButton setTitle:@"筛选" forState:UIControlStateNormal];
@@ -201,13 +204,17 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
         //[_pageControl setCurrentPage:newIndex animate:YES];
     NSLog(@"%ld ->  %ld",fromIndex,toIndex);
-//    if (self.peopleArr != NULL) {
-//        int i = (self.peopleArr.count / (self.pageindex + 1)) - 2;
-//        if (fromIndex == i ) {
-//            self.pageindex++;
-//            [self requestData];
-//        }
-//    }
+    if (self.peopleArr != NULL) {
+        self.index = (int)(self.peopleArr.count  - 3);
+        
+        if (fromIndex == self.index ) {
+            if (fromIndex != self.indextemp) {
+            self.pageindex++;
+            [self requestData];
+            self.indextemp = self.index;
+            }
+        }
+    }
     
     
     
@@ -269,7 +276,6 @@
     [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
     [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     [VVNetWorkTool postWithUrl:Url(KnowTAFirstPage) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-        self.picArr = [NSMutableArray new];
         self.currentmatchinglevel = [[result objectForKey:@"data"] objectForKey:@"currentmatchinglevel"];
         NSMutableArray *arr = [[result objectForKey:@"data"] objectForKey:@"matchingmember"];
         NSMutableArray *picArr = [NSMutableArray new];
