@@ -56,7 +56,7 @@
         
         
         _flowLayout = [UICollectionViewFlowLayout new]; // 自定义的布局对象
-        _flowLayout.itemSize = CGSizeMake(81, 81);
+        _flowLayout.itemSize = CGSizeMake(81*FitWidth, 81*FitHeight);
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _flowLayout.minimumLineSpacing = 10;
         _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kong1.bottom + 10 * FitHeight, kWIDTH, 100*FitHeight) collectionViewLayout:_flowLayout];

@@ -52,7 +52,7 @@
     CGPoint center = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5);
     
     ///底层圆
-    CGFloat radius = self.frame.size.width * 0.5 - 15;
+    CGFloat radius = self.frame.size.height * 0.5 - 15*FitHeight;
     UIBezierPath* arcPath = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:0 endAngle:2 * M_PI clockwise:YES];
     
     CAShapeLayer *shapelayer = [CAShapeLayer layer];
@@ -87,7 +87,7 @@
     
     self.valueLabel = valueLabel;
     
-    valueLabel.frame = CGRectMake(center.x - 50, center.y - 10, 100, 20);
+    valueLabel.frame = CGRectMake(center.x - 50*FitWidth, center.y - 10*FitHeight, 100*FitWidth, 20*FitHeight);
     valueLabel.textColor = [UIColor whiteColor];
     valueLabel.font = [UIFont systemFontOfSize:24 weight:2];
     valueLabel.textAlignment = NSTextAlignmentCenter;

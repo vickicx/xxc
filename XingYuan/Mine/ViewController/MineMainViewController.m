@@ -272,7 +272,7 @@
 - (void)createBackgroundImg:(CGRect)rect label:(UILabel *)label{
     UIView * back = [[UIView alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)];
     UIImageView *backImage = [[UIImageView alloc] initWithFrame:back.frame];
-    [backImage setImage:[UIImage imageNamed:@"头像框"]];
+    [backImage setImage:[UIImage imageNamed:@"头像背景"]];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backImage.width - 10*FitWidth, backImage.height - 10*FitHeight)];
     view.backgroundColor = RGBColor(0, 0, 0, 0.5);

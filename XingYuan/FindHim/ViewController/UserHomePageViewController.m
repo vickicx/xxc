@@ -113,7 +113,7 @@
 //创建TableView
 -(void)createTableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64*FitHeight, kWIDTH, kHEIGHT-64*FitHeight - 49*FitHeight) style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64, kWIDTH, kHEIGHT-64 - 49*FitHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor=[UIColor clearColor];
         _tableView.showsVerticalScrollIndicator=NO;
         
@@ -230,7 +230,7 @@
 - (void)createBackgroundImg:(CGRect)rect label:(UILabel *)label{
     UIView * back = [[UIView alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)];
     UIImageView *backImage = [[UIImageView alloc] initWithFrame:back.frame];
-    [backImage setImage:[UIImage imageNamed:@"头像框"]];
+    [backImage setImage:[UIImage imageNamed:@"头像背景"]];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backImage.width - 10*FitWidth, backImage.height - 10*FitHeight)];
     view.backgroundColor = RGBColor(0, 0, 0, 0.5);
@@ -292,7 +292,7 @@
         if (indexPath.row == 0 ) {
             return 180*FitHeight;
         }else if (indexPath.row == 1){
-            return 221;
+            return 221*FitHeight;
         }else if (indexPath.row == 2){
             return self.IntroductionHeight;
         }else if (indexPath.row == 3){
@@ -300,14 +300,14 @@
                 if(self.rowHeightB == NULL){
                     return 221*FitHeight;
                 }
-                return self.rowHeightB + 100;
+                return self.rowHeightB + 100*FitHeight;
             
             
         }else if (indexPath.row == 4){
                 if(self.rowHeightP == NULL){
                     return 221*FitHeight;
                 }
-                return self.rowHeightP + 100;
+                return self.rowHeightP + 100*FitHeight;
             
         }else if (indexPath.row == 5){
             
@@ -320,7 +320,7 @@
                 if(self.rowHeightFa == NULL){
                     return 221*FitHeight;
                 }
-                return self.rowHeightFa + 100;
+                return self.rowHeightFa + 100*FitHeight;
             }
             
         }else if (indexPath.row == 7){
@@ -330,7 +330,7 @@
                 if(self.rowHeightFu == NULL){
                     return 221*FitHeight;
                 }
-                return self.rowHeightFu + 100;
+                return self.rowHeightFu + 100*FitHeight;
             }
             
         }

@@ -74,7 +74,7 @@
         [menuArr addObject:menuLabel];
     }
     showView.dataSource = menuArr;
-    int height1 = (showView.i + 1) * 30;
+    int height1 = (showView.i + 1) * 30 * FitHeight;
     NSString *height2 = [NSString stringWithFormat:@"%d",height1];
     NSLog(@"~~~~~~!!!!%@",height2);
     

@@ -32,7 +32,7 @@
         kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
         [self addSubview:kong1];
         
-        _summary = [[UILabel alloc] initWithFrame:CGRectMake(30, kong1.bottom + 15 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
+        _summary = [[UILabel alloc] initWithFrame:CGRectMake(30, kong1.bottom + 15 * FitHeight, kWIDTH - 60, 1 *FitHeight)];
         _summary.font = FONT_WITH_S(14);
         _summary.textColor = RGBColor(141, 146, 149, 1);
         _summary.numberOfLines = 0;

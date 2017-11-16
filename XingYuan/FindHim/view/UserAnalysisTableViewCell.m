@@ -41,7 +41,7 @@
         kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
         [self addSubview:kong1];
         
-        JYRadarChart *p = [[JYRadarChart alloc] initWithFrame:CGRectMake(30, 65, 170, 150)];
+        JYRadarChart *p = [[JYRadarChart alloc] initWithFrame:CGRectMake(30 *FitWidth, 65*FitHeight, 170*FitWidth, 150*FitHeight)];
         
         NSArray *a1 = @[@(81), @(97), @(87), @(60), @(65), @(77)];
         
