@@ -104,14 +104,14 @@ typedef NS_ENUM(NSInteger,TabType) {
     int systemNotificationUnreadCount = self.systemUnreadCount ? @(self.systemUnreadCount).intValue : 0;
     NSNumber *totalUnreadCount = [NSNumber numberWithInt:sessionListUnreadCount+systemNotificationUnreadCount];
     nav.tabBarItem.badgeValue = [totalUnreadCount isEqual:@0] ? nil:totalUnreadCount.stringValue;
-    
+
 }
 
-//- (void)refreshConversationBadge{
-//    UINavigationController *nav = self.viewControllers[TabTypeConversation];
-//    nav.tabBarItem.badgeValue = self.conversationUnreadCount ? @(self.conversationUnreadCount).stringValue : nil;
-//}
-//
+- (void)refreshConversationBadge{
+    UINavigationController *nav = self.viewControllers[TabTypeConversation];
+    nav.tabBarItem.badgeValue = self.conversationUnreadCount ? @(self.conversationUnreadCount).stringValue : nil;
+}
+
 //- (void)refreshMineBadge{
 //    UINavigationController *nav = self.viewControllers[TabTypeMine];
 //    NSInteger badge = self.systemUnreadCount;

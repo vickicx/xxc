@@ -11,6 +11,9 @@
 #import "NTESService.h"
 #import "LoginRegisterController.h"
 #import "TabBarController.h"
+#import "AppUntils.h"
+#import <CommonCrypto/CommonDigest.h>
+#import "NSString+Encryption.h"
 
 @interface Helper ()
 
@@ -36,12 +39,29 @@
     if ([body valueForKey:@"memberid"] == nil){
         [body setValue:[Helper memberId] forKey:@"memberid"];
     }
-    [body setValue:@"devicecode" forKey:@"devicecode"];
+    
+    NSString *deviceCode = [AppUntils readUUIDFromKeyChain];
+    if(deviceCode == nil){
+        [AppUntils saveUUIDToKeyChain];
+        deviceCode = [AppUntils readUUIDFromKeyChain];
+    }
+    [body setValue:deviceCode forKey:@"devicecode"];
+    
+    NSDictionary *fixedParameters = [Helper fixedParameters];
+    [body setValue:[fixedParameters valueForKey:@"randomnumber"] forKey:@"randomnumber"];
+    [body setValue:[fixedParameters valueForKey:@"timestamp"] forKey:@"timestamp"];
+    [body setValue:[fixedParameters valueForKey:@"sign"] forKey:@"sign"];
+    
     //将参数体转为Json字符串
     NSString *dataString = [body mj_JSONString];
+    
+    //对dataString进行加密
+    NSString *encryptKey =@"helloQX7";
+    NSString *encryptString = [dataString desEncryptWithKey:encryptKey];
+    
     //重新包装参数体
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setValue:dataString forKey:@"data"];
+    [parameters setValue:encryptString forKey:@"data"];
     return parameters;
 }
 
@@ -75,6 +95,21 @@
     return [[NSUserDefaults standardUserDefaults] valueForKey:@"password"];
 }
 
+//检测密码格式是否正确
++ (BOOL)isValidPassword:(NSString *)password{
+    NSString *passWordRegex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$";
+    NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passWordRegex];
+    return [passWordPredicate evaluateWithObject:password];
+}
+
+//检测手机号码格式是否正确
++ (BOOL)isValidPhoneNum:(NSString *)phoneNum{
+    //手机号以13， 15，18开头，八个 \d 数字字符
+    NSString *phoneRegex = @"^1(3|4|5|7|8)\\d{9}$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
+    return [phoneTest evaluateWithObject:phoneNum];
+}
+
 //获取时间戳
 + (NSString *)timeStamp{
     NSDate *datenow =[NSDate date];//现在时间
@@ -93,21 +128,45 @@
     return value;
 }
 
-//获取签名
-+ (NSString *)sign{
-    //暂未做
-    return @"";
+//返回randomnumber、timestamp、sign三个参数
++ (NSDictionary *)fixedParameters{
+    NSMutableDictionary *dic = [NSMutableDictionary new];
+    NSNumber *randomnumber = [Helper randomnumber];
+    NSString *timeStamp = [Helper timeStamp];
+    NSString *signdValidateKey = @"x2017y^_=+hello+_world";
+    NSString *sign = [Helper md5DigestWithString:[NSString stringWithFormat:@"%@%@%@",timeStamp,randomnumber,signdValidateKey]];
+    
+    [dic setValue:randomnumber forKey:@"randomnumber"];
+    [dic setValue:timeStamp forKey:@"timestamp"];
+    [dic setValue:sign forKey:@"sign"];
+    return dic;
+}
+
+//返回md5加密字符串
++(NSString *)md5DigestWithString:(NSString*)input{
+    const char* str = [input UTF8String];
+    unsigned char result[16];
+    CC_MD5(str, (uint32_t)strlen(str), result);
+    NSMutableString *ret = [NSMutableString stringWithCapacity:16 * 2];
+    for(int i = 0; i<16; i++) {
+        [ret appendFormat:@"%02x",(unsigned int)(result[i])];
+    }
+    return ret;
 }
 
 //获取验证码按钮倒计时
 - (void)makeBtnCannotBeHandleWith:(UIButton *)button{
     [button setUserInteractionEnabled:false];
+    [button setTitleColor:RGBColor(190, 195, 199, 1) forState:UIControlStateNormal];
+    button.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
     self.time = 10;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:true block:^(NSTimer * _Nonnull timer) {
         [button setTitle:[NSString stringWithFormat:@"%d秒后再试",self.time] forState:UIControlStateNormal];
         self.time -= 1;
         if (self.time == 0){
             [button setUserInteractionEnabled:true];
+            [button setTitleColor:APP_THEME_COLOR forState:UIControlStateNormal];
+            button.layer.borderColor = APP_THEME_COLOR.CGColor;
             [button setTitle:@"获取验证码" forState:UIControlStateNormal];
             [self.timer invalidate];
             self.timer = nil;

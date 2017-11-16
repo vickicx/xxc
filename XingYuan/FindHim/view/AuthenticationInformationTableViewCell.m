@@ -65,9 +65,7 @@
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 
 {
-    
     return UIEdgeInsetsMake(0, 11*FitHeight, 0, 0);
-    
 }
 
 
@@ -78,30 +76,36 @@
     NSArray *imageName1 = @[@"实名认证1", @"手机认证1", @"芝麻认证1", @"购车认证1", @"购房认证1"];
     NSArray *titleName = @[@"实名认证", @"手机认证", @"芝麻认证", @"购车认证", @"购房认证"];
     cell.label.text = titleName[indexPath.row];
-    if (_matchingLevelThreeModel.realnameauthentication && indexPath.row == 0) {
-        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
-    }else {
-        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
-    }
-    if (_matchingLevelThreeModel.phoneauthentication && indexPath.row == 1) {
-        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
-    }else {
-        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
-    }
-    if (_matchingLevelThreeModel.zmxyauthentication && indexPath.row == 2) {
-        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
-    }else {
-        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
-    }
-    if (_matchingLevelThreeModel.buycarauthentication && indexPath.row == 3) {
-        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
-    }else {
-        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
-    }
-    if (_matchingLevelThreeModel.buyhouseauthentication && indexPath.row == 4) {
-        [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
-    }else {
-        [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+    if (indexPath.row == 0) {
+        if (_matchingLevelThreeModel.realnameauthentication) {
+            [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+        }else {
+            [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+        }
+    }else if (indexPath.row == 1){
+        if (_matchingLevelThreeModel.phoneauthentication) {
+            [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+        }else {
+            [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+        }
+    }else if (indexPath.row == 2){
+        if (_matchingLevelThreeModel.zmxyauthentication) {
+            [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+        }else {
+            [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+        }
+    }else if (indexPath.row == 3){
+        if (_matchingLevelThreeModel.buycarauthentication) {
+            [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+        }else {
+            [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+        }
+    }else if (indexPath.row == 4){
+        if (_matchingLevelThreeModel.buyhouseauthentication) {
+            [cell.imageView setImage:[UIImage imageNamed:imageName[indexPath.row]]];
+        }else {
+            [cell.imageView setImage:[UIImage imageNamed:imageName1[indexPath.row]]];
+        }
     }
     
     return cell;

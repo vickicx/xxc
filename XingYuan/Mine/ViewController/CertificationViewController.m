@@ -18,13 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"实名认证";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"实名认证";
+
 
     [self createView];
     // Do any additional setup after loading the view from its nib.
@@ -37,8 +32,8 @@
     self.name.textColor = RGBColor(43, 48, 52, 1);
     self.line.backgroundColor = self.line1.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    self.button.backgroundColor = RGBColor(240, 53, 99, 1);
-    self.button.layer.cornerRadius = 10.0f;
+    self.button.backgroundColor = APP_THEME_COLOR;
+    self.button.layer.cornerRadius = 3.0f;
     [self.button addTarget:self action:@selector(buttonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -101,9 +96,7 @@
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     [parameters setValue:self.idNumberField.text forKey:@"idcard"];
     [parameters setValue:self.nameField.text forKey:@"realname"];
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+
     [VVNetWorkTool postWithUrl:Url(Realnameauthentication) body:[Helper parametersWith:parameters]
                       progress:nil success:^(id result) {
                         [JGProgressHUD showSuccessWith:[result objectForKey:@"msg"] In:self.view];
@@ -112,7 +105,7 @@
                               [self.navigationController pushViewController:finishVC animated:YES];
                           }
                       } fail:^(NSError *error) {
-                        [JGProgressHUD showSuccessWith:error In:self.view];
+                          [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
                       }];
 }
 

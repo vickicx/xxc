@@ -19,8 +19,8 @@
         [self addSubview:self.imageviews];
         
         self.delegateButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.delegateButton.frame = CGRectMake(0, 0, 20, 20);
-        [self.delegateButton setTitle:@"X" forState:UIControlStateNormal];
+        self.delegateButton.frame = CGRectMake(self.width - 20, 0, 20, 20);
+        [self.delegateButton setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
         [self.delegateButton addTarget:self action:@selector(deletePicture:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.delegateButton];
         self.delegateButton.hidden = YES;
@@ -38,7 +38,7 @@
     }
     NSString *str = picModel.pic;
     
-    [self.imageviews sd_setImageWithURL:[NSURL URLWithString:Url(str)] placeholderImage:[UIImage imageNamed:@"照片"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    [self.imageviews sd_setImageWithURL:[NSURL URLWithString:Url(str)] placeholderImage:[UIImage imageNamed:@"加载"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         self.delegateButton.hidden = NO;
     }];
    

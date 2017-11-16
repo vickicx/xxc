@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Vicki. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ControllerWithTableView.h"
 
-@interface SystemMessageListController : ViewController
+@interface SystemMessageListController : ControllerWithTableView
 
 @end

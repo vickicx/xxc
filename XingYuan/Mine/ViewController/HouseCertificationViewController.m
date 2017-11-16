@@ -17,15 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"购房认证";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
-
-    // Do any additional setup after loading the view from its nib.
+    self.title = @"购房认证";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,9 +72,6 @@
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     [parameters setValue:@"1" forKey:@"filetype"];//购车认证2 购房认证1
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     
     [VVNetWorkTool formSubmissionWithUrl:Url(UploadCertifyFile) body:[Helper parametersWith:    parameters] progress:^(NSProgress *progress) {
         NSLog(@"%f",1.0*progress.completedUnitCount/progress.totalUnitCount);

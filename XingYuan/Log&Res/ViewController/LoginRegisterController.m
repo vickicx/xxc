@@ -53,7 +53,7 @@
     [super viewDidLoad];
     [self dealLoginSelect:self.loginSelectBtn];
     
-    self.requestVertificationCodeBtn.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
+    self.requestVertificationCodeBtn.layer.borderColor = APP_THEME_COLOR.CGColor;
     self.requestVertificationCodeBtn.layer.borderWidth = 1;
     self.requestVertificationCodeBtn.titleLabel.font = FONT_WITH_S(14);
     
@@ -100,6 +100,14 @@
 
 // MARK: - 登录
 - (IBAction)dealLogin:(UIButton *)sender {
+    if([self.loginPasswordTextFeild.text length] == 0){
+        [JGProgressHUD showErrorWith:@"密码不能为空" In:self.view];
+        return;
+    }
+    if(![Helper isValidPhoneNum:self.loginPhoneTextFeild.text]){
+        [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
+        return;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.loginPhoneTextFeild.text forKey:@"loginname"];
     [parameters setValue:self.loginPasswordTextFeild.text forKey:@"pwd"];
@@ -204,7 +212,22 @@
 // MARK: - 注册
 - (IBAction)dealRegister:(UIButton *)sender {
     //对控件中的值进行判断。。
-    
+    if(![Helper isValidPassword:self.registerPasswordTextFeild.text]){
+        [JGProgressHUD showErrorWith:@"密码格式不正确，请输入6-18位数字和字母" In:self.view];
+        return;
+    }
+    if(![Helper isValidPhoneNum:self.registerPhoneTextFeild.text]){
+        [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
+        return;
+    }
+    if(![self.registerPasswordTextFeild.text isEqualToString:self.registerConfirmPasswordTextFeild.text]){
+        [JGProgressHUD showErrorWith:@"密码不一致" In:self.view];
+        return;
+    }
+    if([self.registerVerificationCode.text length] == 0){
+        [JGProgressHUD showErrorWith:@"验证码不能为空" In:self.view];
+        return;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.registerPhoneTextFeild.text forKey:@"mobilephone"];
     [parameters setValue:self.registerPasswordTextFeild.text forKey:@"pwd"];
@@ -231,6 +254,10 @@
 
 // MARK: - 请求验证码
 - (IBAction)dealRequestVertificationCode:(UIButton *)sender {
+    if(![Helper isValidPhoneNum:self.registerPhoneTextFeild.text]){
+        [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
+        return;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.registerPhoneTextFeild.text forKey:@"mobile"];
     [parameters setValue:[NSNumber numberWithInteger:MsgTyperegister] forKey:@"smstype"];

@@ -67,21 +67,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"我的资料";
+    self.title = @"我的资料";
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.delegate = self;
     tableView.dataSource = self;
     self.tableView = tableView;
     [self.view addSubview:tableView];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"我的资料";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+
     
     self.myDataCellTitles = @[@"基本资料",@"个人情况",@"家庭情况",@"未来规划"];
     self.suposeStandardCellTitles = @[@"年龄",@"身高",@"月收入",@"学历",@"婚姻状况",@"体型",@"工作地区",@"是否想要孩子",@"是否抽烟",@"是否喝酒",@"购房情况",@"购车情况"];

@@ -31,14 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"修改密码";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"修改密码";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"修改密码";
     
     self.finishButton.layer.cornerRadius = 3;
     self.finishButton.clipsToBounds = true;
@@ -59,6 +52,13 @@
 }
 
 - (IBAction)dealFinish:(UIButton *)sender {
+    if(![Helper isValidPassword:self.newsPassword.text]){
+        [JGProgressHUD showErrorWith:@"密码格式不正确，请输入6-18位数字和字母" In:self.view];
+        return;
+    }
+    if(![self.newsPassword.text isEqualToString:self.retypePassword.text]){
+        [JGProgressHUD showErrorWith:@"两次密码不一致" In:self.view];
+    }
     //修改密码
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];

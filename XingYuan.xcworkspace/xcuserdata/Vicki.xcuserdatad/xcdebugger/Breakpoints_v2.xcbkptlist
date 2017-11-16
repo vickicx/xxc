@@ -9,54 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
-            timestampString = "531645538.56122"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "493"
-            endingLineNumber = "493"
-            landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
-            timestampString = "531645538.561302"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "484"
-            endingLineNumber = "484"
-            landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
-            timestampString = "531645538.561359"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "485"
-            endingLineNumber = "485"
-            landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "XingYuan/Mine/ViewController/CarCertificationViewController.m"
             timestampString = "531390908.117348"
             startingColumnNumber = "9223372036854775807"
@@ -113,38 +65,6 @@
             endingLineNumber = "213"
             landmarkName = "-dealRegister:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LoginRegisterController dealRegister:]"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/Log&amp;Res/ViewController/LoginRegisterController.m"
-                  timestampString = "531644529.791583"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "214"
-                  endingLineNumber = "214"
-                  offsetFromSymbolStart = "684">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__40-[LoginRegisterController dealRegister:]_block_invoke"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/Log&amp;Res/ViewController/LoginRegisterController.m"
-                  timestampString = "531644529.796182"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "214"
-                  endingLineNumber = "214"
-                  offsetFromSymbolStart = "19">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -185,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-            timestampString = "531645538.561748"
+            filePath = "XingYuan/FindHim/view/FindHimCollectionViewCell.m"
+            timestampString = "531737804.985135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-pagerView:didScrollFromIndex:toIndex:"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "-RsmallImageButtonDidSelect:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -201,76 +121,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-            timestampString = "531645538.561882"
+            filePath = "XingYuan/Mine/ViewController/PhotoPreviewViewController.m"
+            timestampString = "532073123.944273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
-            landmarkName = "-pagerView:didScrollFromIndex:toIndex:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-            timestampString = "531645538.561979"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
-            landmarkName = "-requestData"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[FindHimMainViewController requestData]"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-                  timestampString = "531644607.786688"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "273"
-                  endingLineNumber = "273"
-                  offsetFromSymbolStart = "678">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__40-[FindHimMainViewController requestData]_block_invoke"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-                  timestampString = "531644607.790123"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "273"
-                  endingLineNumber = "273"
-                  offsetFromSymbolStart = "39">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-            timestampString = "531645538.56207"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "-requestData"
             landmarkType = "7">
          </BreakpointContent>
@@ -281,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-            timestampString = "531645538.562162"
+            filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
+            timestampString = "532073123.944486"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "-requestData"
+            startingLineNumber = "462"
+            endingLineNumber = "462"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -297,92 +153,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-            timestampString = "531645538.562301"
+            filePath = "XingYuan/FindHim/ViewController/UserHomePageViewController.m"
+            timestampString = "532073123.944562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "-requestData"
+            startingLineNumber = "454"
+            endingLineNumber = "454"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-            timestampString = "531645538.562375"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
-            landmarkName = "-requestData"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__40-[FindHimMainViewController requestData]_block_invoke"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-                  timestampString = "531644620.741339"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "290"
-                  endingLineNumber = "290"
-                  offsetFromSymbolStart = "1705">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.357"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-                  timestampString = "531644620.744634"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "290"
-                  endingLineNumber = "290"
-                  offsetFromSymbolStart = "51">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.358"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-                  timestampString = "531644620.748946"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "290"
-                  endingLineNumber = "290"
-                  offsetFromSymbolStart = "29">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__40-[FindHimMainViewController requestData]_block_invoke.360"
-                  moduleName = "XingYuan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Vicki/XXingyuan/XingYuan/FindHim/ViewController/FindHimMainViewController.m"
-                  timestampString = "531644620.752741"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "291"
-                  endingLineNumber = "291"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

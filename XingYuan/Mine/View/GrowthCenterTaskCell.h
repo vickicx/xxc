@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyTaskModel.h"
 
 @interface GrowthCenterTaskCell : UITableViewCell
-@property (nonatomic,strong) void(^block)(void);
+@property (nonatomic,strong) void(^getAwardBlock)(MyTaskModel *);
 
-- (void)configWithData:(NSNumber *)data;
+- (void)configWithModel:(MyTaskModel *)model;
 @end

@@ -22,16 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"绑定手机号";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"绑定手机号";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"绑定手机号";
     
-    self.requestVertificationCodeBtn.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
+    self.requestVertificationCodeBtn.layer.borderColor = APP_THEME_COLOR.CGColor;
     self.requestVertificationCodeBtn.layer.borderWidth = 1;
     self.requestVertificationCodeBtn.titleLabel.font = FONT_WITH_S(14);
     
@@ -50,10 +43,9 @@
 
 //请求验证码
 - (IBAction)dealRequestVertificationCode:(UIButton *)sender {
-    //此处应进行手机号格式判断
-    if (self.phoneNum.text.length == 0){
+    if(![Helper isValidPhoneNum:self.phoneNum.text]){
         [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
-        return ;
+        return;
     }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.phoneNum.text forKey:@"mobile"];
@@ -69,24 +61,17 @@
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
 }
-//使按钮在一定时间内不可操作
-//- (void)makeBtnCannotBeHandleWith:(UIButton *)button{
-//        button.isUserInteractionEnabled = false
-//        var time = 10
-//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
-//            button.setTitle("\(time)秒后再试", for: .normal)
-//            time -= 1
-//            if time == 0{
-//                button.isUserInteractionEnabled = true
-//                button.setTitle("获取验证码", for: .normal)
-//                timer.invalidate()
-//                self.timer = nil
-//            }
-//        })
-//}
 
 //开始绑定
 - (IBAction)dealBund:(UIButton *)sender {
+    if(![Helper isValidPhoneNum:self.phoneNum.text]){
+        [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
+        return;
+    }
+    if([self.vertificationCode.text length] == 0){
+        [JGProgressHUD showErrorWith:@"验证码不能为空" In:self.view];
+        return;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.openId forKey:@"openid"];
     [parameters setValue:[NSNumber numberWithInteger:self.type] forKey:@"type"]; //微信：1，QQ：2，微博：3

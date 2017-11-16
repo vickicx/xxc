@@ -55,6 +55,7 @@
         self.navigationBar.tintColor = [UIColor whiteColor];
         self.automaticallyAdjustsScrollViewInsets = NO;
         if (!TZ_isGlobalHideStatusBar) [UIApplication sharedApplication].statusBarHidden = NO;
+        
     }    
 }
 
@@ -101,6 +102,7 @@
     textAttrs[NSForegroundColorAttributeName] = self.barItemTextColor;
     textAttrs[NSFontAttributeName] = self.barItemTextFont;
     [barItem setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -240,7 +242,6 @@
     self.barItemTextFont = [UIFont systemFontOfSize:15];
     self.barItemTextColor = [UIColor whiteColor];
     self.allowPreview = YES;
-    
     [self configDefaultImageName];
     [self configDefaultBtnTitle];
     

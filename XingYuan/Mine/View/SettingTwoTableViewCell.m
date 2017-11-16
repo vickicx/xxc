@@ -12,7 +12,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.title.font = FONT_WITH_S(17);
+    self.text.font = FONT_WITH_S(15);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

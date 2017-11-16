@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Vicki. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ControllerWithTableView.h"
 
-@interface GrowthCenterController : ViewController
+@interface GrowthCenterController : ControllerWithTableView
 
 @end

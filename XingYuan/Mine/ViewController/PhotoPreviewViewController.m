@@ -5,7 +5,7 @@
 //  Created by 陈曦 on 2017/10/13.
 //  Copyright © 2017年 Vicki. All rights reserved.
 //
-// 性别选择没做，没有图
+//
 
 #import "PhotoPreviewViewController.h"
 #import "FindHimCollectionViewCell.h"
@@ -32,14 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"预览";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"预览";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"预览";
+
     [self createView];
     [self createLabels];
     [self requestData];
@@ -60,10 +54,6 @@
     self.shadeView = shadeView;
     [_mainView addSubview:_shadeView];
     
-    //    UIView *shadeView1 = [[UIView alloc] initWithFrame:CGRectMake(mainView.left , self.showView.top - 40, self.showView.width, self.showView.height - 40)];
-//    shadeView1.layer.cornerRadius = 10.0f;
-//    shadeView1.backgroundColor = RGBColor(0, 0, 0, 0.5);
-//    [self.showView addSubview:shadeView1];
 
     _leftView = [[UIImageView alloc] initWithFrame:CGRectMake(10 * FitWidth, _mainView.bottom + 10 * FitHeight , (_mainView.width - 32*FitWidth) / 3, (_mainView.width - 32*FitWidth) / 3)];
     _leftView.backgroundColor = [UIColor whiteColor];
@@ -82,7 +72,7 @@
 }
 
 - (void)createLabels {
-    self.address = [[UILabel alloc] initWithFrame:CGRectMake(self.showView.width - 80*FitWidth, 10*FitHeight, 60*FitWidth, 20*FitHeight)];
+    self.address = [[UILabel alloc] initWithFrame:CGRectMake(self.showView.width - 100*FitWidth, 10*FitHeight, 90*FitWidth, 20*FitHeight)];
     self.userName = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, self.shadeView.height - 100*FitHeight, 100, 20*FitHeight)];
     self.info = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, _userName.bottom + 10*FitHeight, self.shadeView.width - 24*FitWidth, 20*FitHeight)];
     self.signature = [[UILabel alloc] initWithFrame:CGRectMake(15*FitWidth, _info.bottom + 10*FitHeight, self.shadeView.width - 24*FitWidth, 40*FitHeight)];
@@ -100,14 +90,13 @@
     _info.text = @"24岁 | 166cm | 射手座 | 服装设计";
     _info.font = FONT_WITH_S(12);
     CGSize infoSize = [_info.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_info.font,NSFontAttributeName,nil]];
-    _info.width = infoSize.width;
+
     _info.height = infoSize.height;
     
     _signature.text = @"这里是交友的一个签名什么的~";
     _signature.font = FONT_WITH_S(12);
     _signature.numberOfLines = 0;
     CGSize signatureSize = [_signature.text boundingRectWithSize:CGSizeMake(self.shadeView.width - 20*FitWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
-    _signature.width = signatureSize.width;
     _signature.height = signatureSize.height;
     
     _address.textColor = _userName.textColor = _info.textColor = _signature.textColor = [UIColor whiteColor];
@@ -122,10 +111,6 @@
 - (void)requestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
-    __weak __typeof__(self) weakSelf = self;
     [VVNetWorkTool postWithUrl:Url(PhotoAlbumPreview) body:[Helper parametersWith:parameters]
                       progress:nil success:^(id result) {
                           NSDictionary *dic = [result objectForKey:@"data"];
@@ -135,23 +120,44 @@
                           _signature.text = self.photoPreviewModel.summary;
                           _info.text = [NSString stringWithFormat:@"%@岁 | %@ | %@ | %@", self.photoPreviewModel.age, self.photoPreviewModel.stature, self.photoPreviewModel.constellation, self.photoPreviewModel.work];
                           for ( PictureModel *pic in self.photoPreviewModel.pictureModelArr) {
-                              if (pic.sort.intValue == 1) {
-                                  [_mainView sd_setImageWithURL:Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
-                                  
-                              }else if (pic.sort.intValue == 2){
-                                   [_leftView sd_setImageWithURL:Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
-                              }else if (pic.sort.intValue == 3){
-                                   [_middleView sd_setImageWithURL:Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
-                              }else if (pic.sort.intValue == 4){
-                                   [_rightView sd_setImageWithURL:Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+                              if (self.photoPreviewModel.pictureModelArr.count >0) {
+                                  if (pic.sort.intValue == 0) {
+                                      [_mainView sd_setImageWithURL:(NSURL *)Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+                              }
+                              }else {
+                                  _mainView.image = [UIImage imageNamed:@"未上传"];
+                              }
+                              if (self.photoPreviewModel.pictureModelArr.count >1){
+                                  if (pic.sort.intValue == 1){
+                                      [_leftView sd_setImageWithURL:(NSURL *)Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+                                  }
+                              }else {
+                                  _leftView.image = [UIImage imageNamed:@"未上传"];
+                              }
+                              if (self.photoPreviewModel.pictureModelArr.count >2){
+                                  if (pic.sort.intValue == 2){
+                                      [_middleView sd_setImageWithURL:(NSURL *)Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+                                  }
+                              }else {
+                                  _middleView.image = [UIImage imageNamed:@"未上传"];
+                              }
+                              if (self.photoPreviewModel.pictureModelArr.count >3){
+                                  if (pic.sort.intValue == 3){
+                                      [_rightView sd_setImageWithURL:(NSURL *)Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+                                  }
+                              }else{
+                                  _rightView.image = [UIImage imageNamed:@"未上传"];
                               }
                           }
                           [_userName sizeToFit];
                           _sexImageView.frame = CGRectMake(_userName.right + 3*FitWidth, _userName.top, 20*FitWidth, 20*FitHeight);
-                          [_sexImageView setImage:[UIImage imageNamed:@"six_girl"]];
-                        
+                          if (_photoPreviewModel.sex.intValue == 2) {
+                              [_sexImageView setImage:[UIImage imageNamed:@"six_girl"]];
+                          }else {
+                              [_sexImageView setImage:[UIImage imageNamed:@"six_boy"]];
+                          }
                       } fail:^(NSError *error) {
-                          
+                         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
                       }];
 }
 

@@ -18,6 +18,11 @@
 //屏幕frame
 #define SCREEN_RECT [UIScreen mainScreen].bounds
 
+//获取颜色
+#define RGBColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+//APP主题色
+#define APP_THEME_COLOR RGBColor(246, 80, 118, 1)
 
 /**
  当设计图给的以plus系列（屏幕宽度414如，6plus、6splus、7plus）为标准时的字体大小

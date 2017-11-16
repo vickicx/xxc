@@ -76,15 +76,15 @@
 -(void)setTitle:(NSString *)title{
     _title=title;
     self.label.text=title;
-    //self.label.textColor=[UIColor whiteColor];
-    //[self jianBian];
+    self.label.textColor=RGBColor(240, 53, 99, 1);
+//    [self jianBian];
     
 }
 
 -(void)setColor:(UIColor *)color{
     _color=color;
     self.label.textColor=color;
-    //[self jianBian];
+//    [self jianBian];
 }
 
 //返回按钮

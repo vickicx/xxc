@@ -11,38 +11,22 @@
 
 @interface PhotoDetailViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (assign, nonatomic) NSInteger integer;
-
 @end
 
 @implementation PhotoDetailViewController
 
+-(void)viewWillAppear:(BOOL)animated {
+     [self createView];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    // 设置主题颜色
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    // 设置背景颜色
-    navBar.barTintColor = [UIColor colorWithRed:(15/255.0) green:(15/255.0) blue:(19/255.0) alpha:1.0];
-    // 设置背景图片(为了避免appearance背景图影响)
-    [navBar setBackgroundImage:[UIImage imageNamed:@""] forBarMetrics:UIBarMetricsDefault];
-    // 设置主题颜色
-    navBar.tintColor = [UIColor whiteColor];
-    // 设置字体颜色
-    NSDictionary *attr = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
-                            NSFontAttributeName : [UIFont boldSystemFontOfSize:20]
-                            };
-    [navBar setTitleTextAttributes:attr];
-    navBar.translucent = NO;
     
-    
-    [self createView];
 }
-
-
 
 - (void)createView {
     // 注册cell
     self.collectionView.frame = CGRectMake(0, 0, self.view.width, self.view.height);
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.collectionView registerClass:[PhotoDetailCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     // 支持分页
     self.collectionView.pagingEnabled = YES;
@@ -59,12 +43,13 @@
     self.collectionView.showsVerticalScrollIndicator = NO;
 
     self.title = [NSString stringWithFormat:@"%ld/%lu",(long)self.tag + 1,(unsigned long)self.dataSource.count];
+//    _label.text = [NSString stringWithFormat:@"%ld/%lu",(long)self.tag + 1,(unsigned long)self.dataSource.count];
     self.integer = self.tag;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(NSEC_PER_SEC)*2), dispatch_get_main_queue(), ^{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(NSEC_PER_SEC)*2), dispatch_get_main_queue(), ^{
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.tag inSection:0];
         [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
 
-    });
+//    });
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -90,7 +75,6 @@
     int a  = (int)(scrollView.contentOffset.x / (kWIDTH) +1);
     self.integer = a - 1;
     self.title = [NSString stringWithFormat:@"%d/%lu",a,(unsigned long)self.dataSource.count];
-    
 }
 
 
@@ -105,7 +89,6 @@
 {
     return UIEdgeInsetsZero;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

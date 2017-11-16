@@ -479,6 +479,8 @@ static NSString *PhotoViewCellId = @"PhotoViewCellId";
         self.titleBtn = titleBtn;
         _navItem.title = @"相机胶卷";
         _navItem.titleView = self.titleBtn;
+        
+        
     }
     return _navItem;
 }

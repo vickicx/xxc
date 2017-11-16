@@ -10,13 +10,9 @@
 #import "SystemMessageCell.h"
 #import "SystemMessageModel.h"
 #import "SystemMessageDetailController.h"
-#import  <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
 @interface SystemMessageListController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
-@property (nonatomic,weak) UITableView *tableView;
-@property (nonatomic,strong) NSArray *dataArray;
-@property (nonatomic,assign) NSNumber *pageIndex;
-@property (nonatomic,assign) NSNumber *pageSize;
+
 @end
 
 @implementation SystemMessageListController
@@ -24,19 +20,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的消息";
-    UITableView *tableView = [[UITableView alloc] init];
-    tableView.frame = self.view.bounds;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    tableView.emptyDataSetDelegate = self;
-    tableView.emptyDataSetSource = self;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [tableView registerNib:[UINib nibWithNibName:@"SystemMessageCell" bundle:nil] forCellReuseIdentifier:@"SystemMessageCell"];
-    tableView.estimatedRowHeight = 200;
-    self.tableView = tableView;
-    [self.view addSubview:self.tableView];
-    self.pageIndex = @1;
-    self.pageSize = @20;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"SystemMessageCell" bundle:nil] forCellReuseIdentifier:@"SystemMessageCell"];
+
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.pageIndex = 1;
+        [self requestData];
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.pageIndex += 1;
+        [self requestData];
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.pageIndex = 1;
     [self requestData];
 }
 
@@ -47,24 +46,29 @@
 - (void)requestData{
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:self.pageIndex forKey:@"pageindex"];
-    [parameters setValue:self.pageSize forKey:@"pagesize"];
+    [parameters setValue:[NSNumber numberWithInteger:self.pageIndex] forKey:@"pageindex"];
+    [parameters setValue:[NSNumber numberWithInteger:self.pageSize] forKey:@"pagesize"];
     
     [VVNetWorkTool postWithUrl:Url(MemberInformation) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         BaseModel *baseModel = [BaseModel new];
         [baseModel setValuesForKeysWithDictionary:result];
         
-        NSMutableArray *dataArray = [NSMutableArray new];
         NSArray *datas = [result valueForKey:@"data"];
+        if(self.pageIndex == 1){[self.dataArray removeAllObjects];}
         for(int i=0;i<datas.count;i++){
             SystemMessageModel *systemMessageModel = [SystemMessageModel new];
             [systemMessageModel setValuesForKeysWithDictionary:datas[i]];
-            [dataArray addObject:systemMessageModel];
+            [self.dataArray addObject:systemMessageModel];
         }
-        self.dataArray = dataArray;
+        self. tableView.emptyDataSetDelegate = self;
+        self.tableView.emptyDataSetSource = self;
+        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
         [self.tableView reloadData];
         [JGProgressHUD showErrorWithModel:baseModel In:self.view];
     } fail:^(NSError *error) {
+        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
 }

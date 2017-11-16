@@ -48,7 +48,8 @@
         _kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, information.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
         _kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
         [self addSubview:_kong1];
-
+        
+        
     }
     return self;
 }

@@ -55,17 +55,36 @@
 
 @implementation MineMainViewController
 
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    self.navigationController.navigationBar.subviews[0].subviews[1].alpha = 0;
-    self.navigationController.navigationBar.subviews[0].subviews[0].alpha = 0;
+- (void)viewWillAppear:(BOOL)animated{
+
+    //设置导航栏背景图片为一个空的image，这样就透明了
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    
+    //去掉透明后导航栏下边的黑边
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.subviews[0].subviews[1].alpha = 1;
-    self.navigationController.navigationBar.subviews[0].subviews[0].alpha = 1;
+
+    //如果不想让其他页面的导航栏变为透明 需要重置
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
 }
+
+//-(void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:YES];
+//    self.navigationController.navigationBar.subviews[0].subviews[1].alpha = 0;
+//    self.navigationController.navigationBar.subviews[0].subviews[0].alpha = 0;
+//
+//    [self creatLeftButton];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:animated];
+//    self.navigationController.navigationBar.subviews[0].subviews[1].alpha = 1;
+//    self.navigationController.navigationBar.subviews[0].subviews[0].alpha = 1;
+//    [self.navigationItem setLeftBarButtonItem:nil];
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.imageArr = [NSArray arrayWithObjects:@"喜欢我的", @"我喜欢的", @"关注", @"成长", nil];
@@ -89,6 +108,7 @@
      __weak __typeof__(self) weakSelf = self;
     self.floatView.goMyTreasureView = ^{
         NSLog(@"跳转到我的财富界面");
+        [JGProgressHUD showErrorWith:@"暂未开放" In:weakSelf.view];
     };
     self.floatView.goMyCertificationView = ^{
         MyAttestationViewController *attestationVC = [[MyAttestationViewController alloc] init];
@@ -112,11 +132,9 @@
         _headImageView=[[UserHomePagePopView alloc]init];
         _headImageView.frame=CGRectMake(0, 0, kWIDTH, 310*FitHeight);
         _headImageView.backgroundColor=[UIColor clearColor];
-        
-        UIImage *image=[UIImage imageNamed:@"头像"];
         //图片的宽度设为屏幕的宽度，高度自适应
         _backgroundImgV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, 310*FitHeight)];
-        _backgroundImgV.image=image;
+        
         _backgroundImgV.userInteractionEnabled=YES;
         _backImgHeight=_backgroundImgV.frame.size.height;
         _backImgWidth=_backgroundImgV.frame.size.width;
@@ -138,7 +156,7 @@
         _headerImg=[[UIImageView alloc]init];
        
         [_headerImg.layer setMasksToBounds:YES];
-        [_headerImg.layer setCornerRadius:35];
+        [_headerImg.layer setCornerRadius:50];
         _headerImg.backgroundColor=[UIColor whiteColor];
         _headerImg.userInteractionEnabled=YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toChooseHeadImg)];
@@ -146,45 +164,30 @@
         [self.view addSubview:_headerImg];
         [_headerImg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(_backgroundImgV);
-            make.size.mas_equalTo(CGSizeMake(70, 70));
+            make.size.mas_equalTo(CGSizeMake(100, 100));
         }];
         
         self.ageLabel = [[UILabel alloc] init];
         self.ageLabel.text = @"24岁";
-        [self createBackgroundImg:CGRectMake(40*FitWidth, 40*FitHeight, 60*FitWidth, 60*FitHeight) label:self.ageLabel];
+        [self createBackgroundImg:CGRectMake(25*FitWidth, 30*FitHeight, 50*FitWidth, 50*FitHeight) label:self.ageLabel];
         
         self.statureLabel = [[UILabel alloc] init];
         self.statureLabel.text = @"身高";
-        [self createBackgroundImg:CGRectMake(self.ageLabel.right + 40*FitWidth, self.ageLabel.top + 10*FitHeight, 60*FitWidth, 60*FitHeight) label:self.statureLabel];
+        [self createBackgroundImg:CGRectMake(self.ageLabel.right + 60*FitWidth, self.ageLabel.top - 10*FitHeight, 60*FitWidth, 60*FitHeight) label:self.statureLabel];
         
         self.constellationLabel = [[UILabel alloc] init];
         self.constellationLabel.text = @"星座";
-        [self createBackgroundImg:CGRectMake(30*FitWidth, 90*FitHeight, 80*FitWidth, 80*FitHeight) label:self.constellationLabel];
+        [self createBackgroundImg:CGRectMake(15*FitWidth, 75*FitHeight, 70*FitWidth, 70*FitHeight) label:self.constellationLabel];
         
         self.educationLabel = [[UILabel alloc] init];
         self.educationLabel.text = @"工作";
-        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom - 20*FitHeight, 70*FitHeight, 70*FitHeight) label:self.educationLabel];
+        self.educationLabel.numberOfLines = 0;
+        [self createBackgroundImg:CGRectMake(self.statureLabel.left, self.statureLabel.bottom + 5*FitHeight, 70*FitHeight, 70*FitHeight) label:self.educationLabel];
         
         self.addressLabel = [[UILabel alloc] init];
         self.addressLabel.text = @"地址";
         self.addressLabel.numberOfLines = 0;
-        [self createBackgroundImg:CGRectMake(75*FitWidth, 100*FitHeight, 90*FitWidth, 90*FitHeight) label:self.addressLabel];
-//        //昵称
-//        _nickLabel=[[UILabel alloc]init];
-//        _nickLabel.text=@"执念12o3";
-//        _nickLabel.textColor=[UIColor whiteColor];
-//        _nickLabel.textAlignment=NSTextAlignmentCenter;
-//        UIButton *fixBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-//        fixBtn.frame=CGRectMake(CGRectGetMaxX(_nickLabel.frame)+5, 114, 22, 22);
-//        [fixBtn setImage:[UIImage imageNamed:@"pencil-light-shadow"] forState:UIControlStateNormal];
-//        [fixBtn addTarget:self action:@selector(fixClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [_headImageView addSubview:fixBtn];
-//        [self.view addSubview:_nickLabel];
-//        [_nickLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.view).with.offset(64);
-//            make.centerX.equalTo(self.view);
-//            
-//        }];
+        [self createBackgroundImg:CGRectMake(75*FitWidth, 110*FitHeight, 70*FitWidth, 70*FitHeight) label:self.addressLabel];
     }
     return _headImageView;
 }
@@ -256,6 +259,7 @@
             if([model.code isEqual:@1]){
                 [_headerImg setHidden:false];
                 _headerImg.image = image;
+                _backgroundImgV.image = image;
             }
         } fail:^(NSError *error) {
             [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
@@ -296,11 +300,11 @@
 
 //创建左侧通知消息按钮
 - (void)creatLeftButton{
-    UIButton *leftBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40*FitWidth, 30*FitHeight)];
+    UIButton *leftBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 30)];
     [leftBtn setImage:[UIImage imageNamed:@"通知-(4)"] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(leftBtnAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithCustomView:leftBtn];
-    self.navigationItem.leftBarButtonItem=leftItem;
+    self.navigationItem.leftBarButtonItem = leftItem;
 }
 
 - (void)leftBtnAction{
@@ -389,20 +393,17 @@
 - (void)requestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
-    __weak __typeof__(self) weakSelf = self;
     [VVNetWorkTool postWithUrl:Url(AboutMe) body:[Helper parametersWith:parameters]
                       progress:nil success:^(id result) {
                           NSDictionary *dic = [result objectForKey:@"data"];
                           self.aboutMeModel = [[AboutMeModel alloc] initWithDictionary:dic];
+                          [_backgroundImgV sd_setImageWithURL:(NSURL *)Url(_aboutMeModel.headimg) placeholderImage:[UIImage imageNamed:@"头像"]];
                           [self.tableView reloadData];
                           
                           UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(160, 0, 120, 50)];
                           titleText.backgroundColor = [UIColor clearColor];
                           titleText.textColor=RGBColor(96, 96, 104, 1);
-                          titleText.font = FONT_WITH_S(17);
+                          titleText.font = FONT_WITH_S(18);
                           titleText.textAlignment = NSTextAlignmentCenter;
                           [titleText setText:self.aboutMeModel.nickname];
                           self.navigationItem.titleView=titleText;
@@ -418,25 +419,43 @@
                               self.floatView.memberinfoschedule.text = string;
                           }
                           
-                          self.ageLabel.text = [NSString stringWithFormat:@"%@岁",self.aboutMeModel.age];
-                          
-                          self.statureLabel.text = [NSString stringWithFormat:@"%@",self.aboutMeModel.stature];
-                          
-                          self.constellationLabel.text = [NSString stringWithFormat:@"%@",self.aboutMeModel.constellation];
-                          
-                          self.educationLabel.text = [NSString stringWithFormat:@"%@",self.aboutMeModel.education];
-                          
-                          self.addressLabel.text = [NSString stringWithFormat:@"%@",self.aboutMeModel.address];
+                          if (self.aboutMeModel.age != NULL) {
+                              self.ageLabel.text = [NSString stringWithFormat:@"%@岁",self.aboutMeModel.age];
+                          } else {
+                              self.ageLabel.text = @" ";
+                          }
+                          if (self.aboutMeModel.stature != NULL) {
+                              self.statureLabel.text = [NSString stringWithFormat:@"%@",self.aboutMeModel.stature];
+                          } else {
+                              self.statureLabel.text = @" ";
+                          }
+                          if (self.aboutMeModel.constellation != NULL) {
+                              self.constellationLabel.text = [NSString stringWithFormat:@"%@",self.aboutMeModel.constellation];
+                          } else {
+                              self.constellationLabel.text = @" ";
+                          }
+                          if (self.aboutMeModel.education != NULL) {
+                              self.educationLabel.text = [NSString stringWithFormat:@"%@",self.aboutMeModel.education];
+                          } else {
+                              self.educationLabel.text = @" ";
+                          }
+                          if (self.aboutMeModel.address != NULL) {
+                              NSArray *array = [self.aboutMeModel.address componentsSeparatedByString:@" "];
+                              
+                              self.addressLabel.text = [NSString stringWithFormat:@"%@", array[1]];
+                          } else {
+                              self.addressLabel.text = @" ";
+                          }
                           
                           if (self.aboutMeModel.online == YES) {
                               self.onlineLabel.text = @"当前在线";
                           } else {
                               self.onlineLabel.text = @"当前离线";
                           }
-                           [_headerImg sd_setImageWithURL:Url(self.aboutMeModel.headimg) placeholderImage:[UIImage imageNamed:@"照片"]];
+                           [_headerImg sd_setImageWithURL:(NSURL *)Url(self.aboutMeModel.headimg) placeholderImage:[UIImage imageNamed:@"照片"]];
                           
                       } fail:^(NSError *error) {
-                          
+                         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
                       }];
 }
 

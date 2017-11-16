@@ -25,49 +25,47 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"通用设置";
-    self.titleArr = @[@"账户保护", @"更换手机号", @"修改密码", @"清空缓存", @"关于星缘", @"意见反馈", @"网络诊断"];
+    self.title = @"通用设置";
+    self.titleArr = @[@[@"账户保护", @"更换手机号", @"修改密码"], @[@"清空缓存", @"意见反馈"]];
+    
     [self createTableView];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"通用设置";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
-    // Do any additional setup after loading the view.
+
 }
 
 //创建TableView
 -(void)createTableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWIDTH, kHEIGHT-64*FitHeight - 49*FitHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor=[UIColor clearColor];
+        self.tableView =[[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.backgroundColor=[UIColor groupTableViewBackgroundColor];
         _tableView.showsVerticalScrollIndicator=NO;
         _tableView.dataSource=self;
         _tableView.delegate=self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.scrollEnabled = NO;
         _tableView.tableFooterView = [[UIView alloc] init];
         [_tableView registerNib:[UINib nibWithNibName:@"SettingOneTableViewCell" bundle:nil] forCellReuseIdentifier:@"SettingOneTableViewCell"];
          [_tableView registerNib:[UINib nibWithNibName:@"SettingTwoTableViewCell" bundle:nil] forCellReuseIdentifier:@"SettingTwoTableViewCell"];
-        
         [self.view addSubview:_tableView];
     }
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 429*FitHeight, kWIDTH, 290*FitHeight)];
-    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self.view addSubview:view];
     
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
+    footerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
     self.logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.logoutButton.frame = CGRectMake(12*FitWidth,450*FitHeight,kWIDTH - 24*FitWidth, 48*FitHeight);
     self.logoutButton.layer.cornerRadius = 3.0f;
     [self.logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
     [self.logoutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside];
     self.logoutButton.titleLabel.font = FONT_WITH_S(18);
     self.logoutButton.tintColor = [UIColor whiteColor];
-    self.logoutButton.backgroundColor = RGBColor(240, 53, 90, 1);
-    
-    [self.view addSubview:self.logoutButton];
+    self.logoutButton.backgroundColor = APP_THEME_COLOR;
+
+    [footerView addSubview:self.logoutButton];
+    [self.logoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(footerView);
+        make.centerX.equalTo(footerView);
+        make.left.equalTo(footerView).offset(15);
+        make.height.equalTo(self.logoutButton.mas_width).multipliedBy(1.0/7);
+    }];
+    self.tableView.tableFooterView = footerView;
    
 }
 
@@ -78,7 +76,7 @@
 
 #pragma mark ---- UITableViewDelegate ----
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.titleArr.count;
 }
 //显示每组的头部
 
@@ -110,40 +108,29 @@
     return 45*FitHeight;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 3;
-    }
-        return 4;
-    
+    NSArray *titles = self.titleArr[section];
+    return titles.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SettingOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingOneTableViewCell"];
+    NSString *title =self.titleArr[indexPath.section][indexPath.row];
 
-    SettingTwoTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:@"SettingTwoTableViewCell"];
-    if (indexPath.section == 0) {
-        cell.title.text = self.titleArr[indexPath.row];
-        if(indexPath.row == 2){
-            cell1.title.text = self.titleArr[indexPath.row];
-            cell1.text.text = @"当前密码风险较高";
-            return cell1;
-        }
-    }else if (indexPath.section == 1){
-        cell.title.text = self.titleArr[indexPath.row + 3];
-        if (indexPath.row == 0) {
-            cell1.title.text = self.titleArr[indexPath.row + 3];
-            //获取完整路径
+    if(indexPath.section == 1){
+        if(indexPath.row == 0){
+            SettingTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingTwoTableViewCell"];
+            cell.title.text = title;
+            //缓存大小
             NSString *path = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).lastObject;
             path = [path stringByAppendingPathComponent:@"Caches"];
             NSString *text = [NSString stringWithFormat:@"%.2fM",[self folderSizeAtPath:path]];
-            cell1.text.text = text;
-            [cell1.text setTextColor:RGBColor(32, 33, 34, 1)];
-            return cell1;
+            cell.text.text = text;
+            [cell.text setTextColor:RGBColor(32, 33, 34, 1)];
+            return cell;
         }
     }
-    
+    SettingOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingOneTableViewCell"];
+    cell.title.text = title;
     return cell;
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -168,7 +155,7 @@
         if (indexPath.row == 0) {
             [self ClearDidPress:indexPath];
             
-        }else if (indexPath.row == 2) {
+        }else if (indexPath.row == 1) {
             FeedBackViewController *feedBackVC = [[FeedBackViewController alloc] init];
             [self.navigationController pushViewController:feedBackVC animated:YES];
         }

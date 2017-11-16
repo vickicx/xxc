@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 
-@interface SesameCertificationFirstViewController : UIViewController
+@interface SesameCertificationFirstViewController : ViewController
 @property (weak, nonatomic) IBOutlet UILabel *label;
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberField;

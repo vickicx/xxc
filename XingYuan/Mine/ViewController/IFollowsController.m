@@ -13,40 +13,31 @@
 #import  <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
 @interface IFollowsController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
-@property (weak,nonatomic) UITableView *tableView;
-@property (strong,nonatomic) NSArray *dataArray;
-@property (nonatomic,assign) NSNumber *pageIndex;
-@property (nonatomic,assign) NSNumber *pageSize;
+
 @end
 
 @implementation IFollowsController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"我关注的";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"我关注的";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"我关注的";
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"MemberListCell" bundle:nil] forCellReuseIdentifier:@"MemberListCell"];
 
-    UITableView *tableView = [[UITableView alloc] init];
-    tableView.frame = self.view.bounds;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    tableView.emptyDataSetDelegate = self;
-    tableView.emptyDataSetSource = self;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [tableView registerNib:[UINib nibWithNibName:@"MemberListCell" bundle:nil] forCellReuseIdentifier:@"MemberListCell"];
-    tableView.estimatedRowHeight = 200;
-    self.tableView = tableView;
-    [self.view addSubview:self.tableView];
     
-    self.pageIndex = @1;
-    self.pageSize = @20;
-    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.pageIndex = 1;
+        [self requestData];
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.pageIndex += 1;
+        [self requestData];
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.pageIndex = 1;
     [self requestData];
 }
 
@@ -57,24 +48,29 @@
 - (void)requestData{
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:self.pageIndex forKey:@"pageindex"];
-    [parameters setValue:self.pageSize forKey:@"pagesize"];
+    [parameters setValue:[NSNumber numberWithInteger:self.pageIndex] forKey:@"pageindex"];
+    [parameters setValue:[NSNumber numberWithInteger:self.pageSize] forKey:@"pagesize"];
     
     [VVNetWorkTool postWithUrl:Url(Myfollowmember) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         BaseModel *baseModel = [BaseModel new];
         [baseModel setValuesForKeysWithDictionary:result];
         
-        NSMutableArray *dataArray = [NSMutableArray new];
         NSArray *datas = [result valueForKey:@"data"];
+        if(self.pageIndex == 1){[self.dataArray removeAllObjects];}
         for(int i=0;i<datas.count;i++){
             MemberModel *memberModel = [MemberModel new];
             [memberModel setValuesForKeysWithDictionary:datas[i]];
-            [dataArray addObject:memberModel];
+            [self.dataArray addObject:memberModel];
         }
-        self.dataArray = dataArray;
+        self. tableView.emptyDataSetDelegate = self;
+        self.tableView.emptyDataSetSource = self;
+        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
         [self.tableView reloadData];
         [JGProgressHUD showErrorWithModel:baseModel In:self.view];
     } fail:^(NSError *error) {
+        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
         [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
 }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -67,10 +69,7 @@
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UjY-J9-h9c">
-                    <rect key="frame" x="78" y="188" width="107" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="107" id="92K-gh-1dY"/>
-                    </constraints>
+                    <rect key="frame" x="78" y="188" width="177" height="17"/>
                     <color key="textColor" red="0.72156862745098038" green="0.72941176470588232" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -82,13 +81,13 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HD5-TD-Mu5">
-                    <rect key="frame" x="264" y="178.5" width="85" height="35"/>
+                    <rect key="frame" x="255" y="178.5" width="105" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="EIo-8u-HBu"/>
-                        <constraint firstAttribute="width" constant="85" id="Ldp-ff-hew"/>
+                        <constraint firstAttribute="width" secondItem="HD5-TD-Mu5" secondAttribute="height" multiplier="3:1" id="h8W-RX-vO4"/>
                     </constraints>
                     <state key="normal" title="获取验证码">
-                        <color key="titleColor" red="0.74509803921568629" green="0.76470588235294112" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" name="appThemeColor"/>
                         <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -167,11 +166,13 @@
                 <constraint firstItem="7Zp-lE-Foc" firstAttribute="leading" secondItem="4x3-ZP-fAm" secondAttribute="leading" id="6Yg-v7-Lkl"/>
                 <constraint firstItem="NSg-hU-ex9" firstAttribute="top" secondItem="nDG-Ul-wVL" secondAttribute="bottom" constant="15" id="8cH-Ro-luU"/>
                 <constraint firstItem="4x3-ZP-fAm" firstAttribute="top" secondItem="QKj-8J-gqe" secondAttribute="bottom" constant="20" id="9dK-zD-hcu"/>
+                <constraint firstItem="HD5-TD-Mu5" firstAttribute="leading" secondItem="UjY-J9-h9c" secondAttribute="trailing" id="GRV-hd-7vw"/>
                 <constraint firstItem="NSg-hU-ex9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="HG0-EE-NjA"/>
                 <constraint firstItem="wzs-Zl-xE6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="MiH-aG-RpZ"/>
                 <constraint firstItem="7Zp-lE-Foc" firstAttribute="top" secondItem="HD5-TD-Mu5" secondAttribute="bottom" constant="16" id="OkA-8Y-QVf"/>
                 <constraint firstItem="oDw-F6-HmJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="PSH-cW-O20"/>
                 <constraint firstItem="PfT-rw-Pai" firstAttribute="leading" secondItem="YHm-Db-fqi" secondAttribute="trailing" constant="8" symbolic="YES" id="Qal-8N-qTj"/>
+                <constraint firstAttribute="trailing" secondItem="HD5-TD-Mu5" secondAttribute="trailing" constant="15" id="Qjm-x6-elW"/>
                 <constraint firstItem="HD5-TD-Mu5" firstAttribute="centerY" secondItem="JLr-W1-Ine" secondAttribute="centerY" id="VM5-nJ-EPU"/>
                 <constraint firstItem="nDG-Ul-wVL" firstAttribute="top" secondItem="YHm-Db-fqi" secondAttribute="bottom" constant="20" id="VZh-qw-jbY"/>
                 <constraint firstItem="4x3-ZP-fAm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Vhb-RX-MbL"/>
@@ -193,7 +194,6 @@
                 <constraint firstItem="KFw-xK-vq2" firstAttribute="top" secondItem="nDG-Ul-wVL" secondAttribute="bottom" constant="15" id="tl0-it-YDk"/>
                 <constraint firstItem="YHm-Db-fqi" firstAttribute="leading" secondItem="JLr-W1-Ine" secondAttribute="leading" id="ttE-zq-Cwp"/>
                 <constraint firstItem="oDw-F6-HmJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uxR-vk-ffG"/>
-                <constraint firstItem="HD5-TD-Mu5" firstAttribute="leading" secondItem="UjY-J9-h9c" secondAttribute="trailing" constant="79" id="vFI-Df-YJG"/>
                 <constraint firstItem="KFw-xK-vq2" firstAttribute="height" secondItem="nVa-mK-yc8" secondAttribute="height" id="w2S-Ig-eft"/>
                 <constraint firstItem="nDG-Ul-wVL" firstAttribute="trailing" secondItem="7Zp-lE-Foc" secondAttribute="trailing" id="wwN-G1-1UU"/>
                 <constraint firstAttribute="trailing" secondItem="QKj-8J-gqe" secondAttribute="trailing" constant="11" id="ye6-bg-ctP"/>
@@ -204,5 +204,8 @@
     </objects>
     <resources>
         <image name="未勾选" width="16" height="16"/>
+        <namedColor name="appThemeColor">
+            <color red="0.9649999737739563" green="0.31400001049041748" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

@@ -7,8 +7,8 @@
 //
 
 #import "MyPhotoViewController.h"
-#import "HXPhotoViewController.h"
-#import "HXPhotoView.h"
+//#import "HXPhotoViewController.h"
+//#import "HXPhotoView.h"
 #import "PhotoPreviewViewController.h"
 #import "PictureModel.h"
 #import "FileUtils.h"
@@ -39,35 +39,27 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.title = @"我的相册";
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.dataSource = [NSArray new];
     self.cellArray = [NSMutableArray new];
-    //    self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = YES;
-    // 加载本地图片
-    //    NSMutableArray *images = [NSMutableArray array];
-    
-    //    for (int i = 0 ; i < 4; i++) {
-    //        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i]];
-    //
-    //        [images addObject:image];
-    //    }
-    //    [self.manager addLocalImageToAlbumWithImages:images];
+
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, kHEIGHT - 48*FitHeight)];
     scrollView.alwaysBounceVertical = YES;
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
     
     UILabel *advise = [[UILabel alloc] initWithFrame:CGRectMake(kPhotoViewMargin, 5*FitHeight, kWIDTH - 80*FitWidth, 30*FitHeight)];
-    advise.text = @"当你照片上传完成后，方可进行效xx果展示预览";
+    advise.text = @"当你照片上传完成后，方可进行效果展示预览";
     advise.textColor = [UIColor colorWithRed:184/255.0 green:186/255.0 blue:189/255.0 alpha:1];
     advise.font = FONT_WITH_S(14);
     [self.scrollView addSubview:advise];
     
     self.flowLayout = [[LxGridViewFlowLayout alloc] init];
-    self.flowLayout.itemSize = CGSizeMake(self.view.width/3 - 10, (self.view.height - 118*FitHeight)/4);
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,advise.bottom,kWIDTH,self.view.height - 118*FitHeight - 64) collectionViewLayout:self.flowLayout];
+    self.flowLayout.itemSize = CGSizeMake((kWIDTH - 24 * FitWidth)/3 - 10, (kHEIGHT - 64 - 118*FitHeight)/4);
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(12 *FitWidth,advise.bottom,kWIDTH - 24 * FitWidth,kHEIGHT - 118*FitHeight - 64) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.dataSource = self;
     self.collectionView.delegate  = self;
@@ -165,6 +157,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
+    //添加数据之前应先清空
+    [self.cellArray removeAllObjects];
     [self.cellArray addObjectsFromArray:photos];
     [self savePicData];
 }
@@ -179,10 +173,10 @@ static const CGFloat kPhotoViewMargin = 12.0;
 }
 
 
-- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
-    NSSLog(@"%@",NSStringFromCGRect(frame));
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
-}
+//- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
+//    NSSLog(@"%@",NSStringFromCGRect(frame));
+//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
+//}
 - (void)deletepicWithIds:(NSString *)ids {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     NSMutableArray *arr = [NSMutableArray new];
@@ -193,11 +187,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     [parameters setValue:ids forKey:@"delpicids"]; //待删除照片下标
     
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     
     [VVNetWorkTool postWithUrl:Url(Deletememberpicturewall) body:[Helper parametersWith:parameters]
      
@@ -206,7 +195,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
                               [self requestData];
                           }
                       } fail:^(NSError *error) {
-                          
+                          [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
                       }];
 }
 
@@ -220,9 +209,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+   
     dispatch_group_t upLoadGroup = dispatch_group_create();
     
     for (int i = 0; i < self.cellArray.count; i++) {
@@ -266,13 +253,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     [parameters setValue:@"21" forKey:@"pagesize"]; //每页数据条数
     
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
-    
-    __weak __typeof__(self) weakSelf = self;
     
     [VVNetWorkTool postWithUrl:Url(Myphotoalbum) body:[Helper parametersWith:parameters]
      
@@ -287,22 +267,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
                               
                               [mutableArr addObject:pic];
                               
-                              //                              NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:Url(pic.pic)]];
-                              //
-                              //                              UIImage *image = [UIImage imageWithData:data]; // 取得图片
-                              //
-                              ////                              [FileUtils creatFile:[NSString stringWithFormat:@"nnn%@",pic.sort] withData:data];
-                              //                              NSString *path_sandox = NSHomeDirectory();
-                              //                              //设置一个图片的存储路径
-                              //                              NSString *imagePath = [path_sandox stringByAppendingString:[NSString stringWithFormat:@"/nnn%@.png",pic.sort]];
-                              //                              //把图片直接保存到指定的路径（同时应该把图片的路径imagePath存起来，下次就可以直接用来取）
-                              //                              [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
-                              //
-                              //                              if ( [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES]) {
-                              //                                  NSLog(@"成功");
-                              //                              }else {
-                              //                                  NSLog(@"失败");
-                              //                              }
                           }
                           self.dataSource = [NSArray arrayWithArray:mutableArr];
                           
@@ -311,6 +275,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
                           [hud dismissAnimated:YES];
                           
                       } fail:^(NSError *error) {
+                          [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
                           
                       }];
     
@@ -346,11 +311,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     [parameters setValue:@"21" forKey:@"pagesize"]; //每页数据条数
     
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     __block  NSMutableString *sortStr = [NSMutableString new];
     [self.dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PictureModel *model = obj;
@@ -364,12 +324,14 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [parameters setValue:sortStr forKey:@"picturesort"];
     
     [VVNetWorkTool postWithUrl:Url(Setphotoalbumsort) body:[Helper parametersWith:parameters] progress:^(NSProgress *progress) {
-        
     } success:^(id result) {
         [hud dismissAnimated:YES];
+        [JGProgressHUD showSuccessWith:@"保存成功！" In:self.view];
     } fail:^(NSError *error) {
-        
+        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
 }
 
+
 @end
+

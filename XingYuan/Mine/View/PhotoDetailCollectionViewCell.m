@@ -13,6 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.contentView.backgroundColor = [UIColor blackColor];
         self.imageviews = [[UIImageView alloc] init];
         self.imageviews.center = CGPointMake(kWIDTH / 2, kHEIGHT /2);
         self.imageviews.contentMode = UIViewContentModeScaleAspectFill;

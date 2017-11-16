@@ -12,10 +12,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
 @property (weak, nonatomic) IBOutlet UILabel *nickName;
 @property (weak, nonatomic) IBOutlet UIImageView *sexImg;
-@property (weak, nonatomic) IBOutlet UILabel *age;
-@property (weak, nonatomic) IBOutlet UILabel *height;
-@property (weak, nonatomic) IBOutlet UILabel *constelletion;    //星座
-@property (weak, nonatomic) IBOutlet UILabel *Occupation;   //职业
+@property (weak, nonatomic) IBOutlet UIStackView *messageContianView;
+
 @property (weak, nonatomic) IBOutlet UILabel *introduce;    //简介
 
 @end
@@ -27,31 +25,9 @@
     self.headImg.clipsToBounds = true;
     
     self.nickName.font = FONT_WITH_S(15);
-    self.age.font = FONT_WITH_S(11);
-    self.height.font = FONT_WITH_S(11);
-    self.constelletion.font = FONT_WITH_S(11);
-    self.Occupation.font = FONT_WITH_S(11);
+
     self.introduce.font = FONT_WITH_S(13);
-    
-    self.age.layer.cornerRadius = 2;
-    self.age.layer.borderWidth = 1;
-    self.age.layer.borderWidth = 1;
-    self.age.layer.borderColor = RGBColor(248, 135, 162, 1).CGColor;
-    
-    self.height.layer.cornerRadius = 2;
-    self.height.layer.borderWidth = 1;
-    self.height.layer.borderWidth = 1;
-    self.height.layer.borderColor = RGBColor(248, 135, 162, 1).CGColor;
-    
-    self.constelletion.layer.cornerRadius = 2;
-    self.constelletion.layer.borderWidth = 1;
-    self.constelletion.layer.borderWidth = 1;
-    self.constelletion.layer.borderColor = RGBColor(248, 135, 162, 1).CGColor;
-    
-    self.Occupation.layer.cornerRadius = 2;
-    self.Occupation.layer.borderWidth = 1;
-    self.Occupation.layer.borderWidth = 1;
-    self.Occupation.layer.borderColor = RGBColor(248, 135, 162, 1).CGColor;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -71,36 +47,35 @@
     }
     self.sexImg.image = sexImg;
     
-    //年龄
-    if(model.hl_age == nil){
-        [self.age setHidden:true];
-    }else{
-        [self.age setHidden:false];
-        self.age.text = [NSString stringWithFormat:@" %@ ",model.hl_age];
+    for(UIView *subView in self.messageContianView.subviews){
+        [subView removeFromSuperview];
     }
-    //身高
-    if(model.stature == nil){
-        [self.height setHidden:true];
-    }else{
-        [self.height setHidden:false];
-        self.height.text = [NSString stringWithFormat:@" %@ ",model.stature];
+    if(model.hl_age != nil){
+        [self inputInfoLabelWith:model.hl_age];
     }
-    //星座
-    if(model.hl_constellation == nil){
-        [self.constelletion setHidden:true];
-    }else{
-        [self.constelletion setHidden:false];
-        self.constelletion.text = [NSString stringWithFormat:@" %@ ",model.hl_constellation];
+    if(model.stature != nil){
+        [self inputInfoLabelWith:model.stature];
     }
-    //行业
-    if(model.hl_operatingpost == nil){
-        [self.Occupation setHidden:true];
-    }else{
-        [self.Occupation setHidden:false];
-        self.Occupation.text = [NSString stringWithFormat:@" %@ ",model.hl_operatingpost];
+    if(model.hl_constellation != nil){
+        [self inputInfoLabelWith:model.hl_constellation];
+    }
+    if(model.hl_operatingpost != nil){
+        [self inputInfoLabelWith:model.hl_constellation];
     }
 
     self.introduce.text = model.hl_summary;
+}
+
+- (void)inputInfoLabelWith:(NSString *)str{
+    UILabel *labe = [UILabel new];
+    labe.textColor = APP_THEME_COLOR;
+    labe.font = FONT_WITH_S(11);
+    labe.layer.cornerRadius = 2;
+    labe.layer.borderWidth = 1;
+    labe.layer.borderColor = RGBColor(248, 135, 162, 1).CGColor;
+    labe.text = [NSString stringWithFormat:@" %@ ",str];;
+    [labe sizeToFit];
+    [self.messageContianView addArrangedSubview:labe];
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "MatchingTableViewCell.h"
 
 @interface MatchingTableViewCell ()<UIWebViewDelegate>
-
+@property (nonatomic, strong)  UIWebView *webView;
 @end
 
 @implementation MatchingTableViewCell
@@ -17,15 +17,15 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, 1300*FitHeight)];
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kWIDTH, 1300*FitHeight)];
         
-        [self addSubview:webView];
+        [self addSubview:_webView];
         
-        webView.delegate = self;
+        _webView.delegate = self;
         
-        webView.scalesPageToFit = YES;
+        _webView.scalesPageToFit = YES;
         
-        webView.scrollView.bounces = NO;
+        _webView.scrollView.bounces = NO;
         
         //加载本地html
         
@@ -33,22 +33,30 @@
 //        NSURLRequest *request = [NSURLRequest requestWithURL:filePath];
         
         //网络html
-//        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
         
         
-        NSString *path = [[NSBundle mainBundle] bundlePath];
-        NSURL *baseURL = [NSURL fileURLWithPath:path];
-        NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"matching"
-                                                              ofType:@"html"];
-        NSString * htmlCont = [NSString stringWithContentsOfFile:htmlPath
-                                                        encoding:NSUTF8StringEncoding
-                                                           error:nil];
-        [webView loadHTMLString:htmlCont baseURL:baseURL];
+//        NSString *path = [[NSBundle mainBundle] bundlePath];
+//        NSURL *baseURL = [NSURL fileURLWithPath:path];
+//        NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"matching"
+//                                                              ofType:@"html"];
+//        NSString * htmlCont = [NSString stringWithContentsOfFile:htmlPath
+//                                                        encoding:NSUTF8StringEncoding
+//                                                           error:nil];
+//        [webView loadHTMLString:htmlCont baseURL:baseURL];
         
         
-//        [webView loadRequest:request];
+       
     }
     return self;
+}
+
+-(void)setUrl:(NSString *)url {
+    if (_url != url) {
+        _url = url;
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
+     [_webView loadRequest:request];
+    
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

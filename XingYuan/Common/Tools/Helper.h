@@ -33,14 +33,14 @@
 //获取密码
 + (NSString *)password;
 
-//获取时间戳
-+ (NSString *)timeStamp;
+//检测密码格式是否正确
++ (BOOL)isValidPassword:(NSString *)password;
 
-//获取100-999整随机数
-+ (NSNumber *)randomnumber;
+//检测手机号码格式是否正确
++ (BOOL)isValidPhoneNum:(NSString *)phoneNum;
 
-//获取签名
-+ (NSString *)sign;
+//返回randomnumber、timestamp、sign三个参数
++ (NSDictionary *)fixedParameters;
 
 //使获取验证码button在一段时间内不可操作
 - (void)makeBtnCannotBeHandleWith:(UIButton *)button;

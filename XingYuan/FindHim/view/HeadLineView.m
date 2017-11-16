@@ -47,21 +47,21 @@
             if (labelView.tag==index) {
                 if (labelView.tag==0) {
                     //深绿线
-                    label1.backgroundColor=JXColor(179, 211, 85, 1);
+                    label1.backgroundColor=RGBColor(240, 53, 99, 1);
                 }else if(labelView.tag==1){
-                    label2.backgroundColor=JXColor(179, 211, 85, 1);
+                    label2.backgroundColor=RGBColor(240, 53, 99, 1);
                 }else{
-                    label3.backgroundColor=JXColor(179, 211, 85, 1);
+                    label3.backgroundColor=RGBColor(240, 53, 99, 1);
                 }
                 currentSelected=labelView;
             }else{
                 if (labelView.tag==0) {
                     //绿线
-                    label1.backgroundColor=JXColor(238, 238, 238, 1);
+                    label1.backgroundColor=RGBColor(240, 53, 99, 0.3);
                 }else if(labelView.tag==1){
-                    label2.backgroundColor=JXColor(238, 238, 238, 1);
+                    label2.backgroundColor=RGBColor(240, 53, 99, 0.3);
                 }else{
-                    label3.backgroundColor=JXColor(238, 238, 238, 1);
+                    label3.backgroundColor=RGBColor(240, 53, 99, 0.3);
                 }
             }
         }
@@ -94,7 +94,7 @@
         [btn setTitle:_titleArray[i] forState:UIControlStateNormal];
         btn.titleLabel.textAlignment=NSTextAlignmentCenter;
         btn.titleLabel.font=[UIFont systemFontOfSize:15.0f];
-        [btn setTitleColor:JXColor(87, 173, 104, 1) forState:UIControlStateNormal];
+        [btn setTitleColor:RGBColor(240, 53, 99, 1) forState:UIControlStateNormal];
         [btn setBackgroundColor:[UIColor whiteColor]];
         
         //btn.contentEdgeInsets = UIEdgeInsetsMake(<#CGFloat top#>, <#CGFloat left#>, <#CGFloat bottom#>, <#CGFloat right#>);
@@ -108,7 +108,7 @@
             currentSelected=btn;
             //深绿线
             label1=[[UILabel alloc]initWithFrame:CGRectMake(0, 45.5*FitHeight, kWIDTH/3, 2.5*FitHeight)];
-            label1.backgroundColor=JXColor(179, 211, 85, 1);
+            label1.backgroundColor=RGBColor(240, 53, 99, 1);
             [self addSubview:label1];
             //如果需要添加图片，请把注释去掉就可以了
             //            [btn setTitleColor:JXColor(87, 173, 104, 1) forState:UIControlStateNormal];
@@ -117,7 +117,7 @@
         }else if(i == 1){
             //绿线
             label2=[[UILabel alloc]initWithFrame:CGRectMake(width, 45.5*FitHeight, kWIDTH/3, 2.5*FitHeight)];
-            label2.backgroundColor=JXColor(238, 238, 238, 1);
+            label2.backgroundColor=RGBColor(240, 53, 99, 0.3);
             [self addSubview:label2];
             //            [btn setTitleColor:JXColor(155, 155, 155, 1) forState:UIControlStateNormal];
             //            [btn setBackgroundColor:[UIColor whiteColor]];
@@ -125,7 +125,7 @@
         }else{
             //绿线
             label3=[[UILabel alloc]initWithFrame:CGRectMake(width * 2, 45.5*FitHeight, kWIDTH/3, 2.5*FitHeight)];
-            label3.backgroundColor=JXColor(238, 238, 238, 1);
+            label3.backgroundColor=RGBColor(240, 53, 99, 0.3);
             [self addSubview:label3];
         }
     }

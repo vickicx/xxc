@@ -17,16 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"喜欢我的";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"喜欢我的";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
-    [self createTableView];
-    // Do any additional setup after loading the view.
+    self.title = @"喜欢我的";
 }
 
 //创建TableView

@@ -49,7 +49,15 @@
     
     ShowInformationView *showView = [[ShowInformationView alloc] initWith:CGPointMake(0, _kong1.bottom + 2*FitHeight) width:kWIDTH];
     //showView.color = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
-    NSMutableArray *arr = [NSMutableArray arrayWithObjects: [NSString stringWithFormat:@"家乡:%@", _matchingLevelFourModel.hometown], [NSString stringWithFormat:@"民族:%@", _matchingLevelFourModel.nation], [NSString stringWithFormat:@"生肖:%@", _matchingLevelFourModel.sx], _matchingLevelFourModel.familyranking, _matchingLevelFourModel.parentstatus, _matchingLevelFourModel.fatherwork, _matchingLevelFourModel.motherwork, _matchingLevelFourModel.parenteconomic, _matchingLevelFourModel.parentmedicalinsurance, nil];
+   
+    NSMutableArray *arr = [NSMutableArray arrayWithObjects: _matchingLevelFourModel.familyranking, _matchingLevelFourModel.parentstatus, _matchingLevelFourModel.fatherwork, _matchingLevelFourModel.motherwork, _matchingLevelFourModel.parenteconomic, _matchingLevelFourModel.parentmedicalinsurance, nil];
+    if (_matchingLevelFourModel.hometown) {
+        [arr addObject:[NSString stringWithFormat:@"家乡:%@", _matchingLevelFourModel.hometown]];
+    }else if (_matchingLevelFourModel.nation){
+        [arr addObject:[NSString stringWithFormat:@"民族:%@", _matchingLevelFourModel.nation]];
+    }else if ( _matchingLevelFourModel.sx){
+        [arr addObject:[NSString stringWithFormat:@"生肖:%@", _matchingLevelFourModel.sx]];
+    }
     NSMutableArray *menuArr = [NSMutableArray array];
     for (int index = 0; index < [arr count]; index ++ ) {
         

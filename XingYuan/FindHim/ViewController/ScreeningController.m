@@ -26,7 +26,7 @@
 
 - (instancetype)initWithType:(ScreeningControllerType)type basicInfoCellPreTitle:(NSString *)cellTitle{
     if([self init]){
-        self.controllerType = type==nil ? ScreeningControllerTypeUpdateToServer:type;
+        self.controllerType = type == nil ? ScreeningControllerTypeUpdateToServer : type;
         self.basicInfoCellPreTitle = cellTitle;
     }
     return self;

@@ -10,4 +10,6 @@
 
 @interface MatchingTableViewCell : UITableViewCell
 
+@property (nonatomic,copy) NSString *url;
+
 @end

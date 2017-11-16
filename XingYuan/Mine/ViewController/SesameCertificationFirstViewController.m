@@ -10,24 +10,21 @@
 #import "SesameCertificationSecondViewController.h"
 
 @interface SesameCertificationFirstViewController ()
-
 @end
-
 @implementation SesameCertificationFirstViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"芝麻认证";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"芝麻认证";
 
+
+    self.verificationCodeButton.titleLabel.font = FONT_WITH_S(14)
+    [self.verificationCodeButton setTitleColor:APP_THEME_COLOR forState:UIControlStateNormal];
+    self.verificationCodeButton.layer.borderWidth = 1;
+    self.verificationCodeButton.layer.borderColor = APP_THEME_COLOR.CGColor;
+    
     [self createView];
-    // Do any additional setup after loading the view from its nib.
 }
+
 
 - (void)createView {
     self.label.backgroundColor = [UIColor groupTableViewBackgroundColor];

@@ -32,7 +32,7 @@
 			</dict>
 		</array>
 		<key>name</key>
-		<string>北京市</string>
+		<string>北京</string>
 	</dict>
 	<dict>
 		<key>city</key>
@@ -64,7 +64,7 @@
 			</dict>
 		</array>
 		<key>name</key>
-		<string>天津市</string>
+		<string>天津</string>
 	</dict>
 	<dict>
 		<key>city</key>
@@ -1371,7 +1371,7 @@
 			</dict>
 		</array>
 		<key>name</key>
-		<string>上海市</string>
+		<string>上海</string>
 	</dict>
 	<dict>
 		<key>city</key>
@@ -4282,7 +4282,7 @@
 			</dict>
 		</array>
 		<key>name</key>
-		<string>重庆市</string>
+		<string>重庆</string>
 	</dict>
 	<dict>
 		<key>city</key>

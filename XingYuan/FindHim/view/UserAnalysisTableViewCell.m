@@ -8,11 +8,11 @@
 
 #import "UserAnalysisTableViewCell.h"
 #import "JYRadarChart.h"
-#import "GradualColor_View.h"
+#import "HXCircleChart.h"
+
 
 @interface UserAnalysisTableViewCell ()
 
-@property (nonatomic, weak) GradualColor_View *gradualView;
 
 @end
 
@@ -41,14 +41,13 @@
         kong1.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
         [self addSubview:kong1];
         
-        JYRadarChart *p = [[JYRadarChart alloc] initWithFrame:CGRectMake(30, 65, 150, 150)];
+        JYRadarChart *p = [[JYRadarChart alloc] initWithFrame:CGRectMake(30, 65, 170, 150)];
         
         NSArray *a1 = @[@(81), @(97), @(87), @(60), @(65), @(77)];
         
         p.dataSeries = @[a1];
         p.steps = 4;
         p.showStepText = NO;
-        p.backgroundColor = [UIColor redColor];
         p.r = 60;
         p.minValue = 20;
         p.maxValue = 120;
@@ -59,37 +58,73 @@
         p.backgroundLineColor = [UIColor colorWithRed:219/255.0 green:217/255.0 blue:217/255.0 alpha:1];
         [p setColors:@[[UIColor colorWithRed:231/255.0 green:245/255.0 blue:253/255.0 alpha:1]]];
         [self addSubview:p];
-
-        GradualColor_View *gradualView = ({
-            GradualColor_View *view = [[GradualColor_View alloc] initWithFrame:(CGRectMake(p.right + 50*FitWidth, p.top, 100*FitWidth, 100*FitHeight))];
-            view.backgroundColor = [UIColor whiteColor];
-            [self addSubview:view];
-            view;
-        });
-
-        self.gradualView = gradualView;
-        UIButton *starBtn = ({
-            UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
-            button.frame = CGRectMake(gradualView.left,gradualView.bottom+20*FitHeight, 80*FitWidth, 40*FitHeight);
-            [button setTitle:@"START" forState:(UIControlStateNormal)];
-            [button addTarget:self action:@selector(animationStartAction) forControlEvents:(UIControlEventTouchUpInside)];
-            button;
-        });
-        [self addSubview:starBtn];
         
-
-       
+        HXCircleChart *circle = [[HXCircleChart alloc] initWithFrame:CGRectMake(p.right , p.top, 150*FitWidth, 150*FitHeight) withMaxValue:100 value:85];
         
         
+        circle.valueColor = [self colorWithHexString:@"#f65076" alpha:1];
+        circle.valueTitle = @"85%";
         
+        circle.insideCircleColor = [self colorWithHexString:@"#d1d1d1" alpha:1];
+        
+        circle.colorArray = @[[self colorWithHexString:@"#f7b5c4" alpha:1],[self colorWithHexString:@"#f65076" alpha:1]];
+        
+        circle.locations = @[@0.15,@0.85];
+        
+        [self addSubview:circle];
         
     }
     return self;
 }
 
-- (void)animationStartAction {
-    [self.gradualView setPercet:90 withTimer:1.8f];
+
+
+#pragma mark 设置16进制颜色
+- (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha{
+    //删除字符串中的空格
+    NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    // String should be 6 or 8 characters
+    if ([cString length] < 6)
+    {
+        return [UIColor clearColor];
+    }
+    // strip 0X if it appears
+    //如果是0x开头的，那么截取字符串，字符串从索引为2的位置开始，一直到末尾
+    if ([cString hasPrefix:@"0X"])
+    {
+        cString = [cString substringFromIndex:2];
+    }
+    //如果是#开头的，那么截取字符串，字符串从索引为1的位置开始，一直到末尾
+    if ([cString hasPrefix:@"#"])
+    {
+        cString = [cString substringFromIndex:1];
+    }
+    if ([cString length] != 6)
+    {
+        return [UIColor clearColor];
+    }
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    //r
+    NSString *rString = [cString substringWithRange:range];
+    //g
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    //b
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    return [UIColor colorWithRed:((float)r / 255.0f) green:((float)g / 255.0f) blue:((float)b / 255.0f) alpha:alpha];
 }
+
 
 
 

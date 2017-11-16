@@ -135,15 +135,15 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
      \return 跳转请求处理结果，YES表示成功处理，NO表示不支持的请求协议或处理失败
      */
     [QQApiInterface handleOpenURL:url delegate:self];
-    return [TencentOAuth HandleOpenURL:url];
-//    [[NTESRedPacketManager sharedManager] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    [TencentOAuth HandleOpenURL:url];
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     [QQApiInterface handleOpenURL:url delegate:self];
-    return [TencentOAuth HandleOpenURL:url];
+    [TencentOAuth HandleOpenURL:url];
+    return true;
 }
 
 #pragma mark - misc

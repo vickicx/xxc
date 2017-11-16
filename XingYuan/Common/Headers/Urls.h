@@ -10,7 +10,7 @@
 #define UrlManager_pch
 
 
-#define HOSTURL @"http://120.78.128.50"
+#define HOSTURL @"http://api.sailspace.cn"
 #define Url(string) [NSString stringWithFormat:@"%@%@", HOSTURL, string]
 
 // MARK: - 接口
@@ -53,7 +53,8 @@
 #define Showmatchingfive @"/mobileapi/showmatchingfive"
 
 // 2.3、2.4接口报废
-
+//2.8 用户举报
+#define memberaccusation @"/mobileapi/memberaccusation"
 // MARK: - 2.5设置用户基本资料（已对接）
 #define SetMemberInfo @"/mobileapi/SetMemberInfo"
 
@@ -103,6 +104,7 @@
 #define KnowTAFirstPage @"/mobileapi/KnowTAFirstPage"
 
 // MARK: - 4.1用户匹配HTML
+
 //# warning - 接口
 
 // MARK: - 4.2用户匹配（前端的接口）
@@ -147,7 +149,7 @@
 // MARK: - 5.5 展示兴趣(已对接)
 #define Interestbyids @"/mobileapi/interestbyids"
 
-// MARK: - 5.6 版本管理
+// MARK: - 5.6 版本管理（已对接）
 #define Versionmanage @"/mobileapi/versionmanage"
 
 /***********************赛尔空间接口************************/
@@ -187,6 +189,12 @@
 
 // MARK: - 5.1 实名认证
 #define Realnameauthentication @"/mobileapi/realnameauthentication"
+
+// MARK: - 5.2 任务列表-成长中心（已对接）
+#define Getmytask @"/mobileapi/getmytask"
+
+// MARK: - 5.3 领取奖励（已对接）
+#define Finishaward @"/mobileapi/finishaward"
 
 // MARK: - 5.5 上传用户实时地理位置信息
 #define Uploadmemberlocation @"/mobileapi/uploadmemberlocation"

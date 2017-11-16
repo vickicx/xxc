@@ -12,8 +12,8 @@
 #import "PictureModel.h"
 
 @interface UserHomePhotoTableViewCell()
-
-
+@property (nonatomic,strong) NSArray *imageArray;
+@property (nonatomic, strong) UILabel *photoNum;
 
 
 @end
@@ -39,14 +39,12 @@
         photo.font = FONT_WITH_S(16);
         
         [self addSubview:photo];
-        if (self.photoNum == nil) {
-            self.photoNum = @"12";
-        }
-        UILabel *photoNum = [[UILabel alloc] initWithFrame:CGRectMake(photo.right, 15 * FitHeight, 70*FitWidth, 30*FitHeight)];
-        photoNum.text = [NSString stringWithFormat:@"(%@)",self.photoNum];
-        photoNum.font = FONT_WITH_S(14);
-        photoNum.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
-        [self addSubview:photoNum];
+        
+        _photoNum = [[UILabel alloc] initWithFrame:CGRectMake(photo.right, 15 * FitHeight, 70*FitWidth, 30*FitHeight)];
+       
+        _photoNum.font = FONT_WITH_S(14);
+        _photoNum.textColor = [UIColor colorWithRed:141/255.0 green:146/255.0 blue:149/255.0 alpha:1];
+        [self addSubview:_photoNum];
         
         
         UILabel *kong1 = [[UILabel alloc] initWithFrame:CGRectMake(12*FitWidth, photo.bottom + 10 * FitHeight, kWIDTH - 24 * FitWidth, 1 *FitHeight)];
@@ -78,7 +76,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.photoNum.intValue;
+    return self.photoNum1.intValue;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -102,6 +100,31 @@
     [cell.imageView sd_setImageWithURL:Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
     cell.backgroundColor = [UIColor purpleColor];
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableArray *mutableArray = [NSMutableArray new];
+    
+    for (int i = 0; i < self.picArr.count; i++) {
+        NSIndexPath *indexPaths = [NSIndexPath indexPathForItem:i inSection:0];
+//        SmallPhotoCollectionViewCell *cell = (SmallPhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        PictureModel *pic = self.picArr[indexPaths.row];
+        UIImageView *imageView = [UIImageView new];
+        [imageView sd_setImageWithURL:Url(pic.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+        [mutableArray addObject:imageView.image];
+    }
+    self.imageArray = [NSArray arrayWithArray:mutableArray];
+    
+    self.toBlock(self.imageArray, indexPath.row);
+   
+}
+
+-(void)setPicArr:(NSMutableArray *)picArr {
+    if (_picArr != picArr) {
+        _picArr = picArr;
+    }
+    self.photoNum1 = [NSString stringWithFormat:@"%ld",picArr.count];
+     _photoNum.text = [NSString stringWithFormat:@"(%@)",self.photoNum1];
 }
 
 

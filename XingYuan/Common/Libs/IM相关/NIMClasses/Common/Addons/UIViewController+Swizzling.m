@@ -29,7 +29,7 @@
 #pragma mark - ViewDidLoad
 - (void)swizzling_viewDidLoad{
     if (self.navigationController) {
-        
+
         UIImage *buttonNormal = [[UIImage imageNamed:@"back-拷贝-2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 //        UIImage *buttonNormal = [[UIImage imageNamed:@"icon_back_normal.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         [self.navigationController.navigationBar setBackIndicatorImage:buttonNormal];

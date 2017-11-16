@@ -19,14 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"意见反馈";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"意见反馈";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"意见反馈";
+
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -66,7 +60,7 @@
         self.button.backgroundColor = RGBColor(215, 214, 214, 1);
         
     }else {
-        self.button.backgroundColor = RGBColor(240, 52, 99, 1);
+        self.button.backgroundColor = APP_THEME_COLOR;
     }
     
 }
@@ -75,9 +69,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.textView.text forKey:@"content"];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+
     [VVNetWorkTool postWithUrl:Url(SubmitFeedBack) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         [JGProgressHUD showSuccessWith:@"意见反馈成功！" In:self.view];
         self.button.userInteractionEnabled = NO;

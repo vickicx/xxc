@@ -38,17 +38,17 @@
     _leftButton.frame = CGRectMake(10 * FitWidth, _mainButton.bottom + 10 * FitHeight , (_mainButton.width - 26*FitWidth) / 3, (_mainButton.width - 26*FitWidth) / 3);
     _leftButton.backgroundColor = [UIColor whiteColor];
     [_leftButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
-    [_leftButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+    [_leftButton addTarget:self action:@selector(LsmallImageButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
     _middleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _middleButton.frame = CGRectMake(_leftButton.right + 3 *FitWidth, _leftButton.top, _leftButton.width, _leftButton.height);
     _middleButton.backgroundColor = [UIColor whiteColor];
     [_middleButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
-    [_middleButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+    [_middleButton addTarget:self action:@selector(MsmallImageButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
     _righButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _righButton.frame = CGRectMake(_middleButton.right + 3 *FitWidth, _leftButton.top, _leftButton.width, _leftButton.height);
     _righButton.backgroundColor = [UIColor whiteColor];
     [_righButton setBackgroundImage:[UIImage imageNamed:@"照片"] forState:UIControlStateNormal];
-    [_righButton addTarget:self action:@selector(mainButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+    [_righButton addTarget:self action:@selector(RsmallImageButtonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_mainButton];
     [self addSubview:_leftButton];
     [self addSubview:_middleButton];
@@ -127,10 +127,20 @@
     NSLog(@"点击了中间的图片");
 }
 
--(void)smallImageButtonDidSelect:(UIButton *)button {
+-(void)LsmallImageButtonDidSelect:(UIButton *)button {
     //跳转传值未定
-    [self.jumpDelegate jumpToBigImg:@"跳转到大图链接"];
-    NSLog(@"点击了中间的图片");
+    [self.jumpDelegate jumpToBigImg:@"2" index:self.index];
+    
+}
+-(void)MsmallImageButtonDidSelect:(UIButton *)button {
+    //跳转传值未定
+    [self.jumpDelegate jumpToBigImg:@"3" index:self.index];
+    
+}
+-(void)RsmallImageButtonDidSelect:(UIButton *)button {
+    //跳转传值未定
+   [self.jumpDelegate jumpToBigImg:@"4" index:self.index];
+    
 }
 
 @end

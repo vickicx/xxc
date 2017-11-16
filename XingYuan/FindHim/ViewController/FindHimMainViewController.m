@@ -15,6 +15,9 @@
 #import "FindHimMainModel.h"
 #import "PictureModel.h"
 #import "TZLocationManager.h"
+#import "PhotoDetailViewController.h"
+#import "VersionMessageModel.h"
+#import "VersionManageView.h"
 
 @interface FindHimMainViewController ()
 
@@ -27,6 +30,8 @@
 @property (nonatomic,assign) int pageindex;
 @property (nonatomic,assign) int index;
 @property (nonatomic,assign) int indextemp;
+@property (nonatomic,assign) int indexpathssss;
+@property (nonatomic, assign) int fromIndex;
 @end
 
 @implementation FindHimMainViewController
@@ -35,6 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.pageindex = 0;
+    self.navigationController.navigationBar.translucent = NO;
     [TZLocationManager manager];
     [TZLocationManager.manager startLocation];
     [TZLocationManager.manager startLocationWithSuccessBlock:^(CLLocation *location, CLLocation *oldLocation) {
@@ -43,11 +49,7 @@
         [parameters setValue:[Helper memberId] forKey:@"memberid"];
         [parameters setValue:[NSString stringWithFormat:@"%f", location.coordinate.latitude] forKey:@"lat"];
         [parameters setValue:[NSString stringWithFormat:@"%f", location.coordinate.longitude] forKey:@"lnt"];
-        [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-        [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-        [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
-        __weak __typeof__(self) weakSelf = self;
-        [VVNetWorkTool postWithUrl:Url(Uploadmemberlocation) body:[Helper parametersWith:parameters]
+        [VVNetWorkTool postWithUrl:(NSURL *)Url(Uploadmemberlocation) body:[Helper parametersWith:parameters]
                           progress:nil success:^(id result) {
                               NSString *str = [result objectForKey:@"code"];
                               if (str.intValue == 1) {
@@ -55,6 +57,7 @@
                               }
                               
                           } fail:^(NSError *error) {
+                              [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
                           }];
     } failureBlock:^(NSError *error) {
         NSLog(@"%@",error);
@@ -64,13 +67,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _peopleArr = [NSMutableArray new];
+    self.picArr = [NSMutableArray new];
     self.tabBarController.tabBar.hidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254.9/255.0 alpha:1];
     self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     _attestationViewController = [[MyAttestationViewController alloc] initWithType:AttestationControllerTypeScreening];
-    _peopleArr = [NSMutableArray new];
-    self.picArr = [NSMutableArray new];
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 50*FitWidth, 50*FitHeight);
     [rightButton setTitle:@"筛选" forState:UIControlStateNormal];
@@ -83,8 +86,29 @@
     [self pipeilabel];
     
 //    [self loadData];
-  
-    // Do any additional setup after loading the view.
+    [self requestVersionMessage];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    self.navigationController.navigationBar.translucent = true;
+}
+
+- (void)requestVersionMessage{
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    //枚举，1：Android，2：IOS"
+    [parameters setValue:@2 forKey:@"type"];
+    
+    [VVNetWorkTool postWithUrl:Url(Versionmanage) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+        VersionMessageModel *versionMessageModel = [VersionMessageModel new];
+        [versionMessageModel setValuesForKeysWithDictionary:result];
+        [versionMessageModel setValuesForKeysWithDictionary:[result valueForKey:@"data"]];
+        [VersionManageView showWithModel:versionMessageModel];
+
+        [JGProgressHUD showErrorWithModel:versionMessageModel In:self.view];
+    } fail:^(NSError *error) {
+        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
+    }];
 }
 
 - (void)addPagerView {
@@ -94,7 +118,6 @@
     pagerView.dataSource = self;
     pagerView.delegate = self;
     pagerView.frame = CGRectMake(0, 28 * FitHeight, CGRectGetWidth(self.view.frame), 470 * FitHeight);
-    // registerClass or registerNib
     [pagerView registerClass:[FindHimCollectionViewCell class] forCellWithReuseIdentifier:@"cellId"];
     [self.view addSubview:pagerView];
     _pagerView = pagerView;
@@ -145,6 +168,7 @@
     FindHimCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndex:index];
     _pipeiValueLabel.text = [NSString stringWithFormat:@"%@%%",findModel.matchvalue];
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    cell.index = self.fromIndex;
     cell.layer.cornerRadius = 10;
     [cell.layer setMasksToBounds:YES];
     cell.signature.text = findModel.summary;
@@ -169,18 +193,31 @@
         NSArray *picc = _picArr[index];
         if (picc.count != 0) {
             PictureModel *p1 = picc[0];
-            PictureModel *p2 = picc[1];
-            PictureModel *p3 = picc[2];
-            PictureModel *p4 = picc[3];
-            [image sd_setImageWithURL:(NSURL*)Url(p1.pic)];
-            [image1 sd_setImageWithURL:(NSURL*)Url(p2.pic)];
-            [image2 sd_setImageWithURL:(NSURL*)Url(p3.pic)];
-            [image3 sd_setImageWithURL:(NSURL*)Url(p4.pic)];
+            [image sd_setImageWithURL:(NSURL *)Url(p1.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+            
+                if(picc.count > 1){
+                    PictureModel *p2 = picc[1];
+                    [image1 sd_setImageWithURL:(NSURL*)Url(p2.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+                }else{
+                    [image1 setImage:[UIImage imageNamed:@"未上传"]];
+                }
+                if(picc.count > 2){
+                    PictureModel *p3 = picc[2];
+                    [image2 sd_setImageWithURL:(NSURL*)Url(p3.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+                }else{
+                    [image2 setImage:[UIImage imageNamed:@"未上传"]];
+                }
+                if(picc.count > 3){
+                    PictureModel *p4 = picc[3];
+                    [image3 sd_setImageWithURL:(NSURL*)Url(p4.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+                }else{
+                    [image3 setImage:[UIImage imageNamed:@"未上传"]];
+                }
         }else{
-            [image setImage:[UIImage imageNamed:@"照片"]];
-            [image1 setImage:[UIImage imageNamed:@"照片"]];
-            [image2 setImage:[UIImage imageNamed:@"照片"]];
-            [image3 setImage:[UIImage imageNamed:@"照片"]];
+            [image setImage:[UIImage imageNamed:@"未上传大"]];
+            [image1 setImage:[UIImage imageNamed:@"未上传"]];
+            [image2 setImage:[UIImage imageNamed:@"未上传"]];
+            [image3 setImage:[UIImage imageNamed:@"未上传"]];
         }
      
     [cell.mainButton setBackgroundImage:image.image forState:UIControlStateNormal];
@@ -203,6 +240,7 @@
 
 - (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
         //[_pageControl setCurrentPage:newIndex animate:YES];
+    self.fromIndex = (int)toIndex;
     NSLog(@"%ld ->  %ld",fromIndex,toIndex);
     if (self.peopleArr != NULL) {
         self.index = (int)(self.peopleArr.count  - 3);
@@ -215,15 +253,13 @@
             }
         }
     }
-    
-    
-    
+   
 }
 
 #pragma mark - 跳转到用户详情界面
 
 - (void)jumpTOUserDetail:(NSInteger)index {
-    FindHimMainModel *findModel = self.peopleArr[index];
+    FindHimMainModel *findModel = self.peopleArr[index+1];
     UserHomePageViewController *userPage = [[UserHomePageViewController alloc] init];
     userPage.seememberid = findModel.nId;
     [self.navigationController pushViewController:userPage animated:YES];
@@ -231,8 +267,52 @@
 
 #pragma mark - 点开小图展示大图
 
-- (void)jumpToBigImg:(NSString *)image {
+- (void)jumpToBigImg:(NSString *)image index:(NSInteger)index {
+    UIImageView *images = [[UIImageView alloc] init];
+    NSArray *picc = _picArr[index+1];
+    if (picc.count != 0) {
+       
+         NSMutableArray *mutableArray = [NSMutableArray new];
+    if (image.intValue == 2) {
+        if (picc.count > 1) {
+            PictureModel *p2 = picc[1];
+            [images sd_setImageWithURL:(NSURL*)Url(p2.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+        } else {
+             [images setImage:[UIImage imageNamed:@"未上传"]];
+        }
+        
+    } else if (image.intValue == 3){
+        if (picc.count > 2) {
+            PictureModel *p3 = picc[2];
+            [images sd_setImageWithURL:(NSURL*)Url(p3.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+        } else {
+            [images setImage:[UIImage imageNamed:@"未上传"]];
+        }
+       
+    } else if (image.intValue == 4){
+        if (picc.count > 3) {
+            PictureModel *p4 = picc[3];
+            [images sd_setImageWithURL:(NSURL*)Url(p4.pic) placeholderImage:[UIImage imageNamed:@"照片"]];
+        } else {
+            [images setImage:[UIImage imageNamed:@"未上传"]];
+        }
+        
+    }
+        [mutableArray addObject:images.image];
+    NSArray *arr = [NSArray arrayWithArray:mutableArray];
     
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.minimumLineSpacing = 30;
+    flowLayout.minimumInteritemSpacing = 0;
+    // 设置滚动方向
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    PhotoDetailViewController *vc = [[PhotoDetailViewController alloc] initWithCollectionViewLayout:flowLayout];
+    vc.dataSource = arr;
+    vc.tag = 0;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - 跳转到筛选界面
@@ -258,27 +338,20 @@
             [self.navigationController pushViewController:[OneStageScreeningController new] animated:true];
             break;
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
 
 - (void)requestData {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     [parameters setValue:[NSString stringWithFormat:@"%d", self.pageindex] forKey:@"pageindex"];
     [parameters setValue:@"5" forKey:@"pagesize"];
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
     [VVNetWorkTool postWithUrl:Url(KnowTAFirstPage) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
         self.currentmatchinglevel = [[result objectForKey:@"data"] objectForKey:@"currentmatchinglevel"];
         NSMutableArray *arr = [[result objectForKey:@"data"] objectForKey:@"matchingmember"];
-        NSMutableArray *picArr = [NSMutableArray new];
         NSMutableArray *pic = [NSMutableArray new];
         for (NSDictionary *dic in arr) {
             FindHimMainModel *findHimMainModel = [[FindHimMainModel alloc] initWithDictionary:dic];
@@ -286,16 +359,13 @@
             [self.peopleArr addObject:findHimMainModel];
         }
         for (int i = 0; i < pic.count; i++) {
-            for (PictureModel *pp in pic[i]) {
-                [picArr addObject:pp];
+                 [self.picArr addObject:pic[i]];
             }
-            [self.picArr addObject:picArr];
-        }
         [self.pagerView reloadData];
     } fail:^(NSError *error) {
+        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
     }];
 }
-
 /*
 #pragma mark - Navigation
 
@@ -305,5 +375,4 @@
     // Pass the selected object to the new view controller.
 }
 */
-
 @end

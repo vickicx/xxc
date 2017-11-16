@@ -9,7 +9,7 @@
 
 #define stringify   __STRING
 
-static CGFloat const PRESS_TO_MOVE_MIN_DURATION = 0.1;
+static CGFloat const PRESS_TO_MOVE_MIN_DURATION = 0.5;
 static CGFloat const MIN_PRESS_TO_BEGIN_EDITING_DURATION = 0.6;
 
 CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)

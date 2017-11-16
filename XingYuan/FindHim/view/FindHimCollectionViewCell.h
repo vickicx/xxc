@@ -11,7 +11,7 @@
 @protocol jumpToDelegate <NSObject>
 
 - (void)jumpTOUserDetail:(NSInteger)index;
-- (void)jumpToBigImg:(NSString *)image;
+- (void)jumpToBigImg:(NSString *)image index:(NSInteger)index;
 
 @end
 

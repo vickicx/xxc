@@ -59,8 +59,7 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
 #define FitHeight [[UIScreen mainScreen] bounds].size.height / 667
 
 
-#define MainColor [UIColor colorWithRed:246/255.0 green:241/255.0 blue:235/255.0 alpha:1]
-#define RGBColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+#define MainColor [UIColor colorWithRed:246/255.0 green:80/255.0 blue:118/255.0 alpha:1]
 
 /** 字体 */
 #define TITLEFONT [UIFont systemFontOfSize:16]

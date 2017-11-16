@@ -22,18 +22,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"忘记密码";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"忘记密码";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"忘记密码";
+
     self.finishBtn.layer.cornerRadius = 3;
     self.finishBtn.clipsToBounds = true;
     
-    self.requestVertificationCodeBtn.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
+    self.requestVertificationCodeBtn.layer.borderColor = APP_THEME_COLOR.CGColor;
     self.requestVertificationCodeBtn.layer.borderWidth = 1;
     self.requestVertificationCodeBtn.titleLabel.font = FONT_WITH_S(14);
     
@@ -46,6 +40,10 @@
 
 //请求验证码
 - (IBAction)dealRequestVertificationCode:(UIButton *)sender {
+    if(![Helper isValidPhoneNum:self.phoneNum.text]){
+        [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
+        return;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.phoneNum.text forKey:@"mobile"];
     [parameters setValue:[NSNumber numberWithInteger:MsgTyperesetLoginPwd] forKey:@"smstype"];
@@ -67,6 +65,18 @@
 }
 
 - (IBAction)dealFinish:(UIButton *)sender {
+    if(![Helper isValidPassword:self.newpass.text]){
+        [JGProgressHUD showErrorWith:@"密码格式不正确，请输入6-18位数字和字母" In:self.view];
+        return;
+    }
+    if(![Helper isValidPhoneNum:self.phoneNum.text]){
+        [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
+        return;
+    }
+    if([self.vertificationCode.text length] == 0){
+        [JGProgressHUD showErrorWith:@"验证码不能为空" In:self.view];
+        return;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:self.phoneNum.text forKey:@"loginname"];
     [parameters setValue:self.newpass.text forKey:@"pwd"];

@@ -27,14 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"更改手机号";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"更改手机号";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"更改手机号";
     
     self.bindingsButton.layer.cornerRadius = 3;
     self.bindingsButton.clipsToBounds = true;
@@ -45,7 +38,7 @@
     
     self.bindingsButton.titleLabel.font = FONT_WITH_S(18);
     
-    self.requestVertificationCodeBtn.layer.borderColor = RGBColor(190, 195, 199, 1).CGColor;
+    self.requestVertificationCodeBtn.layer.borderColor = APP_THEME_COLOR.CGColor;
     self.requestVertificationCodeBtn.layer.borderWidth = 1;
     self.requestVertificationCodeBtn.titleLabel.font = FONT_WITH_S(14);
     
@@ -57,19 +50,24 @@
 
 //请求验证码
 - (IBAction)dealRequestVertificationCode:(UIButton *)sender {
-        NSMutableDictionary *parameters = [NSMutableDictionary new];
-        [parameters setValue:self.phoneNumber.text forKey:@"mobile"];
-        [parameters setValue:[NSNumber numberWithInteger:MsgTypebundPhone] forKey:@"smstype"];
-        [parameters setValue:@"" forKey:@"msg"];
-    
-        [VVNetWorkTool postWithUrl:Url(HYZX) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
-            BaseModel *model = [BaseModel new];
-            [model setValuesForKeysWithDictionary:result];
-            [[Helper shareInstance] makeBtnCannotBeHandleWith:self.requestVertificationCodeBtn];
-            [JGProgressHUD showResultWithModel:model In:self.view];
-        } fail:^(NSError *error) {
-            [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
-        }];
+    if(![Helper isValidPhoneNum:self.phoneNumber.text]){
+        [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
+        return;
+    }
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setValue:self.phoneNumber.text forKey:@"mobile"];
+    [parameters setValue:[NSNumber numberWithInteger:MsgTypebundPhone] forKey:@"smstype"];
+    [parameters setValue:@"" forKey:@"msg"];
+
+    [VVNetWorkTool postWithUrl:Url(HYZX) body:[Helper parametersWith:parameters] progress:nil success:^(id result) {
+        BaseModel *model = [BaseModel new];
+        [model setValuesForKeysWithDictionary:result];
+        [[Helper shareInstance] makeBtnCannotBeHandleWith:self.requestVertificationCodeBtn];
+        [JGProgressHUD showResultWithModel:model In:self.view];
+    } fail:^(NSError *error) {
+        [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
+    }];
 }
 
 //改变密码是否可见状态
@@ -80,7 +78,17 @@
 
 //开始绑定
 - (IBAction)dealToBand:(UIButton *)sender {
-    [sender setBackgroundColor:RGBColor(246, 80, 118, 1)];
+    if(![Helper isValidPhoneNum:self.phoneNumber.text]){
+        [JGProgressHUD showErrorWith:@"手机号格式不正确" In:self.view];
+        return;
+    }
+    if([self.vertificationCode.text length] == 0){
+        [JGProgressHUD showErrorWith:@"验证码不能为空" In:self.view];
+        return;
+    }
+    if([self.password.text length] == 0){
+        [JGProgressHUD showErrorWith:@"密码不能为空" In:self.view];
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
     [parameters setValue:self.phoneNumber.text forKey:@"mobilephone"];

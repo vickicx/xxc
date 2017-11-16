@@ -20,15 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"昵称";
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"昵称";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
-    self.titleLabel.font = FONT_WITH_S(17);
+    self.title = @"昵称";
+
+    self.titleLabel.font = FONT_WITH_S(18);
     self.finishBtn.titleLabel.font = FONT_WITH_S(17);
     self.cancelBtn.titleLabel.font = FONT_WITH_S(17);
 }

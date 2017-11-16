@@ -58,13 +58,8 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self createView];
     [self requestData];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    label.text = @"我的认证";
-    label.font = FONT_WITH_S(18);
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    UIBarButtonItem *itme = [[UIBarButtonItem alloc] initWithCustomView:label1];
-    self.navigationItem.rightBarButtonItem = itme;
-    self.navigationItem.titleView = label;
+    self.title = @"我的认证";
+
 }
 
 - (void)createView {
@@ -259,18 +254,14 @@
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     [parameters setValue:[Helper memberId] forKey:@"memberid"];
-    
-    [parameters setValue:[Helper randomnumber] forKey:@"randomnumber"];  //100-999整随机数
-    
-    [parameters setValue:[Helper timeStamp] forKey:@"timestamp"];     //时间戳
-    
-    [parameters setValue:[Helper sign] forKey:@"sign"];          //签名
+
     
     [VVNetWorkTool postWithUrl:Url(ShowmatchingThree) body:[Helper parametersWith:parameters]
                       progress:nil success:^(id result) {
                           NSDictionary *dic = [result objectForKey:@"data"];
                           self.threeStageScreeningModel = [[ThreeStageScreeningModel alloc] initWithDictionary:dic];
                       } fail:^(NSError *error) {
+                          [JGProgressHUD showErrorWith:[error localizedDescription] In:self.view];
                       }];
     
 }
